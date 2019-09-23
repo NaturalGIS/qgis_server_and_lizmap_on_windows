@@ -20,3 +20,7 @@
 ;; uncomment it if you want to use ldap for authentication
 ;; see documentation to complete the ldap configuration
 ;driver=ldapdao
+
+
+[modules]
+lizmap.installparam=demo
