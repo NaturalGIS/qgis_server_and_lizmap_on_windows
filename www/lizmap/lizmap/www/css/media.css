@@ -1,0 +1,156 @@
+/* #### Mobile Phones Portrait #### */
+@media screen and (max-device-width: 480px) and (orientation: portrait){
+  /* some CSS here */
+}
+
+/* #### Mobile Phones Landscape #### */
+@media screen and (max-device-width: 640px) and (orientation: landscape){
+  /* some CSS here */
+}
+
+/* #### Mobile Phones Portrait or Landscape #### */
+@media screen and (max-device-width: 480px){
+  #search-project{
+    width: 75px;
+  }
+
+  #search-query{
+    width: 85px;
+  }
+
+  #search-project, #search-query{
+    padding-left: 8px;
+    padding-right: 8px;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    transition: all .5s;
+  }
+
+  #search-project:focus, #search-query:focus{
+    width: 206px;
+  }
+
+  /* Adapt form */
+  #dock .form-horizontal .controls, div.modal .form-horizontal .controls {
+    margin-left: 10px;
+  }
+}
+@media screen and (max-device-width: 640px){
+  #attributeLayers-tabs > li > a {
+    padding: 2px;
+  }
+
+  /* Hide text for login links */
+  #headermenu.mobile #auth ul.nav a span.text {
+    display:none;
+  }
+}
+
+/* #### Retina screen (iphone4, samsung note, etc.) Portrait or Landscape #### */
+@media
+only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (   min--moz-device-pixel-ratio: 2),
+only screen and (     -o-min-device-pixel-ratio: 2/1),
+only screen and (        min-device-pixel-ratio: 2),
+only screen and (                min-resolution: 192dpi),
+only screen and (                min-resolution: 2dppx),
+only screen and (                   max-height : 640px) ,
+only screen and (                   max-device-height : 640px) {
+
+  /* Retina-specific stuff here */
+  body{
+    padding-top : 60px;
+  }
+  #header {
+    height : 30px;
+  }
+  #logo {
+    height : 30px;
+    margin: 0px 5px;
+    min-width:30px;
+  }
+  #logo h1 {
+    font-size : 1.5em;
+    margin-left: 10px;
+    margin: 5px 5px;
+    line-height: 20px;
+  }
+  #title{
+    height : 30px;
+    margin : 0px 5px;
+    padding-right:5px;
+  }
+  #title h1 {
+    margin : 0px 5px;
+    font-size : 1.5em;
+    line-height: 30px;
+  }
+  #headermenu{
+    height:30px;
+    position: fixed;
+    top: 0px;
+    padding-right: 20px;
+  }
+  #headermenu.mobile #auth form#nominatim-search {
+    position:absolute;
+    right:50px;
+    top:30px;
+  }
+  #headermenu.mobile #auth ul.nav {
+    position: absolute;
+    left:auto;
+    right: 0px;
+  }
+  #headermenu.mobile .btn-locate-clear.icon {
+  background-color: transparent;
+  background-position: -850px 0px;
+  margin-top: 3px;
+  }
+
+  .navbar-inner {
+    min-height:30px;
+    padding: 0px 10px;
+  }
+
+
+
+  /*  for ie*/
+/*  .navbar-inner ul {*/
+/*    height:30px\9;*/
+/*  }*/
+
+  /*  for ie*/
+  .navbar-inner ul li{
+    display:inline\9;
+  }
+
+  #overview-box {
+    right:10px;
+    bottom:40px;
+  }
+
+  #bottom-dock  {
+    width: auto;
+    height: auto;
+    right: 0px;
+  }
+  #bottom-dock.visible {
+    height: 100%;
+    opacity: 1;
+  }
+  #bottom-dock.half-transparent {
+    height: 100%;
+    opacity: 1;
+  }
+
+}
+
+/* #### Tablets Portrait or Landscape #### */
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px){
+  /* some CSS here */
+}
+
+/* #### Desktops #### */
+@media screen and (min-width: 1024px){
+  /* some CSS here */
+}

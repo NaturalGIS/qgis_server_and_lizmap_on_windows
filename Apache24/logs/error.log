@@ -1,0 +1,314 @@
+Starting the 'Apache2.4' service
+The 'Apache2.4' service is running.
+sl:warn] [pid 1760:tid 316] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Mon Sep 16 15:55:07.114289 2019] [mpm_winnt:notice] [pid 1760:tid 316] AH00455: Apache/2.4.41 (Win64) OpenSSL/1.1.1c mod_fcgid/2.3.9 configured -- resuming normal operations
+[Mon Sep 16 15:55:07.114289 2019] [mpm_winnt:notice] [pid 1760:tid 316] AH00456: Apache Lounge VC15 Server built: Aug 11 2019 12:20:04
+[Mon Sep 16 15:55:07.114289 2019] [core:notice] [pid 1760:tid 316] AH00094: Command line: 'C:\\webserver\\Apache24\\bin\\httpd.exe -d C:/webserver/Apache24'
+[Mon Sep 16 15:55:07.114289 2019] [mpm_winnt:notice] [pid 1760:tid 316] AH00418: Parent: Created child process 5084
+[Mon Sep 16 15:55:07.395090 2019] [ssl:warn] [pid 5084:tid 192] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Mon Sep 16 15:55:07.410690 2019] [mpm_winnt:notice] [pid 5084:tid 192] AH00354: Child: Starting 64 worker threads.
+[Mon Sep 16 15:55:25.486402 2019] [mpm_winnt:notice] [pid 1760:tid 316] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Mon Sep 16 15:55:27.500651 2019] [mpm_winnt:notice] [pid 5084:tid 192] AH00364: Child: All worker threads have exited.
+[Mon Sep 16 15:55:27.534653 2019] [mpm_winnt:notice] [pid 1760:tid 316] AH00430: Parent: Child process 5084 exited successfully.
+Starting the 'Apache2.4' service
+The 'Apache2.4' service is running.
+sl:warn] [pid 1800:tid 316] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Mon Sep 16 16:01:00.325107 2019] [mpm_winnt:notice] [pid 1800:tid 316] AH00455: Apache/2.4.41 (Win64) OpenSSL/1.1.1c mod_fcgid/2.3.9 configured -- resuming normal operations
+[Mon Sep 16 16:01:00.325107 2019] [mpm_winnt:notice] [pid 1800:tid 316] AH00456: Apache Lounge VC15 Server built: Aug 11 2019 12:20:04
+[Mon Sep 16 16:01:00.325107 2019] [core:notice] [pid 1800:tid 316] AH00094: Command line: 'C:\\webserver\\Apache24\\bin\\httpd.exe -d C:/webserver/Apache24'
+[Mon Sep 16 16:01:00.325107 2019] [mpm_winnt:notice] [pid 1800:tid 316] AH00418: Parent: Created child process 392
+[Mon Sep 16 16:01:00.590307 2019] [ssl:warn] [pid 392:tid 192] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Mon Sep 16 16:01:00.590307 2019] [mpm_winnt:notice] [pid 392:tid 192] AH00354: Child: Starting 64 worker threads.
+The 'Apache2.4' service is restarting.
+The 'Apache2.4' service has restarted.
+winnt:notice] [pid 1800:tid 316] AH00424: Parent: Received restart signal -- Restarting the server.
+[Mon Sep 16 16:09:51.892844 2019] [ssl:warn] [pid 1800:tid 316] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Mon Sep 16 16:09:51.892844 2019] [mpm_winnt:notice] [pid 1800:tid 316] AH00455: Apache/2.4.41 (Win64) OpenSSL/1.1.1c mod_fcgid/2.3.9 configured -- resuming normal operations
+[Mon Sep 16 16:09:51.892844 2019] [mpm_winnt:notice] [pid 1800:tid 316] AH00456: Apache Lounge VC15 Server built: Aug 11 2019 12:20:04
+[Mon Sep 16 16:09:51.892844 2019] [core:notice] [pid 1800:tid 316] AH00094: Command line: 'C:\\webserver\\Apache24\\bin\\httpd.exe -d C:/webserver/Apache24'
+[Mon Sep 16 16:09:51.908444 2019] [mpm_winnt:notice] [pid 1800:tid 316] AH00418: Parent: Created child process 3224
+[Mon Sep 16 16:09:52.173644 2019] [ssl:warn] [pid 3224:tid 192] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Mon Sep 16 16:09:52.532445 2019] [mpm_winnt:notice] [pid 3224:tid 192] AH00354: Child: Starting 64 worker threads.
+[Mon Sep 16 16:09:54.463710 2019] [mpm_winnt:notice] [pid 392:tid 192] AH00364: Child: All worker threads have exited.
+[Mon Sep 16 16:10:02.845469 2019] [fcgid:error] [pid 392] FastCGI process 2624 still did not exit, terminating forcefully
+The 'Apache2.4' service is restarting.
+The 'Apache2.4' service has restarted.
+winnt:notice] [pid 1800:tid 316] AH00424: Parent: Received restart signal -- Restarting the server.
+[Mon Sep 16 16:16:11.600728 2019] [ssl:warn] [pid 1800:tid 316] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Mon Sep 16 16:16:11.601728 2019] [mpm_winnt:notice] [pid 1800:tid 316] AH00455: Apache/2.4.41 (Win64) OpenSSL/1.1.1c mod_fcgid/2.3.9 configured -- resuming normal operations
+[Mon Sep 16 16:16:11.601728 2019] [mpm_winnt:notice] [pid 1800:tid 316] AH00456: Apache Lounge VC15 Server built: Aug 11 2019 12:20:04
+[Mon Sep 16 16:16:11.601728 2019] [core:notice] [pid 1800:tid 316] AH00094: Command line: 'C:\\webserver\\Apache24\\bin\\httpd.exe -d C:/webserver/Apache24'
+[Mon Sep 16 16:16:11.603728 2019] [mpm_winnt:notice] [pid 1800:tid 316] AH00418: Parent: Created child process 5564
+[Mon Sep 16 16:16:11.879744 2019] [ssl:warn] [pid 5564:tid 192] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Mon Sep 16 16:16:11.883744 2019] [mpm_winnt:notice] [pid 5564:tid 192] AH00354: Child: Starting 64 worker threads.
+[Mon Sep 16 16:16:12.723792 2019] [mpm_winnt:notice] [pid 3224:tid 192] AH00364: Child: All worker threads have exited.
+The 'Apache2.4' service is restarting.
+The 'Apache2.4' service has restarted.
+winnt:notice] [pid 1800:tid 316] AH00424: Parent: Received restart signal -- Restarting the server.
+[Mon Sep 16 16:17:22.666098 2019] [ssl:warn] [pid 1800:tid 316] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Mon Sep 16 16:17:22.666098 2019] [mpm_winnt:notice] [pid 1800:tid 316] AH00455: Apache/2.4.41 (Win64) OpenSSL/1.1.1c mod_fcgid/2.3.9 configured -- resuming normal operations
+[Mon Sep 16 16:17:22.666098 2019] [mpm_winnt:notice] [pid 1800:tid 316] AH00456: Apache Lounge VC15 Server built: Aug 11 2019 12:20:04
+[Mon Sep 16 16:17:22.666098 2019] [core:notice] [pid 1800:tid 316] AH00094: Command line: 'C:\\webserver\\Apache24\\bin\\httpd.exe -d C:/webserver/Apache24'
+[Mon Sep 16 16:17:22.668099 2019] [mpm_winnt:notice] [pid 1800:tid 316] AH00418: Parent: Created child process 4324
+[Mon Sep 16 16:17:22.926113 2019] [ssl:warn] [pid 4324:tid 192] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Mon Sep 16 16:17:22.930113 2019] [mpm_winnt:notice] [pid 4324:tid 192] AH00354: Child: Starting 64 worker threads.
+[Mon Sep 16 16:17:23.745160 2019] [mpm_winnt:notice] [pid 5564:tid 192] AH00364: Child: All worker threads have exited.
+[Mon Sep 16 16:29:16.779409 2019] [mpm_winnt:notice] [pid 1800:tid 316] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Mon Sep 16 16:29:18.807413 2019] [mpm_winnt:notice] [pid 4324:tid 192] AH00364: Child: All worker threads have exited.
+[Mon Sep 16 16:29:27.272960 2019] [fcgid:error] [pid 4324] FastCGI process 7132 still did not exit, terminating forcefully
+[Mon Sep 16 16:29:27.272960 2019] [fcgid:error] [pid 4324] FastCGI process 5444 still did not exit, terminating forcefully
+[Mon Sep 16 16:29:27.272960 2019] [fcgid:error] [pid 4324] FastCGI process 4780 still did not exit, terminating forcefully
+[Mon Sep 16 16:29:28.286962 2019] [mpm_winnt:notice] [pid 1800:tid 316] AH00430: Parent: Child process 4324 exited successfully.
+Starting the 'Apache2.4' service
+The 'Apache2.4' service is running.
+sl:warn] [pid 3980:tid 316] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Mon Sep 16 16:29:34.402172 2019] [mpm_winnt:notice] [pid 3980:tid 316] AH00455: Apache/2.4.41 (Win64) OpenSSL/1.1.1c mod_fcgid/2.3.9 configured -- resuming normal operations
+[Mon Sep 16 16:29:34.402172 2019] [mpm_winnt:notice] [pid 3980:tid 316] AH00456: Apache Lounge VC15 Server built: Aug 11 2019 12:20:04
+[Mon Sep 16 16:29:34.402172 2019] [core:notice] [pid 3980:tid 316] AH00094: Command line: 'C:\\webserver\\Apache24\\bin\\httpd.exe -d C:/webserver/Apache24'
+[Mon Sep 16 16:29:34.417772 2019] [mpm_winnt:notice] [pid 3980:tid 316] AH00418: Parent: Created child process 3732
+[Mon Sep 16 16:29:34.667373 2019] [ssl:warn] [pid 3732:tid 192] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Mon Sep 16 16:29:34.682973 2019] [mpm_winnt:notice] [pid 3732:tid 192] AH00354: Child: Starting 64 worker threads.
+The 'Apache2.4' service is restarting.
+The 'Apache2.4' service has restarted.
+winnt:notice] [pid 3980:tid 316] AH00424: Parent: Received restart signal -- Restarting the server.
+[Mon Sep 16 16:31:33.794036 2019] [ssl:warn] [pid 3980:tid 316] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Mon Sep 16 16:31:33.794036 2019] [mpm_winnt:notice] [pid 3980:tid 316] AH00455: Apache/2.4.41 (Win64) OpenSSL/1.1.1c mod_fcgid/2.3.9 configured -- resuming normal operations
+[Mon Sep 16 16:31:33.794036 2019] [mpm_winnt:notice] [pid 3980:tid 316] AH00456: Apache Lounge VC15 Server built: Aug 11 2019 12:20:04
+[Mon Sep 16 16:31:33.794036 2019] [core:notice] [pid 3980:tid 316] AH00094: Command line: 'C:\\webserver\\Apache24\\bin\\httpd.exe -d C:/webserver/Apache24'
+[Mon Sep 16 16:31:33.794036 2019] [mpm_winnt:notice] [pid 3980:tid 316] AH00418: Parent: Created child process 5832
+[Mon Sep 16 16:31:34.059236 2019] [ssl:warn] [pid 5832:tid 192] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Mon Sep 16 16:31:34.355637 2019] [mpm_winnt:notice] [pid 5832:tid 192] AH00354: Child: Starting 64 worker threads.
+[Mon Sep 16 16:31:35.356039 2019] [mpm_winnt:notice] [pid 3732:tid 192] AH00364: Child: All worker threads have exited.
+[Mon Sep 16 16:43:57.878202 2019] [fcgid:warn] [pid 5832:tid 220] mod_fcgid: process 5000 graceful kill fail, sending SIGKILL
+[Mon Sep 16 16:43:57.878202 2019] [fcgid:warn] [pid 5832:tid 220] mod_fcgid: process 5476 graceful kill fail, sending SIGKILL
+[Mon Sep 16 16:43:57.878202 2019] [fcgid:warn] [pid 5832:tid 220] mod_fcgid: process 7164 graceful kill fail, sending SIGKILL
+[Mon Sep 16 16:43:57.878202 2019] [fcgid:warn] [pid 5832:tid 220] mod_fcgid: process 2060 graceful kill fail, sending SIGKILL
+[Mon Sep 16 16:43:57.878202 2019] [fcgid:warn] [pid 5832:tid 220] mod_fcgid: process 6536 graceful kill fail, sending SIGKILL
+[Mon Sep 16 16:43:57.878202 2019] [fcgid:warn] [pid 5832:tid 220] mod_fcgid: process 2056 graceful kill fail, sending SIGKILL
+[Mon Sep 16 17:01:35.534460 2019] [mpm_winnt:notice] [pid 3980:tid 316] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Mon Sep 16 17:01:37.656063 2019] [mpm_winnt:notice] [pid 5832:tid 192] AH00364: Child: All worker threads have exited.
+[Mon Sep 16 17:01:46.158078 2019] [fcgid:error] [pid 5832] FastCGI process 388 still did not exit, terminating forcefully
+[Mon Sep 16 17:01:46.158078 2019] [fcgid:error] [pid 5832] FastCGI process 3672 still did not exit, terminating forcefully
+[Mon Sep 16 17:01:46.158078 2019] [fcgid:error] [pid 5832] FastCGI process 5348 still did not exit, terminating forcefully
+[Mon Sep 16 17:01:47.172080 2019] [mpm_winnt:notice] [pid 3980:tid 316] AH00430: Parent: Child process 5832 exited successfully.
+[Tue Sep 17 10:16:49.368682 2019] [ssl:warn] [pid 1956:tid 316] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Tue Sep 17 10:16:49.384282 2019] [mpm_winnt:notice] [pid 1956:tid 316] AH00455: Apache/2.4.41 (Win64) OpenSSL/1.1.1c mod_fcgid/2.3.9 configured -- resuming normal operations
+[Tue Sep 17 10:16:49.384282 2019] [mpm_winnt:notice] [pid 1956:tid 316] AH00456: Apache Lounge VC15 Server built: Aug 11 2019 12:20:04
+[Tue Sep 17 10:16:49.384282 2019] [core:notice] [pid 1956:tid 316] AH00094: Command line: 'C:\\webserver\\Apache24\\bin\\httpd.exe -d C:/webserver/Apache24'
+[Tue Sep 17 10:16:49.384282 2019] [mpm_winnt:notice] [pid 1956:tid 316] AH00418: Parent: Created child process 1180
+[Tue Sep 17 10:16:49.665083 2019] [ssl:warn] [pid 1180:tid 192] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Tue Sep 17 10:16:49.665083 2019] [mpm_winnt:notice] [pid 1180:tid 192] AH00354: Child: Starting 64 worker threads.
+[Tue Sep 17 10:27:05.268145 2019] [fcgid:warn] [pid 1180:tid 220] mod_fcgid: process 1732 graceful kill fail, sending SIGKILL
+[Tue Sep 17 10:27:05.268145 2019] [fcgid:warn] [pid 1180:tid 220] mod_fcgid: process 6216 graceful kill fail, sending SIGKILL
+[Tue Sep 17 10:27:05.268145 2019] [fcgid:warn] [pid 1180:tid 220] mod_fcgid: process 5092 graceful kill fail, sending SIGKILL
+[Tue Sep 17 10:27:05.268145 2019] [fcgid:warn] [pid 1180:tid 220] mod_fcgid: process 6096 graceful kill fail, sending SIGKILL
+[Tue Sep 17 10:27:05.268145 2019] [fcgid:warn] [pid 1180:tid 220] mod_fcgid: process 5808 graceful kill fail, sending SIGKILL
+[Tue Sep 17 10:27:05.268145 2019] [fcgid:warn] [pid 1180:tid 220] mod_fcgid: process 1512 graceful kill fail, sending SIGKILL
+[Tue Sep 17 10:27:05.268145 2019] [fcgid:warn] [pid 1180:tid 220] mod_fcgid: process 3980 graceful kill fail, sending SIGKILL
+[Tue Sep 17 10:27:05.268145 2019] [fcgid:warn] [pid 1180:tid 220] mod_fcgid: process 3000 graceful kill fail, sending SIGKILL
+[Tue Sep 17 10:27:05.268145 2019] [fcgid:warn] [pid 1180:tid 220] mod_fcgid: process 5200 graceful kill fail, sending SIGKILL
+[Tue Sep 17 10:27:05.268145 2019] [fcgid:warn] [pid 1180:tid 220] mod_fcgid: process 6136 graceful kill fail, sending SIGKILL
+[Tue Sep 17 10:51:26.704950 2019] [fcgid:warn] [pid 1180:tid 220] mod_fcgid: process 6616 graceful kill fail, sending SIGKILL
+[Tue Sep 17 10:51:26.704950 2019] [fcgid:warn] [pid 1180:tid 220] mod_fcgid: process 6620 graceful kill fail, sending SIGKILL
+[Tue Sep 17 10:51:26.704950 2019] [fcgid:warn] [pid 1180:tid 220] mod_fcgid: process 6228 graceful kill fail, sending SIGKILL
+[Tue Sep 17 10:51:26.704950 2019] [fcgid:warn] [pid 1180:tid 220] mod_fcgid: process 6748 graceful kill fail, sending SIGKILL
+[Tue Sep 17 10:51:26.704950 2019] [fcgid:warn] [pid 1180:tid 220] mod_fcgid: process 4504 graceful kill fail, sending SIGKILL
+[Tue Sep 17 10:51:26.704950 2019] [fcgid:warn] [pid 1180:tid 220] mod_fcgid: process 5176 graceful kill fail, sending SIGKILL
+[Tue Sep 17 11:15:27.526441 2019] [mpm_winnt:notice] [pid 1956:tid 316] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Tue Sep 17 11:15:29.534849 2019] [mpm_winnt:notice] [pid 1180:tid 192] AH00364: Child: All worker threads have exited.
+[Tue Sep 17 11:15:30.287452 2019] [mpm_winnt:notice] [pid 1956:tid 316] AH00430: Parent: Child process 1180 exited successfully.
+[Tue Sep 17 12:52:45.911263 2019] [ssl:warn] [pid 2468:tid 188] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Tue Sep 17 12:52:45.911263 2019] [mpm_winnt:notice] [pid 2468:tid 188] AH00455: Apache/2.4.41 (Win64) OpenSSL/1.1.1c mod_fcgid/2.3.9 configured -- resuming normal operations
+[Tue Sep 17 12:52:45.911263 2019] [mpm_winnt:notice] [pid 2468:tid 188] AH00456: Apache Lounge VC15 Server built: Aug 11 2019 12:20:04
+[Tue Sep 17 12:52:45.911263 2019] [core:notice] [pid 2468:tid 188] AH00094: Command line: 'httpd.exe -d C:/webserver/Apache24'
+[Tue Sep 17 12:52:45.911263 2019] [mpm_winnt:notice] [pid 2468:tid 188] AH00418: Parent: Created child process 1812
+Apache server interrupted...
+019] [ssl:warn] [pid 1812:tid 184] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Tue Sep 17 12:52:46.145264 2019] [mpm_winnt:notice] [pid 1812:tid 184] AH00354: Child: Starting 64 worker threads.
+[Tue Sep 17 12:57:20.803346 2019] [mpm_winnt:notice] [pid 2468:tid 188] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Tue Sep 17 12:57:22.831350 2019] [mpm_winnt:notice] [pid 1812:tid 184] AH00364: Child: All worker threads have exited.
+[Tue Sep 17 12:57:22.987350 2019] [mpm_winnt:notice] [pid 2468:tid 188] AH00430: Parent: Child process 1812 exited successfully.
+[Tue Sep 17 12:57:25.717355 2019] [ssl:warn] [pid 4664:tid 188] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Tue Sep 17 12:57:25.717355 2019] [mpm_winnt:notice] [pid 4664:tid 188] AH00455: Apache/2.4.41 (Win64) OpenSSL/1.1.1c mod_fcgid/2.3.9 configured -- resuming normal operations
+[Tue Sep 17 12:57:25.717355 2019] [mpm_winnt:notice] [pid 4664:tid 188] AH00456: Apache Lounge VC15 Server built: Aug 11 2019 12:20:04
+[Tue Sep 17 12:57:25.717355 2019] [core:notice] [pid 4664:tid 188] AH00094: Command line: 'httpd.exe -d C:/webserver/Apache24'
+[Tue Sep 17 12:57:25.717355 2019] [mpm_winnt:notice] [pid 4664:tid 188] AH00418: Parent: Created child process 4392
+Apache server interrupted...
+019] [ssl:warn] [pid 4392:tid 184] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Tue Sep 17 12:57:25.920155 2019] [mpm_winnt:notice] [pid 4392:tid 184] AH00354: Child: Starting 64 worker threads.
+[Tue Sep 17 13:17:19.410274 2019] [mpm_winnt:notice] [pid 4664:tid 188] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Tue Sep 17 13:17:21.438278 2019] [mpm_winnt:notice] [pid 4392:tid 184] AH00364: Child: All worker threads have exited.
+[Tue Sep 17 13:17:29.940293 2019] [fcgid:error] [pid 4392] FastCGI process 4696 still did not exit, terminating forcefully
+[Tue Sep 17 13:17:30.954295 2019] [mpm_winnt:notice] [pid 4664:tid 188] AH00430: Parent: Child process 4392 exited successfully.
+[Tue Sep 17 13:17:33.543899 2019] [ssl:warn] [pid 1644:tid 188] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Tue Sep 17 13:17:33.543899 2019] [mpm_winnt:notice] [pid 1644:tid 188] AH00455: Apache/2.4.41 (Win64) OpenSSL/1.1.1c mod_fcgid/2.3.9 configured -- resuming normal operations
+[Tue Sep 17 13:17:33.543899 2019] [mpm_winnt:notice] [pid 1644:tid 188] AH00456: Apache Lounge VC15 Server built: Aug 11 2019 12:20:04
+[Tue Sep 17 13:17:33.543899 2019] [core:notice] [pid 1644:tid 188] AH00094: Command line: 'httpd.exe -d C:/webserver/Apache24'
+[Tue Sep 17 13:17:33.543899 2019] [mpm_winnt:notice] [pid 1644:tid 188] AH00418: Parent: Created child process 4352
+Apache server interrupted...
+019] [ssl:warn] [pid 4352:tid 184] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Tue Sep 17 13:17:33.855900 2019] [mpm_winnt:notice] [pid 4352:tid 184] AH00354: Child: Starting 64 worker threads.
+[Tue Sep 17 13:18:31.482401 2019] [mpm_winnt:notice] [pid 1644:tid 188] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Tue Sep 17 13:18:33.510404 2019] [mpm_winnt:notice] [pid 4352:tid 184] AH00364: Child: All worker threads have exited.
+[Tue Sep 17 13:18:33.682005 2019] [mpm_winnt:notice] [pid 1644:tid 188] AH00430: Parent: Child process 4352 exited successfully.
+[Tue Sep 17 13:18:35.569608 2019] [ssl:warn] [pid 2284:tid 188] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Tue Sep 17 13:18:35.569608 2019] [mpm_winnt:notice] [pid 2284:tid 188] AH00455: Apache/2.4.41 (Win64) OpenSSL/1.1.1c mod_fcgid/2.3.9 configured -- resuming normal operations
+[Tue Sep 17 13:18:35.569608 2019] [mpm_winnt:notice] [pid 2284:tid 188] AH00456: Apache Lounge VC15 Server built: Aug 11 2019 12:20:04
+[Tue Sep 17 13:18:35.569608 2019] [core:notice] [pid 2284:tid 188] AH00094: Command line: 'httpd.exe -d C:/webserver/Apache24'
+[Tue Sep 17 13:18:35.569608 2019] [mpm_winnt:notice] [pid 2284:tid 188] AH00418: Parent: Created child process 5552
+Apache server interrupted...
+019] [ssl:warn] [pid 5552:tid 184] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Tue Sep 17 13:18:35.788008 2019] [mpm_winnt:notice] [pid 5552:tid 184] AH00354: Child: Starting 64 worker threads.
+[Tue Sep 17 13:18:48.814031 2019] [mpm_winnt:notice] [pid 2284:tid 188] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Tue Sep 17 13:18:50.842035 2019] [mpm_winnt:notice] [pid 5552:tid 184] AH00364: Child: All worker threads have exited.
+[Tue Sep 17 13:18:50.982435 2019] [mpm_winnt:notice] [pid 2284:tid 188] AH00430: Parent: Child process 5552 exited successfully.
+[Tue Sep 17 13:19:07.128463 2019] [ssl:warn] [pid 4928:tid 188] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Tue Sep 17 13:19:07.128463 2019] [mpm_winnt:notice] [pid 4928:tid 188] AH00455: Apache/2.4.41 (Win64) OpenSSL/1.1.1c mod_fcgid/2.3.9 configured -- resuming normal operations
+[Tue Sep 17 13:19:07.128463 2019] [mpm_winnt:notice] [pid 4928:tid 188] AH00456: Apache Lounge VC15 Server built: Aug 11 2019 12:20:04
+[Tue Sep 17 13:19:07.128463 2019] [core:notice] [pid 4928:tid 188] AH00094: Command line: 'httpd.exe -d C:/webserver/Apache24'
+[Tue Sep 17 13:19:07.128463 2019] [mpm_winnt:notice] [pid 4928:tid 188] AH00418: Parent: Created child process 1376
+Apache server interrupted...
+019] [ssl:warn] [pid 1376:tid 184] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Tue Sep 17 13:19:07.346864 2019] [mpm_winnt:notice] [pid 1376:tid 184] AH00354: Child: Starting 64 worker threads.
+[Tue Sep 17 13:27:15.254122 2019] [mpm_winnt:notice] [pid 4928:tid 188] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Tue Sep 17 13:27:17.282125 2019] [mpm_winnt:notice] [pid 1376:tid 184] AH00364: Child: All worker threads have exited.
+[Tue Sep 17 13:27:18.030927 2019] [mpm_winnt:notice] [pid 4928:tid 188] AH00430: Parent: Child process 1376 exited successfully.
+[Tue Sep 17 13:27:19.918530 2019] [ssl:warn] [pid 4236:tid 188] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Tue Sep 17 13:27:19.918530 2019] [mpm_winnt:notice] [pid 4236:tid 188] AH00455: Apache/2.4.41 (Win64) OpenSSL/1.1.1c mod_fcgid/2.3.9 configured -- resuming normal operations
+[Tue Sep 17 13:27:19.918530 2019] [mpm_winnt:notice] [pid 4236:tid 188] AH00456: Apache Lounge VC15 Server built: Aug 11 2019 12:20:04
+[Tue Sep 17 13:27:19.918530 2019] [core:notice] [pid 4236:tid 188] AH00094: Command line: 'httpd.exe -d C:/webserver/Apache24'
+[Tue Sep 17 13:27:19.918530 2019] [mpm_winnt:notice] [pid 4236:tid 188] AH00418: Parent: Created child process 5180
+Apache server interrupted...
+019] [ssl:warn] [pid 5180:tid 184] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Tue Sep 17 13:27:20.168131 2019] [mpm_winnt:notice] [pid 5180:tid 184] AH00354: Child: Starting 64 worker threads.
+[Tue Sep 17 13:31:31.727027 2019] [mpm_winnt:notice] [pid 4236:tid 188] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Tue Sep 17 13:31:33.755031 2019] [mpm_winnt:notice] [pid 5180:tid 184] AH00364: Child: All worker threads have exited.
+[Tue Sep 17 13:31:34.503832 2019] [mpm_winnt:notice] [pid 4236:tid 188] AH00430: Parent: Child process 5180 exited successfully.
+[Tue Sep 17 13:31:36.360236 2019] [ssl:warn] [pid 4188:tid 188] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Tue Sep 17 13:31:36.360236 2019] [mpm_winnt:notice] [pid 4188:tid 188] AH00455: Apache/2.4.41 (Win64) OpenSSL/1.1.1c mod_fcgid/2.3.9 configured -- resuming normal operations
+[Tue Sep 17 13:31:36.360236 2019] [mpm_winnt:notice] [pid 4188:tid 188] AH00456: Apache Lounge VC15 Server built: Aug 11 2019 12:20:04
+[Tue Sep 17 13:31:36.360236 2019] [core:notice] [pid 4188:tid 188] AH00094: Command line: 'httpd.exe -d C:/webserver/Apache24'
+[Tue Sep 17 13:31:36.360236 2019] [mpm_winnt:notice] [pid 4188:tid 188] AH00418: Parent: Created child process 5736
+Apache server interrupted...
+019] [ssl:warn] [pid 5736:tid 184] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Tue Sep 17 13:31:36.563036 2019] [mpm_winnt:notice] [pid 5736:tid 184] AH00354: Child: Starting 64 worker threads.
+[Tue Sep 17 13:38:37.759458 2019] [mpm_winnt:notice] [pid 4188:tid 188] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Tue Sep 17 13:38:39.787462 2019] [mpm_winnt:notice] [pid 5736:tid 184] AH00364: Child: All worker threads have exited.
+[Tue Sep 17 13:38:40.302263 2019] [mpm_winnt:notice] [pid 4188:tid 188] AH00430: Parent: Child process 5736 exited successfully.
+[Tue Sep 17 13:38:49.553079 2019] [ssl:warn] [pid 4100:tid 188] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Tue Sep 17 13:38:49.553079 2019] [mpm_winnt:notice] [pid 4100:tid 188] AH00455: Apache/2.4.41 (Win64) OpenSSL/1.1.1c mod_fcgid/2.3.9 configured -- resuming normal operations
+[Tue Sep 17 13:38:49.553079 2019] [mpm_winnt:notice] [pid 4100:tid 188] AH00456: Apache Lounge VC15 Server built: Aug 11 2019 12:20:04
+[Tue Sep 17 13:38:49.553079 2019] [core:notice] [pid 4100:tid 188] AH00094: Command line: 'httpd.exe -d C:/webserver/Apache24'
+[Tue Sep 17 13:38:49.553079 2019] [mpm_winnt:notice] [pid 4100:tid 188] AH00418: Parent: Created child process 4632
+Apache server interrupted...
+019] [ssl:warn] [pid 4632:tid 184] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Tue Sep 17 13:38:49.755879 2019] [mpm_winnt:notice] [pid 4632:tid 184] AH00354: Child: Starting 64 worker threads.
+[Tue Sep 17 13:40:05.525212 2019] [mpm_winnt:notice] [pid 4100:tid 188] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Tue Sep 17 13:40:07.553216 2019] [mpm_winnt:notice] [pid 4632:tid 184] AH00364: Child: All worker threads have exited.
+[Tue Sep 17 13:40:07.849617 2019] [mpm_winnt:notice] [pid 4100:tid 188] AH00430: Parent: Child process 4632 exited successfully.
+[Tue Sep 17 13:40:26.136849 2019] [ssl:warn] [pid 2808:tid 188] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Tue Sep 17 13:40:26.152449 2019] [mpm_winnt:notice] [pid 2808:tid 188] AH00455: Apache/2.4.41 (Win64) OpenSSL/1.1.1c mod_fcgid/2.3.9 configured -- resuming normal operations
+[Tue Sep 17 13:40:26.152449 2019] [mpm_winnt:notice] [pid 2808:tid 188] AH00456: Apache Lounge VC15 Server built: Aug 11 2019 12:20:04
+[Tue Sep 17 13:40:26.152449 2019] [core:notice] [pid 2808:tid 188] AH00094: Command line: 'httpd.exe -d C:/webserver/Apache24'
+[Tue Sep 17 13:40:26.152449 2019] [mpm_winnt:notice] [pid 2808:tid 188] AH00418: Parent: Created child process 5848
+Apache server interrupted...
+019] [ssl:warn] [pid 5848:tid 184] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Tue Sep 17 13:40:26.370849 2019] [mpm_winnt:notice] [pid 5848:tid 184] AH00354: Child: Starting 64 worker threads.
+[Tue Sep 17 13:45:12.758050 2019] [mpm_winnt:notice] [pid 2808:tid 188] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Tue Sep 17 13:45:14.786054 2019] [mpm_winnt:notice] [pid 5848:tid 184] AH00364: Child: All worker threads have exited.
+[Tue Sep 17 13:45:15.285254 2019] [mpm_winnt:notice] [pid 2808:tid 188] AH00430: Parent: Child process 5848 exited successfully.
+[Tue Sep 17 13:45:17.048057 2019] [ssl:warn] [pid 2960:tid 188] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Tue Sep 17 13:45:17.048057 2019] [mpm_winnt:notice] [pid 2960:tid 188] AH00455: Apache/2.4.41 (Win64) OpenSSL/1.1.1c mod_fcgid/2.3.9 configured -- resuming normal operations
+[Tue Sep 17 13:45:17.048057 2019] [mpm_winnt:notice] [pid 2960:tid 188] AH00456: Apache Lounge VC15 Server built: Aug 11 2019 12:20:04
+[Tue Sep 17 13:45:17.048057 2019] [core:notice] [pid 2960:tid 188] AH00094: Command line: 'httpd.exe -d C:/webserver/Apache24'
+[Tue Sep 17 13:45:17.048057 2019] [mpm_winnt:notice] [pid 2960:tid 188] AH00418: Parent: Created child process 4396
+Apache server interrupted...
+019] [ssl:warn] [pid 4396:tid 184] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Tue Sep 17 13:45:17.250858 2019] [mpm_winnt:notice] [pid 4396:tid 184] AH00354: Child: Starting 64 worker threads.
+[Tue Sep 17 13:45:44.333505 2019] [mpm_winnt:notice] [pid 2960:tid 188] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Tue Sep 17 13:45:46.361509 2019] [mpm_winnt:notice] [pid 4396:tid 184] AH00364: Child: All worker threads have exited.
+[Tue Sep 17 13:45:46.657910 2019] [mpm_winnt:notice] [pid 2960:tid 188] AH00430: Parent: Child process 4396 exited successfully.
+[Tue Sep 17 13:45:48.389513 2019] [ssl:warn] [pid 2996:tid 188] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Tue Sep 17 13:45:48.389513 2019] [mpm_winnt:notice] [pid 2996:tid 188] AH00455: Apache/2.4.41 (Win64) OpenSSL/1.1.1c mod_fcgid/2.3.9 configured -- resuming normal operations
+[Tue Sep 17 13:45:48.389513 2019] [mpm_winnt:notice] [pid 2996:tid 188] AH00456: Apache Lounge VC15 Server built: Aug 11 2019 12:20:04
+[Tue Sep 17 13:45:48.389513 2019] [core:notice] [pid 2996:tid 188] AH00094: Command line: 'httpd.exe -d C:/webserver/Apache24'
+[Tue Sep 17 13:45:48.389513 2019] [mpm_winnt:notice] [pid 2996:tid 188] AH00418: Parent: Created child process 3588
+Apache server interrupted...
+019] [ssl:warn] [pid 3588:tid 184] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Tue Sep 17 13:45:48.623513 2019] [mpm_winnt:notice] [pid 3588:tid 184] AH00354: Child: Starting 64 worker threads.
+[Tue Sep 17 13:52:35.020628 2019] [mpm_winnt:notice] [pid 2996:tid 188] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Tue Sep 17 13:52:37.048631 2019] [mpm_winnt:notice] [pid 3588:tid 184] AH00364: Child: All worker threads have exited.
+[Tue Sep 17 13:52:45.550646 2019] [fcgid:error] [pid 3588] FastCGI process 1628 still did not exit, terminating forcefully
+[Tue Sep 17 13:52:46.564648 2019] [mpm_winnt:notice] [pid 2996:tid 188] AH00430: Parent: Child process 3588 exited successfully.
+[Tue Sep 17 13:52:48.578051 2019] [ssl:warn] [pid 4440:tid 188] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Tue Sep 17 13:52:48.578051 2019] [mpm_winnt:notice] [pid 4440:tid 188] AH00455: Apache/2.4.41 (Win64) OpenSSL/1.1.1c mod_fcgid/2.3.9 configured -- resuming normal operations
+[Tue Sep 17 13:52:48.578051 2019] [mpm_winnt:notice] [pid 4440:tid 188] AH00456: Apache Lounge VC15 Server built: Aug 11 2019 12:20:04
+[Tue Sep 17 13:52:48.578051 2019] [core:notice] [pid 4440:tid 188] AH00094: Command line: 'httpd.exe -d C:/webserver/Apache24'
+[Tue Sep 17 13:52:48.578051 2019] [mpm_winnt:notice] [pid 4440:tid 188] AH00418: Parent: Created child process 4612
+Apache server interrupted...
+019] [ssl:warn] [pid 4612:tid 184] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Tue Sep 17 13:52:48.780852 2019] [mpm_winnt:notice] [pid 4612:tid 184] AH00354: Child: Starting 64 worker threads.
+[Tue Sep 17 13:54:59.462281 2019] [mpm_winnt:notice] [pid 4440:tid 188] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Tue Sep 17 13:55:01.490285 2019] [mpm_winnt:notice] [pid 4612:tid 184] AH00364: Child: All worker threads have exited.
+[Tue Sep 17 13:55:01.615085 2019] [mpm_winnt:notice] [pid 4440:tid 188] AH00430: Parent: Child process 4612 exited successfully.
+[Tue Sep 17 13:55:40.396753 2019] [ssl:warn] [pid 5844:tid 188] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Tue Sep 17 13:55:40.396753 2019] [mpm_winnt:notice] [pid 5844:tid 188] AH00455: Apache/2.4.41 (Win64) OpenSSL/1.1.1c mod_fcgid/2.3.9 configured -- resuming normal operations
+[Tue Sep 17 13:55:40.396753 2019] [mpm_winnt:notice] [pid 5844:tid 188] AH00456: Apache Lounge VC15 Server built: Aug 11 2019 12:20:04
+[Tue Sep 17 13:55:40.396753 2019] [core:notice] [pid 5844:tid 188] AH00094: Command line: 'httpd.exe -d C:/webserver/Apache24'
+[Tue Sep 17 13:55:40.396753 2019] [mpm_winnt:notice] [pid 5844:tid 188] AH00418: Parent: Created child process 4868
+Apache server interrupted...
+019] [ssl:warn] [pid 4868:tid 184] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Tue Sep 17 13:55:40.615154 2019] [mpm_winnt:notice] [pid 4868:tid 184] AH00354: Child: Starting 64 worker threads.
+[Tue Sep 17 14:14:04.377655 2019] [fcgid:warn] [pid 4868:tid 212] mod_fcgid: process 5544 graceful kill fail, sending SIGKILL
+[Tue Sep 17 14:14:04.377655 2019] [fcgid:warn] [pid 4868:tid 212] mod_fcgid: process 4368 graceful kill fail, sending SIGKILL
+[Tue Sep 17 14:14:04.377655 2019] [fcgid:warn] [pid 4868:tid 212] mod_fcgid: process 5452 graceful kill fail, sending SIGKILL
+[Tue Sep 17 14:14:04.377655 2019] [fcgid:warn] [pid 4868:tid 212] mod_fcgid: process 4228 graceful kill fail, sending SIGKILL
+[Tue Sep 17 14:14:04.377655 2019] [fcgid:warn] [pid 4868:tid 212] mod_fcgid: process 2284 graceful kill fail, sending SIGKILL
+[Tue Sep 17 14:14:04.377655 2019] [fcgid:warn] [pid 4868:tid 212] mod_fcgid: process 1596 graceful kill fail, sending SIGKILL
+[Tue Sep 17 14:14:04.377655 2019] [fcgid:warn] [pid 4868:tid 212] mod_fcgid: process 4004 graceful kill fail, sending SIGKILL
+[Tue Sep 17 14:14:04.377655 2019] [fcgid:warn] [pid 4868:tid 212] mod_fcgid: process 4656 graceful kill fail, sending SIGKILL
+[Tue Sep 17 14:14:04.377655 2019] [fcgid:warn] [pid 4868:tid 212] mod_fcgid: process 5608 graceful kill fail, sending SIGKILL
+[Tue Sep 17 14:15:03.222958 2019] [mpm_winnt:notice] [pid 5844:tid 188] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Tue Sep 17 14:15:05.250962 2019] [mpm_winnt:notice] [pid 4868:tid 184] AH00364: Child: All worker threads have exited.
+[Tue Sep 17 14:15:13.752977 2019] [fcgid:error] [pid 4868] FastCGI process 252 still did not exit, terminating forcefully
+[Tue Sep 17 14:15:14.766979 2019] [mpm_winnt:notice] [pid 5844:tid 188] AH00430: Parent: Child process 4868 exited successfully.
+[Tue Sep 17 14:15:34.906614 2019] [ssl:warn] [pid 6068:tid 188] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Tue Sep 17 14:15:34.906614 2019] [mpm_winnt:notice] [pid 6068:tid 188] AH00455: Apache/2.4.41 (Win64) OpenSSL/1.1.1c mod_fcgid/2.3.9 configured -- resuming normal operations
+[Tue Sep 17 14:15:34.906614 2019] [mpm_winnt:notice] [pid 6068:tid 188] AH00456: Apache Lounge VC15 Server built: Aug 11 2019 12:20:04
+[Tue Sep 17 14:15:34.906614 2019] [core:notice] [pid 6068:tid 188] AH00094: Command line: 'httpd.exe -d C:/webserver/Apache24'
+[Tue Sep 17 14:15:34.922214 2019] [mpm_winnt:notice] [pid 6068:tid 188] AH00418: Parent: Created child process 2104
+[Tue Sep 17 14:15:35.140615 2019] [ssl:warn] [pid 2104:tid 184] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Tue Sep 17 14:15:35.140615 2019] [mpm_winnt:notice] [pid 2104:tid 184] AH00354: Child: Starting 64 worker threads.
+[Tue Sep 17 14:18:10.011677 2019] [fcgid:warn] [pid 2104:tid 212] mod_fcgid: process 5900 graceful kill fail, sending SIGKILL
+[Tue Sep 17 14:23:50.764076 2019] [fcgid:warn] [pid 2104:tid 212] mod_fcgid: process 5640 graceful kill fail, sending SIGKILL
+[Tue Sep 17 14:23:50.764076 2019] [fcgid:warn] [pid 2104:tid 212] mod_fcgid: process 4708 graceful kill fail, sending SIGKILL
+[Tue Sep 17 14:23:50.764076 2019] [fcgid:warn] [pid 2104:tid 212] mod_fcgid: process 2560 graceful kill fail, sending SIGKILL
+[Tue Sep 17 14:23:50.764076 2019] [fcgid:warn] [pid 2104:tid 212] mod_fcgid: process 4612 graceful kill fail, sending SIGKILL
+[Tue Sep 17 14:23:50.764076 2019] [fcgid:warn] [pid 2104:tid 212] mod_fcgid: process 4664 graceful kill fail, sending SIGKILL
+[Tue Sep 17 19:09:33.951994 2019] [core:warn] [pid 3164:tid 176] AH00098: pid file C:/webserver/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Tue Sep 17 19:09:33.951994 2019] [ssl:warn] [pid 3164:tid 176] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Tue Sep 17 19:09:33.951994 2019] [mpm_winnt:notice] [pid 3164:tid 176] AH00455: Apache/2.4.41 (Win64) OpenSSL/1.1.1c mod_fcgid/2.3.9 configured -- resuming normal operations
+[Tue Sep 17 19:09:33.951994 2019] [mpm_winnt:notice] [pid 3164:tid 176] AH00456: Apache Lounge VC15 Server built: Aug 11 2019 12:20:04
+[Tue Sep 17 19:09:33.951994 2019] [core:notice] [pid 3164:tid 176] AH00094: Command line: 'C:\\webserver\\Apache24\\bin\\httpd.exe -d C:/webserver/Apache24'
+[Tue Sep 17 19:09:33.951994 2019] [mpm_winnt:notice] [pid 3164:tid 176] AH00418: Parent: Created child process 744
+[Tue Sep 17 19:09:34.279594 2019] [ssl:warn] [pid 744:tid 188] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Tue Sep 17 19:09:34.279594 2019] [mpm_winnt:notice] [pid 744:tid 188] AH00354: Child: Starting 64 worker threads.
+[Tue Sep 17 19:17:53.094730 2019] [fcgid:warn] [pid 744:tid 216] mod_fcgid: process 4380 graceful kill fail, sending SIGKILL
+[Tue Sep 17 19:17:53.094730 2019] [fcgid:warn] [pid 744:tid 216] mod_fcgid: process 5100 graceful kill fail, sending SIGKILL
+[Tue Sep 17 19:17:53.094730 2019] [fcgid:warn] [pid 744:tid 216] mod_fcgid: process 4424 graceful kill fail, sending SIGKILL
+[Tue Sep 17 19:17:53.094730 2019] [fcgid:warn] [pid 744:tid 216] mod_fcgid: process 4620 graceful kill fail, sending SIGKILL
+[Tue Sep 17 19:17:53.094730 2019] [fcgid:warn] [pid 744:tid 216] mod_fcgid: process 2564 graceful kill fail, sending SIGKILL
+[Tue Sep 17 19:17:53.094730 2019] [fcgid:warn] [pid 744:tid 216] mod_fcgid: process 4612 graceful kill fail, sending SIGKILL
+[Wed Sep 18 22:31:23.438640 2019] [core:warn] [pid 3268:tid 176] AH00098: pid file C:/webserver/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Wed Sep 18 22:31:23.438640 2019] [ssl:warn] [pid 3268:tid 176] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed Sep 18 22:31:23.438640 2019] [mpm_winnt:notice] [pid 3268:tid 176] AH00455: Apache/2.4.41 (Win64) OpenSSL/1.1.1c mod_fcgid/2.3.9 configured -- resuming normal operations
+[Wed Sep 18 22:31:23.438640 2019] [mpm_winnt:notice] [pid 3268:tid 176] AH00456: Apache Lounge VC15 Server built: Aug 11 2019 12:20:04
+[Wed Sep 18 22:31:23.438640 2019] [core:notice] [pid 3268:tid 176] AH00094: Command line: 'C:\\webserver\\Apache24\\bin\\httpd.exe -d C:/webserver/Apache24'
+[Wed Sep 18 22:31:23.438640 2019] [mpm_winnt:notice] [pid 3268:tid 176] AH00418: Parent: Created child process 3292
+Apache server shutdown initiated...
+sl:warn] [pid 3292:tid 188] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed Sep 18 22:31:23.719440 2019] [mpm_winnt:notice] [pid 3292:tid 188] AH00354: Child: Starting 64 worker threads.
+[Wed Sep 18 22:36:52.435299 2019] [mpm_winnt:notice] [pid 3268:tid 176] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Wed Sep 18 22:36:54.463302 2019] [mpm_winnt:notice] [pid 3292:tid 188] AH00364: Child: All worker threads have exited.
+[Wed Sep 18 22:37:02.965317 2019] [fcgid:error] [pid 3292] FastCGI process 2124 still did not exit, terminating forcefully
+[Wed Sep 18 22:37:02.965317 2019] [fcgid:error] [pid 3292] FastCGI process 4828 still did not exit, terminating forcefully

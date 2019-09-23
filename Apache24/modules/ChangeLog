@@ -1,0 +1,51 @@
+V0.92
+------------
+2010-07-20 :
+
+- Fixed ap_get_server_banner unknown on older apache version
+
+V0.91
+------------
+2010-05-27 :
+
+- Fixed weird behaviour on Windows Hosts. (mod_bw.txt)
+- Added high resolution timers for windows. (speed improvements)
+- Fixed stupid bug that caused crash when mod is enabled but there is
+ not a single limit.
+
+
+v0.9
+------------
+2010-05-24 :
+
+- Fixed an "invisible" memory leak
+- Fixed MinBandWidth X -1 skipping all bw control.
+- Added status callback
+- Code cleanup. No more warnings or stuff in Visual Studio
+
+v0.8
+------------
+2007-03-17 :
+
+- Added user agent match on bandwidth and connections limiting
+- Fixed issue of symbols not found on some platforms
+- Updated documentation accordingly
+
+
+v0.7 
+------------
+2005-08-29 :
+
+- Changed License to Apache Software License v2.0
+- Changed coded style. Using GNU indent.
+- Changed function name from is_filetype to match_ext
+- Removed check for "no configurations" (confid < 0)
+- Removed BandwidthDebug directive.
+- Removed simple allocation on Win32 platform. Using SHM now.
+- Removed no-limiting for error pages.
+- Added Support for APR > 0.9
+- Added Support for extra-large files (2G, 4G) with APR > 1
+- Borrowed code (in_domain and ip match) from mod_access)
+- IPV6 Support
+
+

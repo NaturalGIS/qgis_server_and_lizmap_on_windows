@@ -1,0 +1,15 @@
+Todo :
+
+  - Test and more tests (before making this final)
+
+
+  The following features won't be included in this branch of the
+mod. This is because the limitations of the actual code base.
+
+  - Limiting on INPUT
+  - Per User Bandwidth
+  - Htaccess support
+
+  As the new code base is already being written, this features will
+appear sometime in the development of the new mod.
+legacy code.

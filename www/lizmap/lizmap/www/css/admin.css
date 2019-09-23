@@ -1,0 +1,73 @@
+#menu .nav-list > li > a {
+  background-repeat : no-repeat;
+  background-position : left center;
+  padding-left : 20px;
+}
+
+#content {
+  font-size:0.8em;
+}
+
+#auth_login_zone {
+    max-width:450px;
+    margin: auto;
+}
+
+.jforms-error-list {
+    margin-left: 0;
+    background-color: #C43C35;
+    background-image: linear-gradient(to bottom , #EE5F5B, #C43C35);
+    background-repeat: repeat-x;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+/*    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);*/
+    border-radius: 4px 4px 4px 4px;
+    padding: 10px;
+    color: white;
+}
+.jforms-error-list li {
+    list-style: none;
+    color: #FFF;
+}
+
+
+fieldset legend {
+    width:auto;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    border-bottom: 0px;
+    font-size:14px;
+}
+
+fieldset legend label {
+    display:inline-block;
+}
+
+fieldset {
+    border: 1px solid #c5c5c5;
+    padding: 1em;
+    margin-bottom: 1em;
+}
+
+.services-table th {
+    width: 30%;
+    min-width: 10em;
+}
+
+.form-horizontal .control-label {
+    width: 240px;
+}
+
+.form-horizontal .controls {
+    margin-left: 250px;
+}
+
+.table .table {
+    background-color:transparent;
+}
+
+
+@media (max-width: 480px) {
+    .form-horizontal .controls {
+        margin-left: 0px;
+    }
+}
