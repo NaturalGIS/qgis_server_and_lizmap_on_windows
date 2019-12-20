@@ -6,7 +6,7 @@ The following steps assume that the user will keep the suggested installation/de
 
 1) Download the OSGeo4W 64 bit installer: http://download.osgeo.org/osgeo4w/osgeo4w-setup-x86_64.exe
 
-2) Install the packages "qgis-ltr", "qgis-server-ltr" and "fcgi", let the installer manage the installation of dependencies
+2) Install the packages "qgis-ltr", "qgis-server-ltr", "gdal204dll" and "fcgi", let the installer manage the installation of dependencies
 
 3) Copy the "webserver" folder inside the C: drive
 
