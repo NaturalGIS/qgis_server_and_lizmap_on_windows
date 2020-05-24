@@ -16,7 +16,7 @@ The following steps assume that the user will keep the suggested installation/de
 
 C:\webserver\Apache24\bin\httpd.exe -k install
 
-After that Apache can be started/stopped from the Windows Services control panel
+After that Apache can be started/stopped from the Windows Services control panel or from the Windows console unsing the command httpd.exe -k start
 
 6) Open a browser and test if Apache works:
 
@@ -30,11 +30,11 @@ http://localhost/info.php
 
 http://localhost/qgis/qgis_mapserv.fcgi.exe
 
-9) Using a  Windows console, launched as administrator, change the location inside the Lizmap Web Client folder
+9) Using a Windows console, launched as administrator, go to the Lizmap Web Client folder
 
 cd C:\webserver\www\lizmap
 
-then run the following command
+and then run the following command
 
 C:\webserver\php73\php.exe lizmap/install/installer.php
 
