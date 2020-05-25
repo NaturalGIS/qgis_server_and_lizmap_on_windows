@@ -10,34 +10,48 @@ The following steps assume that the user will keep the suggested installation/de
 
 3) Copy the "webserver" folder inside the C: drive
 
-4) Start the Apache web server by double clicking (as administrator) the file *C:\webserver\Apache24\bin\httpd.exe*
+4) Start the Apache web server by double clicking (**as administrator**) the file *C:\webserver\Apache24\bin\httpd.exe*
 
 5) As option Apache can be installed as Windows service by running (from the Windows console, launched as administrator) the following command:
 
+```
 C:\webserver\Apache24\bin\httpd.exe -k install
+```
 
 After that Apache can be started/stopped from the Windows Services control panel or from the Windows console unsing the command httpd.exe -k start
 
 6) Open a browser and test if Apache works:
 
+```
 http://localhost
+```
 
 7) Test if PHP works:
 
+```
 http://localhost/info.php
+```
 
 8) Test if QGIS Server works:
 
+```
 http://localhost/qgis/qgis_mapserv.fcgi.exe
+```
 
-9) Using a Windows console, launched as administrator, go to the Lizmap Web Client folder
+9) Using a Windows console, **launched as administrator**, go to the Lizmap Web Client folder
 
+```
 cd C:\webserver\www\lizmap
+```
 
 and then run the following command
 
+```
 C:\webserver\php73\php.exe lizmap/install/installer.php
+```
 
 10) Test if Lizmap Web Client works:
 
+```
 http://localhost/lizmap/lizmap/www/index.php
+```
