@@ -171,7 +171,32 @@ class serviceCtrl extends jController
 
         foreach ($messages as $code => $msg) {
             if ($code == 'AuthorizationRequired') {
+
+                // 401 : AuthorizationRequired
                 $rep->setHttpStatus(401, $code);
+
+                // Add WWW-Authenticate header only for external clients
+                // To avoid web browser to ask for login/password when session expires
+                // In browser, Lizmap UI sends full service URL in referer
+                $addwww = False;
+                $referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
+                if (!empty($referer)) {
+                    $referer_parse = parse_url($referer);
+                    if (array_key_exists('host', $referer_parse)) {
+                        $referer_domain = $referer_parse['host'];
+                        $domain = jApp::coord()->request->getDomainName();
+                        if (!empty($domain) and $referer_domain != $domain) {
+                            $addwww = True;
+                        }
+                    }
+                }else{
+                    $addwww = True;
+                }
+                // Add WWW-Authenticate header
+                if ($addwww) {
+                    $rep->addHttpHeader('WWW-Authenticate', 'Basic realm="LizmapWebClient", charset="UTF-8"');
+                }
+
             } elseif ($code == 'ProjectNotDefined') {
                 $rep->setHttpStatus(404, 'Not Found');
             } elseif ($code == 'RepositoryNotDefined') {
@@ -269,7 +294,7 @@ class serviceCtrl extends jController
             }
         }
 
-        // Optionnaly filter data by login
+        // Optionally filter data by login
         if (isset($params['request'])) {
             $request = strtolower($params['request']);
             if (in_array($request, array('getmap', 'getfeatureinfo', 'getfeature', 'getprint', 'getprintatlas')) &&
@@ -313,7 +338,7 @@ class serviceCtrl extends jController
     protected function filterDataByLogin()
     {
 
-    // Optionnaly add a filter parameter
+    // Optionally add a filter parameter
         $lproj = $this->project;
 
         $request = strtolower($this->params['request']);
@@ -348,6 +373,10 @@ class serviceCtrl extends jController
             // Check need for filter foreach layer
             $serverFilterArray = array();
             foreach (explode(',', $layers) as $layername) {
+                $layerByTypeName = $this->project->findLayerByTypeName($layername);
+                if($layerByTypeName){
+                    $layername = $layerByTypeName->name;
+                }
                 if (property_exists($pConfig->loginFilteredLayers, $layername)) {
                     $oAttribute = $pConfig->loginFilteredLayers->{$layername}->filterAttribute;
                     $attribute = strtolower($oAttribute);
@@ -523,6 +552,7 @@ class serviceCtrl extends jController
 
         // Return response
         $rep = $this->getResponse('binary');
+        $rep->setHttpStatus($code, '');
         $rep->mimeType = $mime;
         $rep->content = $data;
         $rep->doDownload = false;
@@ -1092,6 +1122,7 @@ class serviceCtrl extends jController
         list($data, $mime, $code) = lizmapProxy::getRemoteData($querystring, array('method' => 'post'));
 
         $rep = $this->getResponse('binary');
+        $rep->setHttpStatus($code, '');
         $rep->mimeType = $mime;
         $rep->content = $data;
         $rep->doDownload = false;
@@ -1154,6 +1185,7 @@ class serviceCtrl extends jController
         list($data, $mime, $code) = lizmapProxy::getRemoteData($querystring, array('method' => 'post'));
 
         $rep = $this->getResponse('binary');
+        $rep->setHttpStatus($code, '');
         $rep->mimeType = $mime;
         $rep->content = $data;
         $rep->doDownload = false;
@@ -1200,7 +1232,8 @@ class serviceCtrl extends jController
 
         // Return response
         $rep = $this->getResponse('binary');
-        $rep->mimeType = 'text/xml';
+        $rep->setHttpStatus($code, '');
+        $rep->mimeType = $mime;
         $rep->content = $data;
         $rep->doDownload = false;
         $rep->outputFileName = 'qgis_style';
@@ -1264,6 +1297,7 @@ class serviceCtrl extends jController
         ));
 
         $rep = $this->getResponse('binary');
+        $rep->setHttpStatus($code, '');
         $rep->mimeType = $mime;
         $rep->content = $data;
         $rep->doDownload = false;
@@ -1287,6 +1321,14 @@ class serviceCtrl extends jController
 
         $rep = $this->getResponse('binary');
         $rep->mimeType = $result->mime;
+        $rep->doDownload = false;
+        $rep->outputFileName = 'qgis_server_wfs';
+        $rep->setHttpStatus($result->code, '');
+
+        if ($result->code >= 400) {
+            $rep->content = $result->data;
+            return $rep;
+        }
 
         if (property_exists($result, 'file') and $result->file and is_file($result->data)) {
             $rep->fileName = $result->data;
@@ -1294,8 +1336,15 @@ class serviceCtrl extends jController
         } else {
             $rep->content = $result->data; // causes memory_limit for big content
         }
-        $rep->doDownload = false;
-        $rep->outputFileName = 'qgis_server_wfs';
+
+        // Define file name
+        $typenames = implode('_', array_map('trim', explode(',', $this->params['typename'])));
+        $zipped_files = array('shp', 'mif', 'tab');
+        if (in_array(strtolower($this->params['outputformat']), $zipped_files)) {
+            $rep->outputFileName = $typenames.'.zip';
+        } else {
+            $rep->outputFileName = $typenames.'.'.strtolower($this->params['outputformat']);
+        }
 
         // Export
         $dl = $this->param('dl');
@@ -1308,7 +1357,6 @@ class serviceCtrl extends jController
                 $rep->content = preg_replace('/^[\n\r]/', '', $result->data);
             }
             // Change file name
-            $zipped_files = array('shp', 'mif', 'tab');
             if (in_array(strtolower($this->params['outputformat']), $zipped_files)) {
                 $rep->outputFileName = 'export_'.$this->params['typename'].'.zip';
             } else {
@@ -1350,7 +1398,7 @@ class serviceCtrl extends jController
         // Get remote data
         list($data, $mime, $code) = lizmapProxy::getRemoteData($querystring);
 
-        if ($returnJson) {
+        if ($code < 400 && $returnJson) {
             $jsonData = array();
 
             $layer = $this->project->findLayerByAnyName($this->params['typename']);
@@ -1389,6 +1437,7 @@ class serviceCtrl extends jController
 
             // Return response
             $rep = $this->getResponse('binary');
+            $rep->setHttpStatus($code, '');
             $rep->mimeType = 'text/json; charset=utf-8';
             $rep->content = $jsonData;
             $rep->doDownload = false;
@@ -1399,6 +1448,7 @@ class serviceCtrl extends jController
 
         // Return response
         $rep = $this->getResponse('binary');
+        $rep->setHttpStatus($code, '');
         $rep->mimeType = $mime;
         $rep->content = $data;
         $rep->doDownload = false;

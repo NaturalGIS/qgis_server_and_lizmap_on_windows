@@ -161,11 +161,8 @@ class filterDatasource {
             }
         }
         $split = False;
-        if(!empty($splitter)){
-            $splitter = $this->validateFilter($splitter);
-            if(strlen($splitter) <= 3){
-                $split = True;
-            }
+        if(!empty($splitter) && strlen($splitter) > 0 && strlen($splitter) <= 3){
+            $split = True;
         }
 
         // SQL
@@ -278,8 +275,13 @@ class filterDatasource {
             $sql.= ' Min(Least("' . implode('","', $fields) . '")) AS min,';
             $sql.= ' Max(Greatest("' . implode('","', $fields) . '")) AS max';
         } else {
-            $sql.= ' Min(Min("' . implode('","', $fields) . '")) AS min,';
-            $sql.= ' Max(Max("' . implode('","', $fields) . '")) AS max';
+            if (count($fields) === 1) {
+                $sql .= ' Min("' . $fields[0] . '") AS min,';
+                $sql .= ' Max("' . $fields[0] . '") AS max';
+            } else {
+                $sql .= ' Min(Min("' . implode('","', $fields) . '")) AS min,';
+                $sql .= ' Max(Max("' . implode('","', $fields) . '")) AS max';
+            }
         }
         $sql.= ' FROM ' . $this->datasource->table;
         $sql.= ' WHERE 2>1';

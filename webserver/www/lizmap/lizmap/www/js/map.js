@@ -342,6 +342,9 @@ var lizMap = function() {
     if ( $('#dock-tabs').is(':visible') )
         $('#dock-content').css( 'max-height', $('#dock').height() - $('#dock-tabs').height() );
 
+    if ( $('#right-dock-tabs').is(':visible') )
+        $('#right-dock-content').css( 'max-height', $('#right-dock').height() - $('#right-dock-tabs').height() );
+
     $('#dock').css('overflow-y', 'hidden');
 
     if(map)
@@ -1543,7 +1546,9 @@ var lizMap = function() {
     } else {
       // zoom to val
       var feat = locate.features[val];
-      var format = new OpenLayers.Format.GeoJSON();
+      var format = new OpenLayers.Format.GeoJSON({
+          ignoreExtraDims: true
+      });
       feat = format.read(feat)[0];
 
       if( feat.geometry != null){
@@ -1720,11 +1725,15 @@ var lizMap = function() {
             }
       });
       var placeHolder = '';
-      if ( 'fieldAlias' in locate && locate.fieldAlias!='' )
-        placeHolder += locate.fieldAlias+' ';
-      else
-        placeHolder += locate.fieldName+' ';
-      placeHolder += '('+lConfig.title+')';
+      if ('filterFieldName' in locate) {
+          if ( 'fieldAlias' in locate && locate.fieldAlias!='' )
+              placeHolder += locate.fieldAlias+' ';
+          else
+              placeHolder += locate.fieldName+' ';
+          placeHolder += '('+lConfig.title+')';
+      } else {
+          placeHolder = lConfig.title;
+      }
       var options = '<option value="-1"></option>';
       for (var i=0, len=features.length; i<len; i++) {
         var feat = features[i];
@@ -3062,7 +3071,7 @@ var lizMap = function() {
     if (window.location.search.length > 1) {
       for (var aItKey, nKeyId = 0, aCouples = window.location.search.substr(1).split("&"); nKeyId < aCouples.length; nKeyId++) {
         aItKey = aCouples[nKeyId].split("=");
-        oParametre[unescape(aItKey[0])] = aItKey.length > 1 ? unescape(aItKey[1]) : "";
+        oParametre[decodeURIComponent(aItKey[0])] = aItKey.length > 1 ? decodeURIComponent(aItKey[1]) : "";
       }
     }
     return oParametre;
@@ -3522,9 +3531,12 @@ var lizMap = function() {
                         rConfigLayer.cleanname = clname;
                     }
                     if ( rConfigLayer.popup == 'True' && self.parent().find('div.lizmapPopupChildren.'+clname).length == 0) {
+                        var qLayerName = rConfigLayer.name;
+                        if ( 'useLayerIDs' in config.options && config.options.useLayerIDs == 'True' )
+                            qLayerName = layerIdMap[rConfigLayer.name];
                         var wmsOptions = {
-                             'LAYERS': rConfigLayer.name
-                            ,'QUERY_LAYERS': rConfigLayer.name
+                             'LAYERS': qLayerName
+                            ,'QUERY_LAYERS': qLayerName
                             ,'STYLES': ''
                             ,'SERVICE': 'WMS'
                             ,'VERSION': '1.3.0'
@@ -4213,7 +4225,22 @@ var lizMap = function() {
               if( 'STYLES' in l.params && l.params['STYLES'].length > 0 )
                 lst = l.params['STYLES'];
               styleLayers.push( lst );
-              opacityLayers.push(parseInt(255*l.opacity));
+
+              // Get config to get qgis layer opacity
+              var qgisName = null;
+              if ( l.name in cleanNameMap )
+                  qgisName = getLayerNameByCleanName(layer.name);
+              var configLayer = null;
+              if ( qgisName )
+                  configLayer = config.layers[qgisName];
+              if ( !configLayer )
+                  configLayer = config.layers[l.params['LAYERS']];
+              if ( !configLayer )
+                  configLayer = config.layers[l.name];
+              if ( configLayer && ('opacity' in configLayer) )
+                opacityLayers.push(parseInt(255*l.opacity*configLayer.opacity));
+              else
+                opacityLayers.push(parseInt(255*l.opacity));
             }
         }
       });
@@ -4931,6 +4958,7 @@ OpenLayers.Control.HighlightFeature = OpenLayers.Class(OpenLayers.Control, {
               var tconfig = config.tooltipLayers[fName];
 
               var gFormat = new OpenLayers.Format.GeoJSON({
+                  ignoreExtraDims: true,
                   externalProjection: lConfig['featureCrs'],
                   internalProjection: lizMap.map.getProjection()
               });
@@ -4947,7 +4975,7 @@ OpenLayers.Control.HighlightFeature = OpenLayers.Class(OpenLayers.Control, {
                       tooltipControl.style.strokeColor = 'cyan';
               else
                   tooltipControl.style.strokeColor = 'transparent';
-              if ( tfeatures.length != 0 && tfeatures[0].geometry.id.startsWith('OpenLayers_Geometry_LineString') )
+              if (tfeatures.length != 0 && tfeatures[0].geometry && tfeatures[0].geometry.id.startsWith('OpenLayers_Geometry_LineString') )
                   tooltipControl.style.strokeWidth = 10;
               else
                   tooltipControl.style.strokeWidth = 3;
@@ -5765,7 +5793,9 @@ OpenLayers.Control.HighlightFeature = OpenLayers.Class(OpenLayers.Control, {
 
   function zoomToOlFeature( feature, proj, zoomAction ){
       zoomAction = typeof zoomAction !== 'undefined' ?  zoomAction : 'zoom';
-      var format = new OpenLayers.Format.GeoJSON();
+      var format = new OpenLayers.Format.GeoJSON({
+          ignoreExtraDims: true
+      });
       var feat = format.read(feature)[0];
       if( feat && 'geometry' in feat ){
           feat.geometry.transform( proj, lizMap.map.getProjection() );
@@ -5974,6 +6004,100 @@ OpenLayers.Control.HighlightFeature = OpenLayers.Class(OpenLayers.Control, {
         aCallback(service, wmsOptions, data);
       }
     });
+  }
+
+
+  function selectLayerFeaturesFromSelectionFeature(targetFeatureType, selectionFeature){
+
+      var lConfig = config.layers[targetFeatureType];
+      lizMap.loadProjDefinition( lConfig.crs, function( aProj ) {
+
+          var gml3 = new OpenLayers.Format.GML.v3(
+              {
+                  internalProjection: lizMap.map.getProjection(),
+                  externalProjection: aProj,
+                  srsName: aProj
+              }
+          );
+          var gml = gml3.writeNode(
+              'feature:_geometry',
+              selectionFeature.geometry
+          );
+          var spatialFilter = "intersects($geometry, geom_from_gml('" ;
+          spatialFilter+= OpenLayers.Format.XML.prototype.write.apply(
+              gml3,
+              gml.children
+          );
+          spatialFilter+= "'))";
+
+          if( 'request_params' in lConfig && 'filter' in lConfig['request_params'] ){
+              var rFilter = lConfig['request_params']['filter'];
+              if( rFilter ){
+                  rFilter = rFilter.replace( targetFeatureType + ':', '');
+                  spatialFilter = rFilter +' AND '+ spatialFilter;
+              }
+          }
+          if( 'request_params' in lConfig && 'exp_filter' in lConfig['request_params'] ){
+              // Add exp_filter, for example if set by another tool( filter module )
+              // Often 'filter' is not set because filtertoken is set instead
+              // But in this case, exp_filter must also been set and must be added
+              var eFilter = lConfig['request_params']['exp_filter'];
+              if( eFilter ){
+                  spatialFilter = eFilter +' AND '+ spatialFilter;
+              }
+          }
+          var limitDataToBbox = false;
+          if ( 'limitDataToBbox' in config.options && config.options.limitDataToBbox == 'True'){
+              limitDataToBbox = true;
+          }
+          var getFeatureUrlData = lizMap.getVectorLayerWfsUrl( targetFeatureType, spatialFilter, null, null, limitDataToBbox );
+          // add BBox to restrict to geom bbox
+          var geomBounds = selectionFeature.geometry.clone().transform(lizMap.map.getProjection(),aProj).getBounds();
+          getFeatureUrlData['options']['BBOX'] = geomBounds.toBBOX();
+          // get features
+          $.post( getFeatureUrlData['url'], getFeatureUrlData['options'], function(result) {
+                  var gFormat = new OpenLayers.Format.GeoJSON({
+                      ignoreExtraDims: true,
+                      externalProjection: lConfig.crs,
+                      internalProjection: lizMap.map.getProjection()
+                  });
+                  var tfeatures = gFormat.read( result );
+                  var sfIds = $.map(tfeatures, function(feat){
+                      return feat.fid.split('.')[1];
+                  });
+                  var stType = $('#selectiontool-type-buttons button.btn.active').val();
+                  if( stType == 'plus' ) {
+                      sfIds = config.layers[targetFeatureType]['selectedFeatures'].concat(sfIds);
+                      for(var i=0; i<sfIds.length; ++i) {
+                          for(var j=i+1; j<sfIds.length; ++j) {
+                              if(sfIds[i] === sfIds[j])
+                                  sfIds.splice(j--, 1);
+                          }
+                      }
+                  } else if( stType == 'minus' ) {
+                      var asfIds = config.layers[targetFeatureType]['selectedFeatures'].concat([]);
+                      for(var i=0; i<sfIds.length; ++i) {
+                          var asfIdIdx = asfIds.indexOf( sfIds[i] );
+                          if( asfIdIdx != -1 )
+                              asfIds.splice(asfIdIdx, 1);
+                      }
+                      sfIds = asfIds;
+                  }
+                  config.layers[targetFeatureType]['selectedFeatures'] = sfIds;
+                  lizMap.events.triggerEvent("layerSelectionChanged",
+                      {
+                          'featureType': targetFeatureType,
+                          'featureIds': config.layers[targetFeatureType]['selectedFeatures'],
+                          'updateDrawing': true
+                      }
+                  );
+
+                  // Remove features from selection layer
+                  var queryLayer = lizMap.layers['selectionQueryLayer'];
+                  queryLayer.destroyFeatures();
+                  $('#selectiontool-query-deactivate').click();
+          });
+      });
   }
 
   // Create new dock or minidock
@@ -6339,6 +6463,13 @@ OpenLayers.Control.HighlightFeature = OpenLayers.Class(OpenLayers.Control, {
      */
     getFeaturePopupContentByFeatureIntersection: function( aName, feat, aCallback) {
       return getFeaturePopupContentByFeatureIntersection(aName, feat, aCallback);
+    },
+
+    /**
+     * Method: selectLayerFeaturesFromSelectionFeature
+     */
+    selectLayerFeaturesFromSelectionFeature: function( targetFeatureType, selectionFeature) {
+      return selectLayerFeaturesFromSelectionFeature(targetFeatureType, selectionFeature);
     },
 
     /**

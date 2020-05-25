@@ -129,6 +129,24 @@ class lizmapWFSRequest extends lizmapOGCRequest
 
         if($provider == 'postgres'){
             $dtparams = $qgisLayer->getDatasourceParameters();
+            // Add key if not present ( WFS need to export id = typename.id for each feature)
+            // To be sure to get the primary keys even if there is an issue in QGIS Server
+            $propertyname = '';
+            if (array_key_exists('propertyname', $this->params)) {
+                $propertyname = $this->params['propertyname'];
+            }
+            if (!empty($propertyname)) {
+                $pfields = explode(',', $propertyname);
+                $key = $dtparams->key;
+                $keys = explode(',', $key);
+                foreach ($keys as $k) {
+                    if (!in_array($k, $pfields)) {
+                        // prepend primary keys
+                        array_unshift($pfields, $k);
+                    }
+                }
+                $this->params['propertyname'] = implode(',', $pfields);
+            }
         }
         // Use direct SQL query to improve performance for PostgreSQL layer
         // but only of not OGC filter is passed (complex to implement)
@@ -228,8 +246,11 @@ class lizmapWFSRequest extends lizmapOGCRequest
         // deduplicate columns to avoid SQL errors
         $sfields = array_values(array_unique($sfields));
 
-        $this->selectFields = $sfields;
-        $sql .= '"'.implode('", "', $sfields).'"';
+        $this->selectFields = array_map(function($item) use($cnx) {
+            return $cnx->encloseName($item);
+        }, $sfields);
+
+        $sql .= implode(', ', $this->selectFields);
 
         // Get spatial field
         $geometryname = '';
@@ -239,7 +260,7 @@ class lizmapWFSRequest extends lizmapOGCRequest
         $geocol = $this->datasource->geocol;
         if (!empty($geocol) && $geometryname !== 'none') {
             $geocolalias = 'geosource';
-            $sql .= ', "'.$geocol.'" AS "'.$geocolalias.'"';
+            $sql .= ', '.$cnx->encloseName($geocol).' AS '.$cnx->encloseName($geocolalias);
         }
 
         // FROM
@@ -295,7 +316,7 @@ class lizmapWFSRequest extends lizmapOGCRequest
             if (strpos($validFilter, '$id') !== false) {
                 $key = $this->datasource->key;
                 if (count(explode(',', $key)) == 1) {
-                    $sql .= ' AND '.str_replace('$id ', '"'.$key.'" ', $validFilter);
+                    $sql .= ' AND '.str_replace('$id ', $cnx->encloseName($key).' ', $validFilter);
                 } else {
                     return $this->getfeatureQgis();
                 }
@@ -311,23 +332,31 @@ class lizmapWFSRequest extends lizmapOGCRequest
             $featureid = $this->params['featureid'];
         }
         if (!empty($featureid)) {
-            $exp = explode('.', $featureid);
-            if (count($exp) == 2 and $exp[0] == $typename) {
-                $sql .= ' AND ';
-                $pks = explode(',', $exp[1]);
-                $i = 0;
-                $v = '';
-                foreach ($keys as $key) {
-                    $sql .= $v.'"'.$key.'" = ';
-                    if (ctype_digit($pks[$i])) {
-                        $sql .= $pks[$i];
-                    } else {
-                        $sql .= $cnx->quote($pks[$i]);
+            $fids = explode(',', $featureid);
+            $fidsSql = array();
+            foreach( $fids as $fid ) {
+                $exp = explode('.', $fid);
+                if (count($exp) == 2 and $exp[0] == $typename) {
+                    $fidSql = '(';
+                    $pks = explode('@@', $exp[1]);
+                    $i = 0;
+                    $v = '';
+                    foreach ($keys as $key) {
+                        $fidSql .= $v.$cnx->encloseName($key).' = ';
+                        if (ctype_digit($pks[$i])) {
+                            $fidSql .= $pks[$i];
+                        } else {
+                            $fidSql .= $cnx->quote($pks[$i]);
+                        }
+                        $v = ' AND ';
+                        ++$i;
                     }
-                    $v = ' AND ';
-                    ++$i;
+                    $fidSql.= ')';
+                    $fidsSql[] = $fidSql;
                 }
             }
+            //jLog::log(implode(' OR ', $fidsSql), 'error');
+            $sql.= ' AND '.implode(' OR ', $fidsSql);
         }
 
         // ORDER BY
@@ -356,7 +385,7 @@ class lizmapWFSRequest extends lizmapOGCRequest
                 $sql .= ' ORDER BY ';
                 $sep = '';
                 foreach ($sort_items as $f => $o) {
-                    $sql .= $sep.'"'.$f.'" '.$o;
+                    $sql .= $sep.$cnx->encloseName($f).' '.$o;
                     $sep = ', ';
                 }
             }
@@ -386,7 +415,7 @@ class lizmapWFSRequest extends lizmapOGCRequest
 
         //jLog::log($sql);
         // Use PostgreSQL method to export geojson
-        $sql = $this->setGeojsonSql($sql);
+        $sql = $this->setGeojsonSql($sql, $cnx);
         //jLog::log($sql);
         // Run query
         try {
@@ -442,7 +471,12 @@ class lizmapWFSRequest extends lizmapOGCRequest
         return str_replace('$geometry', '"'.$this->datasource->geocol.'"', $filter);
     }
 
-    private function setGeojsonSql($sql)
+    /**
+     * @param string $sql
+     * @param jDbConnection $cnx
+     * @return string
+     */
+    private function setGeojsonSql($sql, $cnx)
     {
         $sql = '
         WITH source AS (
@@ -467,13 +501,13 @@ class lizmapWFSRequest extends lizmapOGCRequest
         // this means some Lizmap features won't work with multiple keys or string ids
         // for example when using a filter clause in this query, row_number() will be false
         $sql .= " Concat(
-            '".$this->params['typename']."',
+            ".$cnx->quote($this->params['typename']).",
             '.',
             ";
         $key = $this->datasource->key;
 
         if (count(explode(',', $key)) == 1) {
-            $sql .= '"'.$key.'"';
+            $sql .= $cnx->encloseName($key);
         } else {
             $sql .= ' row_number() OVER() ';
         }
@@ -527,7 +561,7 @@ class lizmapWFSRequest extends lizmapOGCRequest
                             (
                                 SELECT ';
 
-        $sql .= '"'.implode('", "', $this->selectFields).'"';
+        $sql .= implode(', ', $this->selectFields);
         $sql .= '
                             ) As l
                         )

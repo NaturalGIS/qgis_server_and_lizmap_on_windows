@@ -208,7 +208,9 @@ class qgisForm implements qgisFormControlsInterface
 
             $defaultValue = $this->getDefaultValue($fieldName);
 
-            $formControl = new qgisFormControl($fieldName, $edittype, $prop, $alias, $defaultValue, $categoriesXml);
+            $constraints = $this->getConstraints($fieldName);
+
+            $formControl = new qgisFormControl($fieldName, $edittype, $prop, $alias, $defaultValue, $constraints, $categoriesXml);
 
             if ($formControl->isUniqueValue()) {
                 $this->fillControlFromUniqueValues($fieldName, $formControl);
@@ -230,6 +232,11 @@ class qgisForm implements qgisFormControlsInterface
                 $this->formPlugins[$fieldName] = 'color_html';
             }
 
+            // Force readonly to not be required
+            if ($formControl->isReadOnly && $formControl->ctrl->required) {
+                $formControl->required = false;
+                $formControl->ctrl->required = false;
+            }
             // Add the control to the form
             $form->addControl($formControl->ctrl);
             // Set readonly if needed
@@ -291,6 +298,10 @@ class qgisForm implements qgisFormControlsInterface
         // TODO implement a true QGIS expression parser or add the possibility
         // to evaluate the expression by qgis
         return null;
+    }
+
+    protected function getConstraints($fieldName) {
+        return $this->layer->getConstraints($fieldName);
     }
 
     public function getQgisControls()
@@ -425,15 +436,11 @@ class qgisForm implements qgisFormControlsInterface
                 $form->getControl($ref)->setDataFromDao($value, 'boolean');
             }
             // ValueRelation can be an array (i.e. {1,2,3})
-            if ($this->formControls[$ref]->isValueRelation()) {
-                if ($value[0] == '{') {
-                    $arrayValue = explode(',', trim($value, '{}'));
-                    $form->setData($ref, $arrayValue);
-                }else{
-                    $form->setData($ref, $value);
-                }
+            elseif ($this->formControls[$ref]->isValueRelation() && $value[0] === '{') {
+                $arrayValue = array_map('intval', explode(',', trim($value, '{}')));
+                $form->setData($ref, $arrayValue);
             }
-            if ($this->formControls[$ref]->isUploadControl()) {
+            elseif ($this->formControls[$ref]->isUploadControl()) {
                 $ctrl = $form->getControl($this->formControls[$ref]->getControlName());
                 if ($ctrl && $ctrl->type == 'choice') {
                     $path = explode('/', $value);

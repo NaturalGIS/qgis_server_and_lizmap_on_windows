@@ -26,6 +26,11 @@ class qgisVectorLayer extends qgisMapLayer
      */
     protected $defaultValues = array();
 
+    /**
+     * @var string[]  list of constraints for each fields (type of contraints and if it is notNull, unique and/or expression contraint)
+     */
+    protected $constraints = array();
+
     protected $wfsFields = array();
 
     /**
@@ -66,6 +71,7 @@ class qgisVectorLayer extends qgisMapLayer
         $this->fields = $propLayer['fields'];
         $this->aliases = $propLayer['aliases'];
         $this->defaultValues = $propLayer['defaults'];
+        $this->constraints = $propLayer['constraints'];
         $this->wfsFields = $propLayer['wfsFields'];
     }
 
@@ -107,6 +113,34 @@ class qgisVectorLayer extends qgisMapLayer
             return $this->defaultValues[$fieldName];
         }
         return null;
+    }
+
+    /**
+     * list of constraints
+     * @return string[]
+     */
+    public function getConstraintsList()
+    {
+        return $this->constraints;
+    }
+
+    /**
+     * Get the QGIS constraints of the given field
+     *
+     * @param string $fieldName
+     * @return string[] the constraints of the field
+     */
+    public function getConstraints($fieldName)
+    {
+        if (isset($this->constraints[$fieldName])) {
+            return $this->constraints[$fieldName];
+        }
+        return array(
+                    'constraints' => 0,
+                    'notNull' => false,
+                    'unique' => false,
+                    'exp' => false
+                );
     }
 
     public function getWfsFields()
@@ -243,11 +277,12 @@ class qgisVectorLayer extends qgisMapLayer
                 'extensions' => $spatialiteExt,
             );
         } elseif ($this->provider == 'postgres') {
+            // no persistent connexions, it may reach max connections to pgsql if
+            // they are not closed correctly, and then reopened
             if (!empty($dtParams->service)) {
                 $jdbParams = array(
                     'driver' => 'pgsql',
                     'service' => $dtParams->service,
-                    'persistent' => true,
                 );
             } else {
                 $jdbParams = array(
@@ -257,8 +292,10 @@ class qgisVectorLayer extends qgisMapLayer
                     'database' => $dtParams->dbname,
                     'user' => $dtParams->user,
                     'password' => $dtParams->password,
-                    'persistent' => true,
                 );
+            }
+            if (!empty($dtParams->schema)) {
+                $jdbParams['search_path'] = '"'.$dtParams->schema . '",public';
             }
         } elseif ($this->provider == 'ogr'
             and preg_match('#(gpkg|sqlite)$#', $dtParams->dbname ) ) {
@@ -396,9 +433,9 @@ class qgisVectorLayer extends qgisMapLayer
                     $sql .= ' AND attrelid = '.$cnx->quote($tablename).'::regclass';
                     $res = $cnx->query($sql);
                     $res = $res->fetch();
-                    if ($res && strpos($res->type, '(') !== false) {
-                        // It returns something like "geometry(PointZ,32620)".
-                        $dbInfo->geometryType = explode(',', explode('(', strtolower($res->type))[1])[0];
+                    // It returns something like "geometry(PointZ,32620) as type"
+                    if ($res && preg_match('/^geometry\\(([^,\\)]*)/i', $res->type, $m)) {
+                        $dbInfo->geometryType = strtolower($m[1]);
                     }
                 }
             }
@@ -568,18 +605,19 @@ class qgisVectorLayer extends qgisMapLayer
         // test type
         $rs = $cnx->query('SELECT GeometryType('.$nvalue.') as geomtype');
         $rs = $rs->fetch();
-        if (!preg_match('/'.$dbFieldsInfo->geometryType.'/', strtolower($rs->geomtype))) {
-            if (preg_match('/'.str_replace('multi', '', $dbFieldsInfo->geometryType).'/', strtolower($rs->geomtype))) {
+        $geomtype = strtolower($rs->geomtype);
+        if (!preg_match('/'.preg_quote($dbFieldsInfo->geometryType).'/', $geomtype)) {
+            if (preg_match('/'.preg_quote(str_replace('multi', '', $dbFieldsInfo->geometryType)).'/', $geomtype)) {
                 $nvalue = 'ST_Multi('.$nvalue.')';
             }
         }
 
         if (substr($dbFieldsInfo->geometryType, -2) == 'zm') {
-            $nvalue = 'ST_Force_4D('.$nvalue.')';
+            $nvalue = 'ST_Force4D('.$nvalue.')';
         } elseif (substr($dbFieldsInfo->geometryType, -1) == 'z') {
-            $nvalue = 'ST_Force_3DZ('.$nvalue.')';
+            $nvalue = 'ST_Force3DZ('.$nvalue.')';
         } elseif (substr($dbFieldsInfo->geometryType, -1) == 'm') {
-            $nvalue = 'ST_Force_3DM('.$nvalue.')';
+            $nvalue = 'ST_Force3DM('.$nvalue.')';
         }
 
         return $nvalue;
@@ -743,7 +781,7 @@ class qgisVectorLayer extends qgisMapLayer
                 continue;
             }
             // For update, keep fields with NULL to allow deletion of values
-            $update[] = '"'.$ref.'"='.$value;
+            $update[] = $cnx->encloseName($ref).'='.$value;
         }
 
         // SQL for updating on line in the edition table
@@ -752,7 +790,6 @@ class qgisVectorLayer extends qgisMapLayer
 
         // Add where clause with primary keys
         list($sqlw, $pk) = $this->getPkWhereClause($cnx, $dbFieldsInfo, $feature);
-
         // Store WHere clause to retrieve primary keys in spatialite
         $uwhere = '';
         $uwhere .= ' WHERE ';
@@ -904,8 +941,8 @@ class qgisVectorLayer extends qgisMapLayer
 
             // Build SQL
             $sql = ' UPDATE '.$dtParams->table;
-            $sql .= ' SET "'.$fkey.'" = '.$one;
-            $sql .= ' WHERE "'.$pkey.'" = '.$two;
+            $sql .= ' SET '.$cnx->encloseName($fkey).' = '.$one;
+            $sql .= ' WHERE '.$cnx->encloseName($pkey).' = '.$two;
             $sql .= ';';
 
             try {
@@ -942,16 +979,16 @@ class qgisVectorLayer extends qgisMapLayer
 
                 // Build SQL
                 $sql = ' INSERT INTO '.$dtParams->table.' (';
-                $sql .= ' "'.$fkey.'" , ';
-                $sql .= ' "'.$pkey.'" )';
+                $sql .= ' '.$cnx->encloseName($fkey).' , ';
+                $sql .= ' '.$cnx->encloseName($pkey).' )';
                 $sql .= ' SELECT '.$one.', '.$two;
                 $sql .= ' WHERE NOT EXISTS';
                 $sql .= ' ( SELECT ';
-                $sql .= ' "'.$fkey.'" , ';
-                $sql .= ' "'.$pkey.'" ';
+                $sql .= ' '.$cnx->encloseName($fkey).' , ';
+                $sql .= ' '.$cnx->encloseName($pkey).' ';
                 $sql .= ' FROM '.$dtParams->table;
-                $sql .= ' WHERE "'.$fkey.'" = '.$one;
-                $sql .= ' AND "'.$pkey.'" = '.$two.')';
+                $sql .= ' WHERE '.$cnx->encloseName($fkey).' = '.$one;
+                $sql .= ' AND '.$cnx->encloseName($pkey).' = '.$two.')';
                 $sql .= ';';
 
                 try {
@@ -982,8 +1019,8 @@ class qgisVectorLayer extends qgisMapLayer
         }
 
         $sql = ' UPDATE '.$dtParams->table;
-        $sql .= ' SET "'.$fkey.'" = NULL';
-        $sql .= ' WHERE "'.$pkey.'" = '.$val;
+        $sql .= ' SET '.$cnx->encloseName($fkey).' = NULL';
+        $sql .= ' WHERE '.$cnx->encloseName($pkey).' = '.$val;
         $sql .= ';';
 
         try {

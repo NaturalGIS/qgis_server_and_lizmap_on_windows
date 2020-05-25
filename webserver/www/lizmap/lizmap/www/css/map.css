@@ -323,7 +323,7 @@ CSS Sprite positions calculated via http://instantsprite.com/ using 20px images 
 */
   right:50%;
   max-width:50%;
-  background:url('img/header-background-medium.png');
+  background:url('img/header-background-medium.jpg');
 }
 #dock.full {
 /*
@@ -331,7 +331,7 @@ CSS Sprite positions calculated via http://instantsprite.com/ using 20px images 
 */
   right:0px;
   max-width:100%;
-  background:url('img/header-background-medium.png');
+  background:url('img/header-background-medium.jpg');
 }
 
 #map-content.half, #map-content.full{
@@ -351,7 +351,9 @@ ul.nav.nav-tabs {
 
 #right-dock div.tabbable {
   height: 100%;
+  margin-top: 5px;
 }
+
 #right-dock-content {
   height: 100%;
   overflow-y: auto;
@@ -359,8 +361,8 @@ ul.nav.nav-tabs {
 
 #right-dock-close{
   position: absolute;
-  bottom:5px;
-  left:5px;
+  top:5px;
+  right:5px;
 }
 
 #dock-tabs > li > a,
@@ -398,7 +400,7 @@ SubDock
   left:30px;
   top:0px;
   max-height:100%;
-  z-index:1000;
+  z-index:1001;
   overflow:auto;
   background-color:#4A4A4A;
   background-color:rgba(0,0,0,0.7);

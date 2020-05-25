@@ -362,7 +362,11 @@ OpenLayers.Geometry.pointOnSegment = function(point, segment) {
                     elk.push(al.order);
                 }
             }
-            for (var i in elk.sort()) {
+            // Sort by order (int)
+            elk.sort(function (a, b) {
+                return a - b;
+            });
+            for ( var i in elk ) {
                 var alConfig = elconfig[elk[i]];
                 $('#edition-layer').append('<option value="'+alConfig.id+'">'+alConfig.title+'</option>');
             }
@@ -1347,7 +1351,18 @@ OpenLayers.Geometry.pointOnSegment = function(point, segment) {
 
         // Set hidden geometry field
         eform.find('input[name="'+gColumn+'"]').val(geom);
-
+        // dispatch event
+        var formFeatureId = eform.find('input[name="liz_featureId"]').val();
+        var formLayerId = eform.find('input[name="liz_layerId"]').val();
+        lizMap.events.triggerEvent("lizmapeditiongeometryupdated",
+            {
+                'layerId': formLayerId,
+                'featureId': formFeatureId,
+                'geometry': geom,
+                'srid': srid
+            }
+        );
+        return true;
     }
 
     function updateFeatureFromGeometryColumn(){

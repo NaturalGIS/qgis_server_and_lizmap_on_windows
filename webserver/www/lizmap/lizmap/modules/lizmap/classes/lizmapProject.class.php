@@ -169,8 +169,15 @@ class lizmapProject extends qgisProject
         // to avoid collision in the cache engine
         $data = false;
 
+        if (jApp::config()->isWindows) {
+            // Cache backends don't support '\'
+            $fileKey = str_replace('\\', '/', $file);
+        }
+        else {
+            $fileKey = $file;
+        }
         try {
-            $data = jCache::get($file, 'qgisprojects');
+            $data = jCache::get($fileKey, 'qgisprojects');
         } catch (Exception $e) {
             // if qgisprojects profile does not exist, or if there is an
             // other error about the cache, let's log it
@@ -195,7 +202,7 @@ class lizmapProject extends qgisProject
             }
 
             try {
-                jCache::set($file, $data, null, 'qgisprojects');
+                jCache::set($fileKey, $data, null, 'qgisprojects');
             } catch (Exception $e) {
                 jLog::logEx($e, 'error');
             }
@@ -213,7 +220,10 @@ class lizmapProject extends qgisProject
     public function clearCache()
     {
         $file = $this->repository->getPath().$this->key.'.qgs';
-
+        if (jApp::config()->isWindows) {
+            // Cache backends don't support '\'
+            $file = str_replace('\\', '/', $file);
+        }
         try {
             jCache::delete($file, 'qgisprojects');
         } catch (Exception $e) {
@@ -290,7 +300,7 @@ class lizmapProject extends qgisProject
             $this->data['abstract'] = '';
         }
         $this->data['proj'] = $configOptions->projection->ref;
-        $this->data['bbox'] = join($configOptions->bbox, ', ');
+        $this->data['bbox'] = implode(', ', $configOptions->bbox);
 
         // Update WMSInformation
         $this->WMSInformation['ProjectCrs'] = $this->data['proj'];
@@ -331,6 +341,17 @@ class lizmapProject extends qgisProject
                 $name = (string) $xmlLayer->layername;
                 if (property_exists($this->cfg->layers, $name)) {
                     $this->cfg->layers->{$name}->shortname = $sname;
+                }
+            }
+        }
+
+        $layerWithOpacities = $qgs_xml->xpath('//maplayer/layerOpacity[.!=1]/parent::*');
+        if ($layerWithOpacities && count($layerWithOpacities) > 0) {
+            foreach( $layerWithOpacities as $layerWithOpacitiy ) {
+                $name = (string) $layerWithOpacitiy->layername;
+                if (property_exists($this->cfg->layers, $name)) {
+                    $opacity = (float) $layerWithOpacitiy->layerOpacity;
+                    $this->cfg->layers->{$name}->opacity = $opacity;
                 }
             }
         }
@@ -435,7 +456,7 @@ class lizmapProject extends qgisProject
         }
 
         $rootRepositories = $services->getRootRepositories();
-        if (strpos($mapParam, $rootRepositories) === 0) {
+        if ($rootRepositories != '' && strpos($mapParam, $rootRepositories) === 0) {
             $mapParam = str_replace($rootRepositories, '', $mapParam);
             $mapParam = ltrim($mapParam, '/');
         }
@@ -857,6 +878,14 @@ class lizmapProject extends qgisProject
         return false;
     }
 
+    private function optionToBoolean($config_string) {
+        $ret = false;
+        if (strtolower((string)$config_string) == 'true') {
+            $ret = true;
+        }
+        return $ret;
+    }
+
     /**
      * @return array|bool
      */
@@ -870,7 +899,7 @@ class lizmapProject extends qgisProject
             'dataviz' => array(),
         );
         foreach ($this->cfg->datavizLayers as $order => $lc) {
-            if (!array_key_exists('layerId', $lc)) {
+            if (!property_exists($lc, 'layerId')) {
                 continue;
             }
             $layer = $this->findLayerByAnyName($lc->layerId);
@@ -885,13 +914,15 @@ class lizmapProject extends qgisProject
                 'plot_id' => $lc->order,
                 'layer_id' => $layer->id,
                 'title' => $title,
-                'abstract' => $layer->abstract,
                 'plot' => array(
                     'type' => $lc->type,
                     'x_field' => $lc->x_field,
                     'y_field' => $lc->y_field,
                 ),
             );
+
+            $abstract = $layer->abstract;
+            $plotConf['abstract'] = $abstract;
 
             if (property_exists($lc, 'popup_display_child_plot')) {
                 $plotConf['popup_display_child_plot'] = $lc->popup_display_child_plot;
@@ -904,6 +935,9 @@ class lizmapProject extends qgisProject
             }
             if (!empty($lc->color)) {
                 $plotConf['plot']['color'] = $lc->color;
+            }
+            if (property_exists($lc, 'color2') and !empty($lc->color2) ) {
+                $plotConf['plot']['color2'] = $lc->color2;
             }
             if (property_exists($lc, 'aggregation')) {
                 $plotConf['plot']['aggregation'] = $lc->aggregation;
@@ -1430,15 +1464,34 @@ class lizmapProject extends qgisProject
     protected function readLayersOrder($xml, $cfg)
     {
         $layersOrder = array();
-        // For QGIS >=2.4, new item layer-tree-canvas
-        if ($this->qgisProjectVersion >= 20400) {
-            $customeOrder = $xml->xpath('//layer-tree-canvas/custom-order');
-            if (count($customeOrder) == 0) {
+        if ($this->qgisProjectVersion >= 30000) { // For QGIS >=3.0, custom-order is in layer-tree-group
+            $customOrder = $xml->xpath('layer-tree-group/custom-order');
+            if (count($customOrder) == 0) {
                 return $layersOrder;
             }
-            $customeOrderZero = $customeOrder[0];
-            if ($customeOrderZero->attributes()->enabled == 1) {
-                $items = $customeOrderZero->xpath('//item');
+            $customOrderZero = $customOrder[0];
+            if ($customOrderZero->attributes()->enabled == 1) {
+                $items = $customOrderZero->xpath('//item');
+                $lo = 0;
+                foreach  ($items as $layerI) {
+                    // Get layer name from config instead of XML for possible embedded layers
+                    $name = $this->getLayerNameByIdFromConfig($layerI);
+                    if ($name) {
+                        $layersOrder[$name] = $lo;
+                    }
+                    ++$lo;
+                }
+            } else {
+                return $layersOrder;
+            }
+        } else if ($this->qgisProjectVersion >= 20400) { // For QGIS >=2.4, new item layer-tree-canvas
+            $customOrder = $xml->xpath('//layer-tree-canvas/custom-order');
+            if (count($customOrder) == 0) {
+                return $layersOrder;
+            }
+            $customOrderZero = $customOrder[0];
+            if ($customOrderZero->attributes()->enabled == 1) {
+                $items = $customOrderZero->xpath('//item');
                 $lo = 0;
                 foreach ($items as $layerI) {
                     // Get layer name from config instead of XML for possible embedded layers
@@ -1677,7 +1730,9 @@ class lizmapProject extends qgisProject
     public function getDefaultDockable()
     {
         $dockable = array();
-        $bp = jApp::config()->urlengine['basePath'];
+        $confUrlEngine = &jApp::config()->urlengine;
+        $bp = $confUrlEngine['basePath'];
+        $jwp = $confUrlEngine['jelixWWWPath'];
 
         // Get lizmap services
         $services = lizmap::getServices();
@@ -1740,7 +1795,7 @@ class lizmapProject extends qgisProject
                 jLocale::get('view~edition.navbar.title'),
                 $tpl->fetch('view~map_edition'),
                 3,
-                '',
+                $jwp.'design/jform.css',
                 $bp.'js/edition.js'
             );
         }
@@ -1968,7 +2023,6 @@ class lizmapProject extends qgisProject
                 return $this->spatialiteExt;
             }
         } catch (Exception $e) {
-            //jLog::logEx($e);
             $spatial = false;
         }
         // Try with libspatialite
@@ -1981,7 +2035,6 @@ class lizmapProject extends qgisProject
                     return $this->spatialiteExt;
                 }
             } catch (Exception $e) {
-                //jLog::logEx($e);
             }
         }
         $this->spatialiteExt = '';

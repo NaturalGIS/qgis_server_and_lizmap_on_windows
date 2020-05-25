@@ -24,3 +24,7 @@
 
 [modules]
 lizmap.installparam=demo
+
+
+[jcommunity]
+resetAdminPasswordEnabled = off

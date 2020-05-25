@@ -87,9 +87,15 @@ class qgisProject
         // For the cache key, we use the full path of the project file
         // to avoid collision in the cache engine
         $data = false;
-
+        if (jApp::config()->isWindows) {
+            // Cache backends don't support '\'
+            $fileKey = str_replace('\\', '/', $file);
+        }
+        else {
+            $fileKey = $file;
+        }
         try {
-            $data = jCache::get($file, 'qgisprojects');
+            $data = jCache::get($fileKey, 'qgisprojects');
         } catch (Exception $e) {
             // if qgisprojects profile does not exist, or if there is an
             // other error about the cache, let's log it
@@ -108,7 +114,7 @@ class qgisProject
             }
 
             try {
-                jCache::set($file, $data, null, 'qgisprojects');
+                jCache::set($fileKey, $data, null, 'qgisprojects');
             } catch (Exception $e) {
                 jLog::logEx($e, 'error');
             }
@@ -124,7 +130,10 @@ class qgisProject
     public function clearCache()
     {
         $file = $this->path;
-
+        if (jApp::config()->isWindows) {
+            // Cache backends don't support '\'
+            $file = str_replace('\\', '/', $file);
+        }
         try {
             jCache::delete($file, 'qgisprojects');
         } catch (Exception $e) {
@@ -632,6 +641,7 @@ class qgisProject
                     $wfsFields = array();
                     $aliases = array();
                     $defaults = array();
+                    $constraints = array();
                     $edittypes = $xmlLayer->xpath('.//edittype');
                     if ($edittypes) {
                         foreach ($edittypes as $edittype) {
@@ -643,6 +653,7 @@ class qgisProject
                             $wfsFields[] = $field;
                             $aliases[$field] = $field;
                             $defaults[$field] = null;
+                            $constraints[$field] = null;
                         }
                     } else {
                         $fieldconfigurations = $xmlLayer->xpath('.//fieldConfiguration/field');
@@ -656,6 +667,7 @@ class qgisProject
                                 $wfsFields[] = $field;
                                 $aliases[$field] = $field;
                                 $defaults[$field] = null;
+                                $constraints[$field] = null;
                             }
                         }
                     }
@@ -672,9 +684,28 @@ class qgisProject
                         }
                     }
 
+                    if (isset($xmlLayer->constraints->constraint)) {
+                        foreach($xmlLayer->constraints->constraint as $constraint) {
+                            $c = array(
+                                'constraints' => 0,
+                                'notNull' => false,
+                                'unique' => false,
+                                'exp' => false
+                            );
+                            $c['constraints'] = (int) $constraint['constraints'];
+                            if ( $c['constraints'] > 0 ) {
+                                $c['notNull'] = ((int) $constraint['notnull_strength'] > 0);
+                                $c['unique'] = ((int) $constraint['unique_strength'] > 0);
+                                $c['exp'] = ((int) $constraint['exp_strength'] > 0);
+                            }
+                            $constraints[(string) $constraint['field']] = $c;
+                        }
+                    }
+
                     $layer['fields'] = $fields;
                     $layer['aliases'] = $aliases;
                     $layer['defaults'] = $defaults;
+                    $layer['constraints'] = $constraints;
                     $layer['wfsFields'] = $wfsFields;
 
                     $excludeFields = $xmlLayer->xpath('.//excludeAttributesWFS/attribute');

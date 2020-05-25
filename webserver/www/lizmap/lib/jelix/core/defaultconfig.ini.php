@@ -260,7 +260,7 @@ jsonrpc = on
 
 [logger]
 ; list of loggers for each categories of log messages
-; available loggers : file, syslog, firebug, mail, memory. see plugins for others
+; available loggers : file, syslog, stderr, stdout, mail, memory. see plugins for others
 
 ; _all category is the category containing loggers executed for any categories
 _all =
@@ -306,6 +306,12 @@ emailHeaders = "Content-Type: text/plain; charset=UTF-8\nFrom: webmaster@yoursit
 facility=LOG_LOCAL7
 ident="php-%sapi%-%domain%[%pid%]"
 
+[stderrLogger]
+; <type> = %D% %T% %ip% [%type%] %msg%  ; formated string, default is %type% - %msg%
+
+[stdoutLogger]
+; <type> = %D% %T% %ip% [%type%] %msg%  ; formated string, default is %type% - %msg%
+
 
 [mailer]
 webmasterEmail = root@localhost
@@ -344,7 +350,7 @@ smtpTimeout = 10
 ; Copy all emails into files
 copyToFiles = off
 
-; enable the debug mode. debugReceivers should be filled.
+; enable the debug mode.
 debugModeEnabled = off
 
 ; type of receivers set into the email
@@ -375,6 +381,14 @@ debugSubjectPrefix =
 ; Introduction inserted at the beginning of the messages in debug mode
 debugBodyIntroduction =
 
+; smtp debug level. debugModeEnabled should be set to on
+; - `0` No output
+; - `1` Commands
+; - `2` Data and commands
+; - `3` As 2 plus connection status
+; - `4` Low-level data output
+debugSmtpLevel = 0
+
 [acl]
 ; exemple of driver: "db".
 driver =
@@ -393,6 +407,13 @@ start = 1
 ; a different basePath, shared_session indicates if these application
 ; share the same php session
 shared_session = off
+
+; parameters for the session cookie
+cookieSecure=off
+cookieHttpOnly=on
+cookieExpires=0
+; only supported with php 7.3.0+. Possible values: None, Strict, Lax
+cookieSameSite=
 
 ; indicate a session name for each applications installed with the same
 ; domain and basePath, if their respective sessions shouldn't be shared
