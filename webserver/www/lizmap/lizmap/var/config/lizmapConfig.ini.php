@@ -4,7 +4,7 @@
 ;Services
 ;list the different map services (servers, generic parameters, etc.)
 [services]
-wmsServerURL="http://127.0.0.1/qgis/qgis_mapserv.fcgi.exe"
+wmsServerURL="http://localhost/qgis/qgis_mapserv.fcgi.exe"
 ;List of URL available for the web client
 onlyMaps=0
 defaultRepository=
