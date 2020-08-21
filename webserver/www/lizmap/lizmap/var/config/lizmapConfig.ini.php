@@ -4,7 +4,7 @@
 ;Services
 ;list the different map services (servers, generic parameters, etc.)
 [services]
-wmsServerURL="http://127.0.0.1/cgi-bin/qgis_mapserv.fcgi"
+wmsServerURL="http://localhost/qgis/qgis_mapserv.fcgi.exe"
 ;List of URL available for the web client
 onlyMaps=0
 defaultRepository=
@@ -24,7 +24,8 @@ debugMode=0
 ; debug mode
 ; on = print debug messages in lizmap/var/log/messages.log
 ; off = no lizmap debug messages
-cacheRootDirectory="/tmp/"
+; this folder need to be available in the filesystem
+cacheRootDirectory="C:\temp"
 ; cache root directory where cache files will be stored
 ; must be writable
 
