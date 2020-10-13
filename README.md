@@ -55,3 +55,5 @@ C:\webserver\php73\php.exe lizmap/install/installer.php
 ```
 http://localhost/lizmap/lizmap/www/index.php
 ```
+
+11) On a completely clean Window 10 machine you can get an error message about missing some library. If is the case just download and install them from the MS web site: https://www.microsoft.com/en-us/download/details.aspx?id=52685
