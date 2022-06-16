@@ -226,8 +226,8 @@ class jResponseHtml extends jResponseBasicHtml {
         $this->outputDoctype();
         $this->outputHtmlHeader();
         echo '<body ';
-        foreach($this->bodyTagAttributes as $attr=>$value){
-            echo $attr,'="', htmlspecialchars($value),'" ';
+        foreach ($this->bodyTagAttributes as $attr => $value) {
+            echo $attr,'="', htmlspecialchars($value, ENT_COMPAT),'" ';
         }
         echo ">\n";
         echo implode("\n",$this->_bodyTop);
@@ -525,13 +525,18 @@ class jResponseHtml extends jResponseBasicHtml {
 
     protected function outputJsScriptTag( $fileUrl, $scriptParams ) {
         $params = '';
+        if (!isset($scriptParams['type'])) {
+            $params = 'type="text/javascript" ';
+        }
+        $params .= 'src="'.htmlspecialchars($fileUrl).'" ';
+
         foreach ($scriptParams as $param_name=>$param_value){
             if ($param_name=='_ieCondition')
                 continue ;
             $params .= $param_name.'="'. htmlspecialchars($param_value).'" ';
         }
 
-        echo '<script type="text/javascript" src="',htmlspecialchars($fileUrl),'" ',$params,'></script>',"\n";
+        echo '<script ',$params,'></script>',"\n";
     }
 
 
@@ -636,7 +641,7 @@ class jResponseHtml extends jResponseBasicHtml {
                 $more[] = 'type="'.$params[1].'"';
             if (!empty($params[2]))
                 $more[] = 'title = "'.htmlspecialchars($params[2]).'"';
-            echo '<link rel="',$params[0],'" href="',htmlspecialchars($href),'" ',implode($more, ' '),$this->_endTag;
+            echo '<link rel="',$params[0],'" href="',htmlspecialchars($href),'" ',implode(' ', $more),$this->_endTag;
         }
 
         // js code

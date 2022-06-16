@@ -6,7 +6,7 @@
 * @subpackage core
 * @author   Laurent Jouanneau
 * @contributor Loic Mathaud, Julien Issler
-* @copyright 2005-2012 Laurent Jouanneau
+* @copyright 2005-2020 Laurent Jouanneau
 * @copyright 2007 Julien Issler
 * @link     http://www.jelix.org
 * @licence  GNU Lesser General Public Licence see LICENCE file or http://www.gnu.org/licenses/lgpl.html
@@ -16,7 +16,7 @@
  * Version number of Jelix
  * @name  JELIX_VERSION
  */
-define ('JELIX_VERSION', '1.6.28-pre');
+define ('JELIX_VERSION', '1.6.37-pre');
 
 /**
  * base of namespace path used in xml files of jelix
@@ -70,6 +70,10 @@ require (JELIX_LIB_CORE_PATH . 'jLog.class.php');
 require (JELIX_LIB_CORE_PATH . 'jIncluder.class.php');
 require (JELIX_LIB_CORE_PATH . 'jSession.class.php');
 
+if (version_compare(phpversion(), "5.6") > -1) {
+    require JELIX_LIB_UTILS_PATH.'Utilities.php';
+}
+
 /**
  * contains path for the jelix_autoload function
  * @global array $gLibPath
@@ -83,12 +87,29 @@ $GLOBALS['gLibPath']=array('Config'=>JELIX_LIB_PATH.'core/',
  'Auth'=>JELIX_LIB_PATH.'auth/', 'Installer'=>JELIX_LIB_PATH.'installer/',
  'KV'=>JELIX_LIB_PATH.'kvdb/');
 
+$GLOBALS['gLibClassPath']=array(
+    'jIInstallerComponent' => JELIX_LIB_PATH.'installer/jIInstallerComponent.iface.php',
+);
+
 /**
  * function used by php to try to load an unknown class
  */
-function jelix_autoload($class) {
-    if (strpos($class, 'jelix\\') === 0) {
-        $f = LIB_PATH.str_replace('\\', DIRECTORY_SEPARATOR, $class).'.php';
+function jelix_autoload($class)
+{
+    if (stripos($class, 'jelix') === 0) {
+        $class = str_replace(
+            array('Jelix', '\\'),
+            array('jelix', DIRECTORY_SEPARATOR),
+            $class);
+        if (strpos($class, '/Forms/') !== false) {
+            $f = LIB_PATH.str_replace( 'Forms', 'forms', $class).'.php';
+        }
+        else if (strpos($class, '/Core/') !== false) {
+            $f = LIB_PATH.str_replace( 'Core', 'core', $class).'.php';
+        }
+        else {
+            $f = LIB_PATH.$class.'.php';
+        }
     }
     else if(preg_match('/^j(Dao|Tpl|Event|Db|Controller|Forms|Auth|Config|Installer|KV).*/i', $class, $m)){
         $f=$GLOBALS['gLibPath'][$m[1]].$class.'.class.php';
@@ -115,6 +136,9 @@ function jelix_autoload($class) {
                 require($f);
         }
         return;
+    }
+    elseif (isset($GLOBALS['gLibClassPath'][$class])) {
+        $f = $GLOBALS['gLibClassPath'][$class];
     }else{
         $f = JELIX_LIB_UTILS_PATH.$class.'.class.php';
     }
@@ -135,7 +159,7 @@ spl_autoload_register("jelix_autoload");
  */
 function checkAppOpened() {
     if (!jApp::isInit()) {
-        header("HTTP/1.1 500 Application not available");
+        header("HTTP/1.1 500 Internal Server Error");
         header('Content-type: text/html');
         echo "checkAppOpened: jApp is not initialized!";
         exit(1);
@@ -151,10 +175,11 @@ function checkAppOpened() {
         if (file_exists(jApp::appPath('install/closed.html'))) {
             $file = jApp::appPath('install/closed.html');
         }
-        else
+        else {
             $file = JELIX_LIB_PATH.'installer/closed.html';
+        }
 
-        header("HTTP/1.1 500 Application not available");
+        header("HTTP/1.1 503 Application not available");
         header('Content-type: text/html');
         echo str_replace('%message%', $message, file_get_contents($file));
         exit(1);
@@ -174,7 +199,7 @@ function checkAppNotInstalled() {
             echo "Application is installed. The script cannot be runned.\n";
         }
         else {
-            header("HTTP/1.1 500 Application not available");
+            header("HTTP/1.1 500 Internal Server Error");
             header('Content-type: text/plain');
             echo "Application is installed. The script cannot be runned.\n";
         }

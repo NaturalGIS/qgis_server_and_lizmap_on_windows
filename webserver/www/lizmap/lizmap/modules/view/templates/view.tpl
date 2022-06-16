@@ -2,6 +2,7 @@
 {meta_html csstheme 'css/view.css'}
 {meta_html csstheme 'css/media.css'}
 
+<span id="anchor-top-projects"></span>
 {assign $idm = 0}
 {foreach $mapitems as $mi}
 {if $mi->type == 'rep'}
@@ -13,11 +14,13 @@
   <li class="span3 liz-repository-project-item">
     <div class="thumbnail">
       <div class="liz-project">
-        <img src="{$p->img}" alt="project image" class="liz-project-img">
+        <img width="250" height="250" src="{$p->img}" alt="project image" class="liz-project-img">
         <p class="liz-project-desc" style="display:none;">
-          <b>{$p->title}</b>
+          <b class="title">{$p->title}</b>
           <br/>
-          <br/><b>{@default.project.abstract.label@}</b>&nbsp;: {$p->abstract|strip_tags|truncate:100}
+          <br/><b>{@default.project.abstract.label@}</b>&nbsp;: <span class="abstract">{$p->abstract|strip_tags|truncate:100}</span>
+          <br/>
+          <br/><b>{@default.project.keywordList.label@}</b>&nbsp;: <span class="keywordList">{$p->keywordList}</span>
           <br/>
           <br/><b>{@default.project.projection.label@}</b>&nbsp;: <span class="proj">{$p->proj}</span>
           <br/><b>{@default.project.bbox.label@}</b>&nbsp;: <span class="bbox">{$p->bbox}</span>

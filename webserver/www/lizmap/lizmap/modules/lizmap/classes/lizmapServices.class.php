@@ -19,8 +19,10 @@ class lizmapServices
     private $data = array();
 
     /**
-     * List of all properties of lizmapServices that should be retrieved
-     * from lizmapConfig.ini.php or from the main configuration.
+     * List of all properties of lizmapServices that are editable in the
+     * configuration form of Lizmap.
+     *
+     * properties values are stored into lizmapConfig.ini.php or the main configuration.
      */
     private $properties = array(
         'appName',
@@ -37,7 +39,7 @@ class lizmapServices
         'projectSwitcher',
         'rootRepositories',
         'relativeWMSPath',
-        'proxyMethod',
+        'proxyHttpBackend',
         'requestProxyEnabled',
         'requestProxyHost',
         'requestProxyPort',
@@ -58,7 +60,10 @@ class lizmapServices
         'googleAnalyticsID',
     );
 
-    // services properties
+    /**
+     * services properties to not display into the configuration form,
+     * when hideSensitiveServicesProperties is set to 1.
+     */
     private $sensitiveProperties = array(
         'qgisServerVersion',
         'wmsServerURL',
@@ -69,7 +74,6 @@ class lizmapServices
         'cacheExpiration',
         'rootRepositories',
         'relativeWMSPath',
-        'proxyMethod',
         'requestProxyEnabled',
         'requestProxyHost',
         'requestProxyPort',
@@ -85,14 +89,23 @@ class lizmapServices
         'cacheRedisKeyPrefix',
         'adminSenderEmail',
         'adminSenderName',
-    );
-
-    private $notEditableProperties = array(
-        'cacheRedisKeyPrefixFlushMethod',
+        'proxyHttpBackend',
     );
 
     /**
-     * List of properties mapped to a parameter of the main configuration of Jelix.
+     * List of properties that are not editable at all.
+     *
+     * @var string[]
+     */
+    private $notEditableProperties = array(
+        'cacheRedisKeyPrefixFlushMethod',
+        'wmsServerHeaders',
+        'metricsEnabled',
+    );
+
+    /**
+     * List of properties mapped to a parameter of the main configuration
+     * of Jelix.
      *
      * @var array
      */
@@ -105,12 +118,17 @@ class lizmapServices
 
     private $isUsingLdap = false;
 
+    private $varPath = '';
+    private $globalConfig;
+
     // Wms map server
     public $appName = 'Lizmap';
     // QGIS Server version
     public $qgisServerVersion = '3.0';
     // Wms map server
     public $wmsServerURL = '';
+    // headers to send to Wms map server
+    public $wmsServerHeaders = array();
     // Public Wms url list
     public $wmsPublicUrlList = '';
     // Wms max width
@@ -133,15 +151,22 @@ class lizmapServices
     public $rootRepositories = '';
     // Does the server use relative Path from root folder?
     public $relativeWMSPath = '0';
-    // proxy method : use curl ('curl') or file_get_contents ('php')
-    public $proxyMethod = '';
+
+    /**
+     * backend to use to do http request : use curl ('curl') or file_get_contents ('php').
+     * leave empty to have automatic selection (it will use curl if the curl extension is installed).
+     * Fill it only for tests.
+     *
+     * @var string
+     */
+    public $proxyHttpBackend = '';
 
     public $requestProxyEnabled = false;
     public $requestProxyHost = '';
     public $requestProxyPort = '';
     public $requestProxyUser = '';
     public $requestProxyPassword = '';
-    // proxy type: 'http' or 'socks5'. Only used with the curl proxyMethod
+    // proxy type: 'http' or 'socks5'. Only used with the curl proxyHttpBackend
     public $requestProxyType = 'http';
     // list of domains separated by a comma, to which the proxy is not used
     public $requestProxyNotForDomain = 'localhost,127.0.0.1';
@@ -158,6 +183,8 @@ class lizmapServices
     public $cacheRedisDb = '';
     // Redis key prefix
     public $cacheRedisKeyPrefix = '';
+    // cache Expiration
+    public $cacheExpiration = '';
     // method to flush keys when $cacheRedisKeyPrefix is set. See Jelix documentation
     public $cacheRedisKeyPrefixFlushMethod = '';
     // if we allow to view the form to request an account
@@ -170,14 +197,26 @@ class lizmapServices
     // application id for google analytics
     public $googleAnalyticsID = '';
 
-    public function __construct()
+    /**
+     * @var bool|int true/1 if metrics should be sent to the metric logger
+     */
+    private $metricsEnabled = false;
+
+    /**
+     * constructor method.
+     *
+     * @param array  $readConfigPath the local ini file put in an array
+     * @param array  $globalConfig   the jelix ini file put in an array
+     * @param bool   $ldapEnabled    true if ldapdao module is enabled
+     * @param string $varPath        the configuration files path given by jApp::varPath()
+     */
+    public function __construct($readConfigPath, $globalConfig, $ldapEnabled, $varPath)
     {
         // read the lizmap configuration file
-        $readConfigPath = parse_ini_file(jApp::configPath('lizmapConfig.ini.php'), true);
         $this->data = $readConfigPath;
-        $globalConfig = jApp::config();
-
-        $this->isUsingLdap = jApp::isModuleEnabled('ldapdao');
+        $this->globalConfig = $globalConfig;
+        $this->varPath = $varPath;
+        $this->isUsingLdap = $ldapEnabled;
 
         // set generic parameters
         foreach ($this->properties as $prop) {
@@ -200,20 +239,24 @@ class lizmapServices
             }
         }
 
+        if (!is_array($this->wmsServerHeaders)) {
+            $this->wmsServerHeaders = array();
+        }
+
         // check email address where to send notifications
-        if ($this->adminContactEmail == 'root@localhost' ||
-            $this->adminContactEmail == 'root@localhost.localdomain' ||
-            $this->adminContactEmail == '' ||
-            !filter_var($this->adminContactEmail, FILTER_VALIDATE_EMAIL)
+        if ($this->adminContactEmail == 'root@localhost'
+            || $this->adminContactEmail == 'root@localhost.localdomain'
+            || $this->adminContactEmail == ''
+            || !filter_var($this->adminContactEmail, FILTER_VALIDATE_EMAIL)
         ) {
             $this->adminContactEmail = '';
         }
 
         // check email address of the sender
-        if ($this->adminSenderEmail == 'root@localhost' ||
-            $this->adminSenderEmail == 'root@localhost.localdomain' ||
-            $this->adminSenderEmail == '' ||
-            !filter_var($this->adminSenderEmail, FILTER_VALIDATE_EMAIL)
+        if ($this->adminSenderEmail == 'root@localhost'
+            || $this->adminSenderEmail == 'root@localhost.localdomain'
+            || $this->adminSenderEmail == ''
+            || !filter_var($this->adminSenderEmail, FILTER_VALIDATE_EMAIL)
         ) {
             // if the sender email is not configured, deactivate features that
             // need to send an email
@@ -240,6 +283,14 @@ class lizmapServices
     public function isLdapEnabled()
     {
         return $this->isUsingLdap;
+    }
+
+    /**
+     * @return bool|int
+     */
+    public function areMetricsEnabled()
+    {
+        return $this->metricsEnabled === true || $this->metricsEnabled === '1' || $this->metricsEnabled === 'true';
     }
 
     public function getProperties()
@@ -270,10 +321,10 @@ class lizmapServices
         if ($rootRepositories != '') {
             // if path is relative, get full path
             if ($rootRepositories[0] != '/' and $rootRepositories[1] != ':') {
-                $rootRepositories = realpath(jApp::varPath().$rootRepositories);
+                $rootRepositories = realpath($this->varPath.$rootRepositories);
             }
             // add a trailing slash if needed
-            if (!preg_match('#/$#', $rootRepositories)) {
+            if (!preg_match('#/$#', $rootRepositories) && $rootRepositories !== false) {
                 $rootRepositories .= '/';
             }
         }
@@ -295,7 +346,10 @@ class lizmapServices
     public function modify($data)
     {
         $modified = false;
-        $globalConfig = jApp::config();
+        $globalConfig = $this->globalConfig;
+        if (!isset($data)) {
+            return $modified;
+        }
         foreach ($data as $k => $v) {
             if (isset($this->globalConfigProperties[$k])) {
                 list($key, $section) = $this->globalConfigProperties[$k];
@@ -316,30 +370,8 @@ class lizmapServices
         return $modified;
     }
 
-    /**
-     * Update the services. (modify and save).
-     *
-     * @param array $data array containing the data of the services
-     */
-    public function update($data)
+    public function saveIntoIni($ini, $liveIni)
     {
-        $modified = $this->modify($data);
-        if ($modified) {
-            $modified = $this->save();
-        }
-
-        return $modified;
-    }
-
-    /**
-     * save the services.
-     */
-    public function save()
-    {
-        // Get access to the ini file
-        $ini = new jIniFileModifier(jApp::configPath('lizmapConfig.ini.php'));
-        $liveIni = new jIniFileModifier(jApp::configPath('liveconfig.ini.php'));
-
         $dontSaveSensitiveProps = $this->hideSensitiveProperties();
         $hiddenProps = array();
         if ($dontSaveSensitiveProps) {
@@ -359,14 +391,6 @@ class lizmapServices
                 $ini->removeValue($prop, 'services');
             }
         }
-
-        $modified = $ini->isModified() || $liveIni->isModified();
-
-        // Save the ini file
-        $ini->save();
-        $liveIni->save();
-
-        return $modified;
     }
 
     public function sendNotificationEmail($subject, $body)
@@ -393,5 +417,30 @@ class lizmapServices
                 jLog::log('Notification cannot be send: no sender email has been configured', 'warning');
             }
         }
+    }
+
+    /**
+     * This method will create and return a lizmapRepository instance.
+     *
+     * @param string $key the name of the repository
+     *
+     * @return lizmapRepository The lizmapRepository instance
+     */
+    public function getLizmapRepository($key)
+    {
+        $section = 'repository:'.$key;
+
+        if ($key === null || $key === '') {
+            // XXX: should we throw an exception instead?
+            return false;
+        }
+        // Check if repository exists in the ini file
+        if (array_key_exists($section, $this->data)) {
+            $data = $this->data[$section];
+        } else {
+            $data = array();
+        }
+
+        return new lizmapRepository($key, $data, $this->varPath);
     }
 }

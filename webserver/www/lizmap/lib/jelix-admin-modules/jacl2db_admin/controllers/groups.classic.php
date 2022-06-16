@@ -63,6 +63,7 @@ class groupsCtrl extends jController {
             $rep->body->assign('MAIN', $tpl->fetch('groups_right_view'));
         }
         $rep->body->assign('selectedMenuItem','usersgroups');
+        $rep->title = jLocale::get('acl2.groups.title');
         return $rep;
     }
 
@@ -73,6 +74,7 @@ class groupsCtrl extends jController {
         $this->loadGroupRights($tpl);
         $rep->body->assign('MAIN', $tpl->fetch('groups_right'));
         $rep->body->assign('selectedMenuItem','usersgroups');
+        $rep->title = jLocale::get('acl2.groups.rights.title');
         return $rep;
     }
 
@@ -211,7 +213,7 @@ class groupsCtrl extends jController {
 
         try {
             $manager = new jAcl2DbAdminUIManager();
-            $manager->removeGroup($this->param('group_id'));
+            $manager->removeGroup($this->param('group_id'), jAuth::getUserSession()->login);
             jMessage::add(jLocale::get('acl2.message.group.delete.ok'), 'ok');
         }
         catch (jAcl2DbAdminUIException $e) {

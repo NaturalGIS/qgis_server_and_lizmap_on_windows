@@ -1,0 +1,99 @@
+a:5:{s:5:"mtime";i:1652379068;s:5:"ctime";i:1652379068;s:4:"code";i:200;s:4:"mime";s:23:"text/xml; charset=utf-8";s:4:"data";s:3350:"<?xml version="1.0" encoding="utf-8"?><WFS_Capabilities xmlns:gml="http://www.opengis.net/gml" xmlns:ows="http://www.opengis.net/ows" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ogc="http://www.opengis.net/ogc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.opengis.net/wfs" version="1.0.0" updateSequence="0" xsi:schemaLocation="http://www.opengis.net/wfs http://schemas.opengis.net/wfs/1.0.0/WFS-capabilities.xsd">
+ <Service>
+  <Name>WFS</Name>
+  <Title>Touristic events around Montpellier, France</Title>
+  <OnlineResource/>
+  <Fees>conditions unknown</Fees>
+  <AccessConstraints>None</AccessConstraints>
+ </Service>
+ <Capability>
+  <Request>
+   <GetCapabilities>
+    <DCPType>
+     <HTTP>
+      <Get onlineResource="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/events.qgs"/>
+     </HTTP>
+    </DCPType>
+    <DCPType>
+     <HTTP>
+      <Post onlineResource="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/events.qgs"/>
+     </HTTP>
+    </DCPType>
+   </GetCapabilities>
+   <DescribeFeatureType>
+    <SchemaDescriptionLanguage>
+     <XMLSCHEMA/>
+    </SchemaDescriptionLanguage>
+    <DCPType>
+     <HTTP>
+      <Get onlineResource="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/events.qgs"/>
+     </HTTP>
+    </DCPType>
+    <DCPType>
+     <HTTP>
+      <Post onlineResource="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/events.qgs"/>
+     </HTTP>
+    </DCPType>
+   </DescribeFeatureType>
+   <GetFeature>
+    <ResultFormat>
+     <GML2/>
+     <GML3/>
+     <GeoJSON/>
+    <SHP/><TAB/><MIF/><KML/><GPKG/><GPX/><ODS/><XLSX/><CSV/></ResultFormat>
+    <DCPType>
+     <HTTP>
+      <Get onlineResource="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/events.qgs"/>
+     </HTTP>
+    </DCPType>
+    <DCPType>
+     <HTTP>
+      <Post onlineResource="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/events.qgs"/>
+     </HTTP>
+    </DCPType>
+   </GetFeature>
+   <Transaction>
+    <DCPType>
+     <HTTP>
+      <Post onlineResource="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/events.qgs"/>
+     </HTTP>
+    </DCPType>
+   </Transaction>
+  </Request>
+ </Capability>
+ <FeatureTypeList>
+  <Operations>
+   <Query/>
+  </Operations>
+  <FeatureType>
+   <Name>montpellier_events</Name>
+   <Title>Touristic events</Title>
+   <SRS>EPSG:4326</SRS>
+   <LatLongBoundingBox miny="43.5125" maxx="4.07508" maxy="43.752499" minx="3.706949"/>
+   <Operations>
+    <Query/>
+   </Operations>
+  </FeatureType>
+ </FeatureTypeList>
+ <ogc:Filter_Capabilities>
+  <ogc:Spatial_Capabilities>
+   <ogc:Spatial_Operators>
+    <ogc:BBOX/>
+    <ogc:Disjoint/>
+    <ogc:Intersect/>
+    <ogc:Touches/>
+    <ogc:Crosses/>
+    <ogc:Contains/>
+    <ogc:Overlaps/>
+    <ogc:Within/>
+   </ogc:Spatial_Operators>
+  </ogc:Spatial_Capabilities>
+  <ogc:Scalar_Capabilities>
+   <ogc:Comparison_Operators>
+    <ogc:Simple_Comparisons/>
+    <ogc:Between/>
+    <ogc:Like/>
+   </ogc:Comparison_Operators>
+  </ogc:Scalar_Capabilities>
+ </ogc:Filter_Capabilities>
+</WFS_Capabilities>";}

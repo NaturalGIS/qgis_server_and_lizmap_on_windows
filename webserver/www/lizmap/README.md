@@ -1,22 +1,62 @@
-[![logo](icon.png "3Liz")][3liz]Lizmap Web Application 3.3.6
-=================================================================
+[![logo](icon.png "3Liz")][3liz]Lizmap Web Application 3.4.11
+-------------------------------------------------------------
+
+![Unit tests](https://github.com/3liz/lizmap-web-client/workflows/Unit%20tests%20%F0%9F%8E%B3/badge.svg)
+![Lint](https://github.com/3liz/lizmap-web-client/workflows/Lint/badge.svg)
+![PHPStan](https://github.com/3liz/lizmap-web-client/workflows/PHPStan/badge.svg)
+![Cypress](https://github.com/3liz/lizmap-web-client/actions/workflows/e2e_tests_cypress.yml/badge.svg)
 
 Lizmap web application, by 3LIZ.
 
     begin       : 2011-11-01
-    copyright   : (C) 2011-2020 by 3liz
+    copyright   : (C) 2011-2022 by 3liz
     authors     : René-Luc D'Hont and Michaël Douchin
     email       : info@3liz.com
     website     : http://www.3liz.com
 
-Lizmap Web Application generates dynamically a web map application (php/html/css/js) with the help of Qgis Server ( [QGIS as OGC Data Server] ). You can configure one web map per Qgis project with the QGIS LizMap Plugin. The Lizmap web application must be installed on the server.
+![demo](demo.jpg "3Liz")
 
-The Original Code is [3liz] code.
+Lizmap Web Application generates dynamically a web map application (php/html/css/js) with the help of QGIS Server ( [QGIS as OGC Data Server] ). You can visit [some examples projects on the demo](https://demo.lizmap.com/lizmap/).
+You can configure one web map per QGIS project with the QGIS Lizmap plugin. From this plugin, you can enable some tools such as attribute table, dataviz, printing ...
+The Lizmap web application must be installed on the server.
+
+The Original Code is [3liz](https://3liz.com) code.
+
+You can find help and news by subscribing to the mailing list: https://lists.osgeo.org/mailman/listinfo/lizmap.
+
+Versions
+--------
+
+We recommend you reading the [versions](https://github.com/3liz/lizmap-web-client/wiki/Versions) page about QGIS Server, webbrowsers etc.
+
+Documentation and customization
+--------------
+
+https://docs.lizmap.com/
+
+Documentation source: https://github.com/3liz/lizmap-documentation/
+
+You can add your custom Javascript, check your [Javascript library](https://github.com/3liz/lizmap-javascript-scripts/)
+
+Some modules can be added to Lizmap:
+* Map Builder https://github.com/3liz/lizmap-mapbuilder-module
+* Naturaliz https://github.com/3liz/lizmap-naturaliz-module
+* French Cadastre https://github.com/3liz/lizmap-cadastre-module
+* French Adresse https://github.com/3liz/lizmap-adresse-module
+
+Internationalization
+---------------------
+
+Transifex: https://www.transifex.com/3liz-1/lizmap-locales/
+
+Locales source: https://github.com/3liz/lizmap-locales/
 
 Authors
 -------
 
-The Initial Developer of the Original Code are René-Luc D'Hont <rldhont@3liz.com> and Michael Douchin <mdouchin@3liz.com>. Portions created by the Initial Developer are Copyright (C) 2011 the Initial Developer. All Rights Reserved.
+The Initial Developer of the Original Code are René-Luc D'Hont <rldhont@3liz.com> and Michael Douchin <mdouchin@3liz.com>.
+Portions created by the Initial Developer are Copyright (C) 2011 the Initial Developer.
+All Rights Reserved.
 
 Contributors
 --------------
@@ -43,21 +83,6 @@ Contributors
 * Xan Vieiro
 * Rasmus Johansson
 * Jankó J A
-
-Documentation
---------------
-
-http://docs.3liz.com/
-
-Documentation source: https://github.com/3liz/lizmap-documentation/
-
-Internationalization
----------------------
-
-Transifex: https://www.transifex.com/3liz-1/lizmap-locales/
-
-Locales source: https://github.com/3liz/lizmap-locales/
-
 
 License
 -------

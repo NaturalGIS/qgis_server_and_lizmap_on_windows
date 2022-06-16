@@ -40,6 +40,13 @@ class banCtrl extends jController
         $bbox = $this->param('bbox');
         if (preg_match('/\d+(\.\d+)?,\d+(\.\d+)?,\d+(\.\d+)?,\d+(\.\d+)?/', $bbox)) {
             $params['viewbox'] = $bbox;
+            $bbox_split = explode(',', $bbox);
+            if (count($bbox_split) == 4) {
+                $longitude = $bbox_split[0] + ($bbox_split[2] - $bbox_split[0]) / 2;
+                $latitude = $bbox_split[1] + ($bbox_split[3] - $bbox_split[1]) / 2;
+                $params['lat'] = $latitude;
+                $params['lon'] = $longitude;
+            }
         }
 
         $url .= http_build_query($params);
@@ -49,14 +56,19 @@ class banCtrl extends jController
         ));
 
         $var = json_decode($content);
+        if ($var === null) {
+            $rep->content = '[]';
+
+            return $rep;
+        }
         $obj = $var->features;
-        $licence = 'Data © '.$obj->attribution.', '.$obj->licence;
+        //$licence = 'Data © '.$obj->attribution.', '.$obj->licence;
         $res = array();
         $res['search_name'] = 'BAN';
         $res['layer_name'] = 'ban';
         $res['srid'] = 'EPSG:4326';
         $res['features'] = array();
-        foreach($obj as $key){
+        foreach ($obj as $key) {
             /*
             $lat = $key->geometry->coordinates[1];
             $lon = $key->geometry->coordinates[0];
@@ -76,7 +88,7 @@ class banCtrl extends jController
             $d = array();
             $d['label'] = $display_name;
             $d['geometry'] = 'POINT('.$lon.' '.$lat.')';
-            array_push($res['features'],$d);
+            array_push($res['features'], $d);
         }
 
         $rep->content = json_encode(array('ban' => $res));

@@ -25,7 +25,7 @@ class map_menuZone extends jZone
 
         // Get lizmapProject class
         $assign = array(
-            'display_home'=> !$services->onlyMaps,
+            'display_home' => !$services->onlyMaps,
             'edition' => false,
             'measure' => false,
             'locate' => false,
@@ -39,24 +39,24 @@ class map_menuZone extends jZone
             $lproj = lizmap::getProject($repository.'~'.$project);
             $configOptions = $lproj->getOptions();
 
-            if (property_exists($configOptions, 'measure') &&
-                $configOptions->measure == 'True'
+            if (property_exists($configOptions, 'measure')
+                && $configOptions->measure == 'True'
             ) {
                 $assign['measure'] = true;
             }
 
             $assign['locate'] = $lproj->hasLocateByLayer();
 
-            if (property_exists($configOptions, 'print') &&
-                $configOptions->print == 'True'
+            if (property_exists($configOptions, 'print')
+                && $configOptions->print == 'True'
             ) {
                 $assign['print'] = true;
             }
 
             $assign['edition'] = $lproj->hasEditionLayers();
 
-            if (property_exists($configOptions, 'geolocation') &&
-                $configOptions->geolocation == 'True'
+            if (property_exists($configOptions, 'geolocation')
+                && $configOptions->geolocation == 'True'
             ) {
                 $assign['geolocation'] = true;
             }

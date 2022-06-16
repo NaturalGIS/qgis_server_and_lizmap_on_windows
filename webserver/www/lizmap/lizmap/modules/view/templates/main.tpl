@@ -11,24 +11,36 @@
   <div id="headermenu" class="navbar navbar-fixed-top">
     <div id="auth" class="navbar-inner">
       <ul class="nav pull-right">
-        <li class="search-project">
-          <input id="search-project" class="search-query" placeholder="{@view~map.search.nominatim.placeholder@}" type="text">
-        </li>
         {include 'lizmap~user_menu'}
       </ul>
     </div>
   </div>
 </div>
 
-
 <div id="content" class="container">
-{jmessage_bootstrap}
-{$MAIN}
-<footer class="footer">
-  <p class="pull-right">
-    <img src="{$j_themepath.'css/img/logo_footer.png'}" alt=""/>
-  </p>
-</footer>
+  <div id="search">
+    <div class="input-prepend">
+      <button id="toggle-search" class="btn" type="button" data-toggle="tooltip"
+        title="{@view~default.header.search.toggleKeywordsTitle.title@}">T</button>
+      <input id="search-project" class="span2" data-toggle="tooltip" title="{@view~default.header.search.input.title@}"
+        placeholder="{@view~map.search.nominatim.placeholder@}" type="text">
+    </div>
+    <div id="search-project-keywords">
+      <span id="search-project-keywords-selected"></span><span id="search-project-result"></span>
+    </div>
+  </div>
+  {jmessage_bootstrap}
+  {if isset($landing_page_content)}
+  <div id="landingPageContent">
+    {$landing_page_content}
+  </div>
+  {/if}
+  {$MAIN}
+  <footer class="footer">
+    <p class="pull-right">
+      <img src="{$j_themepath.'css/img/logo_footer.png'}" alt=""/>
+    </p>
+  </footer>
 </div>
 
 {if $googleAnalyticsID && $googleAnalyticsID != ''}

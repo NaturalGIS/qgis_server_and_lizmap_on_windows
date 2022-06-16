@@ -27,6 +27,11 @@ class qgisForm implements qgisFormControlsInterface
     protected $form_name;
 
     /**
+     * @var null|qgisAttributeEditorElement the qgis form element
+     */
+    protected $attributeEditorForm;
+
+    /**
      * @var string
      */
     protected $featureId;
@@ -46,7 +51,6 @@ class qgisForm implements qgisFormControlsInterface
 
     /** @var jFormsPlugin[] */
     protected $formPlugins = array();
-
 
     /**
      * qgisForm constructor.
@@ -118,14 +122,14 @@ class qgisForm implements qgisFormControlsInterface
             // get field edit type
             $edittype = null;
             if ($edittypesXml) {
-                $edittype = $edittypesXml->xpath("edittype[@name='${fieldName}']");
+                $edittype = $edittypesXml->xpath("edittype[@name='{$fieldName}']");
                 if ($edittype && count($edittype) != 0) {
                     $edittype = $edittype[0];
                 } else {
                     $edittype = null;
                 }
-            } else if ($fieldConfigurationXml) {
-                $fieldConfiguration = $fieldConfigurationXml->xpath("field[@name='${fieldName}']");
+            } elseif ($fieldConfigurationXml) {
+                $fieldConfiguration = $fieldConfigurationXml->xpath("field[@name='{$fieldName}']");
                 if ($fieldConfiguration && count($fieldConfiguration) !== 0) {
                     $fieldConfiguration = $fieldConfiguration[0];
                     $editWidgetXml = $fieldConfiguration->editWidget;
@@ -135,18 +139,18 @@ class qgisForm implements qgisFormControlsInterface
                         $fieldEditType = (string) $editWidgetXml->attributes()->type;
                         // options
                         $fieldEditOptions = array();
-                        foreach( $editWidgetXml->config as $config ) {
-                            foreach( $config->Option as $option ) {
-                                foreach( $option->Option as $opt ) {
+                        foreach ($editWidgetXml->config as $config) {
+                            foreach ($config->Option as $option) {
+                                foreach ($option->Option as $opt) {
                                     // Option with list of values
                                     if ((string) $opt->attributes()->type === 'List') {
                                         $values = array();
-                                        foreach( $opt->Option as $l ) {
+                                        foreach ($opt->Option as $l) {
                                             if ((string) $l->attributes()->type === 'Map') {
-                                                foreach( $l->Option as $v ) {
+                                                foreach ($l->Option as $v) {
                                                     $values[] = (object) array(
-                                                        'key'=>(string) $v->attributes()->name,
-                                                        'value'=>(string) $v->attributes()->value
+                                                        'key' => (string) $v->attributes()->name,
+                                                        'value' => (string) $v->attributes()->value,
                                                     );
                                                 }
                                             } else {
@@ -155,19 +159,19 @@ class qgisForm implements qgisFormControlsInterface
                                         }
                                         $fieldEditOptions[(string) $opt->attributes()->name] = $values;
                                     // Option with list of values as Map
-                                    } else if ((string) $opt->attributes()->type === 'Map') {
+                                    } elseif ((string) $opt->attributes()->type === 'Map') {
                                         $values = array();
-                                        foreach( $opt->Option as $v ) {
+                                        foreach ($opt->Option as $v) {
                                             $values[] = (object) array(
-                                                'key'=>(string) $v->attributes()->name,
-                                                'value'=>(string) $v->attributes()->value
+                                                'key' => (string) $v->attributes()->name,
+                                                'value' => (string) $v->attributes()->value,
                                             );
                                         }
                                         $fieldEditOptions[(string) $opt->attributes()->name] = $values;
                                     // Option with string list of values
-                                    } else if ((string) $opt->attributes()->type === 'StringList') {
+                                    } elseif ((string) $opt->attributes()->type === 'StringList') {
                                         $values = array();
-                                        foreach( $opt->Option as $v ) {
+                                        foreach ($opt->Option as $v) {
                                             $values[] = (string) $v->attributes()->value;
                                         }
                                         $fieldEditOptions[(string) $opt->attributes()->name] = $values;
@@ -179,14 +183,13 @@ class qgisForm implements qgisFormControlsInterface
                             }
                         }
 
-
                         $edittype = array(
-                            "type"=>$fieldEditType,
-                            "options"=>(object) $fieldEditOptions
+                            'type' => $fieldEditType,
+                            'options' => (object) $fieldEditOptions,
                         );
 
                         // editable
-                        $editableFieldXml = $layerXml->xpath("editable/field[@name='${fieldName}']");
+                        $editableFieldXml = $layerXml->xpath("editable/field[@name='{$fieldName}']");
                         if ($editableFieldXml && count($editableFieldXml) !== 0) {
                             $editableFieldXml = $editableFieldXml[0];
                             $edittype['editable'] = (int) $editableFieldXml->attributes()->editable;
@@ -256,6 +259,27 @@ class qgisForm implements qgisFormControlsInterface
             $this->formControls[$fieldName] = $formControl;
         }
 
+        // Deactivate undisplayed fields in Drag and Drop form
+        $attributeEditorForm = $this->getAttributesEditorForm();
+        if ($attributeEditorForm) {
+            $attributeEditorFormFields = $attributeEditorForm->getFields();
+            if (count($attributeEditorFormFields) > 0) {
+                foreach ($this->formControls as $fieldName => $formControl) {
+                    if (in_array($fieldName, $attributeEditorFormFields)) {
+                        continue;
+                    }
+                    if ($formControl->ctrl->type == 'hidden') {
+                        continue;
+                    }
+                    $ctrlref = $formControl->getControlName();
+                    if (!$form->isActivated($ctrlref)) {
+                        continue;
+                    }
+                    $form->setReadOnly($ctrlref, true);
+                }
+            }
+        }
+
         // Hide when no modify capabilities, only for UPDATE cases (  when $this->featureId control exists )
         if (!empty($featureId) && strtolower($capabilities->modifyAttribute) == 'false') {
             foreach ($toDeactivate as $de) {
@@ -269,24 +293,62 @@ class qgisForm implements qgisFormControlsInterface
                 }
             }
         }
+
+        // Set form's private data
+        $privateData = array();
+        $privateData['liz_repository'] = $layer->getProject()->getRepository()->getKey();
+        $privateData['liz_project'] = $layer->getProject()->getKey();
+        $privateData['liz_layerId'] = $layer->getId();
+        $privateData['liz_featureId'] = $featureId;
+        $privateData['liz_geometryColumn'] = $this->dbFieldsInfo->geometryColumn;
+
+        $privateData['qgis_controls'] = array();
+        foreach ($this->formControls as $fieldName => $formControl) {
+            $privateData['qgis_controls'][$formControl->ref] = array(
+                'fieldName' => $formControl->fieldName,
+                'defaultValue' => $formControl->defaultValue,
+                'fieldEditType' => $formControl->fieldEditType,
+                'fieldAlias' => $formControl->fieldAlias,
+                // 'rendererCategories' => $formControl->rendererCategories, // needs to be parsed
+                'fieldDataType' => $formControl->fieldDataType,
+                'isReadOnly' => $formControl->isReadOnly,
+                'required' => $formControl->required,
+                'valueRelationData' => $formControl->valueRelationData,
+                'relationReferenceData' => $formControl->relationReferenceData,
+                'uniqueValuesData' => $formControl->uniqueValuesData,
+            );
+        }
+
+        $attributeEditorForm = $this->getAttributesEditorForm();
+        if ($attributeEditorForm) {
+            $groupVisibilities = $attributeEditorForm->getGroupVisibilityExpressions();
+            $qgis_groupDependencies = qgisExpressionUtils::getCriteriaFromExpressions($groupVisibilities);
+            $privateData['qgis_groupDependencies'] = array_intersect($qgis_groupDependencies, array_keys($this->dbFieldsInfo->dataFields));
+        } else {
+            $privateData['qgis_groupDependencies'] = array();
+        }
+
+        $form->getContainer()->privateData = array_merge($form->getContainer()->privateData, $privateData);
     }
 
     /**
      * Get the default value of a QGIS field, if this is
-     * a simple raw value
+     * a simple raw value.
      *
      * @param string $fieldName
-     * @return string|null return null if this is not a number or a string
+     *
+     * @return null|string return null if this is not a number or a string
      */
-    protected function getDefaultValue($fieldName) {
+    protected function getDefaultValue($fieldName)
+    {
         $expression = $this->layer->getDefaultValue($fieldName);
-        if ($expression === null) {
+        if ($expression === null || trim($expression) === '') {
             return null;
         }
         if (is_numeric($expression)) {
             return $expression;
         }
-        else if (preg_match("/^'.*'$/", $expression)) {
+        if (preg_match("/^'.*'$/", $expression)) {
             // it seems this is a simple string
             $expression = trim($expression, "'");
             // if there are some ' without a \, then probably we have a
@@ -295,12 +357,22 @@ class qgisForm implements qgisFormControlsInterface
                 return str_replace("\\'", "'", $expression);
             }
         }
-        // TODO implement a true QGIS expression parser or add the possibility
-        // to evaluate the expression by qgis
+        // Evaluate the expression by qgis
+        $results = qgisExpressionUtils::evaluateExpressions(
+            $this->layer,
+            array(
+                $fieldName => $expression,
+            )
+        );
+        if ($results && property_exists($results, $fieldName)) {
+            return $results->{$fieldName};
+        }
+
         return null;
     }
 
-    protected function getConstraints($fieldName) {
+    protected function getConstraints($fieldName)
+    {
         return $this->layer->getConstraints($fieldName);
     }
 
@@ -333,6 +405,10 @@ class qgisForm implements qgisFormControlsInterface
      */
     public function getAttributesEditorForm()
     {
+        if ($this->form_name !== null && $this->form_name != '') {
+            return $this->attributeEditorForm;
+        }
+
         $this->form_name = self::generateFormName($this->form->getSelector());
 
         $layerXml = $this->layer->getXmlLayer();
@@ -346,6 +422,8 @@ class qgisForm implements qgisFormControlsInterface
         }
 
         if ($attributeEditorForm && $attributeEditorForm->hasChildren()) {
+            $this->attributeEditorForm = $attributeEditorForm;
+
             return $attributeEditorForm;
         }
 
@@ -381,9 +459,29 @@ class qgisForm implements qgisFormControlsInterface
     }
 
     /**
+     * Reset the form controls data to Null.
+     *
+     * @return jFormsBase the Jelix jForm object
+     */
+    public function resetFormData()
+    {
+        if (!$this->dbFieldsInfo) {
+            return $this->form;
+        }
+
+        $form = $this->form;
+        $dataFields = $this->dbFieldsInfo->dataFields;
+        foreach ($dataFields as $ref => $prop) {
+            $form->setData($ref, null);
+        }
+
+        return $form;
+    }
+
+    /**
      * Set the form controls data from the database default value.
      *
-     * @return object the Jelix jForm object
+     * @return jFormsBase the Jelix jForm object
      */
     public function setFormDataFromDefault()
     {
@@ -406,7 +504,7 @@ class qgisForm implements qgisFormControlsInterface
                 or $this->formControls[$ref]->fieldEditType === 'CheckBox')
                 and $this->formControls[$ref]->fieldDataType === 'boolean') {
                 $ctrl->setDataFromDao($value, 'boolean');
-            }else{
+            } else {
                 $form->setData($ref, $value);
             }
         }
@@ -419,7 +517,7 @@ class qgisForm implements qgisFormControlsInterface
      *
      * @param mixed $feature
      *
-     * @return object the Jelix jForm object
+     * @return jFormsBase the Jelix jForm object
      */
     public function setFormDataFromFields($feature)
     {
@@ -435,12 +533,17 @@ class qgisForm implements qgisFormControlsInterface
                 and $this->formControls[$ref]->fieldDataType === 'boolean') {
                 $form->getControl($ref)->setDataFromDao($value, 'boolean');
             }
-            // ValueRelation can be an array (i.e. {1,2,3})
-            elseif ($this->formControls[$ref]->isValueRelation() && $value[0] === '{') {
-                $arrayValue = array_map('intval', explode(',', trim($value, '{}')));
+            // ValueRelation can be an array (i.e. {1,2,3} or {'foo', 'bar'})
+            elseif ($this->formControls[$ref]->isValueRelation() && strpos($value, '{') === 0) {
+                $arrayValue = explode(',', trim($value, '{}'));
+                // Depending on the QGIS version or values,
+                // QGIS also enclose each single value with double-quotes
+                $func = function (string $str): string {
+                    return trim($str, '"');
+                };
+                $arrayValue = array_map($func, $arrayValue);
                 $form->setData($ref, $arrayValue);
-            }
-            elseif ($this->formControls[$ref]->isUploadControl()) {
+            } elseif ($this->formControls[$ref]->isUploadControl()) {
                 $ctrl = $form->getControl($this->formControls[$ref]->getControlName());
                 if ($ctrl && $ctrl->type == 'choice') {
                     $path = explode('/', $value);
@@ -451,7 +554,18 @@ class qgisForm implements qgisFormControlsInterface
                     $ctrl->itemsNames['delete'] = jLocale::get('view~edition.upload.choice.delete').' '.$filename;
                 }
                 $form->setData($ref.'_hidden', $value);
-            }else{
+            } else {
+                if (in_array(strtolower($this->formControls[$ref]->fieldEditType), array('date', 'time', 'datetime'))) {
+                    $edittype = $this->formControls[$ref]->getEditType();
+                    if ($edittype && property_exists($edittype, 'options')
+                            && property_exists($edittype->options, 'field_format') && $value) {
+                        $format = $this->convertQgisFormatToPHP($edittype->options->field_format);
+                        $date = DateTime::createFromFormat($format, $value);
+                        if ($date) {
+                            $value = $date->format('Y-m-d H:i:s');
+                        }
+                    }
+                }
                 $form->setData($ref, $value);
             }
         }
@@ -459,14 +573,207 @@ class qgisForm implements qgisFormControlsInterface
         return $form;
     }
 
+    public function check($feature = null)
+    {
+        $form = $this->form;
+
+        $dataFields = $this->dbFieldsInfo->dataFields;
+        $geometryColumn = $this->dbFieldsInfo->geometryColumn;
+
+        // Jelix check
+        $check = $form->check();
+
+        // Geom check
+        $allow_without_geom = $this->layer->getEditionCapabilities()->capabilities->allow_without_geom;
+        if (strtolower($allow_without_geom) == 'false' && $geometryColumn != '' && $form->getData($geometryColumn) == '') {
+            $check = false;
+            $form->setErrorOn($geometryColumn, jLocale::get('view~edition.message.error.no.geometry'));
+        }
+
+        // Get values and form fields
+        $values = array();
+        $formFields = array();
+        foreach ($dataFields as $fieldName => $prop) {
+            $values[$fieldName] = null;
+            $formFields[] = $fieldName;
+        }
+        if ($feature) {
+            $values = $this->layer->getDbFieldValues($feature);
+        }
+
+        // Get list of fields diplayed in form
+        // can be an empty list
+        $attributeEditorForm = $this->getAttributesEditorForm();
+        if ($attributeEditorForm) {
+            $formFields = $attributeEditorForm->getFields();
+        }
+
+        $cnx = $this->layer->getDatasourceConnection();
+        // Get values from form and get expressions
+        $constraintExpressions = array();
+        foreach ($formFields as $fieldName) {
+            $jCtrl = $form->getControl($fieldName);
+            // Field not in form
+            if ($jCtrl === null) {
+                continue;
+            }
+
+            // Get and filter the posted data foreach form control
+            $value = $form->getData($fieldName);
+
+            if (is_array($value)) {
+                $value = '{'.implode(',', $value).'}';
+            }
+
+            if ($value === '') {
+                $value = null;
+            }
+
+            $values[$fieldName] = $value;
+
+            // Get expression constraint
+            $constraints = $this->getConstraints($fieldName);
+            if ($constraints && $constraints['exp'] && $constraints['exp_value'] !== '') {
+                $constraintExpressions[$fieldName] = $constraints['exp_value'];
+            }
+        }
+        // Get filter by login
+        $expByUserKey = 'filterByLogin';
+        $expByUser = qgisExpressionUtils::getExpressionByUser($this->layer, true);
+        if ($expByUser !== '') {
+            while (array_key_exists($expByUserKey, $constraintExpressions)) {
+                $expByUserKey .= '@';
+            }
+            $constraintExpressions[$expByUserKey] = $expByUser;
+        }
+
+        // Evaluate constraint expressions
+        if (count($constraintExpressions) > 0) {
+            $form_feature = array(
+                'type' => 'Feature',
+                'geometry' => null,
+                'properties' => $values,
+            );
+            $results = qgisExpressionUtils::evaluateExpressions(
+                $this->layer,
+                $constraintExpressions,
+                $form_feature
+            );
+
+            if (!$results) {
+                // Evaluation failed
+                return $check;
+            }
+            $results = (array) $results;
+            foreach ($results as $fieldName => $result) {
+                if ($result === 1) {
+                    continue;
+                }
+                if ($fieldName === $expByUserKey) {
+                    $project = $this->layer->getProject();
+                    $loginFilterConfig = $project->getLoginFilteredConfig($this->layer->getName());
+                    $form->setErrorOn($loginFilterConfig->filterAttribute, jLocale::get('view~edition.message.error.feature.editable'));
+
+                    $check = false;
+
+                    continue;
+                }
+                $constraints = $this->getConstraints($fieldName);
+                if ($constraints['exp_desc'] !== '') {
+                    $form->setErrorOn($fieldName, $constraints['exp_desc']);
+                } else {
+                    $form->setErrorOn($fieldName, jLocale::get('view~edition.message.error.constraint', array($constraints['exp_value'])));
+                }
+                $check = false;
+            }
+        }
+
+        return $check;
+    }
+
+    public function getDateTimeConversionTab()
+    {
+        // 'ZZ' is not an actual PHP Format it's to avoid php format to be reconverted as if it was Qgis format
+        return array_reverse(array(
+            'ZZ' => 'd',
+            'd' => 'j',
+            'dd' => 'ZZ',
+            'ddd' => 'D',
+            'dddd' => 'l',
+            'M' => 'n',
+            'MM' => 'm',
+            'MMM' => 'M',
+            'MMMM' => 'F',
+            'yy' => 'y',
+            'yyyy' => 'Y',
+            'H' => 'G',
+            'HH' => 'H',
+            'h' => 'G',
+            'hh' => 'H',
+            'AP' => 'A',
+            'ap' => 'a',
+            'm' => 'i',
+            'mm' => 'i',
+            'ss' => 's',
+            't' => 'T',
+            'Qt ISO Date' => 'c',
+        ));
+    }
+
+    /**
+     * Converts the format of a date from QGIS syntax to PHP syntax.
+     *
+     * @param string $fieldFormat The format to convert
+     *
+     * @return string The format converted
+     */
+    public function convertQgisFormatToPHP($fieldFormat)
+    {
+        $dateFormat = $fieldFormat;
+        // conversion from QGIS to PHP format
+        $format = $this->getDateTimeConversionTab();
+        $format12h = array('a', 'ap', 'A', 'AP');
+        foreach ($format12h as $am) {
+            if (strstr($dateFormat, $am)) {
+                $format['h'] = 'g';
+                $format['hh'] = 'h';
+
+                break;
+            }
+        }
+        foreach ($format as $qgis => $php) {
+            $dateFormat = str_replace($qgis, $php, $dateFormat);
+        }
+
+        return $dateFormat;
+    }
+
+    /**
+     * Converts the datetime to the format specified in the qgis Project.
+     *
+     * @param string $value       The datetime to convert
+     * @param string $fieldFormat The format in which to convert the date
+     *
+     * @return string The date converted
+     */
+    public function convertDateTimeToFormat($value, $fieldFormat)
+    {
+        $dateFormat = $this->convertQgisFormatToPHP($fieldFormat);
+
+        $date = new DateTime($value);
+
+        return $date->format($dateFormat);
+    }
+
     /**
      * Save the form to the database.
      *
      * @param null|mixed $feature
+     * @param array      $modifiedControls
      *
-     * @return array|false|int value of primary key or false if an error occured
+     * @return array|false|int value of primary key or false if an error occurred
      */
-    public function saveToDb($feature = null)
+    public function saveToDb($feature = null, $modifiedControls = array())
     {
         if (!$this->dbFieldsInfo) {
             throw new Exception('Save to database can\'t be done for the layer "'.$this->layer->getName().'"!');
@@ -487,24 +794,57 @@ class qgisForm implements qgisFormControlsInterface
         $dataFields = $this->dbFieldsInfo->dataFields;
         $geometryColumn = $this->dbFieldsInfo->geometryColumn;
 
+        // Get list of modified fields
+        // can be an empty list
+        $modifiedFields = array_keys($modifiedControls);
+
         // Get list of fields which are not primary keys
         $fields = array();
         foreach ($dataFields as $fieldName => $prop) {
-            // For update : And get only fields corresponding to edition capabilities
-            if (
-                (strtolower($capabilities->modifyAttribute) == 'true' and $fieldName != $geometryColumn)
-                or (strtolower($capabilities->modifyGeometry) == 'true' and $fieldName == $geometryColumn)
-                or $insertAction
-            ) {
-                $fields[] = $fieldName;
+            // For geometry column does not add it
+            // if it's not an insert action
+            // and no geometry modification capability
+            if ($fieldName == $geometryColumn
+                && !$insertAction
+                && strtolower($capabilities->modifyGeometry) != 'true') {
+                continue;
             }
+
+            // For other column than geometry does not add it
+            // if it's not an insert action
+            // and no attribute modification capability
+            if ($fieldName != $geometryColumn
+                && !$insertAction
+                && strtolower($capabilities->modifyAttribute) != 'true') {
+                continue;
+            }
+
+            // For other column than geometry does not add it
+            // if it's column not in form
+            if ($fieldName != $geometryColumn
+                && count($modifiedFields) != 0
+                && !in_array($fieldName, $modifiedFields)
+                && !in_array($this->getFormControlName($fieldName), $modifiedFields)) {
+                continue;
+            }
+
+            $fields[] = $fieldName;
         }
 
         if (count($fields) == 0) {
-            jLog::log('Not enough capabilities for this layer ! SQL cannot be constructed: no fields available !', 'error');
-            $this->form->setErrorOn($geometryColumn, jLocale::get('view~edition.message.error.save').' '.jLocale::get('view~edition.message.error.save.fields'));
+            if ($insertAction) {
+                // For insertion, one field has to be set
+                jLog::log('Error in form, SQL cannot be constructed: no fields available for insert !', 'error');
+                $this->form->setErrorOn($geometryColumn, jLocale::get('view~edition.message.error.save').' '.jLocale::get('view~edition.message.error.save.fields'));
+                // do not throw an exception to let the user update the form
+                jLog::log(jLocale::get('view~edition.link.error.sql'), 'error');
 
-            throw new Exception(jLocale::get('view~edition.link.error.sql'));
+                return false;
+            }
+            // For update, nothing has changed so nothing to do except close form
+            jLog::log('SQL cannot be constructed: no fields available for update !', 'error');
+
+            return true;
         }
 
         $form = $this->form;
@@ -512,7 +852,13 @@ class qgisForm implements qgisFormControlsInterface
         $values = array();
         // Loop though the fields and filter the form posted values
         foreach ($fields as $ref) {
-            if ($form->getControl($ref) instanceof jFormsControlUpload) {
+            $jCtrl = $form->getControl($ref);
+            // Field not in form
+            if ($jCtrl === null) {
+                continue;
+            }
+            // Control is an upload control
+            if ($jCtrl instanceof jFormsControlUpload) {
                 $values[$ref] = $this->processUploadedFile($form, $ref, $cnx);
 
                 continue;
@@ -525,12 +871,22 @@ class qgisForm implements qgisFormControlsInterface
                 $value = '{'.implode(',', $value).'}';
             }
 
-            if (($value === '' || $value === null) &&
-              !$this->formControls[$ref]->required
+            if (($value === '' || $value === null)
+              && !$this->formControls[$ref]->required
             ) {
                 $values[$ref] = 'NULL';
 
                 continue;
+            }
+
+            $convertDate = array('date', 'time', 'datetime');
+
+            if (in_array(strtolower($this->formControls[$ref]->fieldEditType), $convertDate)) {
+                $edittype = $this->formControls[$ref]->getEditType();
+                if ($edittype && property_exists($edittype, 'options')
+                    && property_exists($edittype->options, 'field_format')) {
+                    $value = $this->convertDateTimeToFormat($value, $edittype->options->field_format);
+                }
             }
 
             switch ($this->formControls[$ref]->fieldDataType) {
@@ -544,6 +900,7 @@ class qgisForm implements qgisFormControlsInterface
                     }
 
                     break;
+
                 case 'date':
                 case 'time':
                 case 'datetime':
@@ -555,6 +912,7 @@ class qgisForm implements qgisFormControlsInterface
                     }
 
                     break;
+
                 case 'integer':
                     if (is_numeric($value)) {
                         $value = (int) filter_var($value, FILTER_SANITIZE_NUMBER_INT);
@@ -566,6 +924,7 @@ class qgisForm implements qgisFormControlsInterface
                     }
 
                     break;
+
                 case 'float':
                     if (is_numeric($value)) {
                         $value = (float) $value;
@@ -577,16 +936,18 @@ class qgisForm implements qgisFormControlsInterface
                     }
 
                     break;
+
                 case 'text':
                     $value = $cnx->quote($value);
 
                     break;
+
                 case 'boolean':
                     $strVal = strtolower($value);
-                    if ($strVal != 'true' && $strVal !== 't' && intval($value) != 1 &&
-                       $strVal !== 'on' && $value !== true &&
-                       $strVal != 'false' && $strVal !== 'f' && intval($value) != 0 &&
-                       $strVal !== 'off' && $value !== false
+                    if ($strVal != 'true' && $strVal !== 't' && intval($value) != 1
+                       && $strVal !== 'on' && $value !== true
+                       && $strVal != 'false' && $strVal !== 'f' && intval($value) != 0
+                       && $strVal !== 'off' && $value !== false
                     ) {
                         $value = 'NULL';
                     } else {
@@ -594,6 +955,7 @@ class qgisForm implements qgisFormControlsInterface
                     }
 
                     break;
+
                 default:
                     $value = $cnx->quote(
                         filter_var($value, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES)
@@ -667,8 +1029,7 @@ class qgisForm implements qgisFormControlsInterface
             jFile::createDir($repPath.$this->formControls[$ref]->DefaultRoot); // Need to create it to then make the realpath checks
             if (
                 (substr(realpath($repPath.$this->formControls[$ref]->DefaultRoot), 0, strlen(realpath($repPath))) === realpath($repPath))
-                or
-                (substr(realpath($repPath.$this->formControls[$ref]->DefaultRoot), 0, strlen(realpath($repPath.'/../'))) === realpath($repPath.'/../'))
+                or (substr(realpath($repPath.$this->formControls[$ref]->DefaultRoot), 0, strlen(realpath($repPath.'/../'))) === realpath($repPath.'/../'))
             ) {
                 $targetPath = $this->formControls[$ref]->DefaultRoot;
                 $targetFullPath = realpath($repPath.$this->formControls[$ref]->DefaultRoot);
@@ -799,8 +1160,8 @@ class qgisForm implements qgisFormControlsInterface
                     $data[$user->login] = $user->login;
                     $value = $user->login;
                 } else {
-                    $userGroups = jAcl2DbUserGroup::getGroups();
-                    foreach ($userGroups as $uGroup) {
+                    $uGroups = jAcl2DbUserGroup::getGroups();
+                    foreach ($uGroups as $uGroup) {
                         if ($uGroup != 'users' and substr($uGroup, 0, 7) != '__priv_') {
                             $data[$uGroup] = $uGroup;
                         }
@@ -925,6 +1286,66 @@ class qgisForm implements qgisFormControlsInterface
      */
     private function fillControlFromValueRelationLayer($fieldName, $formControl)
     {
+
+        // required
+        if (array_key_exists('notNull', $formControl->valueRelationData)
+                and $formControl->valueRelationData['notNull']
+        ) {
+            jLog::log('notNull '.$formControl->valueRelationData['notNull'], 'error');
+            $formControl->ctrl->required = true;
+        }
+        // combobox
+        if (array_key_exists('useCompleter', $formControl->valueRelationData)
+             && $formControl->valueRelationData['useCompleter']
+        ) {
+            $formControl->ctrl->setAttribute('class', 'combobox');
+        }
+
+        // In lib/jelix/plugins/formwidget/menulist_html/menulist_html.formwidget.php
+        // An empty value is added with these rules
+        // if ($this->ctrl->emptyItemLabel !== null || !$this->ctrl->required)
+        // To add an empty value to ValueRelation displayed as menulist, we only
+        // have to set an emptyItemLabel !== null
+        $formControl->ctrl->emptyItemLabel = '';
+        if ($formControl->valueRelationData['allowMulti'] && $formControl->ctrl->required) {
+            $formControl->ctrl->emptyItemLabel = null;
+        }
+        $dataSource = new qgisFormValueRelationDynamicDatasource($formControl->ref);
+
+        // In lib/jelix/plugins/formwidget/checkboxes_html/checkboxes_html.formwidget.php
+        // no empty value is added by checking the value of the Jelix Control attributes
+        // emptyItemLabel and required
+        // To get an empty checkbox in the list of values like in QGIS, we have to force
+        // an empty value for ValueRelation not required with allowMulti and allowNull
+        if ($formControl->valueRelationData['allowMulti']
+            && $formControl->valueRelationData['allowNull']
+            && !$formControl->ctrl->required) {
+            $dataSource->setForceEmptyValue(true);
+        }
+
+        // criteriaFrom based on current_value in filterExpression
+        if (array_key_exists('filterExpression', $formControl->valueRelationData)
+             && $formControl->valueRelationData['filterExpression'] !== ''
+        ) {
+            $filterExpression = $formControl->valueRelationData['filterExpression'];
+            $criteriaFrom = qgisExpressionUtils::getCurrentValueCriteriaFromExpression($filterExpression);
+            if (qgisExpressionUtils::hasCurrentGeometry($filterExpression)) {
+                $criteriaFrom[] = $this->dbFieldsInfo->geometryColumn;
+            }
+            if (count($criteriaFrom) !== 0) {
+                $dataSource->setCriteriaControls($criteriaFrom);
+            }
+        }
+
+        $formControl->ctrl->datasource = $dataSource;
+
+        // Add default empty value for required fields
+        // Jelix does not do it, but we think it is better this way to avoid unwanted set values
+        //if ($formControl->ctrl->required) {
+        //    $data[''] = '';
+        //}
+
+        /*
         $wfsData = null;
         $mime = '';
 
@@ -933,28 +1354,22 @@ class qgisForm implements qgisFormControlsInterface
         $project = $this->layer->getProject();
         $relationLayerId = $formControl->valueRelationData['layer'];
 
-        $_relationLayerXml = $project->getXmlLayer($relationLayerId);
-        if (count($_relationLayerXml) == 0) {
+        $layer = $project->getLayer($relationLayerId);
+        if ($layer === null) {
             $formControl->ctrl->hint = 'Control not well configured!';
             $formControl->ctrl->help = 'Control not well configured!';
 
             return;
         }
-        $relationLayerXml = $_relationLayerXml[0];
 
-        $_layerName = $relationLayerXml->xpath('layername');
-        if (count($_layerName) == 0) {
-            $formControl->ctrl->hint = 'Control not well configured!';
-            $formControl->ctrl->help = 'Control not well configured!';
-
-            return;
+        $typename = $layer->getShortName();
+        if ($typename === null || $typename === '') {
+            $typename = str_replace(' ', '_', $layer->getName());
         }
-        $layerName = (string) $_layerName[0];
 
         $valueColumn = $formControl->valueRelationData['value'];
         $keyColumn = $formControl->valueRelationData['key'];
         $filterExpression = $formControl->valueRelationData['filterExpression'];
-        $typename = str_replace(' ', '_', $layerName);
 
         $params = array(
             'SERVICE' => 'WFS',
@@ -1014,10 +1429,6 @@ class qgisForm implements qgisFormControlsInterface
             }
             $dataSource = new jFormsStaticDatasource();
 
-            // required
-            if (!$formControl->valueRelationData['allowNull']) {
-                $formControl->ctrl->required = true;
-            }
             // combobox
             if (array_key_exists('useCompleter', $formControl->valueRelationData)
                  && $formControl->valueRelationData['useCompleter']
@@ -1027,7 +1438,7 @@ class qgisForm implements qgisFormControlsInterface
 
             // Add default empty value for required fields
             // Jelix does not do it, but we think it is better this way to avoid unwanted set values
-            if ($formControl->ctrl->required) {
+            if (($formControl->ctrl->required and !$formControl->valueRelationData['allowMulti']) or $formControl->valueRelationData['allowNull']) {
                 $data[''] = '';
             }
 
@@ -1046,7 +1457,7 @@ class qgisForm implements qgisFormControlsInterface
                 $formControl->ctrl->hint = 'No data to fill this control!';
                 $formControl->ctrl->help = 'No data to fill this control!';
             }
-        }
+        }*/
     }
 
     /**
@@ -1105,7 +1516,7 @@ class qgisForm implements qgisFormControlsInterface
         $referencedField = $relationXml->fieldRef->attributes()->referencedField;
         $previewField = $previewExpression;
         if (substr($previewField, 0, 8) == 'COALESCE') {
-            if (preg_match('/"([\S ]+)"/g', $previewField, $matches) == 1) {
+            if (preg_match('/"([\S ]+)"/', $previewField, $matches) == 1) {
                 $previewField = $matches[1];
             } else {
                 $previewField = $referencedField;
@@ -1248,7 +1659,13 @@ class qgisForm implements qgisFormControlsInterface
                     if ($type == 'login') {
                         $where = ' "'.$attribute."\" IN ( '".$login."' , 'all' )";
                     } else {
-                        $userGroups = jAcl2DbUserGroup::getGroups();
+                        $userGroups = array();
+                        $uGroups = jAcl2DbUserGroup::getGroups();
+                        foreach ($uGroups as $uGroup) {
+                            if (substr($uGroup, 0, 7) != '__priv_') {
+                                $userGroups[$uGroup] = $uGroup;
+                            }
+                        }
                         // Set XML Filter if getFeature request
                         $flatGroups = implode("' , '", $userGroups);
                         $where = ' "'.$attribute."\" IN ( '".$flatGroups."' , 'all' )";

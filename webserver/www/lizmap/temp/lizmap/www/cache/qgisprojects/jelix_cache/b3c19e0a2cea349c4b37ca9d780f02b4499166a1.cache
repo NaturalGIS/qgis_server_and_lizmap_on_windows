@@ -1,0 +1,196 @@
+a:5:{s:5:"mtime";i:1652379068;s:5:"ctime";i:1652379068;s:4:"code";i:200;s:4:"mime";s:23:"text/xml; charset=utf-8";s:4:"data";s:9054:"<?xml version="1.0" encoding="utf-8"?>
+<WMS_Capabilities xsi:schemaLocation="http://www.opengis.net/wms http://schemas.opengis.net/wms/1.3.0/capabilities_1_3_0.xsd http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/sld_capabilities.xsd http://www.qgis.org/wms http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/events.qgs&amp;SERVICE=WMS&amp;REQUEST=GetSchemaExtension" version="1.3.0" xmlns:qgs="http://www.qgis.org/wms" xmlns:sld="http://www.opengis.net/sld" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.opengis.net/wms">
+ <Service>
+  <Name>WMS</Name>
+  <Title>Touristic events around Montpellier, France</Title>
+  <KeywordList>
+   <Keyword vocabulary="ISO">infoMapAccessService</Keyword>
+  </KeywordList>
+  <OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/events.qgs"/>
+  <Fees>conditions unknown</Fees>
+  <AccessConstraints>None</AccessConstraints>
+ </Service>
+ <Capability>
+  <Request>
+   <GetCapabilities>
+    <Format>text/xml</Format>
+    <DCPType>
+     <HTTP>
+      <Get>
+       <OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/events.qgs&amp;"/>
+      </Get>
+     </HTTP>
+    </DCPType>
+   </GetCapabilities>
+   <GetMap>
+    <Format>image/jpeg</Format>
+    <Format>image/png</Format>
+    <Format>image/png; mode=16bit</Format>
+    <Format>image/png; mode=8bit</Format>
+    <Format>image/png; mode=1bit</Format>
+    <Format>application/dxf</Format>
+    <DCPType>
+     <HTTP>
+      <Get>
+       <OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/events.qgs&amp;"/>
+      </Get>
+     </HTTP>
+    </DCPType>
+   </GetMap>
+   <GetFeatureInfo>
+    <Format>text/plain</Format>
+    <Format>text/html</Format>
+    <Format>text/xml</Format>
+    <Format>application/vnd.ogc.gml</Format>
+    <Format>application/vnd.ogc.gml/3.1.1</Format>
+    <Format>application/json</Format>
+    <Format>application/geo+json</Format>
+    <DCPType>
+     <HTTP>
+      <Get>
+       <OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/events.qgs&amp;"/>
+      </Get>
+     </HTTP>
+    </DCPType>
+   </GetFeatureInfo>
+   <sld:GetLegendGraphic>
+    <Format>image/jpeg</Format>
+    <Format>image/png</Format>
+    <Format>application/json</Format>
+    <DCPType>
+     <HTTP>
+      <Get>
+       <OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/events.qgs&amp;"/>
+      </Get>
+     </HTTP>
+    </DCPType>
+   </sld:GetLegendGraphic>
+   <sld:DescribeLayer>
+    <Format>text/xml</Format>
+    <DCPType>
+     <HTTP>
+      <Get>
+       <OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/events.qgs&amp;"/>
+      </Get>
+     </HTTP>
+    </DCPType>
+   </sld:DescribeLayer>
+   <qgs:GetStyles>
+    <Format>text/xml</Format>
+    <DCPType>
+     <HTTP>
+      <Get>
+       <OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/events.qgs&amp;"/>
+      </Get>
+     </HTTP>
+    </DCPType>
+   </qgs:GetStyles>
+  </Request>
+  <Exception>
+   <Format>XML</Format>
+  </Exception>
+  <sld:UserDefinedSymbolization SupportSLD="1" RemoteWFS="0" UserLayer="0" UserStyle="1" RemoteWCS="0" InlineFeature="0"/>
+  <Layer queryable="1">
+   <Title>Touristic events around Montpellier, France</Title>
+   <KeywordList>
+    <Keyword vocabulary="ISO">infoMapAccessService</Keyword>
+   </KeywordList>
+   <CRS>CRS:84</CRS>
+   <CRS>EPSG:4326</CRS>
+   <CRS>EPSG:3857</CRS>
+   <EX_GeographicBoundingBox>
+    <westBoundLongitude>3.507777</westBoundLongitude>
+    <eastBoundLongitude>4.293045</eastBoundLongitude>
+    <southBoundLatitude>43.412755</southBoundLatitude>
+    <northBoundLatitude>43.814424</northBoundLatitude>
+   </EX_GeographicBoundingBox>
+   <BoundingBox CRS="EPSG:3857" minx="390483.996" maxx="477899.474" maxy="5436768.564" miny="5375009.914"/>
+   <BoundingBox CRS="EPSG:4326" minx="43.412755" maxx="43.814424" maxy="4.293045" miny="3.507777"/>
+   <Layer queryable="1">
+    <Name>montpellier_events</Name>
+    <Title>Touristic events</Title>
+    <CRS>CRS:84</CRS>
+    <CRS>EPSG:4326</CRS>
+    <CRS>EPSG:3857</CRS>
+    <EX_GeographicBoundingBox>
+     <westBoundLongitude>3.706949</westBoundLongitude>
+     <eastBoundLongitude>4.07508</eastBoundLongitude>
+     <southBoundLatitude>43.5125</southBoundLatitude>
+     <northBoundLatitude>43.752499</northBoundLatitude>
+    </EX_GeographicBoundingBox>
+    <BoundingBox CRS="EPSG:3857" minx="412655.78" maxx="453635.822" maxy="5427220.323" miny="5390307.899"/>
+    <BoundingBox CRS="EPSG:4326" minx="43.5125" maxx="43.752499" maxy="4.07508" miny="3.706949"/>
+    <Style>
+     <Name>default</Name>
+     <Title>default</Title>
+     <LegendURL>
+      <Format>image/png</Format>
+      <OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/events.qgs&amp;SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=montpellier_events&amp;FORMAT=image/png&amp;STYLE=default&amp;SLD_VERSION=1.1.0"/>
+     </LegendURL>
+    </Style>
+   </Layer>
+   <Layer queryable="1">
+    <Name>Hidden</Name>
+    <Title>Hidden</Title>
+    <CRS>CRS:84</CRS>
+    <CRS>EPSG:4326</CRS>
+    <CRS>EPSG:3857</CRS>
+    <EX_GeographicBoundingBox>
+     <westBoundLongitude>-180</westBoundLongitude>
+     <eastBoundLongitude>180</eastBoundLongitude>
+     <southBoundLatitude>-85.051129</southBoundLatitude>
+     <northBoundLatitude>85.051129</northBoundLatitude>
+    </EX_GeographicBoundingBox>
+    <BoundingBox CRS="EPSG:3857" minx="-20037508.343" maxx="20037508.343" maxy="20037508.343" miny="-20037508.343"/>
+    <BoundingBox CRS="EPSG:4326" minx="-85.051129" maxx="85.051129" maxy="180" miny="-180"/>
+    <Layer queryable="1">
+     <Name>osm-stamen-toner</Name>
+     <Title>osm-stamen-toner</Title>
+     <CRS>CRS:84</CRS>
+     <CRS>EPSG:4326</CRS>
+     <CRS>EPSG:3857</CRS>
+     <EX_GeographicBoundingBox>
+      <westBoundLongitude>-180</westBoundLongitude>
+      <eastBoundLongitude>180</eastBoundLongitude>
+      <southBoundLatitude>-85.051129</southBoundLatitude>
+      <northBoundLatitude>85.051129</northBoundLatitude>
+     </EX_GeographicBoundingBox>
+     <BoundingBox CRS="EPSG:3857" minx="-20037508.343" maxx="20037508.343" maxy="20037508.343" miny="-20037508.343"/>
+     <BoundingBox CRS="EPSG:4326" minx="-85.051129" maxx="85.051129" maxy="180" miny="-180"/>
+     <Style>
+      <Name>défaut</Name>
+      <Title>défaut</Title>
+      <LegendURL>
+       <Format>image/png</Format>
+       <OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/events.qgs&amp;SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=osm-stamen-toner&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0"/>
+      </LegendURL>
+     </Style>
+    </Layer>
+    <Layer queryable="1">
+     <Name>osm-mapnik</Name>
+     <Title>osm-mapnik</Title>
+     <CRS>CRS:84</CRS>
+     <CRS>EPSG:4326</CRS>
+     <CRS>EPSG:3857</CRS>
+     <EX_GeographicBoundingBox>
+      <westBoundLongitude>-180</westBoundLongitude>
+      <eastBoundLongitude>180</eastBoundLongitude>
+      <southBoundLatitude>-85.051129</southBoundLatitude>
+      <northBoundLatitude>85.051129</northBoundLatitude>
+     </EX_GeographicBoundingBox>
+     <BoundingBox CRS="EPSG:3857" minx="-20037508.343" maxx="20037508.343" maxy="20037508.343" miny="-20037508.343"/>
+     <BoundingBox CRS="EPSG:4326" minx="-85.051129" maxx="85.051129" maxy="180" miny="-180"/>
+     <Style>
+      <Name>défaut</Name>
+      <Title>défaut</Title>
+      <LegendURL>
+       <Format>image/png</Format>
+       <OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/events.qgs&amp;SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=osm-mapnik&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0"/>
+      </LegendURL>
+     </Style>
+    </Layer>
+   </Layer>
+  </Layer>
+ </Capability>
+</WMS_Capabilities>
+";}

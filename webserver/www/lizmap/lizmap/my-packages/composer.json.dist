@@ -1,0 +1,24 @@
+{
+    "name": "lizmap/my-modules",
+    "type": "library",
+    "description": "Additional packages you want to use to enhance Lizmap",
+    "require": {
+        "jelix/composer-module-setup": "^1.0.0"
+    },
+    "extra": {
+        "jelix": {
+            "app-dir" : "../",
+            "var-config-dir" : "../var/config/",
+            "config-file-16" : "localconfig.ini.php"
+        }
+    },
+    "minimum-stability": "stable",
+    "config": {
+        "preferred-install": {
+            "*": "dist"
+        },
+        "allow-plugins": {
+            "jelix/composer-module-setup": true
+        }
+    }
+}

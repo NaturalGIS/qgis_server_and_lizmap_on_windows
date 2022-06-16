@@ -1,0 +1,11 @@
+stages:
+  - release
+
+release:
+  stage: release
+  script:
+    - make deploy
+  only:
+    - tags
+  tags:
+    - jelix

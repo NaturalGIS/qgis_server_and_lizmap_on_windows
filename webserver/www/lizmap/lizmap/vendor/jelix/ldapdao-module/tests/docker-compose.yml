@@ -1,0 +1,48 @@
+version: '3.4'
+
+services:
+  openldap:
+    build: ./docker-conf/openldap
+    container_name: jelix_ldapdao_ldap
+    environment:
+      #SLAPD_FORCE_RECONFIGURE: false
+      SLAPD_PASSWORD: "passjelix"
+      SLAPD_ORGANISATION: "Jelix"
+      SLAPD_DOMAIN: "tests.jelix"
+      SLAPD_TLS_CRT_FILENAME: "ldap.jelix.crt"
+      SLAPD_TLS_KEY_FILENAME: "ldap.jelix.key"
+      SLAPD_TLS_CA_CRT_FILENAME: "tests.jelix-CA.crt"
+    volumes:
+      - "./docker-conf/certs:/customcerts"
+      - "./docker-conf/openldap/ldif:/customldif"
+  php:
+    build:
+      context: ./docker-conf/phpfpm
+      args:
+        user_id: ${FPM_USER_ID}
+        group_id: ${FPM_GROUP_ID}
+    container_name: jelix_ldapdao_php
+    environment:
+      TLS_CA_CRT_FILENAME: "tests.jelix-CA.crt"
+      TESTAPP_WEB_PORT: "${TESTAPP_WEB_PORT}"
+      PHP_VERSION: "${PHP_VERSION}"
+    volumes:
+      - "../:/jelixapp/"
+      - "./docker-conf/certs:/customcerts"
+    depends_on:
+      - openldap
+  web:
+    image: nginx:alpine
+    container_name: jelix_ldapdao_web
+    volumes:
+      - "./docker-conf/nginx-default.conf:/etc/nginx/conf.d/default.conf"
+      - "../:/jelixapp/"
+    command: /bin/sh -c "nginx -g 'daemon off;'"
+    ports:
+      - "${TESTAPP_WEB_PORT}:80"
+    depends_on:
+      - php
+    networks:
+      default:
+        aliases:
+          - testapp.local

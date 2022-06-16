@@ -1,0 +1,238 @@
+a:5:{s:5:"mtime";i:1652379068;s:5:"ctime";i:1652379068;s:4:"code";i:200;s:4:"mime";s:23:"text/xml; charset=utf-8";s:4:"data";s:7412:"<WFS_Capabilities xmlns="http://www.opengis.net/wfs" xmlns:gml="http://www.opengis.net/gml" updateSequence="0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0.0" xsi:schemaLocation="http://www.opengis.net/wfs http://schemas.opengis.net/wfs/1.0.0/WFS-capabilities.xsd" xmlns:ogc="http://www.opengis.net/ogc" xmlns:ows="http://www.opengis.net/ows" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <Service>
+  <Name>WFS</Name>
+  <Title>Montpellier - Transports</Title>
+  <Abstract><![CDATA[Demo project with bus and tramway lines in Montpellier, France.
+Data is licensed under ODbl, OpenStreetMap contributors]]></Abstract>
+  <OnlineResource>http://www.3liz.com/lizmap.html</OnlineResource>
+  <Fees>conditions unknown</Fees>
+  <AccessConstraints>None</AccessConstraints>
+ </Service>
+ <Capability>
+  <Request>
+   <GetCapabilities>
+    <DCPType>
+     <HTTP>
+      <Get onlineResource="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/montpellier.qgs"/>
+     </HTTP>
+    </DCPType>
+    <DCPType>
+     <HTTP>
+      <Post onlineResource="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/montpellier.qgs"/>
+     </HTTP>
+    </DCPType>
+   </GetCapabilities>
+   <DescribeFeatureType>
+    <SchemaDescriptionLanguage>
+     <XMLSCHEMA/>
+    </SchemaDescriptionLanguage>
+    <DCPType>
+     <HTTP>
+      <Get onlineResource="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/montpellier.qgs"/>
+     </HTTP>
+    </DCPType>
+    <DCPType>
+     <HTTP>
+      <Post onlineResource="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/montpellier.qgs"/>
+     </HTTP>
+    </DCPType>
+   </DescribeFeatureType>
+   <GetFeature>
+    <ResultFormat>
+     <GML2/>
+     <GML3/>
+     <GeoJSON/>
+    </ResultFormat>
+    <DCPType>
+     <HTTP>
+      <Get onlineResource="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/montpellier.qgs"/>
+     </HTTP>
+    </DCPType>
+    <DCPType>
+     <HTTP>
+      <Post onlineResource="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/montpellier.qgs"/>
+     </HTTP>
+    </DCPType>
+   </GetFeature>
+   <Transaction>
+    <DCPType>
+     <HTTP>
+      <Post onlineResource="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/montpellier.qgs"/>
+     </HTTP>
+    </DCPType>
+   </Transaction>
+  </Request>
+ </Capability>
+ <FeatureTypeList>
+  <Operations>
+   <Query/>
+  </Operations>
+  <FeatureType>
+   <Name>SousQuartiers</Name>
+   <Title>SousQuartiers</Title>
+   <SRS>EPSG:2154</SRS>
+   <LatLongBoundingBox miny="6274561.222" maxx="776031.667" minx="765145.882" maxy="6284189.521"/>
+   <Operations>
+    <Query/>
+   </Operations>
+  </FeatureType>
+  <FeatureType>
+   <Name>VilleMTP_MTP_Quartiers_2011_4326</Name>
+   <Title>VilleMTP_MTP_Quartiers_2011_4326</Title>
+   <SRS>EPSG:4326</SRS>
+   <LatLongBoundingBox miny="43.566704" maxx="3.941331" minx="3.80707" maxy="43.653372"/>
+   <Operations>
+    <Query/>
+   </Operations>
+  </FeatureType>
+  <FeatureType>
+   <Name>Quartiers</Name>
+   <Title>Quartiers</Title>
+   <SRS>EPSG:4326</SRS>
+   <LatLongBoundingBox miny="43.566704" maxx="3.941331" minx="3.80707" maxy="43.653372"/>
+   <Operations>
+    <Query/>
+   </Operations>
+  </FeatureType>
+  <FeatureType>
+   <Name>bus</Name>
+   <Title>Bus lines</Title>
+   <SRS>EPSG:4326</SRS>
+   <LatLongBoundingBox miny="43.5265" maxx="4.081239" minx="3.698123" maxy="43.761579"/>
+   <Operations>
+    <Query/>
+   </Operations>
+  </FeatureType>
+  <FeatureType>
+   <Name>bus_stops</Name>
+   <Title>bus_stops</Title>
+   <SRS>EPSG:4326</SRS>
+   <LatLongBoundingBox miny="43.526928" maxx="4.039132" minx="3.55326" maxy="43.752341"/>
+   <Operations>
+    <Query/>
+   </Operations>
+  </FeatureType>
+  <FeatureType>
+   <Name>donnes_sociodemo_sous_quartiers</Name>
+   <Title>Repartition of owners and tenants</Title>
+   <Abstract>This plot shows the repartition of owners and tenants per subdistrict in Montpellier, France.</Abstract>
+   <SRS>EPSG:4326</SRS>
+   <LatLongBoundingBox miny="inf" maxx="-inf" minx="inf" maxy="-inf"/>
+   <Operations>
+    <Query/>
+   </Operations>
+  </FeatureType>
+  <FeatureType>
+   <Name>edition_line</Name>
+   <Title>Bicycle rides</Title>
+   <SRS>EPSG:4326</SRS>
+   <LatLongBoundingBox miny="43.571914" maxx="3.907531" minx="3.831298" maxy="43.670511"/>
+   <Operations>
+    <Query/>
+   </Operations>
+  </FeatureType>
+  <FeatureType>
+   <Name>points_of_interest</Name>
+   <Title>Points of interest</Title>
+   <SRS>EPSG:4326</SRS>
+   <LatLongBoundingBox miny="43.594383" maxx="3.895635" minx="3.845415" maxy="43.642037"/>
+   <Operations>
+    <Query/>
+   </Operations>
+  </FeatureType>
+  <FeatureType>
+   <Name>areas_of_interest</Name>
+   <Title>Areas of interest</Title>
+   <SRS>EPSG:4326</SRS>
+   <LatLongBoundingBox miny="43.606014" maxx="3.894895" minx="3.862278" maxy="43.649006"/>
+   <Operations>
+    <Query/>
+   </Operations>
+  </FeatureType>
+  <FeatureType>
+   <Name>tramway_pivot</Name>
+   <Title>tramway_pivot</Title>
+   <SRS>EPSG:4326</SRS>
+   <LatLongBoundingBox miny="inf" maxx="-inf" minx="inf" maxy="-inf"/>
+   <Operations>
+    <Query/>
+   </Operations>
+  </FeatureType>
+  <FeatureType>
+   <Name>publicbuildings</Name>
+   <Title>public buildings</Title>
+   <SRS>EPSG:3857</SRS>
+   <LatLongBoundingBox miny="5403527.322" maxx="433783.15" minx="431114.842" maxy="5406274.452"/>
+   <Operations>
+    <Query/>
+   </Operations>
+  </FeatureType>
+  <FeatureType>
+   <Name>publicbuildings_tramstop</Name>
+   <Title>Pivot tramstops / Buildings</Title>
+   <SRS>EPSG:4326</SRS>
+   <LatLongBoundingBox miny="inf" maxx="-inf" minx="inf" maxy="-inf"/>
+   <Operations>
+    <Query/>
+   </Operations>
+  </FeatureType>
+  <FeatureType>
+   <Name>tram_stop_work</Name>
+   <Title>Tram stop works</Title>
+   <SRS>EPSG:4326</SRS>
+   <LatLongBoundingBox miny="inf" maxx="-inf" minx="inf" maxy="-inf"/>
+   <Operations>
+    <Query/>
+   </Operations>
+  </FeatureType>
+  <FeatureType>
+   <Name>tramstop</Name>
+   <Title>Tram stops</Title>
+   <SRS>EPSG:4326</SRS>
+   <LatLongBoundingBox miny="43.557942" maxx="3.963648" minx="3.810105" maxy="43.65456"/>
+   <Operations>
+    <Query/>
+   </Operations>
+  </FeatureType>
+  <FeatureType>
+   <Name>tramway</Name>
+   <Title>Tram lines</Title>
+   <SRS>EPSG:4326</SRS>
+   <LatLongBoundingBox miny="43.557609" maxx="3.963925" minx="3.809746" maxy="43.654613"/>
+   <Operations>
+    <Query/>
+   </Operations>
+  </FeatureType>
+  <FeatureType>
+   <Name>tramway_ref</Name>
+   <Title>tramway_ref</Title>
+   <SRS>EPSG:4326</SRS>
+   <LatLongBoundingBox miny="inf" maxx="-inf" minx="inf" maxy="-inf"/>
+   <Operations>
+    <Query/>
+   </Operations>
+  </FeatureType>
+ </FeatureTypeList>
+ <ogc:Filter_Capabilities>
+  <ogc:Spatial_Capabilities>
+   <ogc:Spatial_Operators>
+    <ogc:BBOX/>
+    <ogc:Disjoint/>
+    <ogc:Intersect/>
+    <ogc:Touches/>
+    <ogc:Crosses/>
+    <ogc:Contains/>
+    <ogc:Overlaps/>
+    <ogc:Within/>
+   </ogc:Spatial_Operators>
+  </ogc:Spatial_Capabilities>
+  <ogc:Scalar_Capabilities>
+   <ogc:Comparison_Operators>
+    <ogc:Simple_Comparisons/>
+    <ogc:Between/>
+    <ogc:Like/>
+   </ogc:Comparison_Operators>
+  </ogc:Scalar_Capabilities>
+ </ogc:Filter_Capabilities>
+</WFS_Capabilities>
+";}

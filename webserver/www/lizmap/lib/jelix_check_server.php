@@ -80,20 +80,20 @@ class jInstallerMessageProvider {
 
     protected $messages = array(
         'fr'=>array(
-     'checker.title'=>'Vérification de votre serveur pour Jelix 1.6.28-pre',
+     'checker.title'=>'Vérification de votre serveur pour Jelix 1.6.37-pre',
         'number.errors'         =>' erreurs.',
         'number.error'          =>' erreur.',
         'number.warnings'       =>' avertissements.',
         'number.warning'        =>' avertissement.',
         'number.notices'        =>' remarques.',
         'number.notice'         =>' remarque.',
-    'conclusion.error'      =>'Vous devez corriger l\'erreur pour faire fonctionner correctement une application Jelix 1.6.28-pre.',
-    'conclusion.errors'     =>'Vous devez corriger les erreurs pour faire fonctionner correctement une application Jelix 1.6.28-pre.',
-    'conclusion.warning'    =>'Une application Jelix 1.6.28-pre peut à priori fonctionner, mais il est préférable de corriger l\'avertissement pour être sûr.',
-    'conclusion.warnings'   =>'Une application Jelix 1.6.28-pre peut à priori fonctionner, mais il est préférable de corriger les avertissements pour être sûr.',
-    'conclusion.notice'     =>'Aucun problème pour installer une application pour Jelix  1.6.28-pre malgré la remarque.',
-    'conclusion.notices'    =>'Aucun problème pour installer une application pour Jelix  1.6.28-pre malgré les remarques.',
-    'conclusion.ok'         =>'Vous pouvez installer une application avec Jelix 1.6.28-pre',
+    'conclusion.error'      =>'Vous devez corriger l\'erreur pour faire fonctionner correctement une application Jelix 1.6.37-pre.',
+    'conclusion.errors'     =>'Vous devez corriger les erreurs pour faire fonctionner correctement une application Jelix 1.6.37-pre.',
+    'conclusion.warning'    =>'Une application Jelix 1.6.37-pre peut à priori fonctionner, mais il est préférable de corriger l\'avertissement pour être sûr.',
+    'conclusion.warnings'   =>'Une application Jelix 1.6.37-pre peut à priori fonctionner, mais il est préférable de corriger les avertissements pour être sûr.',
+    'conclusion.notice'     =>'Aucun problème pour installer une application pour Jelix  1.6.37-pre malgré la remarque.',
+    'conclusion.notices'    =>'Aucun problème pour installer une application pour Jelix  1.6.37-pre malgré les remarques.',
+    'conclusion.ok'         =>'Vous pouvez installer une application avec Jelix 1.6.37-pre',
         'cannot.continue'       =>'Les vérifications ne peuvent continuer : %s',
         'extension.not.installed'=>'L\'extension %s n\'est pas disponible',
         'extension.optional.not.installed'=>'L\'extension %s optionnelle n\'est pas disponible',
@@ -165,20 +165,20 @@ class jInstallerMessageProvider {
         ),
 
         'en'=>array(
-  'checker.title'   =>'Check your configuration server for Jelix 1.6.28-pre',
+  'checker.title'   =>'Check your configuration server for Jelix 1.6.37-pre',
         'number.errors'     =>' errors.',
         'number.error'      =>' error.',
         'number.warnings'   =>' warnings.',
         'number.warning'    =>' warning.',
         'number.notices'    =>' notices.',
         'number.notice'     =>' notice.',
-      'conclusion.error'    =>'You must fix the error in order to run an application correctly with Jelix 1.6.28-pre.',
-      'conclusion.errors'   =>'You must fix errors in order to run an application correctly with Jelix 1.6.28-pre.',
-      'conclusion.warning'  =>'Your application for Jelix 1.6.28-pre may run without problems, but it is recommanded to fix the warning.',
-      'conclusion.warnings' =>'Your application for Jelix 1.6.28-pre may run without problems, but it is recommanded to fix warnings.',
-      'conclusion.notice'   =>'You can install an application for Jelix 1.6.28-pre, although there is a notice.',
-      'conclusion.notices'  =>'You can install an application for Jelix 1.6.28-pre, although there are notices.',
-      'conclusion.ok'       =>'You can install an application for Jelix 1.6.28-pre.',
+      'conclusion.error'    =>'You must fix the error in order to run an application correctly with Jelix 1.6.37-pre.',
+      'conclusion.errors'   =>'You must fix errors in order to run an application correctly with Jelix 1.6.37-pre.',
+      'conclusion.warning'  =>'Your application for Jelix 1.6.37-pre may run without problems, but it is recommanded to fix the warning.',
+      'conclusion.warnings' =>'Your application for Jelix 1.6.37-pre may run without problems, but it is recommanded to fix warnings.',
+      'conclusion.notice'   =>'You can install an application for Jelix 1.6.37-pre, although there is a notice.',
+      'conclusion.notices'  =>'You can install an application for Jelix 1.6.37-pre, although there are notices.',
+      'conclusion.ok'       =>'You can install an application for Jelix 1.6.37-pre.',
         'cannot.continue'       =>'Cannot continue the checking: %s',
         'extension.not.installed'=>'The extension %s is not available',
         'extension.optional.not.installed'=>'the optional extension %s is not available',
@@ -336,7 +336,7 @@ class jInstallCheck {
         $this->reporter = $reporter;
         $this->messages = new jInstallerMessageProvider($lang);
         $this->buildProperties = array(
-   'PHP_VERSION_TARGET'=>'5.6',
+   'PHP_VERSION_TARGET'=>'7.0',
         );
     }
 
@@ -706,7 +706,7 @@ class jDbParameters
             if (isset(self::$JdbDriverIndex[$driver])) {
                 $info = self::$driversInfos[self::$JdbDriverIndex[$driver]];
             } else {
-                $info = array('', '', '', $driver, '', '');
+                $info = array('', '', '', $driver, '');
                 $info[0] = (isset($profile['dbtype']) ? $profile['dbtype'] : '');
                 $info[1] = (isset($profile['phpext']) ? $profile['phpext'] : '');
             }

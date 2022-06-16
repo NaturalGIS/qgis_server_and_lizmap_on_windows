@@ -1,0 +1,9 @@
+{
+    "name": "jelix/ldapdaotest",
+    "type": "project",
+    "license": "LGPL",
+    "require": {
+      "php": ">=5.6"
+    },
+    "minimum-stability": "stable"
+}

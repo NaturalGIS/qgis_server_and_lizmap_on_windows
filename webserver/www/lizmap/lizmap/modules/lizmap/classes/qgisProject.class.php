@@ -56,6 +56,11 @@ class qgisProject
     protected $relations = array();
 
     /**
+     * @var array list of themes
+     */
+    protected $themes = array();
+
+    /**
      * @var bool
      */
     protected $useLayerIDs = false;
@@ -66,10 +71,26 @@ class qgisProject
     protected $layers = array();
 
     /**
+     * @var array list of custom project variables defined by user in project
+     */
+    protected $customProjectVariables = array();
+
+    /**
      * @var array List of cached properties
      */
     protected $cachedProperties = array('WMSInformation', 'canvasColor', 'allProj4',
-        'relations', 'useLayerIDs', 'layers', 'data', 'qgisProjectVersion', );
+        'relations', 'themes', 'useLayerIDs', 'layers', 'data', 'qgisProjectVersion',
+        'customProjectVariables', );
+
+    /**
+     * version of the format of data stored in the cache.
+     *
+     * This number should be increased each time you change the structure of the
+     * properties of qgisProject (ex: adding some new data properties into the $layers).
+     * So you'll be sure that the cache will be updated when Lizmap code source
+     * is updated on a server
+     */
+    const CACHE_FORMAT_VERSION = 2;
 
     /**
      * constructor.
@@ -87,13 +108,8 @@ class qgisProject
         // For the cache key, we use the full path of the project file
         // to avoid collision in the cache engine
         $data = false;
-        if (jApp::config()->isWindows) {
-            // Cache backends don't support '\'
-            $fileKey = str_replace('\\', '/', $file);
-        }
-        else {
-            $fileKey = $file;
-        }
+        $fileKey = jCache::normalizeKey($file);
+
         try {
             $data = jCache::get($fileKey, 'qgisprojects');
         } catch (Exception $e) {
@@ -102,13 +118,17 @@ class qgisProject
             jLog::logEx($e, 'error');
         }
 
-        if ($data === false ||
-            $data['qgsmtime'] < filemtime($file)) {
+        if ($data === false
+            || $data['qgsmtime'] < filemtime($file)
+            || !isset($data['format_version'])
+            || $data['format_version'] != self::CACHE_FORMAT_VERSION
+        ) {
             // FIXME reading XML could take time, so many process could
             // read it and construct the cache at the same time. We should
             // have a kind of lock to avoid this issue.
             $this->readXmlProject($file);
             $data['qgsmtime'] = filemtime($file);
+            $data['format_version'] = self::CACHE_FORMAT_VERSION;
             foreach ($this->cachedProperties as $prop) {
                 $data[$prop] = $this->{$prop};
             }
@@ -129,13 +149,10 @@ class qgisProject
 
     public function clearCache()
     {
-        $file = $this->path;
-        if (jApp::config()->isWindows) {
-            // Cache backends don't support '\'
-            $file = str_replace('\\', '/', $file);
-        }
+        $fileKey = jCache::normalizeKey($this->path);
+
         try {
-            jCache::delete($file, 'qgisprojects');
+            jCache::delete($fileKey, 'qgisprojects');
         } catch (Exception $e) {
             // if qgisprojects profile does not exist, or if there is an
             // other error about the cache, let's log it
@@ -174,7 +191,7 @@ class qgisProject
 
     public function getProj4($authId)
     {
-        if (!array_key_exists($authId, $this->data)) {
+        if (!array_key_exists($authId, $this->allProj4)) {
             return null;
         }
 
@@ -189,6 +206,16 @@ class qgisProject
     public function getRelations()
     {
         return $this->relations;
+    }
+
+    public function getThemes()
+    {
+        return $this->themes;
+    }
+
+    public function getCustomProjectVariables()
+    {
+        return $this->customProjectVariables;
     }
 
     /**
@@ -315,10 +342,10 @@ class qgisProject
         if ($layer && array_key_exists('embedded', $layer) && $layer['embedded'] == 1) {
             $qgsProj = new qgisProject(realpath(dirname($this->path).DIRECTORY_SEPARATOR.$layer['projectPath']));
 
-            return $qgsProj->getXml()->xpath("//maplayer[id='${layerId}']");
+            return $qgsProj->getXml()->xpath("//maplayer[id='{$layerId}']");
         }
 
-        return $this->getXml()->xpath("//maplayer[id='${layerId}']");
+        return $this->getXml()->xpath("//maplayer[id='{$layerId}']");
     }
 
     /**
@@ -334,7 +361,7 @@ class qgisProject
      */
     public function getXmlLayerByKeyword($key)
     {
-        return $this->getXml()->xpath("//maplayer/keywordList[value='${key}']/parent::*");
+        return $this->getXml()->xpath("//maplayer/keywordList[value='{$key}']/parent::*");
     }
 
     /**
@@ -350,7 +377,7 @@ class qgisProject
      */
     public function getXmlRelation($relationId)
     {
-        return $this->getXml()->xpath("//relation[@id='${relationId}']");
+        return $this->getXml()->xpath("//relation[@id='{$relationId}']");
     }
 
     /**
@@ -370,8 +397,13 @@ class qgisProject
         if (!file_exists($qgs_path)) {
             throw new Exception('The QGIS project '.$qgs_path.' does not exist!');
         }
-        $xml = simplexml_load_file($qgs_path);
-        if ($xml === false) {
+
+        $xml = \Lizmap\App\XmlTools::xmlFromFile($qgs_path);
+        if (!is_object($xml)) {
+            $errormsg = '\n'.$qgs_path.'\n'.$xml;
+            $errormsg = 'An error has been raised when loading QGIS Project:'.$errormsg;
+            \jLog::log($errormsg, 'error');
+
             throw new Exception('The QGIS project '.$qgs_path.' has invalid content!');
         }
         $this->xml = $xml;
@@ -390,8 +422,12 @@ class qgisProject
             throw new Exception('The QGIS project '.basename($qgs_path).' does not exist!');
         }
 
-        $qgs_xml = simplexml_load_file($qgs_path);
-        if ($qgs_xml === false) {
+        $qgs_xml = \Lizmap\App\XmlTools::xmlFromFile($qgs_path);
+        if (!is_object($qgs_xml)) {
+            $errormsg = '\n'.$qgs_path.'\n'.$qgs_xml;
+            $errormsg = 'An error has been raised when loading QGIS Project:'.$errormsg;
+            \jLog::log($errormsg, 'error');
+
             throw new Exception('The QGIS project '.basename($qgs_path).' has invalid content!');
         }
         $this->path = $qgs_path;
@@ -411,6 +447,17 @@ class qgisProject
         // get abstract from WMS properties
         if (property_exists($qgs_xml->properties, 'WMSServiceAbstract')) {
             $this->data['abstract'] = (string) $qgs_xml->properties->WMSServiceAbstract;
+        }
+
+        // get keyword list from WMS properties
+        if (property_exists($qgs_xml->properties, 'WMSKeywordList')) {
+            $values = array();
+            foreach ($qgs_xml->properties->WMSKeywordList->value as $value) {
+                if ((string) $value !== '') {
+                    $values[] = (string) $value;
+                }
+            }
+            $this->data['keywordList'] = implode(', ', $values);
         }
 
         // get WMS max width
@@ -451,6 +498,8 @@ class qgisProject
         $this->canvasColor = $this->readCanvasColor($qgs_xml);
         $this->allProj4 = $this->readAllProj4($qgs_xml);
         $this->relations = $this->readRelations($qgs_xml);
+        $this->themes = $this->readThemes($qgs_xml);
+        $this->customProjectVariables = $this->readCustomProjectVariables($qgs_xml);
         $this->useLayerIDs = $this->readUseLayerIDs($qgs_xml);
         $this->layers = $this->readLayers($qgs_xml);
     }
@@ -461,6 +510,7 @@ class qgisProject
         // Default metadata
         $WMSServiceTitle = '';
         $WMSServiceAbstract = '';
+        $WMSKeywordList = '';
         $WMSExtent = '';
         $ProjectCrs = '';
         $WMSOnlineResource = '';
@@ -471,10 +521,23 @@ class qgisProject
         if ($qgsLoad) {
             $WMSServiceTitle = (string) $qgsLoad->properties->WMSServiceTitle;
             $WMSServiceAbstract = (string) $qgsLoad->properties->WMSServiceAbstract;
-            $WMSExtent = $qgsLoad->properties->WMSExtent->value[0];
-            $WMSExtent .= ', '.$qgsLoad->properties->WMSExtent->value[1];
-            $WMSExtent .= ', '.$qgsLoad->properties->WMSExtent->value[2];
-            $WMSExtent .= ', '.$qgsLoad->properties->WMSExtent->value[3];
+
+            if (property_exists($qgsLoad->properties, 'WMSKeywordList')) {
+                $values = array();
+                foreach ($qgsLoad->properties->WMSKeywordList->value as $value) {
+                    if ((string) $value !== '') {
+                        $values[] = (string) $value;
+                    }
+                }
+                $WMSKeywordList = implode(', ', $values);
+            }
+
+            if (!is_null($qgsLoad->properties->WMSExtent)) {
+                $WMSExtent = $qgsLoad->properties->WMSExtent->value[0];
+                $WMSExtent .= ', '.$qgsLoad->properties->WMSExtent->value[1];
+                $WMSExtent .= ', '.$qgsLoad->properties->WMSExtent->value[2];
+                $WMSExtent .= ', '.$qgsLoad->properties->WMSExtent->value[3];
+            }
             $WMSOnlineResource = (string) $qgsLoad->properties->WMSOnlineResource;
             $WMSContactMail = (string) $qgsLoad->properties->WMSContactMail;
             $WMSContactOrganization = (string) $qgsLoad->properties->WMSContactOrganization;
@@ -488,6 +551,7 @@ class qgisProject
         return array(
             'WMSServiceTitle' => $WMSServiceTitle,
             'WMSServiceAbstract' => $WMSServiceAbstract,
+            'WMSKeywordList' => $WMSKeywordList,
             'WMSExtent' => $WMSExtent,
             'ProjectCrs' => $ProjectCrs,
             'WMSOnlineResource' => $WMSOnlineResource,
@@ -526,6 +590,70 @@ class qgisProject
         }
 
         return $srsList;
+    }
+
+    /**
+     * @param SimpleXMLElement $xml
+     *
+     * @return null|array[]
+     */
+    protected function readThemes($xml)
+    {
+        $xmlThemes = $xml->xpath('//visibility-presets');
+        $themes = array();
+
+        if ($xmlThemes) {
+            foreach ($xmlThemes[0] as $theme) {
+                $themeObj = $theme->attributes();
+                if (!array_key_exists((string) $themeObj->name, $themes)) {
+                    $themes[(string) $themeObj->name] = array();
+                }
+
+                // Copy layers and their attributes
+                foreach ($theme->layer as $layer) {
+                    $layerObj = $layer->attributes();
+                    $themes[(string) $themeObj->name]['layers'][(string) $layerObj->id] = array(
+                        'style' => (string) $layerObj->style,
+                        'expanded' => (string) $layerObj->expanded,
+                    );
+                }
+
+                // Copy expanded group nodes
+                if (isset($theme->{'expanded-group-nodes'}->{'expanded-group-node'})) {
+                    foreach ($theme->{'expanded-group-nodes'}->{'expanded-group-node'} as $expandedGroupNode) {
+                        $expandedGroupNodeObj = $expandedGroupNode->attributes();
+                        $themes[(string) $themeObj->name]['expandedGroupNode'][] = (string) $expandedGroupNodeObj->id;
+                    }
+                }
+            }
+
+            return $themes;
+        }
+
+        return null;
+    }
+
+    /**
+     * @param \SimpleXMLElement $xml
+     *
+     * @return null|array[] array of custom variable name => variable value
+     */
+    protected function readCustomProjectVariables($xml)
+    {
+        $xmlCustomProjectVariables = $xml->xpath('//properties/Variables');
+        $customProjectVariables = array();
+
+        if ($xmlCustomProjectVariables && count($xmlCustomProjectVariables) === 1) {
+            $variableIndex = 0;
+            foreach ($xmlCustomProjectVariables[0]->variableNames->value as $variableName) {
+                $customProjectVariables[(string) $variableName] = (string) $xmlCustomProjectVariables[0]->variableValues->value[$variableIndex];
+                ++$variableIndex;
+            }
+
+            return $customProjectVariables;
+        }
+
+        return null;
     }
 
     /**
@@ -673,32 +801,54 @@ class qgisProject
                     }
 
                     if (isset($xmlLayer->aliases->alias)) {
-                        foreach($xmlLayer->aliases->alias as $alias) {
+                        foreach ($xmlLayer->aliases->alias as $alias) {
                             $aliases[(string) $alias['field']] = (string) $alias['name'];
                         }
                     }
 
                     if (isset($xmlLayer->defaults->default)) {
-                        foreach($xmlLayer->defaults->default as $default) {
+                        foreach ($xmlLayer->defaults->default as $default) {
                             $defaults[(string) $default['field']] = (string) $default['expression'];
                         }
                     }
 
                     if (isset($xmlLayer->constraints->constraint)) {
-                        foreach($xmlLayer->constraints->constraint as $constraint) {
+                        foreach ($xmlLayer->constraints->constraint as $constraint) {
                             $c = array(
                                 'constraints' => 0,
                                 'notNull' => false,
                                 'unique' => false,
-                                'exp' => false
+                                'exp' => false,
                             );
                             $c['constraints'] = (int) $constraint['constraints'];
-                            if ( $c['constraints'] > 0 ) {
+                            if ($c['constraints'] > 0) {
                                 $c['notNull'] = ((int) $constraint['notnull_strength'] > 0);
                                 $c['unique'] = ((int) $constraint['unique_strength'] > 0);
                                 $c['exp'] = ((int) $constraint['exp_strength'] > 0);
                             }
                             $constraints[(string) $constraint['field']] = $c;
+                        }
+                    }
+
+                    if (isset($xmlLayer->constraintExpressions->constraint)) {
+                        foreach ($xmlLayer->constraintExpressions->constraint as $constraint) {
+                            $f = (string) $constraint['field'];
+                            $c = array(
+                                'constraints' => 0,
+                                'notNull' => false,
+                                'unique' => false,
+                                'exp' => false,
+                            );
+                            if (array_key_exists($f, $constraints)) {
+                                $c = $constraints[$f];
+                            }
+                            $exp_val = (string) $constraint['exp'];
+                            if ($exp_val !== '') {
+                                $c['exp'] = true;
+                                $c['exp_value'] = $exp_val;
+                                $c['exp_desc'] = (string) $constraint['desc'];
+                            }
+                            $constraints[$f] = $c;
                         }
                     }
 
@@ -708,7 +858,14 @@ class qgisProject
                     $layer['constraints'] = $constraints;
                     $layer['wfsFields'] = $wfsFields;
 
-                    $excludeFields = $xmlLayer->xpath('.//excludeAttributesWFS/attribute');
+                    // Do not expose fields with HideFromWfs parameter
+                    // Format in .qgs has changed in QGIS 3.16
+                    if ($this->qgisProjectVersion >= 31600) {
+                        $excludeFields = $xmlLayer->xpath('.//field[contains(@configurationFlags,"HideFromWfs")]/@name');
+                    } else {
+                        $excludeFields = $xmlLayer->xpath('.//excludeAttributesWFS/attribute');
+                    }
+
                     if ($excludeFields && count($excludeFields) > 0) {
                         foreach ($excludeFields as $eField) {
                             $eField = (string) $eField;

@@ -8,12 +8,32 @@ class configListener extends jEventListener
             // Create the "lizmap" parent menu item
             $bloc = new masterAdminMenuItem('lizmap', 'LizMap', '', 50);
 
-            // Child for the configuration of lizmap repositories
+            if (jAcl2::check('lizmap.admin.services.view')) {
+                $bloc->childItems[] = new masterAdminMenuItem(
+                    'lizmap_configuration',
+                    jLocale::get('admin~admin.menu.configuration.main.label'),
+                    jUrl::get('admin~config:index'),
+                    110,
+                    'lizmap'
+                );
+            }
+
+            if (jAcl2::check('lizmap.admin.repositories.view')) {
+                $bloc->childItems[] = new masterAdminMenuItem(
+                    'lizmap_maps',
+                    jLocale::get('admin~admin.menu.lizmap.repositories.label'),
+                    jUrl::get('admin~maps:index'),
+                    111,
+                    'lizmap'
+                );
+            }
+
+            // Child for the configuration of lizmap landing page content
             $bloc->childItems[] = new masterAdminMenuItem(
-                'lizmap_configuration',
-                jLocale::get('admin~admin.menu.configuration.main.label'),
-                jUrl::get('admin~config:index'),
-                110,
+                'lizmap_landing_page_content',
+                jLocale::get('admin~admin.menu.lizmap.landingPageContent.label'),
+                jUrl::get('admin~landing_page_content:index'),
+                115,
                 'lizmap'
             );
 
@@ -22,7 +42,7 @@ class configListener extends jEventListener
                 'lizmap_theme',
                 jLocale::get('admin~admin.menu.lizmap.theme.label'),
                 jUrl::get('admin~theme:index'),
-                115,
+                120,
                 'lizmap'
             );
 
@@ -31,7 +51,7 @@ class configListener extends jEventListener
                 'lizmap_logs',
                 jLocale::get('admin~admin.menu.lizmap.logs.label'),
                 jUrl::get('admin~logs:index'),
-                120,
+                125,
                 'lizmap'
             );
 
@@ -42,7 +62,7 @@ class configListener extends jEventListener
 
     public function onjauthdbAdminGetViewInfo(jEvent $event)
     {
-        if (/*!$event->himself && */jAcl2::check('acl.user.view')) {
+        if (/*!$event->himself && */ jAcl2::check('acl.user.view')) {
             $user = $event->tpl->get('id');
 
             $groups = jAcl2DbUserGroup::getGroupList($user);

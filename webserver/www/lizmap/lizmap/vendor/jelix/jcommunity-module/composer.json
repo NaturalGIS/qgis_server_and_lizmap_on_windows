@@ -1,0 +1,32 @@
+{
+    "name": "jelix/jcommunity-module",
+    "type": "jelix-module",
+    "description": "modules to add community features to a web site made with Jelix",
+    "keywords": ["authentication", "profile", "messaging", "community"],
+    "homepage": "https://github.com/jelix/jcommunity-module/wiki/",
+    "license": "GPL-2.0",
+    "authors": [
+        {
+            "name": "Laurent Jouanneau",
+            "email": "laurent@jelix.org"
+        }
+    ],
+    "require": {
+        "php": ">=5.6"
+    },
+    "archive": {
+        "exclude": ["/test"]
+    },
+    "extra": {
+        "jelix" : {
+            "modules-dir": [
+                "modules"
+            ]
+        },
+        "branch-alias": {
+            "dev-master": "1.3.x-dev",
+            "dev-1.2.x": "1.2.x-dev"
+        }
+    },
+    "minimum-stability": "stable"
+}

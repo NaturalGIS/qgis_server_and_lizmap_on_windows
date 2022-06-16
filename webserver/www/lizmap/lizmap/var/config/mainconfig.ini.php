@@ -13,13 +13,13 @@ timeZone="Europe/Paris"
 
 theme=default
 
-pluginsPath="app:plugins/,lib:jelix-plugins/,module:jacl2db/plugins"
-modulesPath="lib:jelix-admin-modules/,lib:jelix-modules/,lib:vendor-modules/,app:modules/,app:lizmap-modules"
+pluginsPath="app:plugins,lib:jelix-plugins,module:jacl2db/plugins"
+modulesPath="lib:jelix-admin-modules,lib:jelix-modules,app:modules,app:lizmap-modules,app:vendor/jelix/jcommunity-module/modules"
 
 ; the locales available in the application
-availableLocales="cs_CZ,de_DE,el_GR,en_US,es_ES,eu_ES,fi_FI,fr_FR,gl_ES,hu_HU,it_IT,nl_NL,pl_PL,pt_BR,pt_PT,ro_RO,ru_RU,sl_SL,sv_SE"
+availableLocales="cs_CZ,de_DE,el_GR,en_US,es_ES,eu_ES,fi_FI,fr_FR,gl_ES,hu_HU,it_IT,ja_JP,nl_NL,pl_PL,pt_BR,pt_PT,ro_RO,ru_RU,sl_SI,sv_SE,sk_SK,uk_UA"
 ; the locale to fallback when the asked string doesn't exist in the current locale
-fallbackLocale = en_US
+fallbackLocale=en_US
 
 [coordplugins]
 ;name = file_ini_name or 1
@@ -34,17 +34,6 @@ htmlmap=myHtmlMapResponse
 htmlsimple=simpleHtmlResponse
 
 [jResponseHtml]
-plugins=minify
-;concatene et compress les fichier CSS
-minifyCSS=0
-;concatene et compress les fichier JS
-minifyJS=0
-; liste des fichiers CSS qui ne doivent pas être compressé
-minifyExcludeCSS="OpenLayers-2.13/theme/default/style.css,js/jquery/ui-1.11.4/jquery-ui.min.css,js/jquery/ui-1.11.4/jquery-ui.structure.min.css,js/jquery/ui-1.11.4/jquery-ui.theme.min.css"
-; liste des fichiers JS qui ne doivent pas être compressé
-minifyExcludeJS="index.php/view/translate/,OpenLayers-2.13/OpenLayers.js,js/jquery/jquery-1.12.4.min.js,js/jquery/ui-1.11.4/jquery-ui.min.js,js/ckeditor5/ckeditor.js"
-; chemin du point d'entrée de Minify, relatif au basePath
-minifyEntryPoint=minify.php
 
 [error_handling]
 messageLogFormat="%date%\t[%code%]\t%msg%\t%file%\t%line%\n"
@@ -62,8 +51,8 @@ engine=basic_significant
 ; because the jelix-www directory is outside the yourapp/www/ directory, you should create a link to
 ; jelix-www, or copy its content in yourapp/www/ (with a name like 'jelix' for example)
 ; so you should indicate the relative path of this link/directory to the basePath, or an absolute path.
-jelixWWWPath="jelix/"
-
+jelixWWWPath="assets/jelix/"
+jqueryPath="assets/jelix/jquery/"
 
 ; enable the parsing of the url. Set it to off if the url is already parsed by another program
 ; (like mod_rewrite in apache), if the rewrite of the url corresponds to a simple url, and if
@@ -84,11 +73,9 @@ basePath=
 
 defaultEntrypoint=index
 
-entrypointExtension=.php
-
 ; leave empty to have jelix error messages
 ;notfoundAct=
-notfoundAct = "jelix~error:notfound"
+notfoundAct="jelix~error:notfound"
 
 ; list of actions which require https protocol for the simple url engine
 ; syntax of the list is the same as explained in the simple_urlengine_entrypoints
@@ -105,7 +92,7 @@ simple_urlengine_https=
 ;   @r       -> for all actions for the request of type "r"
 
 index="@classic"
-admin="jacl2db~*@classic, jacl2db_admin~*@classic, jauthdb_admin~*@classic, master_admin~*@classic, admin~*@classic, jcommunity~*@classic"
+admin="jacl2db~*@classic,jacl2db_admin~*@classic,jauthdb_admin~*@classic,master_admin~*@classic,admin~*@classic,jcommunity~*@classic"
 
 
 [basic_significant_urlengine_entrypoints]
@@ -227,47 +214,51 @@ datepicker=default
 datetimepicker=default
 
 [jquery]
-jquery = js/jquery/jquery-1.12.4.min.js
-jqueryui.js[] = js/jquery/ui-1.11.4/jquery-ui.min.js
-jqueryui.css[] = js/jquery/ui-1.11.4/jquery-ui.min.css
+jquery="assets/js/jquery/jquery-3.5.1.min.js"
+jqueryui.js[]="assets/js/jquery/ui-1.11.4/jquery-ui.min.js"
+jqueryui.css[]="assets/js/jquery/ui-1.11.4/jquery-ui.min.css"
 
 [datepickers]
-default = $jelix/js/jforms/datepickers/default/init.js
-default.js[]=js/jquery/ui-1.11.4/jquery-ui.min.js
-default.js[]=$jelix/js/jforms/datepickers/default/ui.en.js
-default.js[]=$jqueryPath/ui/i18n/jquery.ui.datepicker-$lang.js
-default.js[]=$jelix/js/jforms/datepickers/default/ui.$lang.js
-default.css[]=js/jquery/ui-1.11.4/jquery-ui.min.css
+default="$jelix/js/jforms/datepickers/default/init.js"
+default.js[]="assets/js/jquery/ui-1.11.4/jquery-ui.min.js"
+default.js[]="$jelix/js/jforms/datepickers/default/ui.en.js"
+default.js[]="$jqueryPath/ui/i18n/jquery.ui.datepicker-$lang.js"
+default.js[]="$jelix/js/jforms/datepickers/default/ui.$lang.js"
+default.css[]="assets/js/jquery/ui-1.11.4/jquery-ui.min.css"
 
 [datetimepickers]
-default = $jelix/js/jforms/datepickers/default/init.js
-default.js[]=js/jquery/ui-1.11.4/jquery-ui.min.js
-default.js[]=$jelix/js/jforms/datepickers/default/ui.en.js
-default.js[]=$jqueryPath/ui/i18n/jquery.ui.datepicker-$lang.js
-default.js[]=$jelix/js/jforms/datepickers/default/ui.$lang.js
-default.css[]=js/jquery/ui-1.11.4/jquery-ui.min.css
+default="$jelix/js/jforms/datepickers/default/init.js"
+default.js[]="assets/js/jquery/ui-1.11.4/jquery-ui.min.js"
+default.js[]="$jelix/js/jforms/datepickers/default/ui.en.js"
+default.js[]="$jqueryPath/ui/i18n/jquery.ui.datepicker-$lang.js"
+default.js[]="$jelix/js/jforms/datepickers/default/ui.$lang.js"
+default.css[]="assets/js/jquery/ui-1.11.4/jquery-ui.min.css"
 
 [htmleditors]
-default.engine.name = ckeditor
-default.engine.file[] = js/ckeditor5/ckeditor.js
-default.engine.file[] = js/ckeditor5/translations/$lang.js
-default.config = js/ckeditor5/ckeditor_lizmap.js
-default.skin.default =
+default.engine.name=ckeditor
+default.engine.file[]="assets/js/ckeditor5/ckeditor.js"
+default.engine.file[]="assets/js/ckeditor5/translations/$lang.js"
+default.config="assets/js/ckeditor5/ckeditor_lizmap.js"
+default.skin.default=
 
-ckdefault.engine.name = ckeditor
-ckdefault.engine.file[] = js/ckeditor5/ckeditor.js
-default.engine.file[] = js/ckeditor5/translations/$lang.js
-ckdefault.config = js/ckeditor5/ckeditor_ckdefault.js
+ckdefault.engine.name=ckeditor
+ckdefault.engine.file[]="assets/js/ckeditor5/ckeditor.js"
+default.engine.file[]="assets/js/ckeditor5/translations/$lang.js"
+ckdefault.config="assets/js/ckeditor5/ckeditor_ckdefault.js"
 
-ckfull.engine.name = ckeditor
-ckfull.engine.file[] = js/ckeditor5/ckeditor.js
-default.engine.file[] = js/ckeditor5/translations/$lang.js
-ckfull.config = js/ckeditor5/ckeditor_ckfull.js
+ckfull.engine.name=ckeditor
+ckfull.engine.file[]="assets/js/ckeditor5/ckeditor.js"
+default.engine.file[]="assets/js/ckeditor5/translations/$lang.js"
+ckfull.config="assets/js/ckeditor5/ckeditor_ckfull.js"
 
-ckbasic.engine.name = ckeditor
-ckbasic.engine.file[] = js/ckeditor5/ckeditor.js
-default.engine.file[] = js/ckeditor5/translations/$lang.js
-ckbasic.config = js/ckeditor5/ckeditor_ckbasic.js
+ckbasic.engine.name=ckeditor
+ckbasic.engine.file[]="assets/js/ckeditor5/ckeditor.js"
+default.engine.file[]="assets/js/ckeditor5/translations/$lang.js"
+ckbasic.config="assets/js/ckeditor5/ckeditor_ckbasic.js"
+
+ckfullandmedia.engine.name=ckeditor
+ckfullandmedia.engine.file[]="assets/js/ckeditor5/ckeditor.js"
+ckfullandmedia.config="assets/js/ckeditor5/ckeditor_ckfullandmedia.js"
 
 [modules]
 jelix.access=1
@@ -292,6 +283,7 @@ jcommunity.installparam="defaultusers=lizmap~defaultusers.json;manualconfig"
 admin.access=1
 dataviz.access=1
 filter.access=1
+action.access=1
 dynamicLayers.access=1
 lizmap.access=1
 proj4php.access=1
@@ -300,18 +292,27 @@ view.access=1
 ldapdao.installparam=noconfigfile
 multiauth.installparam="noconfigfile;localconfig"
 
+ldapdao.path="app:vendor/jelix/ldapdao-module/ldapdao"
+
+saml.installparam="localconfig"
+
+
 [mailLogger]
 email="root@localhost"
 emailHeaders="Content-Type: text/plain; charset=UTF-8\nFrom: webmaster@yoursite.com\nX-Mailer: Jelix\nX-Priority: 1 (Highest)\n"
 
 [jcommunity]
-loginResponse = htmlauth
-registrationEnabled = off
-resetPasswordEnabled = on
-resetPasswordAdminEnabled = on
-verifyNickname = off
+loginResponse=htmlauth
+registrationEnabled=off
+resetPasswordEnabled=on
+resetAdminPasswordEnabled=on
+verifyNickname=off
 ;passwordChangeEnabled=on
 ;accountDestroyEnabled=on
 useJAuthDbAdminRights=on
 ;disableJPref = on
 
+;------- some parameters for the "saml" module
+[saml:sp]
+; list of dao properties that can be used for mapping
+daoPropertiesForMapping="login,email,firstname,lastname,phonenumber"

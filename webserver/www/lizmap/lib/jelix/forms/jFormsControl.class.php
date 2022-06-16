@@ -14,7 +14,8 @@
  * @package     jelix
  * @subpackage  forms
  */
-abstract class jFormsControl {
+abstract class jFormsControl
+{
     /** @var string a type name that identify the control type */
     public $type = null;
     
@@ -66,7 +67,8 @@ abstract class jFormsControl {
     /**
      * @param string $ref the identifiant of the control
      */
-    function __construct($ref){
+    public function __construct($ref)
+    {
         $this->ref = $ref;
         $this->datatype = new jDatatypeString();
     }
@@ -75,26 +77,31 @@ abstract class jFormsControl {
      * @return string the default widget type to use to render the control
      * @since 1.6.14
      */
-    function getWidgetType() {
+    public function getWidgetType()
+    {
         return $this->type;
     }
 
     /**
      * @param jFormsBase $form
      */
-    function setForm($form) {
+    public function setForm($form)
+    {
         $this->form = $form;
         $this->container = $form->getContainer();
-        if($this->initialReadOnly)
+        if ($this->initialReadOnly) {
             $this->container->setReadOnly($this->ref, true);
-        if(!$this->initialActivation)
+        }
+        if (!$this->initialActivation) {
             $this->container->deactivate($this->ref, true);
+        }
     }
 
     /**
      * says if the control can have multiple values
      */
-    function isContainer(){
+    public function isContainer()
+    {
         return false;
     }
 
@@ -106,42 +113,52 @@ abstract class jFormsControl {
      *
      * @return int|null null if it is ok, or one of jForms::ERRDATA_* constants when there is an error
      */
-    function check(){
+    public function check()
+    {
         $value = $this->container->data[$this->ref];
-        if(trim($value) == '') {
-            if($this->required)
+        if (trim($value) == '') {
+            if ($this->required) {
                 return $this->container->errors[$this->ref] = jForms::ERRDATA_REQUIRED;
+            }
             if (!$this->datatype->allowWhitespace()) {
                 $this->container->data[$this->ref] = trim($value);
             }
-        }elseif(!$this->datatype->check($value)){
+        } elseif (!$this->datatype->check($value)) {
             return $this->container->errors[$this->ref] = jForms::ERRDATA_INVALID;
-        }elseif($this->datatype instanceof jIFilteredDatatype) {
+        } elseif ($this->datatype instanceof jIFilteredDatatype) {
             $this->container->data[$this->ref] = $this->datatype->getFilteredValue();
         }
         return null;
     }
 
-    function setData($value) {
+    public function setData($value)
+    {
+        if ($value === null) {
+            $value = '';
+        }
         $this->container->data[$this->ref] = $value;
     }
 
-    function setReadOnly($r = true){
+    public function setReadOnly($r = true)
+    {
         $this->container->setReadOnly($this->ref, $r);
     }
 
     /**
      * @param jRequest $request
      */
-    function setValueFromRequest($request) {
-        $this->setData($request->getParam($this->ref,''));
+    public function setValueFromRequest($request)
+    {
+        $this->setData($request->getParam($this->ref, ''));
     }
 
-    function setDataFromDao($value, $daoDatatype) {
+    public function setDataFromDao($value, $daoDatatype)
+    {
         $this->setData($value);
     }
 
-    function getDisplayValue($value){
+    public function getDisplayValue($value)
+    {
         if ($value == '' && $this->emptyValueLabel !== null) {
             return $this->emptyValueLabel;
         }
@@ -152,11 +169,13 @@ abstract class jFormsControl {
      * says if the content is html or not
      * @since 1.2
      */
-    public function isHtmlContent() {
+    public function isHtmlContent()
+    {
         return false;
     }
 
-    public function deactivate($deactivation=true) {
+    public function deactivate($deactivation=true)
+    {
         $this->container->deactivate($this->ref, $deactivation);
     }
 
@@ -164,7 +183,8 @@ abstract class jFormsControl {
     * check if the control is activated
     * @return boolean true if it is activated
     */
-    public function isActivated() {
+    public function isActivated()
+    {
         return $this->container->isActivated($this->ref);
     }
 
@@ -172,19 +192,71 @@ abstract class jFormsControl {
      * check if the control is readonly
      * @return boolean true if it is readonly
      */
-    public function isReadOnly() {
+    public function isReadOnly()
+    {
         return $this->container->isReadOnly($this->ref);
     }
 
-    public function setAttribute($name, $value) {
+    public function setAttribute($name, $value)
+    {
         $this->attributes[$name] = $value;
     }
 
-    public function getAttribute($name) {
+    public function getAttribute($name)
+    {
         if (isset($this->attributes[$name])) {
             return $this->attributes[$name];
         }
         return null;
+    }
+
+    public function isModified()
+    {
+        $orig = & $this->container->originalData;
+        $value = $this->container->data[$this->ref];
+
+        if (!array_key_exists($this->ref, $orig)) {
+            // if the key does not exist in original data, we cannot compare
+            return false;
+        }
+
+        return $this->_diffValues($orig[$this->ref], $value);
+    }
+
+
+    /**
+     * @param mixed $v1
+     * @param mixed $v2
+     *
+     * @return bool true if the values are not equals
+     */
+    protected function _diffValues(&$v1, &$v2) {
+        if (is_array($v1) && is_array($v2)) {
+            $comp = array_merge(array_diff($v1, $v2),array_diff($v2, $v1));
+            return !empty($comp);
+        }
+
+        if ($v1 === $v2) {
+            return false;
+        }
+
+        if (($v1 === '' && $v2 === null) || ($v1 === null && $v2 === '')) {
+            return false;
+        }
+
+        if (is_numeric($v1) != is_numeric($v2)) {
+            return true;
+        }
+
+        if (empty($v1) && empty($v2)) {
+            return false;
+        }
+
+        if (is_array($v1) || is_array($v2)) {
+            return true;
+        }
+
+        return ($v1 != $v2);
     }
 }
 
@@ -211,8 +283,10 @@ require(JELIX_LIB_PATH.'forms/controls/jFormsControlSecretConfirm.class.php');
 require(JELIX_LIB_PATH.'forms/controls/jFormsControlSubmit.class.php');
 require(JELIX_LIB_PATH.'forms/controls/jFormsControlSwitch.class.php');
 require(JELIX_LIB_PATH.'forms/controls/jFormsControlTextarea.class.php');
+require(JELIX_LIB_PATH.'forms/controls/jFormsControlTime.class.php');
 require(JELIX_LIB_PATH.'forms/controls/jFormsControlUpload.class.php');
 require(JELIX_LIB_PATH.'forms/controls/jFormsControlUpload2.class.php');
+require(JELIX_LIB_PATH.'forms/controls/jFormsControlImageUpload.class.php');
 require(JELIX_LIB_PATH.'forms/controls/jFormsControlDate.class.php');
 require(JELIX_LIB_PATH.'forms/controls/jFormsControlDatetime.class.php');
 require(JELIX_LIB_PATH.'forms/controls/jFormsControlWikiEditor.class.php');

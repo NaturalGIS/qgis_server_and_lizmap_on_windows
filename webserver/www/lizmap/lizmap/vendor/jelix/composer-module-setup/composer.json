@@ -1,0 +1,29 @@
+{
+    "name": "jelix/composer-module-setup",
+    "type": "composer-plugin",
+    "description": "Plugin for Composer to declare Jelix modules automatically into a Jelix application",
+    "keywords": ["composer", "composer-plugin", "jelix"],
+    "homepage": "http://jelix.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Laurent Jouanneau",
+            "email": "laurent@jelix.org"
+        }
+    ],
+    "require": {
+        "composer-plugin-api": "^2.0"
+    },
+    "require-dev": {
+        "composer/composer": "^2.0.3",
+        "phpunit/phpunit": "9.5.*",
+        "jelix/file-utilities": "1.8.*"
+    },
+    "autoload": {
+        "psr-4": { "Jelix\\ComposerPlugin\\": "lib/" }
+    },
+    "extra": {
+        "class": "Jelix\\ComposerPlugin\\ModuleSetup"
+    },
+    "minimum-stability": "stable"
+}

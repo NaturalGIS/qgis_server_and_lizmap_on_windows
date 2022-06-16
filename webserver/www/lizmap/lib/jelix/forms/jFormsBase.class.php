@@ -6,7 +6,7 @@
 * @contributor Dominique Papin
 * @contributor Bastien Jaillot, Steven Jehannet
 * @contributor Christophe Thiriot, Julien Issler, Olivier Demah
-* @copyright   2006-2010 Laurent Jouanneau, 2007 Dominique Papin, 2008 Bastien Jaillot
+* @copyright   2006-2020 Laurent Jouanneau, 2007 Dominique Papin, 2008 Bastien Jaillot
 * @copyright   2008-2009 Julien Issler, 2009 Olivier Demah, 2010 Steven Jehannet
 * @link        http://www.jelix.org
 * @licence     http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public Licence, see LICENCE file
@@ -15,8 +15,8 @@
 /**
  *
  */
-require(JELIX_LIB_PATH.'forms/jFormsControl.class.php');
-require(JELIX_LIB_PATH.'forms/jFormsDatasource.class.php');
+require_once(JELIX_LIB_PATH.'forms/jFormsControl.class.php');
+require_once(JELIX_LIB_PATH.'forms/jFormsDatasource.class.php');
 require_once(JELIX_LIB_UTILS_PATH.'jDatatype.class.php');
 
 /**
@@ -193,9 +193,14 @@ abstract class jFormsBase {
                 if (count($this->container->data[$name]) ==1) {
                     $object->$name = $this->container->data[$name][0];
                 }
-                else
-                    // do nothing for arrays ?
-                    continue;
+                else {
+                    if (jApp::config()->forms['flagPrepareObjectFromControlsContactArrayValues']) {
+                        // ugly fix for a specific project
+                        $object->$name = implode('_', $this->container->data[$name]);
+                    } else {
+                        continue;
+                    }
+                }
             }
             else{
                 $object->$name = $this->container->data[$name];
@@ -467,7 +472,7 @@ abstract class jFormsBase {
     /**
      * return list of errors found during the check
      * @return array
-     * @see jFormsBase::check
+     * @see jFormsBase::check()
      */
     public function getErrors(){  return $this->container->errors;  }
 
@@ -483,12 +488,16 @@ abstract class jFormsBase {
     /**
      *
      * @param string $name the name of the control/data
-     * @param string $value the data value
+     * @param string|string[] $value the data value
      * @throws jExceptionForms
      */
     public function setData($name, $value) {
-        if (!isset($this->controls[$name]))
-            throw new jExceptionForms('jelix~formserr.unknown.control2', array($name, $this->sel));
+        if (!isset($this->controls[$name])) {
+            throw new jExceptionForms(
+                'jelix~formserr.unknown.control2',
+                array($name, $this->sel)
+            );
+        }
 
         $this->controls[$name]->setData($value);
     }
@@ -496,12 +505,23 @@ abstract class jFormsBase {
     /**
      *
      * @param string $name the name of the  control/data
-     * @return string the data value
+     * @return string|array the data value
      */
     public function getData($name) {
-        if(isset($this->container->data[$name]))
+        if(isset($this->container->data[$name])) {
             return $this->container->data[$name];
-        else return null;
+        }
+        return '';
+    }
+
+    /**
+     * @param string $name the name of the  control/data
+     *
+     * @return boolean true if there is a data with this name
+     */
+    public function hasData($name)
+    {
+        return array_key_exists($name, $this->container->data);
     }
 
     /**
@@ -573,7 +593,7 @@ abstract class jFormsBase {
     /**
      * @param string $name the control name you want to get
      * @return jFormsControl
-     * @since jelix 1.0
+     * @since 1.0
      */
     public function getControl($name) {
         if(isset($this->controls[$name]))
@@ -625,50 +645,29 @@ abstract class jFormsBase {
      * @return array key=control id,  value=old value
      * @since 1.1
      */
-    public function getModifiedControls(){
+    public function getModifiedControls()
+    {
         if (count($this->container->originalData)) {
-
-            // we musn't use array_diff_assoc because it convert array values
-            // to "Array" before comparison, so these values are always equal for it.
-            // We shouldn't use array_udiff_assoc  because it crashes PHP, at least on
-            // some PHP version.
-            // so we have to compare by ourself.
-
             $result = array();
             $orig = & $this->container->originalData;
-            foreach($this->container->data as $k=>$v1) {
 
-                if (!array_key_exists($k, $orig)) {
+            foreach($this->controls as $ref => $ctrl) {
+
+                if (!array_key_exists($ref, $orig)) {
                     continue;
                 }
 
-                if($this->_diffValues($orig[$k], $v1))  {
-                    $result[$k] = $orig[$k];
-                    continue;
+                if ($ctrl->isModified()) {
+                    $result[$ref] = $orig[$ref];
                 }
             }
+
             return $result;
         }
         else
             return $this->container->data;
     }
 
-    protected function _diffValues(&$v1, &$v2) {
-        if (is_array($v1) && is_array($v2)) {
-            $comp = array_merge(array_diff($v1, $v2),array_diff($v2, $v1));
-            return !empty($comp);
-        }
-        elseif(empty($v1) && empty($v2)){
-            return false;
-        }
-        elseif (is_array($v1) || is_array($v2)) {
-            return true;
-        }
-        else {
-            return !($v1==$v2);
-            //return !($v2== (string)$v1);
-        }
-    }
 
     /**
      * @return jFormsControlReset the reset object
@@ -688,7 +687,7 @@ abstract class jFormsBase {
     /**
      * @param string $buildertype the type name of a form builder.
      *          if the name begins by 'legacy.', it load a legacy builder plugin (jelix <=1.4)
-     * @return \jelix\forms\Builder\BuilderBase|jFormsBuilderBase
+     * @return \Jelix\Forms\Builder\BuilderBase|jFormsBuilderBase
      * @throws jExceptionForms
      */
     public function getBuilder($buildertype){
@@ -848,8 +847,8 @@ abstract class jFormsBase {
         }
         $control->setForm($this);
 
-        if(!isset($this->container->data[$control->ref])){
-            if ( $control->datatype instanceof jDatatypeDateTime && $control->defaultValue == 'now') {
+        if (!array_key_exists($control->ref, $this->container->data)) {
+            if ($control->datatype instanceof jDatatypeDateTime && $control->defaultValue == 'now') {
                 $dt = new jDateTime();
                 $dt->now();
                 $this->container->data[$control->ref] = $dt->toString($control->datatype->getFormat());

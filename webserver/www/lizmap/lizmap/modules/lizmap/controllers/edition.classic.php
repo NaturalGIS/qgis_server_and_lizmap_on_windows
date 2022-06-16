@@ -35,7 +35,7 @@ class editionCtrl extends jController
     /** @var SimpleXMLElement Layer data as simpleXml object */
     private $layerXml = '';
 
-    /** @var qgisMapLayer|qgisVectorLayer Layer data */
+    /** @var qgisVectorLayer Layer data */
     private $layer = '';
 
     /** @var string[] Primary key for getWfsFeature */
@@ -54,18 +54,37 @@ class editionCtrl extends jController
     private $loginFilteredOverride = false;
 
     /**
+     * @var string error message during responses processing
+     */
+    private $errorMessage = '';
+
+    /**
+     * @var string error type during responses processing
+     */
+    private $errorType = 'default';
+
+    protected function setErrorMessage($message, $type = 'default')
+    {
+        $this->errorMessage = $message;
+        $this->errorType = $type;
+    }
+
+    /**
      * Send an answer.
      *
      * @return jResponseHtmlFragment HTML fragment
      */
-    public function serviceAnswer()
+    protected function serviceAnswer()
     {
+        if ($this->errorMessage !== '') {
+            jMessage::add($this->errorMessage, $this->errorType);
+        }
         $title = jLocale::get('view~edition.modal.title.default');
 
         // Get title layer
         if ($this->layer) {
             $_title = $this->layer->getTitle();
-            if ($_title and $_title != '') {
+            if ($_title && $_title != '') {
                 $title = $_title;
             }
         }
@@ -104,7 +123,7 @@ class editionCtrl extends jController
         }
 
         if (!$project) {
-            jMessage::add(jLocale::get('view~edition.message.error.parameter.project'), 'ProjectNotDefined');
+            $this->setErrorMessage(jLocale::get('view~edition.message.error.parameter.project'), 'ProjectNotDefined');
 
             return false;
         }
@@ -112,7 +131,7 @@ class editionCtrl extends jController
         // Get repository data
         $lrep = lizmap::getRepository($repository);
         if (!$lrep) {
-            jMessage::add('The repository '.strtoupper($repository).' does not exist !', 'RepositoryNotDefined');
+            $this->setErrorMessage('The repository '.strtoupper($repository).' does not exist !', 'RepositoryNotDefined');
 
             return false;
         }
@@ -122,33 +141,33 @@ class editionCtrl extends jController
         try {
             $lproj = lizmap::getProject($repository.'~'.$project);
             if (!$lproj) {
-                jMessage::add('The lizmapProject '.strtoupper($project).' does not exist !', 'ProjectNotDefined');
+                $this->setErrorMessage('The lizmapProject '.strtoupper($project).' does not exist !', 'ProjectNotDefined');
 
                 return false;
             }
         } catch (UnknownLizmapProjectException $e) {
-            jMessage::add('The lizmapProject '.strtoupper($project).' does not exist !', 'ProjectNotDefined');
+            $this->setErrorMessage('The lizmapProject '.strtoupper($project).' does not exist !', 'ProjectNotDefined');
 
             return false;
         }
 
         // Redirect if no rights to access this repository
         if (!$lproj->checkAcl()) {
-            jMessage::add(jLocale::get('view~default.repository.access.denied'), 'AuthorizationRequired');
+            $this->setErrorMessage(jLocale::get('view~default.repository.access.denied'), 'AuthorizationRequired');
 
             return false;
         }
 
         // Redirect if no rights to use the edition tool
         if (!jAcl2::check('lizmap.tools.edition.use', $lrep->getKey())) {
-            jMessage::add(jLocale::get('view~edition.access.denied'), 'AuthorizationRequired');
+            $this->setErrorMessage(jLocale::get('view~edition.access.denied'), 'AuthorizationRequired');
 
             return false;
         }
 
         $layer = $lproj->getLayer($layerId);
         if (!$layer) {
-            jMessage::add(jLocale::get('view~edition.message.error.layer.editable'), 'LayerNotEditable');
+            $this->setErrorMessage(jLocale::get('view~edition.message.error.layer.editable'), 'LayerNotEditable');
 
             return false;
         }
@@ -157,7 +176,7 @@ class editionCtrl extends jController
 
         // Verifying if the layer is editable
         if (!$layer->isEditable()) {
-            jMessage::add(jLocale::get('view~edition.message.error.layer.editable'), 'LayerNotEditable');
+            $this->setErrorMessage(jLocale::get('view~edition.message.error.layer.editable'), 'LayerNotEditable');
 
             return false;
         }
@@ -172,7 +191,7 @@ class editionCtrl extends jController
             if (is_array($editionGroups) and count($editionGroups) > 0) {
                 $userGroups = jAcl2DbUserGroup::getGroups();
                 if (!array_intersect($editionGroups, $userGroups)) {
-                    jMessage::add(jLocale::get('view~edition.access.denied'), 'AuthorizationRequired');
+                    $this->setErrorMessage(jLocale::get('view~edition.access.denied'), 'AuthorizationRequired');
 
                     return false;
                 }
@@ -199,7 +218,7 @@ class editionCtrl extends jController
         $this->layerName = $layerName;
 
         // Optionnaly filter data by login
-        $this->loginFilteredOverride = jacl2::check('lizmap.tools.loginFilteredLayers.override', $lrep->getKey());
+        $this->loginFilteredOverride = jAcl2::check('lizmap.tools.loginFilteredLayers.override', $lrep->getKey());
 
         $dbFieldsInfo = $this->layer->getDbFieldsInfo();
         $this->primaryKeys = $dbFieldsInfo->primaryKeys;
@@ -217,7 +236,7 @@ class editionCtrl extends jController
         // Get features primary key field values corresponding to featureId(s)
         if (!empty($featureId) || $featureId === 0 || $featureId === '0') {
             $typename = $this->layer->getShortName();
-            if (!$typename or $typename == '') {
+            if (!$typename || $typename == '') {
                 $typename = str_replace(' ', '_', $this->layer->getName());
             }
             if (is_array($featureId)) {
@@ -227,6 +246,15 @@ class editionCtrl extends jController
             } else {
                 $featureId = $typename.'.'.$featureId;
             }
+
+            $propertyName = array_merge(array(), $this->primaryKeys);
+            if (!$this->loginFilteredOverride) {
+                $loginFilteredConfig = $this->project->getLoginFilteredConfig($this->layer->getName());
+                if ($loginFilteredConfig && property_exists($loginFilteredConfig, 'filterAttribute')) {
+                    $propertyName[] = $loginFilteredConfig->filterAttribute;
+                }
+            }
+
             $wfsparams = array(
                 'SERVICE' => 'WFS',
                 'VERSION' => '1.0.0',
@@ -234,15 +262,16 @@ class editionCtrl extends jController
                 'TYPENAME' => $typename,
                 'OUTPUTFORMAT' => 'GeoJSON',
                 'GEOMETRYNAME' => 'none',
-                'PROPERTYNAME' => implode(',', $this->primaryKeys),
+                'PROPERTYNAME' => implode(',', $propertyName),
                 'FEATUREID' => $featureId,
             );
 
             $wfsrequest = new lizmapWFSRequest($this->project, $wfsparams);
-            $wfsresponse = $wfsrequest->getfeature();
+            // FIXME no support of the case where $wfsresponse is the content of serviceException?
+            $wfsresponse = $wfsrequest->process();
             if (property_exists($wfsresponse, 'data')) {
                 $data = $wfsresponse->data;
-                if (property_exists($wfsresponse, 'file') and $wfsresponse->file and is_file($data)) {
+                if (property_exists($wfsresponse, 'file') && $wfsresponse->file && is_file($data)) {
                     $data = jFile::read($data);
                 }
                 $this->featureData = json_decode($data);
@@ -280,9 +309,9 @@ class editionCtrl extends jController
             return $this->serviceAnswer();
         }
 
-        jForms::destroy('view~edition');
+        jForms::destroy('view~edition', $this->featureId);
         // Create form instance
-        $form = jForms::create('view~edition');
+        $form = jForms::create('view~edition', $this->featureId);
         $form->setData('liz_future_action', $this->param('liz_future_action', 'close'));
 
         // event to add custom field in the jForms form
@@ -332,6 +361,26 @@ class editionCtrl extends jController
             jMessage::add(jLocale::get('view~edition.message.error.feature.get'), 'featureNotFoundViaWfs');
 
             return $this->serviceAnswer();
+        }
+
+        if (!$this->loginFilteredOverride) {
+            // Get filter by login
+            $expByUser = qgisExpressionUtils::getExpressionByUser($this->layer, true);
+            if ($expByUser !== '') {
+                $results = qgisExpressionUtils::evaluateExpressions(
+                    $this->layer,
+                    array('filterByLogin' => $expByUser),
+                    $this->featureData->features[0]
+                );
+
+                if ($results
+                    && property_exists($results, 'filterByLogin')
+                    && $results->filterByLogin !== 1) {
+                    $this->setErrorMessage(jLocale::get('view~edition.message.error.feature.editable'), 'FeatureNotEditable');
+
+                    return $this->serviceAnswer();
+                }
+            }
         }
 
         // Create form instance
@@ -384,10 +433,32 @@ class editionCtrl extends jController
 
         // Check if data has been fetched via WFS for the feature
         $this->getWfsFeature();
-        if ($this->featureId and !$this->featureData) {
+        if (($this->featureId || $this->featureId === 0 || $this->featureId === '0') && !$this->featureData) {
             jMessage::add(jLocale::get('view~edition.message.error.feature.get'), 'featureNotFoundViaWfs');
 
             return $this->serviceAnswer();
+        }
+
+        if (!$this->loginFilteredOverride
+            && ($this->featureId || $this->featureId === 0 || $this->featureId === '0')
+            && $this->featureData) {
+            // Get filter by login
+            $expByUser = qgisExpressionUtils::getExpressionByUser($this->layer, true);
+            if ($expByUser !== '') {
+                $results = qgisExpressionUtils::evaluateExpressions(
+                    $this->layer,
+                    array('filterByLogin' => $expByUser),
+                    $this->featureData->features[0]
+                );
+
+                if ($results
+                    && property_exists($results, 'filterByLogin')
+                    && $results->filterByLogin !== 1) {
+                    $this->setErrorMessage(jLocale::get('view~edition.message.error.feature.editable'), 'FeatureNotEditable');
+
+                    return $this->serviceAnswer();
+                }
+            }
         }
 
         // Get the form instance
@@ -468,8 +539,7 @@ class editionCtrl extends jController
                     jFile::createDir($repPath.$DefaultRoot); // Need to create it to then make the realpath checks
                     if (
                         (substr(realpath($repPath.$DefaultRoot), 0, strlen(realpath($repPath))) === realpath($repPath))
-                        or
-                        (substr(realpath($repPath.$DefaultRoot), 0, strlen(realpath($repPath.'/../'))) === realpath($repPath.'/../'))
+                        or (substr(realpath($repPath.$DefaultRoot), 0, strlen(realpath($repPath.'/../'))) === realpath($repPath.'/../'))
                     ) {
                         $targetPath = $DefaultRoot;
                         $targetFullPath = realpath($repPath.$DefaultRoot);
@@ -517,17 +587,23 @@ class editionCtrl extends jController
 
         // Get title layer
         $title = $this->layer->getTitle();
-        if (!$title or $title == '') {
+        if (!$title || $title == '') {
             $title = 'No title';
         }
 
+        // Prepare template
+        $attributeEditorForm = $qgisForm->getAttributesEditorForm();
+        $form = $qgisForm->getForm();
+
         // Use template to create html form content
         $tpl = new jTpl();
-        $tpl->assign('attributeEditorForm', $qgisForm->getAttributesEditorForm());
+        $tpl->assign('attributeEditorForm', $attributeEditorForm);
         $tpl->assign('fieldNames', $qgisForm->getFieldNames());
         $tpl->assign('title', $title);
-        $tpl->assign('form', $qgisForm->getForm());
+        $tpl->assign('form', $form);
         $tpl->assign('formPlugins', $qgisForm->getFormPlugins());
+        $tpl->assign('ajaxNewFeatureUrl', jUrl::get('lizmap~edition:saveNewFeature'));
+        $tpl->assign('groupVisibilities', qgisExpressionUtils::evaluateGroupVisibilities($attributeEditorForm, $form));
 
         // event to add custom fields into the jForms form, or to modify those that
         // have been added by QgisForm, and to inject custom data into the template
@@ -604,16 +680,33 @@ class editionCtrl extends jController
         $eventParams['qgisForm'] = $qgisForm;
         jEvent::notify('LizmapEditionSaveGetQgisForm', $eventParams);
 
+        // SELECT data from the database and set the form data accordingly
+        // or reset form controls data to null to check modified fields
+        // and save default data
+        $defaultFormData = array();
+        if ($this->featureId) {
+            $form = $qgisForm->setFormDataFromFields($this->featureData->features[0]);
+        } else {
+            $defaultFormData = $form->getAllData();
+            $form = $qgisForm->resetFormData();
+        }
+        // Track modified records
+        $form->initModifiedControlsList();
+        // Apply default data to get save it
+        foreach ($defaultFormData as $ref => $val) {
+            if ($val !== null) {
+                $form->setdata($ref, $val);
+            }
+        }
         // Get data from the request and set the form controls data accordingly
         $form->initFromRequest();
 
         // Check the form data and redirect if needed
-        $check = $form->check();
-        $modifyGeometry = $this->layer->getEditionCapabilities()->capabilities->modifyGeometry;
-        if (strtolower($modifyGeometry) == 'true' && $this->geometryColumn != '' && $form->getData($this->geometryColumn) == '') {
-            $check = false;
-            $form->setErrorOn($this->geometryColumn, jLocale::get('view~edition.message.error.no.geometry'));
+        $feature = null;
+        if ($this->featureId || $this->featureId === 0 || $this->featureId === '0') {
+            $feature = $this->featureData->features[0];
         }
+        $check = $qgisForm->check($feature);
 
         // event to add additionnal checks
         $event = jEvent::notify('LizmapEditionSaveCheckForm', $eventParams);
@@ -633,15 +726,18 @@ class editionCtrl extends jController
         // And get returned primary key values
         $pkvals = null;
         if ($check) {
-            $feature = null;
-            if ($this->featureId) {
-                $feature = $this->featureData->features[0];
+            // Check if featureId is null to get all controls or only modified controls
+            if ($this->featureId == null) {
+                // Save to database with all controls
+                $pkvals = $qgisForm->saveToDb($feature, $form->getControls());
+            } else {
+                // Save to database with modified controls
+                $pkvals = $qgisForm->saveToDb($feature, $form->getModifiedControls());
             }
-            $pkvals = $qgisForm->saveToDb($feature);
         }
 
         // Some errors where encoutered
-        if (!$check or !$pkvals) {
+        if (!$check || !$pkvals) {
             // Redirect to the display action
             $token = uniqid('lizform_');
             $rep->params['error'] = $token;
@@ -673,8 +769,8 @@ class editionCtrl extends jController
         $eCapabilities = $this->layer->getEditionCapabilities();
 
         // CREATE NEW FEATURE
-        if ($next_action == 'create' &&
-            $eCapabilities->capabilities->createFeature == 'True'
+        if ($next_action == 'create'
+            && $eCapabilities->capabilities->createFeature == 'True'
         ) {
             jMessage::add(jLocale::get('view~edition.form.data.saved'), 'success');
             $rep->params = array(
@@ -695,11 +791,11 @@ class editionCtrl extends jController
         // If there is a single integer primary key
         // This is the featureid, we can redirect to the edition form
         // for the newly created or the updated feature
-        if ($next_action == 'edit' &&
+        if ($next_action == 'edit'
             // and if capabilities is ok for attribute modification
-            $eCapabilities->capabilities->modifyAttribute == 'True' &&
+            && $eCapabilities->capabilities->modifyAttribute == 'True'
             // if we have retrieved the pkeys only one integer pkey
-            is_array($pkvals) and count($pkvals) == 1
+            && is_array($pkvals) and count($pkvals) == 1
         ) {
             //Get the fields info
             $dbFieldsInfo = $this->layer->getDbFieldsInfo();
@@ -796,7 +892,7 @@ class editionCtrl extends jController
             return $this->serviceAnswer();
         }
 
-        if (!$this->featureId) {
+        if (!$this->featureId && $this->featureId !== 0 && $this->featureId !== '0') {
             jMessage::add(jLocale::get('view~edition.message.error.parameter.featureId'), 'error');
 
             return $this->serviceAnswer();
@@ -846,7 +942,7 @@ class editionCtrl extends jController
             'layer' => $this->layer,
             'featureId' => $this->featureId,
             'featureData' => $this->featureData,
-            'filesToDelete' => $deleteFiles
+            'filesToDelete' => $deleteFiles,
         );
         $event = jEvent::notify('LizmapEditionPreDelete', $eventParams);
         if ($event->allResponsesByKeyAreTrue('filesDeleted')) {
@@ -880,7 +976,195 @@ class editionCtrl extends jController
     }
 
     /**
-     * Link features between 2 tables via pivot table.
+     * Save a new feature, without redirecting to an HTML response.
+     *
+     * @urlparam string $repository Lizmap Repository
+     * @urlparam string $project Name of the project
+     * @urlparam string $layerId Qgis id of the layer
+     * @urlparam integer $featureId Id of the feature.
+     *
+     * @return jResponseJson
+     */
+    public function saveNewFeature()
+    {
+        /** @var jResponseJson $rep */
+        $rep = $this->getResponse('json');
+        $rep->data = array('success' => true);
+
+        // Get repository, project data and do some right checking
+        if (!$this->getEditionParameters(true)) {
+            $rep->data['success'] = false;
+            $rep->data['message'] = $this->errorMessage;
+
+            return $rep;
+        }
+
+        // Get the form instance
+        $form = jForms::create('view~edition', '____new__feature___');
+        if (!$form) {
+            $rep->data['success'] = false;
+            $rep->data['message'] = jLocale::get('view~edition.message.error.form.get');
+
+            return $rep;
+        }
+
+        // event to add custom field into the jForms form before setting data in it
+        $eventParams = array(
+            'form' => $form,
+            'project' => $this->project,
+            'repository' => $this->repository,
+            'layer' => $this->layer,
+            'featureId' => $this->featureId,
+            'featureData' => $this->featureData,
+            'status' => $this->param('status', 0),
+        );
+        jEvent::notify('LizmapEditionSaveGetForm', $eventParams);
+
+        // Dynamically add form controls based on QGIS layer information
+        // And save data into the edition table (insert or update line)
+        $qgisForm = null;
+
+        try {
+            $qgisForm = new qgisForm($this->layer, $form, $this->featureId, $this->loginFilteredOverride);
+        } catch (Exception $e) {
+            $rep->data['success'] = false;
+            $rep->data['message'] = $e->getMessage();
+
+            return $rep;
+        }
+
+        // event to add or modify some control after QgisForm has added its own controls
+        $eventParams['qgisForm'] = $qgisForm;
+        jEvent::notify('LizmapEditionSaveGetQgisForm', $eventParams);
+
+        // Get data from the request and set the form controls data accordingly
+        $form->initFromRequest();
+
+        // Check the form data and redirect if needed
+        $check = $form->check();
+
+        // event to add additionnal checks
+        $event = jEvent::notify('LizmapEditionSaveCheckForm', $eventParams);
+        if ($event->allResponsesByKeyAreTrue('check') === false || !$check) {
+            $rep->data['success'] = false;
+            $rep->data['message'] = 'There are some errors in the form';
+
+            return $rep;
+        }
+
+        // Check geometry
+        $modifyGeometry = $this->layer->getEditionCapabilities()->capabilities->modifyGeometry;
+        if (strtolower($modifyGeometry) == 'true' && $this->geometryColumn != '' && $form->getData($this->geometryColumn) == '') {
+            $rep->data['success'] = false;
+            $rep->data['message'] = jLocale::get('view~edition.message.error.no.geometry');
+
+            return $rep;
+        }
+
+        // Save data into database
+        // And get returned primary key values
+        $feature = null;
+        if ($this->featureId || $this->featureId === 0 || $this->featureId === '0') {
+            $feature = $this->featureData->features[0];
+        }
+        $pkvals = $qgisForm->saveToDb($feature);
+
+        jForms::destroy('view~edition', '____new__feature___');
+
+        // Some errors where encoutered
+        if (!$check || !$pkvals) {
+            $rep->data['success'] = false;
+            $rep->data['message'] = 'Error during the save of the feature';
+
+            return $rep;
+        }
+
+        return $rep;
+    }
+
+    /**
+     * Editable features.
+     *
+     * @urlparam string $repository Lizmap Repository
+     * @urlparam string $project Name of the project
+     * @urlparam string $layerId Qgis id of the layer
+     *
+     * @return jResponseJson
+     */
+    public function editableFeatures()
+    {
+        /** @var jResponseJson $rep */
+        $rep = $this->getResponse('json');
+        $rep->data = array('success' => false);
+
+        $project = $this->param('project');
+        $repository = $this->param('repository');
+        $layerId = $this->param('layerId');
+
+        if (!$project) {
+            $rep->data['message'] = jLocale::get('view~edition.message.error.parameter.project');
+
+            return $rep;
+        }
+
+        // Get repository data
+        $lrep = lizmap::getRepository($repository);
+        if (!$lrep) {
+            $rep->data['message'] = 'The repository '.strtoupper($repository).' does not exist !';
+
+            return $rep;
+        }
+
+        // Get the project data
+        $lproj = null;
+
+        try {
+            $lproj = lizmap::getProject($repository.'~'.$project);
+            if (!$lproj) {
+                $rep->data['message'] = 'The lizmapProject '.strtoupper($project).' does not exist !';
+
+                return $rep;
+            }
+        } catch (UnknownLizmapProjectException $e) {
+            $rep->data['message'] = 'The lizmapProject '.strtoupper($project).' does not exist !';
+
+            return $rep;
+        }
+
+        // Redirect if no rights to access this repository
+        if (!$lproj->checkAcl()) {
+            $rep->data['message'] = jLocale::get('view~default.repository.access.denied');
+
+            return $rep;
+        }
+
+        // Redirect if no rights to use the edition tool
+        if (!jAcl2::check('lizmap.tools.edition.use', $lrep->getKey())) {
+            $rep->data['message'] = jLocale::get('view~edition.access.denied');
+
+            return $rep;
+        }
+
+        $layer = $lproj->getLayer($layerId);
+        if (!$layer) {
+            $rep->data['message'] = jLocale::get('view~edition.message.error.layer.editable');
+
+            return $rep;
+        }
+
+        $rep->data['success'] = true;
+        $rep->data['message'] = 'Success';
+        $rep->data = array_merge($rep->data, $layer->editableFeatures());
+
+        return $rep;
+    }
+
+    /**
+     * Link features between 2 tables :
+     * - Either [1->n] relation, ie a parent layer and a child layer. In this case, passed $features2 layer id = $pivot.
+     *   In this case, we set the parent id in the child table foreign key column
+     * - Or [n<->m] relation ie 2 tables with a pivot table between them
+     *   In this case we add a new line in the pivot table referencing both parent layers.
      *
      * @urlparam string $repository Lizmap Repository
      * @urlparam string $project Name of the project
@@ -893,37 +1177,6 @@ class editionCtrl extends jController
      */
     public function linkFeatures()
     {
-        $features1 = $this->param('features1');
-        $features2 = $this->param('features2');
-        $pivotId = $this->param('pivot');
-        if (!$features1 or !$features2 or !$pivotId) {
-            jMessage::add(jLocale::get('view~edition.link.error.missing.parameter'), 'error');
-
-            return $this->serviceAnswer();
-        }
-
-        // Cut layers id and features ids
-        $exp1 = explode(':', $features1);
-        $exp2 = explode(':', $features2);
-        if (count($exp1) != 3 or count($exp2) != 3) {
-            jMessage::add(jLocale::get('view~edition.link.error.missing.parameter'), 'error');
-
-            return $this->serviceAnswer();
-        }
-
-        $ids1 = explode(',', $exp1[2]);
-        $ids2 = explode(',', $exp2[2]);
-        if (count($ids1) > 1 and count($ids2) > 1) {
-            jMessage::add(jLocale::get('view~edition.link.error.multiple.ids'), 'error');
-
-            return $this->serviceAnswer();
-        }
-        if (count($ids1) == 0 or count($ids2) == 0 or empty($exp1[2]) or empty($exp2[2])) {
-            jMessage::add(jLocale::get('view~edition.link.error.missing.id'), 'error');
-
-            return $this->serviceAnswer();
-        }
-
         $project = $this->param('project');
         $repository = $this->param('repository');
 
@@ -934,6 +1187,7 @@ class editionCtrl extends jController
 
             return $this->serviceAnswer();
         }
+
         // Get the project data
         $lproj = null;
 
@@ -953,10 +1207,45 @@ class editionCtrl extends jController
         $this->project = $lproj;
         $this->repository = $lrep;
 
+        // Check the mandatory parameters features1 & features2
+        $features1 = $this->param('features1');
+        $features2 = $this->param('features2');
+        $pivotId = $this->param('pivot');
+        if (!$features1 || !$features2 || !$pivotId) {
+            jMessage::add(jLocale::get('view~edition.link.error.missing.parameter'), 'error');
+
+            return $this->serviceAnswer();
+        }
+
+        // Cut layers id and features ids
+        $exp1 = explode(':', $features1);
+        $exp2 = explode(':', $features2);
+        if (count($exp1) != 3 || count($exp2) != 3) {
+            jMessage::add(jLocale::get('view~edition.link.error.missing.parameter'), 'error');
+
+            return $this->serviceAnswer();
+        }
+
+        // Get the list of features ids given for each layer
+        $ids1 = explode(',', $exp1[2]);
+        $ids2 = explode(',', $exp2[2]);
+        if (count($ids1) > 1 and count($ids2) > 1) {
+            jMessage::add(jLocale::get('view~edition.link.error.multiple.ids'), 'error');
+
+            return $this->serviceAnswer();
+        }
+
+        // Not enough id given
+        if (count($ids1) == 0 || count($ids2) == 0 || empty($exp1[2]) || empty($exp2[2])) {
+            jMessage::add(jLocale::get('view~edition.link.error.missing.id'), 'error');
+
+            return $this->serviceAnswer();
+        }
+
         // Get layer names
         $layer1 = $lproj->getLayer($exp1[0]);
         $layer2 = $lproj->getLayer($exp2[0]);
-        if (!$layer1 or !$layer2) {
+        if (!$layer1 || !$layer2) {
             jMessage::add(jLocale::get('view~edition.link.error.wrong.layer'), 'error');
 
             return $this->serviceAnswer();
@@ -964,28 +1253,34 @@ class editionCtrl extends jController
         $layerName1 = $layer1->getName();
         $layerName2 = $layer2->getName();
 
-        // verifying layers in attribute config
+        // Verifying the layers are present in the attribute table configuration
         $pConfig = $lproj->getFullCfg();
         if (!$lproj->hasAttributeLayers()
-            or !property_exists($pConfig->attributeLayers, $layerName1)
-            or !property_exists($pConfig->attributeLayers, $layerName2)
+            || !property_exists($pConfig->attributeLayers, $layerName1)
+            || !property_exists($pConfig->attributeLayers, $layerName2)
         ) {
             jMessage::add(jLocale::get('view~edition.link.error.not.attribute.layer'), 'error');
 
             return $this->serviceAnswer();
         }
 
-        // Get pivot layer information
+        // Get the child layer (which can be a third pivot table) qgisVectorLayer instance
+        /** @var qgisVectorLayer $layer The QGIS vector layer instance */
         $layer = $lproj->getLayer($pivotId);
         $layerNamePivot = $layer->getName();
         $this->layerId = $pivotId;
         $this->layerName = $layerNamePivot;
         $this->layer = $layer;
 
-        // Get editLayer capabilities
+        // Get the editing capabilities for the child layer (which can be a third pivot table)
         $eLayer = $layer->getEditionCapabilities();
-        if ($layerNamePivot == $layerName2) {
+
+        // Check if we are in a 1-n relation or in a n-m relation with a pivot layer
+        // If the name of the 2nd layer is the same that the pivot layer, we are in a 1-n relation
+        $isPivot = false;
+        if ($layerNamePivot != $layerName2) {
             // pivot layer (n:m)
+            $isPivot = true;
             if ($eLayer->capabilities->createFeature != 'True') {
                 jMessage::add(jLocale::get('view~edition.link.error.no.create.feature', array($layerNamePivot)), 'LayerNotEditable');
 
@@ -993,6 +1288,7 @@ class editionCtrl extends jController
             }
         } else {
             // child layer (1:n)
+            $isPivot = false;
             if ($eLayer->capabilities->modifyAttribute != 'True') {
                 jMessage::add(jLocale::get('view~edition.link.error.no.modify.attributes', array($layerNamePivot)), 'LayerNotEditable');
 
@@ -1000,12 +1296,23 @@ class editionCtrl extends jController
             }
         }
 
+        // For the 1-n relation, do not allow multiple ids for the parent layer
+        // to avoid wrong data editing (a child feature cannot have 2 parent ids)
+        // It could be ok if we have a n-m relation with a pivot table, by definition
+        // but it could lead to many unwanted links if we do not prevent it also
+        // Forbid it for both cases.
+        if (count($ids1) > 1 && count($ids2) > 1) {
+            jMessage::add(jLocale::get('view~edition.link.error.multiple.ids'), 'error');
+
+            return $this->serviceAnswer();
+        }
+
         // Get fields data from the edition database
         $dbFieldsInfo = $this->layer->getDbFieldsInfo();
         $dataFields = $dbFieldsInfo->dataFields;
 
         // Check fields
-        if (!array_key_exists($exp1[1], $dataFields) or !array_key_exists($exp2[1], $dataFields)) {
+        if (!array_key_exists($exp1[1], $dataFields) || !array_key_exists($exp2[1], $dataFields)) {
             jMessage::add(jLocale::get('view~edition.link.error.no.given.fields'), 'error');
 
             return $this->serviceAnswer();
@@ -1013,17 +1320,22 @@ class editionCtrl extends jController
         $key1 = $exp1[1];
         $key2 = $exp2[1];
 
-        // Check if we need to insert a new row in a pivot table (n:m)
-        // or if we need to update a foreign key in a child table ( 1:n)
-        if ($layerNamePivot == $layerName2) {
-            if (count($ids2) > 1) {
+        // Check if we need to insert a new row in a pivot table (n-m relation)
+        // or if we need to update a foreign key in a child table (1-n relation)
+        if (!$isPivot) {
+            // Check if there is only one parent item selected
+            if (count($ids1) > 1) {
                 jMessage::add(jLocale::get('view~edition.link.error.multiple.ids'), 'error');
 
                 return $this->serviceAnswer();
             }
-            // 1:n relation
+            // Update the child features to add the parent id
             try {
-                $results = $layer->linkChildren($key2, $ids2[0], $key1, $ids1);
+                $foreign_key_column = $key2;
+                $parent_id_value = $ids1[0];
+                $child_pkey_column = $key1;
+                $child_ids = $ids2;
+                $layer->linkChildren($foreign_key_column, $parent_id_value, $child_pkey_column, $child_ids);
                 jMessage::add(jLocale::get('view~edition.link.success'), 'success');
             } catch (Exception $e) {
                 jLog::log('An error has been raised when create linked data:', 'error');
@@ -1031,9 +1343,10 @@ class editionCtrl extends jController
                 jMessage::add(jLocale::get('view~edition.link.error.sql'), 'error');
             }
         } else {
-            // pivot table ( n:m relation )
+            // 2 layers and 1 pivot table -> n:m relation
+            // Insert lines in the pivot table referencing the 2 parent layers id
             try {
-                $results = $layer->insertRelations($key2, $ids2, $key1, $ids1);
+                $layer->insertRelations($key2, $ids2, $key1, $ids1);
                 jMessage::add(jLocale::get('view~edition.link.success'), 'success');
             } catch (Exception $e) {
                 jLog::log('An error has been raised when create linked data:', 'error');
@@ -1066,7 +1379,7 @@ class editionCtrl extends jController
         $project = $this->param('project');
         $repository = $this->param('repository');
 
-        if (!$lid or !$fkey or !$pkey or !$pkeyval or !$project or !$repository) {
+        if (!$lid || !$fkey || !$pkey || !$pkeyval || !$project || !$repository) {
             jMessage::add(jLocale::get('view~edition.link.error.missing.parameter'), 'error');
 
             return $this->serviceAnswer();
@@ -1117,7 +1430,7 @@ class editionCtrl extends jController
         $dataFields = $dbFieldsInfo->dataFields;
 
         // Check fields
-        if (!array_key_exists($fkey, $dataFields) or !array_key_exists($pkey, $dataFields)) {
+        if (!array_key_exists($fkey, $dataFields) || !array_key_exists($pkey, $dataFields)) {
             jMessage::add(jLocale::get('view~edition.link.error.no.given.fields'), 'error');
 
             return $this->serviceAnswer();
@@ -1134,5 +1447,73 @@ class editionCtrl extends jController
         }
 
         return $this->serviceAnswer();
+    }
+
+    /**
+     * web service for XHR request when group visibilities
+     * depending of the value of form controls.
+     */
+    public function getGroupVisibilities()
+    {
+        if (!$this->request->isPostMethod()) {
+            $rep = $this->getResponse('text', true);
+            $rep->setHttpStatus('405', 'Method Not Allowed');
+
+            return $rep;
+        }
+
+        $rep = $this->getResponse('json', true);
+
+        try {
+            $form = jForms::get($this->param('__form'), $this->param('__formid'));
+            if (!$form) {
+                throw new Exception('dummy');
+            }
+        } catch (Exception $e) {
+            $rep = $this->getResponse('text', true);
+            $rep->setHttpStatus('422', 'Unprocessable entity');
+            $rep->content = 'invalid form selector';
+
+            return $rep;
+        }
+
+        // check CSRF
+        if ($form->securityLevel == jFormsBase::SECURITY_CSRF) {
+            if ($form->getContainer()->token !== $this->param('__JFORMS_TOKEN__')) {
+                $rep = $this->getResponse('text', true);
+                $rep->setHttpStatus('422', 'Unprocessable entity');
+                $rep->content = 'invalid token';
+                jLog::logEx(new jException('jelix~formserr.invalid.token'), 'error');
+
+                return $rep;
+            }
+        }
+
+        // Get Private data
+        $privateData = $form->getContainer()->privateData;
+
+        // Build QGIS Form
+        $repository = $privateData['liz_repository'];
+        $project = $privateData['liz_project'];
+        $layerId = $privateData['liz_layerId'];
+        $featureId = $privateData['liz_featureId'];
+
+        $lrep = lizmap::getRepository($repository);
+        $lproj = lizmap::getProject($repository.'~'.$project);
+        $layer = $lproj->getLayer($layerId);
+
+        $qgisForm = new qgisForm($layer, $form, $featureId, jAcl2::check('lizmap.tools.loginFilteredLayers.override', $lrep->getKey()));
+
+        // Update form
+        $dependencies = $privateData['qgis_groupDependencies'];
+        foreach ($dependencies as $ctname) {
+            $form->setData($ctname, $this->param($ctname));
+        }
+
+        // evaluate group visibilities
+        $attributeEditorForm = $qgisForm->getAttributesEditorForm();
+        $rep->data = qgisExpressionUtils::evaluateGroupVisibilities($attributeEditorForm, $form);
+
+        return $rep;
     }
 }

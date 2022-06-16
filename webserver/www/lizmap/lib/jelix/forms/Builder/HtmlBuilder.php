@@ -4,16 +4,16 @@
 * @subpackage  forms
 * @author      Laurent Jouanneau
 * @contributor Julien Issler, Dominique Papin, Claudio Bernardes
-* @copyright   2006-2018 Laurent Jouanneau
+* @copyright   2006-2021 Laurent Jouanneau
 * @copyright   2008-2016 Julien Issler, 2008 Dominique Papin, 2012 Claudio Bernardes
 * @link        http://www.jelix.org
 * @licence     http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public Licence, see LICENCE file
 */
 
-namespace jelix\forms\Builder;
+namespace Jelix\Forms\Builder;
 
-use \jelix\forms\HtmlWidget\ParentWidgetInterface;
-use \jelix\forms\HtmlWidget\WidgetBase;
+use \Jelix\Forms\HtmlWidget\ParentWidgetInterface;
+use \Jelix\Forms\HtmlWidget\WidgetBase;
 
 /**
  * Main HTML form builder
@@ -98,6 +98,8 @@ class HtmlBuilder extends BuilderBase {
      *      <li>"errDecorator"=>"name of your javascript object for error listener"</li>
      *      <li>"method" => "post" or "get". default is "post"</li>
      *      <li>"plugins" => list of class names for widget. keys are controls refs</li>
+     *      <li>"attributes" => list of html attributes to put on the form element</li>
+     *      <li>"widgetsAttributes" => list of attributes for each widget. keys are controls refs</li>
      *      </ul>
      */
     public function setOptions($options) {
@@ -129,11 +131,17 @@ class HtmlBuilder extends BuilderBase {
         foreach( $this->_form->getRootControls() as $ctrlref=>$ctrl){
             if($ctrl->type == 'submit' || $ctrl->type == 'reset' || $ctrl->type == 'hidden') continue;
             if(!$this->_form->isActivated($ctrlref)) continue;
-            if($ctrl->type == 'group') {
+            if ($ctrl->type == 'group') {
                 echo '<tr><td colspan="2">';
                 $this->outputControl($ctrl);
                 echo '</td></tr>';
-            }else{
+            } else if ($ctrl->type == 'checkbox') {
+                echo '<tr><th scope="row">';
+                echo '</th><td>';
+                $this->outputControl($ctrl);
+                $this->outputControlLabel($ctrl);
+                echo "</td></tr>\n";
+            } else {
                 echo '<tr><th scope="row">';
                 $this->outputControlLabel($ctrl);
                 echo '</th><td>';
@@ -209,12 +217,12 @@ class HtmlBuilder extends BuilderBase {
 
         $hiddens = '';
         foreach ($urlParams as $p_name => $p_value) {
-            $hiddens .= '<input type="hidden" name="'. $p_name .'" value="'. htmlspecialchars($p_value). '"'.$this->_endt. "\n";
+            $hiddens .= '<input type="hidden" name="'. $p_name .'" value="'. htmlspecialchars($p_value, ENT_COMPAT). '"'.$this->_endt. "\n";
         }
 
         foreach ($this->_form->getHiddens() as $ctrl) {
             if(!$this->_form->isActivated($ctrl->ref)) continue;
-            $hiddens .= '<input type="hidden" name="'. $ctrl->ref.'" id="'.$this->_name.'_'.$ctrl->ref.'" value="'. htmlspecialchars($this->_form->getData($ctrl->ref)). '"'.$this->_endt. "\n";
+            $hiddens .= '<input type="hidden" name="'. $ctrl->ref.'" id="'.$this->_name.'_'.$ctrl->ref.'" value="'. htmlspecialchars($this->_form->getData($ctrl->ref), ENT_COMPAT). '"'.$this->_endt. "\n";
         }
 
         if($this->_form->securityLevel){
@@ -300,15 +308,23 @@ class HtmlBuilder extends BuilderBase {
 
         // now we have its name, let's create the widget instance
         $className = $pluginName . 'FormWidget';
+        /** @var WidgetBase $plugin */
         $plugin = \jApp::loadPlugin($pluginName, 'formwidget', '.formwidget.php', $className, array($ctrl, $this, $parentWidget));
         if (!$plugin)
             throw new \Exception('Widget '.$pluginName.' not found');
         $this->widgets[$ctrl->ref] = $plugin;
 
+        $defaultAttributes = array();
         if (isset($this->htmlWidgetsAttributes[$ctrl->getWidgetType()])) {
-            $plugin->setDefaultAttributes($this->htmlWidgetsAttributes[$ctrl->getWidgetType()]);
+            $defaultAttributes = $this->htmlWidgetsAttributes[$ctrl->getWidgetType()];
         }
 
+        if (isset($this->options['widgetsAttributes'][$ctrl->ref]) &&
+            is_array($this->options['widgetsAttributes'][$ctrl->ref])
+        ) {
+            $defaultAttributes = array_merge($defaultAttributes, $this->options['widgetsAttributes'][$ctrl->ref]);
+        }
+        $plugin->setDefaultAttributes($defaultAttributes);
         return $plugin;
     }
 
@@ -344,12 +360,12 @@ class HtmlBuilder extends BuilderBase {
         }
         $widget = $this->getWidget($ctrl, $this->rootWidget);
         // additionnal &nbsp, else background icon is not shown in webkit
-        echo '<span class="jforms-help" id="'.$widget->getId().'-help">&nbsp;<span>'.htmlspecialchars($ctrl->help).'</span></span>';
+        echo '<span class="jforms-help" id="'.$widget->getId().'-help">&nbsp;<span>'.htmlspecialchars($ctrl->help, ENT_COMPAT).'</span></span>';
     }
 
     protected function _outputAttr(&$attributes) {
         foreach($attributes as $name=>$val) {
-            echo ' '.$name.'="'.htmlspecialchars($val).'"';
+            echo ' '.$name.'="'.htmlspecialchars($val, ENT_COMPAT).'"';
         }
     }
 

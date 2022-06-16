@@ -19,6 +19,9 @@ class qgisAttributeEditorElement
     protected $_isGroupBox = false;
     protected $_isTabPanel = false;
 
+    protected $_isVisibilityExpressionEnabled = false;
+    protected $_visibilityExpression = '';
+
     protected $attributes = array();
 
     protected $childrenBeforeTab = array();
@@ -65,12 +68,17 @@ class qgisAttributeEditorElement
                 }
             }
 
+            if ($this->getAttribute('visibilityExpressionEnabled') === '1') {
+                $this->_isVisibilityExpressionEnabled = true;
+                $this->_visibilityExpression = $this->getAttribute('visibilityExpression');
+            }
+
             $childIdx = 0;
             foreach ($node->children() as $child) {
                 $name = $child->getName();
-                if ($name != 'attributeEditorContainer' &&
-                    $name != 'attributeEditorForm' &&
-                    $name != 'attributeEditorField'
+                if ($name != 'attributeEditorContainer'
+                    && $name != 'attributeEditorForm'
+                    && $name != 'attributeEditorField'
                 ) {
                     ++$childIdx;
 
@@ -146,6 +154,21 @@ class qgisAttributeEditorElement
         return $this->_isTabPanel;
     }
 
+    public function isVisibilityExpressionEnabled()
+    {
+        return $this->_isVisibilityExpressionEnabled
+                && $this->_visibilityExpression !== '';
+    }
+
+    public function visibilityExpression()
+    {
+        if ($this->isVisibilityExpressionEnabled()) {
+            return $this->_visibilityExpression;
+        }
+
+        return null;
+    }
+
     /**
      * @return qgisAttributeEditorElement[]
      */
@@ -180,5 +203,76 @@ class qgisAttributeEditorElement
         return (count($this->tabChildren) +
             count($this->childrenBeforeTab) +
             count($this->childrenAfterTab)) > 0;
+    }
+
+    public function getFields()
+    {
+        $fields = array();
+        if (!$this->hasChildren()) {
+            return $fields;
+        }
+
+        foreach ($this->getChildrenBeforeTab() as $child) {
+            if ($child->isGroupBox()) {
+                $fields = array_merge($fields, $child->getFields());
+            } else {
+                $fields[] = $child->getName();
+            }
+        }
+
+        foreach ($this->getTabChildren() as $child) {
+            $fields = array_merge($fields, $child->getFields());
+        }
+
+        foreach ($this->getChildrenAfterTab() as $child) {
+            if ($child->isGroupBox()) {
+                $fields = array_merge($fields, $child->getFields());
+            } else {
+                $fields[] = $child->getName();
+            }
+        }
+
+        return $fields;
+    }
+
+    public function getGroupVisibilityExpressions()
+    {
+        $expressions = array();
+        if (!$this->hasChildren()) {
+            return $expressions;
+        }
+
+        foreach ($this->getChildrenBeforeTab() as $child) {
+            if ($child->isGroupBox()) {
+                if ($child->isVisibilityExpressionEnabled()) {
+                    $expressions[$child->getHtmlId()] = $child->visibilityExpression();
+                } else {
+                    $expressions[$child->getHtmlId()] = '';
+                }
+                $expressions = array_merge($expressions, $child->getGroupVisibilityExpressions());
+            }
+        }
+
+        foreach ($this->getTabChildren() as $child) {
+            if ($child->isVisibilityExpressionEnabled()) {
+                $expressions[$child->getHtmlId()] = $child->visibilityExpression();
+            } else {
+                $expressions[$child->getHtmlId()] = '';
+            }
+            $expressions = array_merge($expressions, $child->getGroupVisibilityExpressions());
+        }
+
+        foreach ($this->getChildrenAfterTab() as $child) {
+            if ($child->isGroupBox()) {
+                if ($child->isVisibilityExpressionEnabled()) {
+                    $expressions[$child->getHtmlId()] = $child->visibilityExpression();
+                } else {
+                    $expressions[$child->getHtmlId()] = '';
+                }
+                $expressions = array_merge($expressions, $child->getGroupVisibilityExpressions());
+            }
+        }
+
+        return $expressions;
     }
 }

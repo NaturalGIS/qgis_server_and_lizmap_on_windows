@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dao xmlns="http://jelix.org/ns/dao/1.0">
+    <datasources>
+        <primarytable name="jmessenger" realname="jmessenger" primarykey="id" />
+        <foreigntable name="users" realname="community_users" primarykey="id" onforeignkey="id_from" />
+        <foreigntable name="users2" realname="community_users" primarykey="id" onforeignkey="id_for" />
+    </datasources>
+    <record>
+
+    <property name="id" fieldname="id" datatype="autoincrement"/>
+    <property name="id_from" fieldname="id_from" datatype="int" required="true" default="0"/>
+    <property name="id_for" fieldname="id_for" datatype="int" required="true" default="0"/>
+    <property name="date" fieldname="date" datatype="date" required="true" insertpattern="NOW()"/>
+    <property name="title" fieldname="title" datatype="string" required="true" maxlength="255"/>
+    <property name="content" fieldname="content" datatype="text" required="true"/>
+    <property name="isSeen" fieldname="isSeen" datatype="int" required="true"/>
+    <property name="isArchived" fieldname="isArchived" datatype="int" required="true"/>
+    <property name="isReceived" fieldname="isReceived" datatype="int" required="true"/>
+    <property name="isSend" fieldname="isSend" datatype="int" required="true"/>
+
+
+    <!-- foreign data -->
+    <property name="loginFrom" fieldname="login" datatype="string" required="true" maxlength="100" table="users"/>
+    <property name="loginFor" fieldname="login" datatype="string" required="true" maxlength="100" table="users2"/>
+    <property name="nicknameFrom" fieldname="nickname" datatype="string" required="true" maxlength="100" table="users"/>
+    <property name="nicknameFor" fieldname="nickname" datatype="string" required="true" maxlength="100" table="users2"/>
+
+    </record>
+    <factory>
+        <method name="getRecus" type="select">
+            <parameter name="id" />
+            <conditions>
+                <eq property="id_for" expr="$id" />
+                <eq property="isArchived" expr="0" />
+                <eq property="isReceived" expr="1" />
+                
+            </conditions>
+            <order>
+                <orderitem property="date" way="desc" />
+             </order>
+        </method>
+
+        <method name="getSend" type="select">
+            <parameter name="id" />
+            <conditions>
+                <eq property="id_from" expr="$id" />
+                <eq property="isArchived" expr="0" />
+                <eq property="isSend" expr="1" />	             
+            </conditions>
+            <order>
+                <orderitem property="date" way="desc" />
+             </order>
+        </method>
+
+         <method name="getArchive" type="select">
+            <parameter name="id" />
+            <conditions>
+                <eq property="id_for" expr="$id" />
+                <eq property="isArchived" expr="1" />    
+                <!-- <eq property="recu" expr="1" />     -->
+            </conditions>
+            <order>
+                <orderitem property="date" way="desc" />
+             </order>
+        </method>
+
+         <method name="getNbNewMessage" type="count">
+            <parameter name="id" />
+            <conditions>
+                <eq property="id_for" expr="$id" />
+                <eq property="isArchived" expr="0" />
+                <eq property="isReceived" expr="1" />
+                <eq property="isSeen" expr="0" />
+            </conditions>
+        </method>
+    </factory>
+</dao>

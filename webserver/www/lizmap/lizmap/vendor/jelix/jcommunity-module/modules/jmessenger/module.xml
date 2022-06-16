@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<module xmlns="http://jelix.org/ns/module/1.0">
+      <info id="jmessenger@jelix.org" name="jmessenger">
+        <version date="2018-01-07">1.1.1</version>
+        <label>jMessenger</label>
+        <description>internal messaging system</description>
+        <licence URL="http://www.gnu.org/licenses/gpl.html">GPL</licence>
+        <copyright>Copyright 2008 Bastien Jaillot, 2012-2018 jelix.org</copyright>
+        <creator name="Bastien Jaillot" email="bastnicj@gmail.com"/>
+        <contributor name="Laurent Jouanneau" email="laurent@jelix.org"/>
+        <homepageURL>https://github.com/jelix/jcommunity-module/</homepageURL>
+    </info>
+    <dependencies>
+        <jelix minversion="1.6" maxversion="1.7.*"/>
+        <module name="jcommunity" />
+    </dependencies>
+</module>
