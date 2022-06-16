@@ -6,4 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Jelix\\ComposerPlugin\\' => array($vendorDir . '/jelix/composer-module-setup/lib'),
 );

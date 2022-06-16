@@ -45,7 +45,8 @@ class lizmapLogListener extends jEventListener
         $key = $event->getParam('key');
 
         // Build data array from event params
-        $logItem = lizmap::getLogItem($key);
+        $logConfig = lizmap::getLogConfig();
+        $logItem = $logConfig->getLogItem($key);
         $data = array();
         if ($logItem) {
             foreach ($logItem->getRecordKeys() as $rk) {
@@ -69,7 +70,8 @@ class lizmapLogListener extends jEventListener
     {
 
         // Get log item properties
-        $logItem = lizmap::getLogItem($key);
+        $logConfig = lizmap::getLogConfig();
+        $logItem = $logConfig->getLogItem($key);
 
         // Optionnaly log detail
         if ($logItem->getData('logDetail')) {
@@ -89,8 +91,8 @@ class lizmapLogListener extends jEventListener
             $logItem->insertLogDetail($data);
 
             // Send an email
-            if ($logItem->getData('logEmail') &&
-                in_array($key, array('editionSaveFeature', 'editionDeleteFeature'))
+            if ($logItem->getData('logEmail')
+                && in_array($key, array('editionSaveFeature', 'editionDeleteFeature'))
             ) {
                 $this->sendEmail($key, $data);
             }
@@ -116,7 +118,7 @@ class lizmapLogListener extends jEventListener
         // Build subject and body
         $subject = '['.$services->appName.'] '.jLocale::get('admin~admin.logs.email.subject');
 
-        $body = jLocale::get("admin~admin.logs.email.${key}.body");
+        $body = jLocale::get("admin~admin.logs.email.{$key}.body");
 
         foreach ($data as $k => $v) {
             if (empty($v)) {
@@ -136,7 +138,7 @@ class lizmapLogListener extends jEventListener
                     }
                 }
             } else {
-                $body .= "\r\n"."  * ${k} = ${v}";
+                $body .= "\r\n"."  * {$k} = {$v}";
             }
         }
 

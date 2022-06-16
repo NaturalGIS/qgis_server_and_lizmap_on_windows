@@ -17,7 +17,8 @@ class lizMapCtrl extends jController
     protected $projectKey;
 
     /**
-     * Used to pass project Object (no need to rebuild it)
+     * Used to pass project Object (no need to rebuild it).
+     *
      * @var lizmapProject
      */
     protected $projectObj;
@@ -116,8 +117,8 @@ class lizMapCtrl extends jController
         $pOptions = $lproj->getOptions();
         // Redirect if project is hidden (lizmap plugin option)
         if (!$this->forceHiddenProjectVisible) {
-            if (property_exists($pOptions, 'hideProject') &&
-                $pOptions->hideProject == 'True'
+            if (property_exists($pOptions, 'hideProject')
+                && $pOptions->hideProject == 'True'
             ) {
                 jMessage::add(jLocale::get('view~default.project.access.denied'), 'error');
 
@@ -127,7 +128,10 @@ class lizMapCtrl extends jController
 
         // the html response
         $rep = $this->getResponse('htmlmap');
-        $rep->addJSLink(jUrl::get('view~translate:index'));
+        // Get Lizmap version from project.xml
+        $xmlLoad = simplexml_load_file(jApp::appPath('project.xml'));
+        $version = (string) $xmlLoad->info->version;
+        $rep->addJSLink((jUrl::get('view~translate:index')).'?v='.$version.'&lang='.jApp::config()->locale);
 
         $this->repositoryKey = $lrep->getKey();
         $this->projectKey = $lproj->getKey();
@@ -150,29 +154,29 @@ class lizMapCtrl extends jController
         $www = $confUrlEngine['jelixWWWPath'];
         $rep->addJSLink($www.'jquery/include/jquery.include.js');
         $rep->addJSLink($www.'js/jforms_jquery.js');
-	
+
         // Add datepickers jForms js
         $confDate = &jApp::config()->datepickers;
         $rep->addJSLink($confDate['default']);
         if (isset($confDate['default.js'])) {
             $js = $confDate['default.js'];
-            foreach($js as $file) {
-                $file = str_replace('$lang', jLocale::getCurrentLang(), $file);
+            foreach ($js as $file) {
+                $file = str_replace('$lang', $lang, $file);
                 if (strpos($file, 'jquery.ui.datepicker-en.js') !== false) {
                     continue;
                 }
                 $rep->addJSLink($file);
             }
         }
-	
+
         // Add other jForms js
-        $rep->addJSLink($bp.'js/ckeditor5/ckeditor.js');
-        $rep->addJSLink($bp.'js/ckeditor5/ckeditor_lizmap.js');
-        $rep->addJSLink($bp.'js/fileUpload/jquery.fileupload.js');
-        $rep->addJSLink($bp.'js/bootstrapErrorDecoratorHtml.js');
+        $rep->addJSLink($bp.'assets/js/ckeditor5/ckeditor.js');
+        $rep->addJSLink($bp.'assets/js/ckeditor5/ckeditor_lizmap.js');
+        $rep->addJSLink($bp.'assets/js/fileUpload/jquery.fileupload.js');
+        $rep->addJSLink($bp.'assets/js/bootstrapErrorDecoratorHtml.js');
 
         // Add bottom dock js
-        $rep->addJSLink($bp.'js/bottom-dock.js');
+        $rep->addJSLink($bp.'assets/js/bottom-dock.js');
 
         // Pass some configuration options to the web page through javascript var
         $lizUrls = array(
@@ -184,7 +188,7 @@ class lizMapCtrl extends jController
             'ign' => jUrl::get('lizmap~ign:address'),
             'edition' => jUrl::get('lizmap~edition:getFeature'),
             'permalink' => jUrl::getFull('view~map:index'),
-            'dataTableLanguage' => $bp.'js/dataTables/'.jApp::config()->locale.'.json',
+            'dataTableLanguage' => $bp.'assets/js/dataTables/'.jApp::config()->locale.'.json',
             'basepath' => $bp,
             'geobookmark' => jUrl::get('lizmap~geobookmark:index'),
         );
@@ -202,7 +206,7 @@ class lizMapCtrl extends jController
         }
 
         if (jAcl2::check('lizmap.admin.repositories.delete')) {
-            $lizUrls['removeCache'] = jUrl::get('admin~config:removeLayerCache');
+            $lizUrls['removeCache'] = jUrl::get('admin~maps:removeLayerCache');
         }
 
         $rep->addJSCode('var lizUrls = '.json_encode($lizUrls).';');
@@ -222,17 +226,28 @@ class lizMapCtrl extends jController
         $rep->title = $title;
 
         // Add search js
-        $rep->addJSLink($bp.'js/search.js');
+        $rep->addJSLink($bp.'assets/js/search.js');
 
         // Add moment.js for timemanager
         if ($lproj->hasTimemanagerLayers()) {
-            $rep->addJSLink($bp.'js/moment.js');
+            $rep->addJSLink($bp.'assets/js/moment.js');
+            $rep->addJSLink($bp.'assets/js/filter.js');
+            $filterConfigData = array(
+                'url' => jUrl::get(
+                    'filter~service:index',
+                    array(
+                        'repository' => $this->repositoryKey,
+                        'project' => $this->projectKey,
+                    )
+                ),
+            );
+            $rep->addJSCode('var filterConfigData = '.json_encode($filterConfigData));
         }
 
         // Add atlas.js for atlas feature and additionnal CSS for right-dock max-width
         if ($lproj->hasAtlasEnabled()) {
             // Add JS
-            $rep->addJSLink($bp.'js/atlas.js');
+            $rep->addJSLink($bp.'assets/js/atlas.js');
 
             // Add CSS
             $options = $lproj->getOptions();
@@ -245,7 +260,7 @@ class lizMapCtrl extends jController
         }
 
         // Add qgis popup atlas JS
-        $rep->addJSLink($bp.'js/popupQgisAtlas.js');
+        $rep->addJSLink($bp.'assets/js/popupQgisAtlas.js');
 
         // Assign variables to template
         $assign = array_merge(array(
@@ -311,21 +326,42 @@ class lizMapCtrl extends jController
 
         // Override default theme with color set in admin panel
         if ($cssContent = jFile::read(jApp::varPath('lizmap-theme-config/').'theme.css')) {
-            $css = '<style type="text/css">'.$cssContent.'</style>
-      ';
+            $css = '<style type="text/css">'.$cssContent.'</style>';
             $rep->addHeadContent($css);
         }
 
-        // Replace default theme by theme found in
-        // the repository folder media/themes/default/
+        // Override default theme by themes found in folder media/themes/...
+        // Theme name can be 'default' and apply to all projects in a repository
+        // or the project name and only apply to it
+        // Also if media/themes/default/css is found one directory above repositorie's one
+        // it will apply to all repositories
         if ($lrep->getData('allowUserDefinedThemes')) {
             $repositoryPath = $lrep->getPath();
             $cssArray = array('main', 'map', 'media');
             $themeArray = array('default', $project);
             foreach ($cssArray as $k) {
+                // Handle theme applying to all repositorie's projects in the same directory
+                $cssRelPath = '../media/themes/default/css/'.$k.'.css';
+                $cssPath = realpath($repositoryPath.$cssRelPath);
+                if (file_exists($cssPath)) {
+                    $cssUrl = jUrl::get(
+                        'view~media:getCssFile',
+                        array(
+                            'repository' => $lrep->getKey(),
+                            'project' => $project,
+                            'path' => $cssRelPath,
+                        )
+                    );
+                    //~ $rep->addCssLink( $cssUrl );
+                    // Use addHeadContent and not addCssLink to be sure it will be loaded after minified code
+                    $rep->addHeadContent('<link type="text/css" href="'.$cssUrl.'" rel="stylesheet" />');
+                }
+
+                // Handle themes applying to a repository (media/themes/default)
+                // or to a project (media/themes/PROJECT-NAME)
                 foreach ($themeArray as $theme) {
                     $cssRelPath = 'media/themes/'.$theme.'/css/'.$k.'.css';
-                    $cssPath = $lrep->getPath().'/'.$cssRelPath;
+                    $cssPath = realpath($repositoryPath.$cssRelPath);
                     if (file_exists($cssPath)) {
                         $cssUrl = jUrl::get(
                             'view~media:getCssFile',
@@ -368,6 +404,7 @@ class lizMapCtrl extends jController
                                     array(
                                         'repository' => $lrep->getKey(),
                                         'project' => $project,
+                                        'mtime' => filemtime($filename),
                                         'path' => $jsRelPath,
                                     )
                                 );
@@ -399,9 +436,9 @@ class lizMapCtrl extends jController
         $jsCode = '';
         $mapMenuCss = '';
         $h = $this->intParam('h', 1);
-        if ($h == 0 or
-            (property_exists($pOptions, 'hideHeader') &&
-                $pOptions->hideHeader == 'True'
+        if ($h == 0
+            or (property_exists($pOptions, 'hideHeader')
+                && $pOptions->hideHeader == 'True'
             )
         ) {
             $h = 0;
@@ -411,8 +448,8 @@ class lizMapCtrl extends jController
 
         // menu = left vertical menu with icons
         $m = $this->intParam('m', 1);
-        if ($m == 0 or
-            (
+        if ($m == 0
+            or (
               property_exists($pOptions, 'hideMenu')
               && $pOptions->hideMenu == 'True'
             )
@@ -426,8 +463,8 @@ class lizMapCtrl extends jController
 
         // legend = legend open at startup
         $l = $this->intParam('l', 1);
-        if ($l == 0  ||
-            (
+        if ($l == 0
+            || (
                 property_exists($pOptions, 'hideLegend')
                 && $pOptions->hideLegend == 'True'
             )
@@ -447,8 +484,8 @@ class lizMapCtrl extends jController
 
         // navbar
         $n = $this->intParam('n', 1);
-        if ($n == 0 or
-            (
+        if ($n == 0
+            or (
                 property_exists($pOptions, 'hideNavbar')
                 && $pOptions->hideNavbar == 'True'
             )
@@ -458,8 +495,8 @@ class lizMapCtrl extends jController
 
         // overview-box = scale & overview
         $o = $this->intParam('o', 1);
-        if ($o == 0 ||
-            (
+        if ($o == 0
+            || (
                 property_exists($pOptions, 'hideOverview')
                 && $pOptions->hideOverview == 'True'
             )
@@ -473,8 +510,8 @@ class lizMapCtrl extends jController
         }
 
         // Hide groups checkboxes
-        if (property_exists($pOptions, 'hideGroupCheckbox') &&
-            $pOptions->hideGroupCheckbox == 'True'
+        if (property_exists($pOptions, 'hideGroupCheckbox')
+            && $pOptions->hideGroupCheckbox == 'True'
         ) {
             $rep->addStyle('#switcher-layers button[name="group"]', 'display:none !important;');
         }
@@ -514,7 +551,7 @@ class lizMapCtrl extends jController
         //$assign['auth_url_return'] = jUrl::get('view~default:index');
 
         // switcher-layers-actions javascript
-        $rep->addJSLink($bp.'js/switcher-layers-actions.js');
+        $rep->addJSLink($bp.'assets/js/switcher-layers-actions.js');
 
         // Add Google Analytics ID
         $assign['googleAnalyticsID'] = '';

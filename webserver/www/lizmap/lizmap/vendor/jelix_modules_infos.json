@@ -1,0 +1,30 @@
+{
+    "version": 1,
+    "packages": {
+        "jelix\/jcommunity-module": {
+            "modules-dirs": [
+                "jelix\/jcommunity-module\/modules"
+            ],
+            "plugins-dirs": [],
+            "modules": [],
+            "autoconfig-access-16": [],
+            "modules-autoconfig-access-16": []
+        },
+        "jelix\/ldapdao-module": {
+            "modules-dirs": [],
+            "plugins-dirs": [],
+            "modules": [
+                "jelix\/ldapdao-module\/ldapdao"
+            ],
+            "autoconfig-access-16": [],
+            "modules-autoconfig-access-16": []
+        },
+        "lizmap\/lizmap-web-client": {
+            "modules-dirs": [],
+            "plugins-dirs": [],
+            "modules": [],
+            "autoconfig-access-16": [],
+            "modules-autoconfig-access-16": []
+        }
+    }
+}

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<suburls xmlns="http://jelix.org/ns/suburls/1.0">
+    <url pathinfo="/"  action="jmessenger:index"/>
+    <url pathinfo="/inbox"  action="jmessenger:inbox"/>
+    <url pathinfo="/outbox"  action="jmessenger:outbox"/>
+    
+    <url pathinfo="/new/precreate"  action="jmessenger:precreate"/>
+    <url pathinfo="/new"  action="jmessenger:create"/>
+    <url pathinfo="/new/save"  action="jmessenger:savecreate"/>
+    
+    <url pathinfo="/edit/:id"  action="jmessenger:editupdate" actionoverride="jmessenger:preupdate">
+        <param id="id" type="number"/>
+    </url>
+    <url pathinfo="/edit/:id/save"  action="jmessenger:saveupdate">
+        <param id="id" type="number"/>
+    </url>
+    <url pathinfo="/read/:id"  action="jmessenger:view">
+        <param id="id" type="number"/>
+    </url>
+    <url pathinfo="/answer/:id"  action="jmessenger:answer">
+        <param id="id" type="number"/>
+    </url>
+    <url pathinfo="/delete/:id"  action="jmessenger:delete">
+        <param id="id" type="number"/>
+    </url>
+</suburls>

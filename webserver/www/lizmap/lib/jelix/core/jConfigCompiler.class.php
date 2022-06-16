@@ -4,7 +4,7 @@
 * @subpackage   core
 * @author       Laurent Jouanneau
 * @contributor  Thibault Piront (nuKs), Christophe Thiriot, Philippe Schelté
-* @copyright    2006-2012 Laurent Jouanneau
+* @copyright    2006-2022 Laurent Jouanneau
 * @copyright    2007 Thibault Piront, 2008 Christophe Thiriot, 2008 Philippe Schelté
 * @link         http://www.jelix.org
 * @licence      GNU Lesser General Public Licence see LICENCE file or http://www.gnu.org/licenses/lgpl.html
@@ -128,11 +128,9 @@ class jConfigCompiler {
     static public function getCacheFilename($configFile)
     {
         $filename = jApp::tempPath().str_replace('/','~',$configFile);
-        if (isset($_SERVER['HTTP_HOST'])) {
-            $filename .= '.'.str_replace(':', '-', $_SERVER['HTTP_HOST']);
-        }
-        elseif (isset($_SERVER['SERVER_NAME'])) {
-            $filename .= '.'.$_SERVER['SERVER_NAME'];
+        list($domain, $port) = jServer::getDomainPortFromServer();
+        if ($domain) {
+            $filename.= '.'.$domain.'-'.$port;
         }
         if (BYTECODE_CACHE_EXISTS) {
             $filename .= '.conf.php';
@@ -168,8 +166,21 @@ class jConfigCompiler {
             $config->startAction = ':';
         }
 
-        if ($config->domainName == "" && isset($_SERVER['SERVER_NAME']))
-            $config->domainName = $_SERVER['SERVER_NAME'];
+        if ($config->domainName == "") {
+            // as each compiled config is stored in a file based on the domain
+            // name/port, we can store the guessed domain name into the configuration
+            list($domain, $port) = jServer::getDomainPortFromServer();
+            if ($domain) {
+                $config->domainName = $domain;
+                $isHttps = jServer::isHttpsFromServer();
+                if ($config->forceHTTPPort == '' && !$isHttps && $port != '80') {
+                    $config->forceHTTPPort = $port;
+                }
+                else if ($config->forceHTTPSPort == '' && $isHttps && $port != '443') {
+                    $config->forceHTTPSPort = $port;
+                }
+            }
+        }
 
         $config->_allBasePath = array();
 
@@ -226,7 +237,12 @@ class jConfigCompiler {
         }
 
         // sort plugins by priority
-        usort($plugins, function($a, $b){ return $a->getPriority() < $b->getPriority();});
+        usort($plugins, function($a, $b){
+            if ($a->getPriority() == $b->getPriority()) {
+                return 0;
+            }
+            return ($a->getPriority() < $b->getPriority()) ? -1 : 1;
+        });
 
         // run plugins
         foreach($plugins as $plugin) {
@@ -494,7 +510,7 @@ class jConfigCompiler {
     }
 
     /**
-     * calculate miscelaneous path, depending of the server configuration and other informations
+     * calculate miscellaneous path, depending of the server configuration and other information
      * in the given array : script path, script name, documentRoot ..
      * @param array $urlconf urlengine configuration. scriptNameServerVariable, basePath,
      * jelixWWWPath and jqueryPath should be present
@@ -528,9 +544,15 @@ class jConfigCompiler {
                 $urlconf['urlScriptPath'] = getcwd().'/'.substr ($urlconf['urlScript'], 0, $lastslash ).'/';
                 $urlconf['urlScriptName'] = substr ($urlconf['urlScript'], $lastslash+1);
             }
-            $basepath = $urlconf['urlScriptPath'];
+
             $snp = $urlconf['urlScriptName'];
-            $urlconf['urlScript'] = $basepath.$snp;
+            $urlconf['urlScript'] = $urlconf['urlScriptPath'].$snp;
+
+            if ($urlconf['basePath'] == '') {
+                // we should have a basePath when generating url from a command line
+                // script. We cannot guess the url base path so we use a default value
+                $urlconf['basePath'] = '/';
+            }
         }
         else {
             $lastslash = strrpos ($urlconf['urlScript'], '/');
@@ -585,16 +607,23 @@ class jConfigCompiler {
 
             $snp = substr($urlconf['urlScript'], strlen($localBasePath));
 
-            if ($localBasePath == '/')
+            if (isset($_SERVER['DOCUMENT_ROOT'])) {
+                $urlconf['documentRoot'] = $_SERVER['DOCUMENT_ROOT'];
+            } else {
                 $urlconf['documentRoot'] = jApp::wwwPath();
-            else if(strpos(jApp::wwwPath(), $localBasePath) === false) {
-                if (isset($_SERVER['DOCUMENT_ROOT']))
-                    $urlconf['documentRoot'] = $_SERVER['DOCUMENT_ROOT'];
-                else
-                    $urlconf['documentRoot'] = jApp::wwwPath();
             }
-            else
-                $urlconf['documentRoot'] = substr(jApp::wwwPath(), 0, - (strlen($localBasePath)));
+
+            if ($localBasePath != '/') {
+                // if wwwPath ends with the base path, we remove the base path from the wwwPath to have
+                // the document root
+                $posBP = strpos(jApp::wwwPath(), $localBasePath);
+                if ($posBP !== false) {
+                    $lenWP = strlen(jApp::wwwPath()) - strlen($localBasePath);
+                    if ($posBP == $lenWP) {
+                        $urlconf['documentRoot'] = substr(jApp::wwwPath(), 0, $lenWP);
+                    }
+                }
+            }
         }
 
         $pos = strrpos($snp, '.php');

@@ -1,0 +1,646 @@
+a:5:{s:5:"mtime";i:1652379068;s:5:"ctime";i:1652379068;s:4:"code";i:200;s:4:"mime";s:23:"text/xml; charset=utf-8";s:4:"data";s:32891:"<?xml version="1.0" encoding="utf-8"?>
+<WMS_Capabilities xmlns:qgs="http://www.qgis.org/wms" xmlns:sld="http://www.opengis.net/sld" xmlns="http://www.opengis.net/wms" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.3.0" xsi:schemaLocation="http://www.opengis.net/wms http://schemas.opengis.net/wms/1.3.0/capabilities_1_3_0.xsd http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/sld_capabilities.xsd http://www.qgis.org/wms http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/montpellier.qgs&amp;SERVICE=WMS&amp;REQUEST=GetSchemaExtension">
+ <Service>
+  <Name>WMS</Name>
+  <Title>Montpellier - Transports</Title>
+  <Abstract><![CDATA[Demo project with bus and tramway lines in Montpellier, France.
+Data is licensed under ODbl, OpenStreetMap contributors]]></Abstract>
+  <KeywordList>
+   <Keyword vocabulary="ISO">infoMapAccessService</Keyword>
+  </KeywordList>
+  <OnlineResource xlink:type="simple" xlink:href="http://www.3liz.com/lizmap.html" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+  <ContactInformation>
+   <ContactPersonPrimary>
+    <ContactPerson>3liz</ContactPerson>
+    <ContactOrganization>3liz</ContactOrganization>
+   </ContactPersonPrimary>
+   <ContactVoiceTelephone>+334 67 16 64 51</ContactVoiceTelephone>
+   <ContactElectronicMailAddress>info@3liz.com</ContactElectronicMailAddress>
+  </ContactInformation>
+  <Fees>conditions unknown</Fees>
+  <AccessConstraints>None</AccessConstraints>
+ </Service>
+ <Capability>
+  <Request>
+   <GetCapabilities>
+    <Format>text/xml</Format>
+    <DCPType>
+     <HTTP>
+      <Get>
+       <OnlineResource xlink:type="simple" xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/montpellier.qgs&amp;" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+      </Get>
+     </HTTP>
+    </DCPType>
+   </GetCapabilities>
+   <GetMap>
+    <Format>image/jpeg</Format>
+    <Format>image/png</Format>
+    <Format>image/png; mode=16bit</Format>
+    <Format>image/png; mode=8bit</Format>
+    <Format>image/png; mode=1bit</Format>
+    <Format>application/dxf</Format>
+    <DCPType>
+     <HTTP>
+      <Get>
+       <OnlineResource xlink:type="simple" xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/montpellier.qgs&amp;" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+      </Get>
+     </HTTP>
+    </DCPType>
+   </GetMap>
+   <GetFeatureInfo>
+    <Format>text/plain</Format>
+    <Format>text/html</Format>
+    <Format>text/xml</Format>
+    <Format>application/vnd.ogc.gml</Format>
+    <Format>application/vnd.ogc.gml/3.1.1</Format>
+    <Format>application/json</Format>
+    <Format>application/geo+json</Format>
+    <DCPType>
+     <HTTP>
+      <Get>
+       <OnlineResource xlink:type="simple" xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/montpellier.qgs&amp;" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+      </Get>
+     </HTTP>
+    </DCPType>
+   </GetFeatureInfo>
+   <sld:GetLegendGraphic>
+    <Format>image/jpeg</Format>
+    <Format>image/png</Format>
+    <Format>application/json</Format>
+    <DCPType>
+     <HTTP>
+      <Get>
+       <OnlineResource xlink:type="simple" xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/montpellier.qgs&amp;" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+      </Get>
+     </HTTP>
+    </DCPType>
+   </sld:GetLegendGraphic>
+   <sld:DescribeLayer>
+    <Format>text/xml</Format>
+    <DCPType>
+     <HTTP>
+      <Get>
+       <OnlineResource xlink:type="simple" xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/montpellier.qgs&amp;" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+      </Get>
+     </HTTP>
+    </DCPType>
+   </sld:DescribeLayer>
+   <qgs:GetStyles>
+    <Format>text/xml</Format>
+    <DCPType>
+     <HTTP>
+      <Get>
+       <OnlineResource xlink:type="simple" xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/montpellier.qgs&amp;" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+      </Get>
+     </HTTP>
+    </DCPType>
+   </qgs:GetStyles>
+  </Request>
+  <Exception>
+   <Format>XML</Format>
+  </Exception>
+  <sld:UserDefinedSymbolization RemoteWFS="0" RemoteWCS="0" UserStyle="1" InlineFeature="0" UserLayer="0" SupportSLD="1"/>
+  <Layer queryable="1">
+   <Name>Montpellier - Transports</Name>
+   <Title>Montpellier - Transports</Title>
+   <Abstract><![CDATA[Demo project with bus and tramway lines in Montpellier, France.
+Data is licensed under ODbl, OpenStreetMap contributors]]></Abstract>
+   <KeywordList>
+    <Keyword vocabulary="ISO">infoMapAccessService</Keyword>
+   </KeywordList>
+   <CRS>CRS:84</CRS>
+   <CRS>EPSG:2154</CRS>
+   <CRS>EPSG:4326</CRS>
+   <CRS>EPSG:3857</CRS>
+   <EX_GeographicBoundingBox>
+    <westBoundLongitude>3.746034</westBoundLongitude>
+    <eastBoundLongitude>4.01689</eastBoundLongitude>
+    <southBoundLatitude>43.542477</southBoundLatitude>
+    <northBoundLatitude>43.672144</northBoundLatitude>
+   </EX_GeographicBoundingBox>
+   <BoundingBox miny="5394910.34" CRS="EPSG:3857" maxx="447158.049" minx="417006.613" maxy="5414844.995"/>
+   <BoundingBox miny="3.746034" CRS="EPSG:4326" maxx="43.672144" minx="43.542477" maxy="4.01689"/>
+   <BoundingBox miny="6271774.524" CRS="EPSG:2154" maxx="782213.301" minx="760179.876" maxy="6286428.826"/>
+   <Layer queryable="1">
+    <Name>Edition</Name>
+    <Title>Edition</Title>
+    <CRS>CRS:84</CRS>
+    <CRS>EPSG:2154</CRS>
+    <CRS>EPSG:4326</CRS>
+    <CRS>EPSG:3857</CRS>
+    <EX_GeographicBoundingBox>
+     <westBoundLongitude>3.831297</westBoundLongitude>
+     <eastBoundLongitude>3.907531</eastBoundLongitude>
+     <southBoundLatitude>43.571914</southBoundLatitude>
+     <northBoundLatitude>43.670511</northBoundLatitude>
+    </EX_GeographicBoundingBox>
+    <BoundingBox miny="5399432.173" CRS="EPSG:3857" maxx="434984.262" minx="426498.142" maxy="5414593.656"/>
+    <BoundingBox miny="3.831297" CRS="EPSG:4326" maxx="43.670511" minx="43.571914" maxy="3.907531"/>
+    <BoundingBox miny="6275114.928" CRS="EPSG:2154" maxx="773334.673" minx="767059.472" maxy="6286139.847"/>
+    <Layer queryable="1">
+     <Name>points of interest</Name>
+     <Title>Points of interest</Title>
+     <CRS>CRS:84</CRS>
+     <CRS>EPSG:2154</CRS>
+     <CRS>EPSG:4326</CRS>
+     <CRS>EPSG:3857</CRS>
+     <EX_GeographicBoundingBox>
+      <westBoundLongitude>3.845415</westBoundLongitude>
+      <eastBoundLongitude>3.895635</eastBoundLongitude>
+      <southBoundLatitude>43.594383</southBoundLatitude>
+      <northBoundLatitude>43.642037</northBoundLatitude>
+     </EX_GeographicBoundingBox>
+     <BoundingBox miny="5402885.088" CRS="EPSG:3857" maxx="433660.033" minx="428069.654" maxy="5410212.553"/>
+     <BoundingBox miny="3.845415" CRS="EPSG:4326" maxx="43.642037" minx="43.594383" maxy="3.895635"/>
+     <BoundingBox miny="6277624.103" CRS="EPSG:2154" maxx="772345.131" minx="768232.115" maxy="6282964.615"/>
+     <Style>
+      <Name>default</Name>
+      <Title>default</Title>
+      <LegendURL>
+       <Format>image/png</Format>
+       <OnlineResource xlink:type="simple" xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/montpellier.qgs&amp;SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=points of interest&amp;FORMAT=image/png&amp;STYLE=default&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+      </LegendURL>
+     </Style>
+    </Layer>
+    <Layer queryable="1">
+     <Name>edition_line</Name>
+     <Title>Bicycle rides</Title>
+     <CRS>CRS:84</CRS>
+     <CRS>EPSG:2154</CRS>
+     <CRS>EPSG:4326</CRS>
+     <CRS>EPSG:3857</CRS>
+     <EX_GeographicBoundingBox>
+      <westBoundLongitude>3.831298</westBoundLongitude>
+      <eastBoundLongitude>3.907531</eastBoundLongitude>
+      <southBoundLatitude>43.571914</southBoundLatitude>
+      <northBoundLatitude>43.670511</northBoundLatitude>
+     </EX_GeographicBoundingBox>
+     <BoundingBox miny="5399432.173" CRS="EPSG:3857" maxx="434984.262" minx="426498.142" maxy="5414593.656"/>
+     <BoundingBox miny="3.831298" CRS="EPSG:4326" maxx="43.670511" minx="43.571914" maxy="3.907531"/>
+     <BoundingBox miny="6275114.929" CRS="EPSG:2154" maxx="773334.672" minx="767059.472" maxy="6286139.847"/>
+     <Style>
+      <Name>default</Name>
+      <Title>default</Title>
+      <LegendURL>
+       <Format>image/png</Format>
+       <OnlineResource xlink:type="simple" xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/montpellier.qgs&amp;SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=edition_line&amp;FORMAT=image/png&amp;STYLE=default&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+      </LegendURL>
+     </Style>
+    </Layer>
+    <Layer queryable="1">
+     <Name>areas_of_interest</Name>
+     <Title>Areas of interest</Title>
+     <CRS>CRS:84</CRS>
+     <CRS>EPSG:2154</CRS>
+     <CRS>EPSG:4326</CRS>
+     <CRS>EPSG:3857</CRS>
+     <EX_GeographicBoundingBox>
+      <westBoundLongitude>3.862278</westBoundLongitude>
+      <eastBoundLongitude>3.894895</eastBoundLongitude>
+      <southBoundLatitude>43.606014</southBoundLatitude>
+      <northBoundLatitude>43.649006</northBoundLatitude>
+     </EX_GeographicBoundingBox>
+     <BoundingBox miny="5404673.008" CRS="EPSG:3857" maxx="433577.617" minx="429946.82" maxy="5411284.751"/>
+     <BoundingBox miny="3.862278" CRS="EPSG:4326" maxx="43.649006" minx="43.606014" maxy="3.894895"/>
+     <BoundingBox miny="6278931.428" CRS="EPSG:2154" maxx="772270.682" minx="769584.579" maxy="6283738.483"/>
+     <Style>
+      <Name>default</Name>
+      <Title>default</Title>
+      <LegendURL>
+       <Format>image/png</Format>
+       <OnlineResource xlink:type="simple" xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/montpellier.qgs&amp;SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=areas_of_interest&amp;FORMAT=image/png&amp;STYLE=default&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+      </LegendURL>
+     </Style>
+    </Layer>
+   </Layer>
+   <Layer queryable="1">
+    <Name>datalayers</Name>
+    <Title>datalayers</Title>
+    <CRS>CRS:84</CRS>
+    <CRS>EPSG:2154</CRS>
+    <CRS>EPSG:4326</CRS>
+    <CRS>EPSG:3857</CRS>
+    <EX_GeographicBoundingBox>
+     <westBoundLongitude>3.553259</westBoundLongitude>
+     <eastBoundLongitude>4.08124</eastBoundLongitude>
+     <southBoundLatitude>43.526499</southBoundLatitude>
+     <northBoundLatitude>43.76158</northBoundLatitude>
+    </EX_GeographicBoundingBox>
+    <BoundingBox miny="5392456.985" CRS="EPSG:3857" maxx="454321.448" minx="395547.093" maxy="5428619.814"/>
+    <BoundingBox miny="3.553259" CRS="EPSG:4326" maxx="43.76158" minx="43.526499" maxy="4.08124"/>
+    <BoundingBox miny="6269870.538" CRS="EPSG:2154" maxx="787439.853" minx="744560.142" maxy="6296435.987"/>
+    <Layer queryable="1">
+     <Name>Bus</Name>
+     <Title>Bus</Title>
+     <CRS>CRS:84</CRS>
+     <CRS>EPSG:2154</CRS>
+     <CRS>EPSG:4326</CRS>
+     <CRS>EPSG:3857</CRS>
+     <EX_GeographicBoundingBox>
+      <westBoundLongitude>3.553259</westBoundLongitude>
+      <eastBoundLongitude>4.08124</eastBoundLongitude>
+      <southBoundLatitude>43.526499</southBoundLatitude>
+      <northBoundLatitude>43.76158</northBoundLatitude>
+     </EX_GeographicBoundingBox>
+     <BoundingBox miny="5392456.985" CRS="EPSG:3857" maxx="454321.448" minx="395547.093" maxy="5428619.814"/>
+     <BoundingBox miny="3.553259" CRS="EPSG:4326" maxx="43.76158" minx="43.526499" maxy="4.08124"/>
+     <BoundingBox miny="6269870.538" CRS="EPSG:2154" maxx="787439.853" minx="744560.142" maxy="6296435.987"/>
+     <Layer queryable="1">
+      <Name>bus_stops</Name>
+      <Title>bus_stops</Title>
+      <CRS>CRS:84</CRS>
+      <CRS>EPSG:2154</CRS>
+      <CRS>EPSG:4326</CRS>
+      <CRS>EPSG:3857</CRS>
+      <EX_GeographicBoundingBox>
+       <westBoundLongitude>3.55326</westBoundLongitude>
+       <eastBoundLongitude>4.039132</eastBoundLongitude>
+       <southBoundLatitude>43.526928</southBoundLatitude>
+       <northBoundLatitude>43.752341</northBoundLatitude>
+      </EX_GeographicBoundingBox>
+      <BoundingBox miny="5392522.697" CRS="EPSG:3857" maxx="449634.007" minx="395547.093" maxy="5427196.032"/>
+      <BoundingBox miny="3.55326" CRS="EPSG:4326" maxx="43.752341" minx="43.526928" maxy="4.039132"/>
+      <BoundingBox miny="6269918.107" CRS="EPSG:2154" maxx="784034.151" minx="744567.335" maxy="6295363.936"/>
+      <Style>
+       <Name>default</Name>
+       <Title>default</Title>
+       <LegendURL>
+        <Format>image/png</Format>
+        <OnlineResource xlink:type="simple" xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/montpellier.qgs&amp;SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=bus_stops&amp;FORMAT=image/png&amp;STYLE=default&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </LegendURL>
+      </Style>
+      <MinScaleDenominator>0</MinScaleDenominator>
+      <MaxScaleDenominator>15000</MaxScaleDenominator>
+     </Layer>
+     <Layer queryable="1">
+      <Name>bus</Name>
+      <Title>Bus lines</Title>
+      <CRS>CRS:84</CRS>
+      <CRS>EPSG:2154</CRS>
+      <CRS>EPSG:4326</CRS>
+      <CRS>EPSG:3857</CRS>
+      <EX_GeographicBoundingBox>
+       <westBoundLongitude>3.698123</westBoundLongitude>
+       <eastBoundLongitude>4.081239</eastBoundLongitude>
+       <southBoundLatitude>43.5265</southBoundLatitude>
+       <northBoundLatitude>43.761579</northBoundLatitude>
+      </EX_GeographicBoundingBox>
+      <BoundingBox miny="5392456.985" CRS="EPSG:3857" maxx="454321.448" minx="411673.169" maxy="5428619.814"/>
+      <BoundingBox miny="3.698123" CRS="EPSG:4326" maxx="43.761579" minx="43.5265" maxy="4.081239"/>
+      <BoundingBox miny="6269963.369" CRS="EPSG:2154" maxx="787439.853" minx="756227.288" maxy="6296435.987"/>
+      <Style>
+       <Name>default</Name>
+       <Title>default</Title>
+       <LegendURL>
+        <Format>image/png</Format>
+        <OnlineResource xlink:type="simple" xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/montpellier.qgs&amp;SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=bus&amp;FORMAT=image/png&amp;STYLE=default&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </LegendURL>
+      </Style>
+      <MinScaleDenominator>-4.65661e-10</MinScaleDenominator>
+      <MaxScaleDenominator>40001</MaxScaleDenominator>
+     </Layer>
+    </Layer>
+    <Layer queryable="1">
+     <Name>Tramway</Name>
+     <Title>Tramway</Title>
+     <CRS>CRS:84</CRS>
+     <CRS>EPSG:2154</CRS>
+     <CRS>EPSG:4326</CRS>
+     <CRS>EPSG:3857</CRS>
+     <EX_GeographicBoundingBox>
+      <westBoundLongitude>3.809746</westBoundLongitude>
+      <eastBoundLongitude>3.963925</eastBoundLongitude>
+      <southBoundLatitude>43.557609</southBoundLatitude>
+      <northBoundLatitude>43.654613</northBoundLatitude>
+     </EX_GeographicBoundingBox>
+     <BoundingBox miny="5397234.468" CRS="EPSG:3857" maxx="441262.046" minx="424099.073" maxy="5412147.262"/>
+     <BoundingBox miny="3.809746" CRS="EPSG:4326" maxx="43.654613" minx="43.557609" maxy="3.963925"/>
+     <BoundingBox miny="6273506.992" CRS="EPSG:2154" maxx="777910.908" minx="765339.151" maxy="6284427.046"/>
+     <Layer queryable="1">
+      <Name>tramway_ref</Name>
+      <Title>tramway_ref</Title>
+      <Style>
+       <Name>default</Name>
+       <Title>default</Title>
+       <LegendURL>
+        <Format>image/png</Format>
+        <OnlineResource xlink:type="simple" xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/montpellier.qgs&amp;SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=tramway_ref&amp;FORMAT=image/png&amp;STYLE=default&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </LegendURL>
+      </Style>
+     </Layer>
+     <Layer queryable="1">
+      <Name>tramway_pivot</Name>
+      <Title>tramway_pivot</Title>
+      <Style>
+       <Name>default</Name>
+       <Title>default</Title>
+       <LegendURL>
+        <Format>image/png</Format>
+        <OnlineResource xlink:type="simple" xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/montpellier.qgs&amp;SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=tramway_pivot&amp;FORMAT=image/png&amp;STYLE=default&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </LegendURL>
+      </Style>
+     </Layer>
+     <Layer queryable="1">
+      <Name>tram_stop_work</Name>
+      <Title>Tram stop works</Title>
+      <Style>
+       <Name>default</Name>
+       <Title>default</Title>
+       <LegendURL>
+        <Format>image/png</Format>
+        <OnlineResource xlink:type="simple" xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/montpellier.qgs&amp;SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=tram_stop_work&amp;FORMAT=image/png&amp;STYLE=default&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </LegendURL>
+      </Style>
+     </Layer>
+     <Layer queryable="1">
+      <Name>tramstop</Name>
+      <Title>Tram stops</Title>
+      <CRS>CRS:84</CRS>
+      <CRS>EPSG:2154</CRS>
+      <CRS>EPSG:4326</CRS>
+      <CRS>EPSG:3857</CRS>
+      <EX_GeographicBoundingBox>
+       <westBoundLongitude>3.810105</westBoundLongitude>
+       <eastBoundLongitude>3.963648</eastBoundLongitude>
+       <southBoundLatitude>43.557942</southBoundLatitude>
+       <northBoundLatitude>43.65456</northBoundLatitude>
+      </EX_GeographicBoundingBox>
+      <BoundingBox miny="5397285.651" CRS="EPSG:3857" maxx="441231.211" minx="424139.015" maxy="5412139.184"/>
+      <BoundingBox miny="3.810105" CRS="EPSG:4326" maxx="43.65456" minx="43.557942" maxy="3.963648"/>
+      <BoundingBox miny="6273544.321" CRS="EPSG:2154" maxx="777888.068" minx="765368.162" maxy="6284420.938"/>
+      <Style>
+       <Name>default</Name>
+       <Title>default</Title>
+       <LegendURL>
+        <Format>image/png</Format>
+        <OnlineResource xlink:type="simple" xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/montpellier.qgs&amp;SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=tramstop&amp;FORMAT=image/png&amp;STYLE=default&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </LegendURL>
+      </Style>
+     </Layer>
+     <Layer queryable="1">
+      <Name>tramway</Name>
+      <Title>Tram lines</Title>
+      <CRS>CRS:84</CRS>
+      <CRS>EPSG:2154</CRS>
+      <CRS>EPSG:4326</CRS>
+      <CRS>EPSG:3857</CRS>
+      <EX_GeographicBoundingBox>
+       <westBoundLongitude>3.809746</westBoundLongitude>
+       <eastBoundLongitude>3.963925</eastBoundLongitude>
+       <southBoundLatitude>43.557609</southBoundLatitude>
+       <northBoundLatitude>43.654613</northBoundLatitude>
+      </EX_GeographicBoundingBox>
+      <BoundingBox miny="5397234.468" CRS="EPSG:3857" maxx="441262.046" minx="424099.073" maxy="5412147.262"/>
+      <BoundingBox miny="3.809746" CRS="EPSG:4326" maxx="43.654613" minx="43.557609" maxy="3.963925"/>
+      <BoundingBox miny="6273506.993" CRS="EPSG:2154" maxx="777910.908" minx="765339.152" maxy="6284427.046"/>
+      <Style>
+       <Name>black</Name>
+       <Title>black</Title>
+       <LegendURL>
+        <Format>image/png</Format>
+        <OnlineResource xlink:type="simple" xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/montpellier.qgs&amp;SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=tramway&amp;FORMAT=image/png&amp;STYLE=black&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </LegendURL>
+      </Style>
+      <Style>
+       <Name>colored</Name>
+       <Title>colored</Title>
+       <LegendURL>
+        <Format>image/png</Format>
+        <OnlineResource xlink:type="simple" xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/montpellier.qgs&amp;SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=tramway&amp;FORMAT=image/png&amp;STYLE=colored&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </LegendURL>
+      </Style>
+     </Layer>
+    </Layer>
+    <Layer queryable="1">
+     <Name>Buildings</Name>
+     <Title>Buildings</Title>
+     <CRS>CRS:84</CRS>
+     <CRS>EPSG:2154</CRS>
+     <CRS>EPSG:4326</CRS>
+     <CRS>EPSG:3857</CRS>
+     <EX_GeographicBoundingBox>
+      <westBoundLongitude>3.87277</westBoundLongitude>
+      <eastBoundLongitude>3.896741</eastBoundLongitude>
+      <southBoundLatitude>43.598561</southBoundLatitude>
+      <northBoundLatitude>43.616431</northBoundLatitude>
+     </EX_GeographicBoundingBox>
+     <BoundingBox miny="5403527.322" CRS="EPSG:3857" maxx="433783.15" minx="431114.842" maxy="5406274.452"/>
+     <BoundingBox miny="3.87277" CRS="EPSG:4326" maxx="43.616431" minx="43.598561" maxy="3.896741"/>
+     <BoundingBox miny="6278112.483" CRS="EPSG:2154" maxx="772429.19" minx="770471.291" maxy="6280119.982"/>
+     <Layer queryable="1">
+      <Name>publicbuildings</Name>
+      <Title>public buildings</Title>
+      <CRS>CRS:84</CRS>
+      <CRS>EPSG:2154</CRS>
+      <CRS>EPSG:4326</CRS>
+      <CRS>EPSG:3857</CRS>
+      <EX_GeographicBoundingBox>
+       <westBoundLongitude>3.87277</westBoundLongitude>
+       <eastBoundLongitude>3.896741</eastBoundLongitude>
+       <southBoundLatitude>43.598561</southBoundLatitude>
+       <northBoundLatitude>43.616431</northBoundLatitude>
+      </EX_GeographicBoundingBox>
+      <BoundingBox miny="5403527.322" CRS="EPSG:3857" maxx="433783.15" minx="431114.842" maxy="5406274.452"/>
+      <BoundingBox miny="3.87277" CRS="EPSG:4326" maxx="43.616431" minx="43.598561" maxy="3.896741"/>
+      <BoundingBox miny="6278112.483" CRS="EPSG:2154" maxx="772429.19" minx="770471.291" maxy="6280119.982"/>
+      <Style>
+       <Name>default</Name>
+       <Title>default</Title>
+       <LegendURL>
+        <Format>image/png</Format>
+        <OnlineResource xlink:type="simple" xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/montpellier.qgs&amp;SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=publicbuildings&amp;FORMAT=image/png&amp;STYLE=default&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </LegendURL>
+      </Style>
+     </Layer>
+     <Layer queryable="1">
+      <Name>publicbuildings_tramstop</Name>
+      <Title>Pivot tramstops / Buildings</Title>
+      <Style>
+       <Name>default</Name>
+       <Title>default</Title>
+       <LegendURL>
+        <Format>image/png</Format>
+        <OnlineResource xlink:type="simple" xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/montpellier.qgs&amp;SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=publicbuildings_tramstop&amp;FORMAT=image/png&amp;STYLE=default&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </LegendURL>
+      </Style>
+     </Layer>
+    </Layer>
+   </Layer>
+   <Layer queryable="1">
+    <Name>donnes_sociodemo_sous_quartiers</Name>
+    <Title>Repartition of owners and tenants</Title>
+    <Abstract>This plot shows the repartition of owners and tenants per subdistrict in Montpellier, France.</Abstract>
+    <Style>
+     <Name>default</Name>
+     <Title>default</Title>
+     <LegendURL>
+      <Format>image/png</Format>
+      <OnlineResource xlink:type="simple" xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/montpellier.qgs&amp;SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=donnes_sociodemo_sous_quartiers&amp;FORMAT=image/png&amp;STYLE=default&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+     </LegendURL>
+    </Style>
+   </Layer>
+   <Layer queryable="1">
+    <Name>SousQuartiers</Name>
+    <Title>SousQuartiers</Title>
+    <CRS>CRS:84</CRS>
+    <CRS>EPSG:2154</CRS>
+    <CRS>EPSG:4326</CRS>
+    <CRS>EPSG:3857</CRS>
+    <EX_GeographicBoundingBox>
+     <westBoundLongitude>3.806121</westBoundLongitude>
+     <eastBoundLongitude>3.942233</eastBoundLongitude>
+     <southBoundLatitude>43.566038</southBoundLatitude>
+     <northBoundLatitude>43.65375</northBoundLatitude>
+    </EX_GeographicBoundingBox>
+    <BoundingBox miny="5398529.409" CRS="EPSG:3857" maxx="438847.345" minx="423695.483" maxy="5412014.611"/>
+    <BoundingBox miny="3.806121" CRS="EPSG:4326" maxx="43.65375" minx="43.566038" maxy="3.942233"/>
+    <BoundingBox miny="6274561.222" CRS="EPSG:2154" maxx="776031.667" minx="765145.882" maxy="6284189.521"/>
+    <Style>
+     <Name>default</Name>
+     <Title>default</Title>
+     <LegendURL>
+      <Format>image/png</Format>
+      <OnlineResource xlink:type="simple" xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/montpellier.qgs&amp;SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=SousQuartiers&amp;FORMAT=image/png&amp;STYLE=default&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+     </LegendURL>
+    </Style>
+   </Layer>
+   <Layer queryable="1">
+    <Name>Quartiers</Name>
+    <Title>Quartiers</Title>
+    <CRS>CRS:84</CRS>
+    <CRS>EPSG:2154</CRS>
+    <CRS>EPSG:4326</CRS>
+    <CRS>EPSG:3857</CRS>
+    <EX_GeographicBoundingBox>
+     <westBoundLongitude>3.80707</westBoundLongitude>
+     <eastBoundLongitude>3.941331</eastBoundLongitude>
+     <southBoundLatitude>43.566704</southBoundLatitude>
+     <northBoundLatitude>43.653372</northBoundLatitude>
+    </EX_GeographicBoundingBox>
+    <BoundingBox miny="5398631.67" CRS="EPSG:3857" maxx="438746.925" minx="423801.134" maxy="5411956.343"/>
+    <BoundingBox miny="3.80707" CRS="EPSG:4326" maxx="43.653372" minx="43.566704" maxy="3.941331"/>
+    <BoundingBox miny="6274515.572" CRS="EPSG:2154" maxx="776072.767" minx="765124.605" maxy="6284267.155"/>
+    <Style>
+     <Name>default</Name>
+     <Title>default</Title>
+     <LegendURL>
+      <Format>image/png</Format>
+      <OnlineResource xlink:type="simple" xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/montpellier.qgs&amp;SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=Quartiers&amp;FORMAT=image/png&amp;STYLE=default&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+     </LegendURL>
+    </Style>
+   </Layer>
+   <Layer queryable="1">
+    <Name>Overview</Name>
+    <Title>Overview</Title>
+    <CRS>CRS:84</CRS>
+    <CRS>EPSG:2154</CRS>
+    <CRS>EPSG:4326</CRS>
+    <CRS>EPSG:3857</CRS>
+    <EX_GeographicBoundingBox>
+     <westBoundLongitude>3.80707</westBoundLongitude>
+     <eastBoundLongitude>3.941331</eastBoundLongitude>
+     <southBoundLatitude>43.566704</southBoundLatitude>
+     <northBoundLatitude>43.653372</northBoundLatitude>
+    </EX_GeographicBoundingBox>
+    <BoundingBox miny="5398631.67" CRS="EPSG:3857" maxx="438746.925" minx="423801.134" maxy="5411956.343"/>
+    <BoundingBox miny="3.80707" CRS="EPSG:4326" maxx="43.653372" minx="43.566704" maxy="3.941331"/>
+    <BoundingBox miny="6274515.572" CRS="EPSG:2154" maxx="776072.768" minx="765124.604" maxy="6284267.155"/>
+    <Layer queryable="1">
+     <Name>VilleMTP_MTP_Quartiers_2011_4326</Name>
+     <Title>VilleMTP_MTP_Quartiers_2011_4326</Title>
+     <CRS>CRS:84</CRS>
+     <CRS>EPSG:2154</CRS>
+     <CRS>EPSG:4326</CRS>
+     <CRS>EPSG:3857</CRS>
+     <EX_GeographicBoundingBox>
+      <westBoundLongitude>3.80707</westBoundLongitude>
+      <eastBoundLongitude>3.941331</eastBoundLongitude>
+      <southBoundLatitude>43.566704</southBoundLatitude>
+      <northBoundLatitude>43.653372</northBoundLatitude>
+     </EX_GeographicBoundingBox>
+     <BoundingBox miny="5398631.67" CRS="EPSG:3857" maxx="438746.925" minx="423801.134" maxy="5411956.343"/>
+     <BoundingBox miny="3.80707" CRS="EPSG:4326" maxx="43.653372" minx="43.566704" maxy="3.941331"/>
+     <BoundingBox miny="6274515.572" CRS="EPSG:2154" maxx="776072.767" minx="765124.605" maxy="6284267.155"/>
+     <Style>
+      <Name>default</Name>
+      <Title>default</Title>
+      <LegendURL>
+       <Format>image/png</Format>
+       <OnlineResource xlink:type="simple" xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/montpellier.qgs&amp;SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=VilleMTP_MTP_Quartiers_2011_4326&amp;FORMAT=image/png&amp;STYLE=default&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+      </LegendURL>
+     </Style>
+     <MinScaleDenominator>0</MinScaleDenominator>
+     <MaxScaleDenominator>1e+08</MaxScaleDenominator>
+    </Layer>
+   </Layer>
+   <Layer queryable="1">
+    <Name>Hidden</Name>
+    <Title>Hidden</Title>
+    <CRS>CRS:84</CRS>
+    <CRS>EPSG:2154</CRS>
+    <CRS>EPSG:4326</CRS>
+    <CRS>EPSG:3857</CRS>
+    <EX_GeographicBoundingBox>
+     <westBoundLongitude>-180</westBoundLongitude>
+     <eastBoundLongitude>180</eastBoundLongitude>
+     <southBoundLatitude>-85.051129</southBoundLatitude>
+     <northBoundLatitude>85.051129</northBoundLatitude>
+    </EX_GeographicBoundingBox>
+    <BoundingBox miny="-20037508.343" CRS="EPSG:3857" maxx="20037508.343" minx="-20037508.343" maxy="20037508.343"/>
+    <BoundingBox miny="-180" CRS="EPSG:4326" maxx="85.051129" minx="-85.051129" maxy="180"/>
+    <BoundingBox miny="-101583928.926" CRS="EPSG:2154" maxx="114773529.381" minx="-113604282.606" maxy="83711011.776"/>
+    <Layer queryable="1">
+     <Name>osm-mapnik</Name>
+     <Title>osm-mapnik</Title>
+     <CRS>CRS:84</CRS>
+     <CRS>EPSG:2154</CRS>
+     <CRS>EPSG:4326</CRS>
+     <CRS>EPSG:3857</CRS>
+     <EX_GeographicBoundingBox>
+      <westBoundLongitude>-180</westBoundLongitude>
+      <eastBoundLongitude>180</eastBoundLongitude>
+      <southBoundLatitude>-85.051129</southBoundLatitude>
+      <northBoundLatitude>85.051129</northBoundLatitude>
+     </EX_GeographicBoundingBox>
+     <BoundingBox miny="-20037508.343" CRS="EPSG:3857" maxx="20037508.343" minx="-20037508.343" maxy="20037508.343"/>
+     <BoundingBox miny="-180" CRS="EPSG:4326" maxx="85.051129" minx="-85.051129" maxy="180"/>
+     <BoundingBox miny="-101583928.923" CRS="EPSG:2154" maxx="114773529.379" minx="-113604282.603" maxy="83711011.772"/>
+     <Style>
+      <Name>default</Name>
+      <Title>default</Title>
+      <LegendURL>
+       <Format>image/png</Format>
+       <OnlineResource xlink:type="simple" xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/montpellier.qgs&amp;SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=osm-mapnik&amp;FORMAT=image/png&amp;STYLE=default&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+      </LegendURL>
+     </Style>
+    </Layer>
+    <Layer queryable="1">
+     <Name>osm-stamen-toner</Name>
+     <Title>osm-stamen-toner</Title>
+     <CRS>CRS:84</CRS>
+     <CRS>EPSG:2154</CRS>
+     <CRS>EPSG:4326</CRS>
+     <CRS>EPSG:3857</CRS>
+     <EX_GeographicBoundingBox>
+      <westBoundLongitude>-180</westBoundLongitude>
+      <eastBoundLongitude>180</eastBoundLongitude>
+      <southBoundLatitude>-85.051129</southBoundLatitude>
+      <northBoundLatitude>85.051129</northBoundLatitude>
+     </EX_GeographicBoundingBox>
+     <BoundingBox miny="-20037508.343" CRS="EPSG:3857" maxx="20037508.343" minx="-20037508.343" maxy="20037508.343"/>
+     <BoundingBox miny="-180" CRS="EPSG:4326" maxx="85.051129" minx="-85.051129" maxy="180"/>
+     <BoundingBox miny="-101583928.923" CRS="EPSG:2154" maxx="114773529.379" minx="-113604282.603" maxy="83711011.772"/>
+     <Style>
+      <Name>default</Name>
+      <Title>default</Title>
+      <LegendURL>
+       <Format>image/png</Format>
+       <OnlineResource xlink:type="simple" xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C:%5Cwebserver%5Cwww%5Clizmap%5Clizmap%5Cinstall%5Cqgis/montpellier.qgs&amp;SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=osm-stamen-toner&amp;FORMAT=image/png&amp;STYLE=default&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+      </LegendURL>
+     </Style>
+    </Layer>
+   </Layer>
+  </Layer>
+ </Capability>
+</WMS_Capabilities>
+";}

@@ -1,0 +1,77 @@
+2022-06-14 20:14:49	127.0.0.1	notice	Spatialite is not available
+2022-06-14 20:14:54	127.0.0.1	error	GetCapabilities result code: 404
+2022-06-14 20:14:54	127.0.0.1	error	An error has been raised when loading WMS GetCapabilities: HTTP Code 400
+2022-06-14 20:14:54	127.0.0.1	error	GetCapabilities result code: 404
+2022-06-14 20:14:54	127.0.0.1	error	GetCapabilities result code: 404
+2022-06-14 20:15:08	127.0.0.1	error	GetCapabilities result code: 404
+2022-06-14 20:15:08	127.0.0.1	error	GetCapabilities result code: 404
+2022-06-14 20:15:08	127.0.0.1	error	GetCapabilities result code: 404
+2022-06-14 20:15:08	127.0.0.1	error	An error has been raised when loading WMS GetCapabilities: HTTP Code 400
+2022-06-16 12:55:07	::1	notice	2022-06-16 12:55:07	[8]	Undefined index: schema	C:\webserver\www\lizmap\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	151
+
+2022-06-16 12:55:07	::1	notice	2022-06-16 12:55:07	[8]	Undefined index: tablename	C:\webserver\www\lizmap\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	151
+
+2022-06-16 12:55:07	::1	warning	2022-06-16 12:55:07	[2]	SQLite3::loadExtension(): SQLite Extension are disabled	C:\webserver\www\lizmap\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	90
+
+2022-06-16 12:55:07	::1	warning	2022-06-16 12:55:07	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	112
+
+2022-06-16 12:55:07	::1	warning	2022-06-16 12:55:07	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	112
+
+2022-06-16 12:55:08	::1	notice	2022-06-16 12:55:08	[8]	Undefined index: schema	C:\webserver\www\lizmap\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	151
+
+2022-06-16 12:55:08	::1	notice	2022-06-16 12:55:08	[8]	Undefined index: tablename	C:\webserver\www\lizmap\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	151
+
+2022-06-16 12:55:08	::1	warning	2022-06-16 12:55:08	[2]	SQLite3::loadExtension(): SQLite Extension are disabled	C:\webserver\www\lizmap\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	90
+
+2022-06-16 12:55:08	::1	warning	2022-06-16 12:55:08	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	112
+
+2022-06-16 12:55:08	::1	warning	2022-06-16 12:55:08	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	112
+
+2022-06-16 12:55:08	::1	notice	2022-06-16 12:55:08	[8]	Undefined index: schema	C:\webserver\www\lizmap\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	151
+
+2022-06-16 12:55:08	::1	notice	2022-06-16 12:55:08	[8]	Undefined index: tablename	C:\webserver\www\lizmap\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	151
+
+2022-06-16 12:55:08	::1	warning	2022-06-16 12:55:08	[2]	SQLite3::loadExtension(): SQLite Extension are disabled	C:\webserver\www\lizmap\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	90
+
+2022-06-16 12:55:08	::1	notice	2022-06-16 12:55:08	[8]	Undefined index: schema	C:\webserver\www\lizmap\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	151
+
+2022-06-16 12:55:08	::1	notice	2022-06-16 12:55:08	[8]	Undefined index: tablename	C:\webserver\www\lizmap\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	151
+
+2022-06-16 12:55:08	::1	warning	2022-06-16 12:55:08	[2]	SQLite3::loadExtension(): SQLite Extension are disabled	C:\webserver\www\lizmap\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	90
+
+2022-06-16 12:55:08	::1	warning	2022-06-16 12:55:08	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	112
+
+2022-06-16 13:37:36	::1	notice	2022-06-16 13:37:36	[8]	Undefined index: schema	C:\webserver\www\lizmap\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	151
+
+2022-06-16 13:37:36	::1	notice	2022-06-16 13:37:36	[8]	Undefined index: tablename	C:\webserver\www\lizmap\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	151
+
+2022-06-16 13:37:36	::1	warning	2022-06-16 13:37:36	[2]	SQLite3::loadExtension(): SQLite Extension are disabled	C:\webserver\www\lizmap\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	90
+
+2022-06-16 13:37:36	::1	warning	2022-06-16 13:37:36	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	112
+
+2022-06-16 13:37:36	::1	warning	2022-06-16 13:37:36	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	112
+
+2022-06-16 13:37:37	::1	notice	2022-06-16 13:37:37	[8]	Undefined index: schema	C:\webserver\www\lizmap\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	151
+
+2022-06-16 13:37:37	::1	notice	2022-06-16 13:37:37	[8]	Undefined index: tablename	C:\webserver\www\lizmap\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	151
+
+2022-06-16 13:37:37	::1	warning	2022-06-16 13:37:37	[2]	SQLite3::loadExtension(): SQLite Extension are disabled	C:\webserver\www\lizmap\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	90
+
+2022-06-16 13:37:37	::1	warning	2022-06-16 13:37:37	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	112
+
+2022-06-16 13:37:37	::1	notice	2022-06-16 13:37:37	[8]	Undefined index: schema	C:\webserver\www\lizmap\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	151
+
+2022-06-16 13:37:37	::1	notice	2022-06-16 13:37:37	[8]	Undefined index: tablename	C:\webserver\www\lizmap\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	151
+
+2022-06-16 13:37:37	::1	warning	2022-06-16 13:37:37	[2]	SQLite3::loadExtension(): SQLite Extension are disabled	C:\webserver\www\lizmap\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	90
+
+2022-06-16 13:37:37	::1	notice	2022-06-16 13:37:37	[8]	Undefined index: schema	C:\webserver\www\lizmap\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	151
+
+2022-06-16 13:37:37	::1	notice	2022-06-16 13:37:37	[8]	Undefined index: tablename	C:\webserver\www\lizmap\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	151
+
+2022-06-16 13:37:37	::1	warning	2022-06-16 13:37:37	[2]	SQLite3::loadExtension(): SQLite Extension are disabled	C:\webserver\www\lizmap\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	90
+
+2022-06-16 13:37:37	::1	warning	2022-06-16 13:37:37	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	112
+
+2022-06-16 13:37:37	::1	warning	2022-06-16 13:37:37	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	112
+

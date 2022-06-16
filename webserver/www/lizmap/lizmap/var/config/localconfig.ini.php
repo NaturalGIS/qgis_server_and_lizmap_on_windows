@@ -11,10 +11,7 @@
 
 
 [modules]
-;; uncomment it if you want to use ldap for authentication
-;; see documentation to complete the ldap configuration
-;ldapdao.access=2
-
+lizmap.installparam=demo
 
 [coordplugin_auth]
 ;; uncomment it if you want to use ldap for authentication
@@ -22,9 +19,5 @@
 ;driver=ldapdao
 
 
-[modules]
-lizmap.installparam=demo
-
-
-[jcommunity]
-resetAdminPasswordEnabled = off
+[coordplugins]
+lizmap=lizmapConfig.ini.php

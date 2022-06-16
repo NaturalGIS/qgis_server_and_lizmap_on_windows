@@ -9,8 +9,11 @@
 */
 
 $appPath = __DIR__.'/';
+require ($appPath.'vendor/autoload.php');
 require ($appPath.'../lib/jelix/init.php');
-
+if (file_exists($appPath.'my-packages/vendor/autoload.php')) {
+    require ($appPath.'my-packages/vendor/autoload.php');
+}
 jApp::initPaths(
     $appPath
     //$appPath.'www/',

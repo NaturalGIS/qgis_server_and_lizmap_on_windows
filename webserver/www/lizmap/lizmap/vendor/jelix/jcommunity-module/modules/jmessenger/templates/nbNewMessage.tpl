@@ -1,0 +1,1 @@
+<a href="{jurl 'jmessenger~jmessenger:inbox'}">{$nb}</a>

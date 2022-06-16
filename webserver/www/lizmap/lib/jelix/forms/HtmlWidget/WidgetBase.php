@@ -4,14 +4,14 @@
 * @subpackage  forms
 * @author      Laurent Jouanneau
 * @contributor Julien Issler, Dominique Papin, Claudio Bernardes
-* @copyright   2006-2018 Laurent Jouanneau
+* @copyright   2006-2020 Laurent Jouanneau
 * @copyright   2008-2011 Julien Issler, 2008 Dominique Papin
 * @copyright   2012 Claudio Bernardes
 * @link        http://www.jelix.org
 * @licence     http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public Licence, see LICENCE file
 */
 
-namespace jelix\forms\HtmlWidget;
+namespace Jelix\Forms\HtmlWidget;
 
 abstract class WidgetBase implements WidgetInterface {
 
@@ -223,10 +223,11 @@ abstract class WidgetBase implements WidgetInterface {
     protected function escJsStr($str) {
         return '\''.str_replace(array("'","\n"),array("\\'", "\\n"), $str).'\'';
     }
-    
-    protected function _outputAttr(&$attributes) {
-        foreach($attributes as $name=>$val) {
-            echo ' '.$name.'="'.htmlspecialchars($val).'"';
+
+    protected function _outputAttr(&$attributes)
+    {
+        foreach ($attributes as $name => $val) {
+            echo ' '.$name.'="'.htmlspecialchars($val, ENT_COMPAT).'"';
         }
     }
 
@@ -240,7 +241,7 @@ abstract class WidgetBase implements WidgetInterface {
         // deprecated. only for compatibility of plugins for jelix 1.6
         else if ($this->ctrl->help) {
             // additionnal &nbsp, else background icon is not shown in webkit
-            echo '<span class="jforms-help" id="'.$this->getId().'-help">&nbsp;<span>'.htmlspecialchars($this->ctrl->help).'</span></span>';
+            echo '<span class="jforms-help" id="'.$this->getId().'-help">&nbsp;<span>'.htmlspecialchars($this->ctrl->help, ENT_COMPAT).'</span></span>';
         }
     }
 
@@ -257,7 +258,8 @@ abstract class WidgetBase implements WidgetInterface {
 
         if ($ctrl->type == 'output' || $ctrl->type == 'checkboxes' ||
             $ctrl->type == 'radiobuttons' || $ctrl->type == 'date' ||
-            $ctrl->type == 'datetime' || $ctrl->type == 'choice'){
+            $ctrl->type == 'datetime' || $ctrl->type == 'time' ||
+            $ctrl->type == 'choice') {
             $this->outputLabelAsTitle($label, $attr);
         }
         else if($ctrl->type != 'submit' && $ctrl->type != 'reset'){
@@ -267,13 +269,13 @@ abstract class WidgetBase implements WidgetInterface {
 
     protected function outputLabelAsFormLabel($label, $attr) {
         echo '<label class="',$attr['class'],'" for="',$this->getId(),'"',$attr['idLabel'],$attr['hint'],'>';
-        echo htmlspecialchars($label), $attr['reqHtml'];
+        echo htmlspecialchars($label, ENT_COMPAT), $attr['reqHtml'];
         echo "</label>\n";
     }
 
     protected function outputLabelAsTitle($label, $attr) {
         echo '<span class="',$attr['class'],'"',$attr['idLabel'],$attr['hint'],'>';
-        echo htmlspecialchars($label), $attr['reqHtml'];
+        echo htmlspecialchars($label, ENT_COMPAT), $attr['reqHtml'];
         echo "</span>\n";
     }
     
@@ -290,16 +292,17 @@ abstract class WidgetBase implements WidgetInterface {
         echo '>';
         $value = $this->getValue();
         $value = $this->ctrl->getDisplayValue($value);
-        if(is_array($value)){
-            $s ='';
-            foreach($value as $v){
-                $s .= $this->valuesSeparator.htmlspecialchars($v);
+        if (is_array($value)) {
+            $s = '';
+            foreach ($value as $v) {
+                $s .= $this->valuesSeparator.htmlspecialchars($v, ENT_COMPAT);
             }
             echo substr($s, strlen($this->valuesSeparator));
-        }else if ($this->ctrl->isHtmlContent())
+        }else if ($this->ctrl->isHtmlContent()) {
             echo $value;
-        else
-            echo htmlspecialchars($value);
+        } else {
+            echo htmlspecialchars($value, ENT_COMPAT);
+        }
         echo '</span>';
     }
 

@@ -4,7 +4,7 @@
 * @subpackage  forms
 * @author      Laurent Jouanneau
 * @contributor Julien Issler, Dominique Papin
-* @copyright   2006-2018 Laurent Jouanneau
+* @copyright   2006-2020 Laurent Jouanneau
 * @copyright   2008-2011 Julien Issler, 2008 Dominique Papin
 * @link        http://www.jelix.org
 * @licence     http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public Licence, see LICENCE file
@@ -232,10 +232,10 @@ class jFormsBuilderHtml extends jFormsBuilderBase {
         $hint = ($ctrl->hint == ''?'':' title="'.htmlspecialchars($ctrl->hint).'"');
         $id = $this->_name.'_'.$ctrl->ref;
         $idLabel = ' id="'.$id.'_label"';
-        if($ctrl->type == 'output' || $ctrl->type == 'checkboxes' || $ctrl->type == 'radiobuttons' || $ctrl->type == 'date' || $ctrl->type == 'datetime' || $ctrl->type == 'choice'){
-            echo '<span class="jforms-label',$required,$inError,'"',$idLabel,$hint,'>',htmlspecialchars($ctrl->label),$reqhtml,"</span>\n";
+        if($ctrl->type == 'output' || $ctrl->type == 'checkboxes' || $ctrl->type == 'radiobuttons' || $ctrl->type == 'date' || $ctrl->type == 'datetime' || $ctrl->type == 'time' || $ctrl->type == 'choice'){
+            echo '<span class="jforms-label',$required,$inError,'"',$idLabel,$hint,'>',htmlspecialchars($ctrl->label, ENT_COMPAT),$reqhtml,"</span>\n";
         }else if($ctrl->type != 'submit' && $ctrl->type != 'reset'){
-            echo '<label class="jforms-label',$required,$inError,'" for="',$id,'"',$idLabel,$hint,'>',htmlspecialchars($ctrl->label),$reqhtml,"</label>\n";
+            echo '<label class="jforms-label',$required,$inError,'" for="',$id,'"',$idLabel,$hint,'>',htmlspecialchars($ctrl->label, ENT_COMPAT),$reqhtml,"</label>\n";
         }
     }
 
@@ -298,7 +298,7 @@ class jFormsBuilderHtml extends jFormsBuilderBase {
         if(is_array($value)){
             $s ='';
             foreach($value as $v){
-                $s .= $separator.htmlspecialchars($v);
+                $s .= $separator.htmlspecialchars($v, ENT_COMPAT);
             }
             echo substr($s, strlen($separator));
         }else if ($ctrl->isHtmlContent()) {
@@ -312,7 +312,7 @@ class jFormsBuilderHtml extends jFormsBuilderBase {
 
     protected function _outputAttr(&$attributes) {
         foreach($attributes as $name=>$val) {
-            echo ' '.$name.'="'.htmlspecialchars($val).'"';
+            echo ' '.$name.'="'.htmlspecialchars($val, ENT_COMPAT).'"';
         }
     }
 
@@ -486,10 +486,10 @@ class jFormsBuilderHtml extends jFormsBuilderBase {
         }
     }
 
-    protected function _outputDateControlHour($ctrl, $attr, $value){
+    protected function _outputDateControlHour($ctrl, $attr, $value, $configParameter='controls.datetime.input'){
         $attr['name'] = $ctrl->ref.'[hour]';
         $attr['id'] .= 'hour';
-        if(jApp::config()->forms['controls.datetime.input'] == 'textboxes') {
+        if(jApp::config()->forms[$configParameter] == 'textboxes') {
             $attr['value'] = $value;
             echo '<input type="text" size="2" maxlength="2"';
             $this->_outputAttr($attr);
@@ -507,10 +507,10 @@ class jFormsBuilderHtml extends jFormsBuilderBase {
         }
     }
 
-    protected function _outputDateControlMinutes($ctrl, $attr, $value){
+    protected function _outputDateControlMinutes($ctrl, $attr, $value, $configParameter='controls.datetime.input'){
         $attr['name'] = $ctrl->ref.'[minutes]';
         $attr['id'] .= 'minutes';
-        if(jApp::config()->forms['controls.datetime.input'] == 'textboxes') {
+        if(jApp::config()->forms[$configParameter] == 'textboxes') {
             $attr['value'] = $value;
             echo '<input type="text" size="2" maxlength="2"';
             $this->_outputAttr($attr);
@@ -528,12 +528,12 @@ class jFormsBuilderHtml extends jFormsBuilderBase {
         }
     }
 
-    protected function _outputDateControlSeconds($ctrl, $attr, $value){
+    protected function _outputDateControlSeconds($ctrl, $attr, $value, $configParameter='controls.datetime.input'){
         $attr['name'] = $ctrl->ref.'[seconds]';
         $attr['id'] .= 'seconds';
         if(!$ctrl->enableSeconds)
             echo '<input type="hidden" id="'.$attr['id'].'" name="'.$attr['name'].'" value="'.$value.'"'.$this->_endt;
-        else if(jApp::config()->forms['controls.datetime.input'] == 'textboxes') {
+        else if(jApp::config()->forms[$configParameter] == 'textboxes') {
             $attr['value'] = $value;
             echo '<input type="text"';
             $this->_outputAttr($attr);
@@ -646,6 +646,45 @@ class jFormsBuilderHtml extends jFormsBuilderBase {
         $this->commonJs($ctrl);
     }
 
+    protected function outputTime($ctrl, &$attr){
+        $attr['id'] = $this->_name.'_'.$ctrl->ref.'_';
+        $v = array('hour'=>'','minutes'=>'','seconds'=>'');
+        if (preg_match('#^(\d{2}):(\d{2})(:(\d{2}))?(?:$|\\s|\\.)#', $this->_form->getData($ctrl->ref), $matches)){
+            $v['hour'] = $matches[1];
+            $v['minutes'] = $matches[2];
+            if (isset($matches[3])) {
+                $v['seconds'] = $matches[4];
+            }
+            else {
+                $v['seconds'] = '00';
+            }
+        }
+        $f = jLocale::get('jelix~format.time');
+        for ($i = 0; $i < strlen($f); ++$i) {
+            if ($f[$i] == 'H') {
+                $this->_outputDateControlHour($ctrl, $attr, $v['hour'], 'controls.time.input');
+            } elseif ($f[$i] == 'i') {
+                $this->_outputDateControlMinutes($ctrl, $attr, $v['minutes'], 'controls.time.input');
+            } elseif ($f[$i] == 's') {
+                $this->_outputDateControlSeconds($ctrl, $attr, $v['seconds'], 'controls.time.input');
+            } else {
+                echo ' ';
+            }
+        }
+    }
+
+    protected function jsTime($ctrl){
+        $this->jsContent .= "c = new ".$this->jFormsJsVarName."ControlTime2('".$ctrl->ref."', ".$this->escJsStr($ctrl->label).");\n";
+        $this->jsContent .= "c.multiFields = true;\n";
+        $minDate = $ctrl->datatype->getFacet('minValue');
+        $maxDate = $ctrl->datatype->getFacet('maxValue');
+        if($minDate)
+            $this->jsContent .= "c.minDate = '".$minDate->toString(jDateTime::DB_TFORMAT)."';\n";
+        if($maxDate)
+            $this->jsContent .= "c.maxDate = '".$maxDate->toString(jDateTime::DB_TFORMAT)."';\n";
+        $this->commonJs($ctrl);
+    }
+
     protected function outputCheckbox($ctrl, &$attr) {
         $value = $this->_form->getData($ctrl->ref);
 
@@ -674,7 +713,7 @@ class jFormsBuilderHtml extends jFormsBuilderBase {
             $this->_outputAttr($attr);
             if((is_array($value) && in_array((string) $v,$value,true)) || ($value === (string) $v))
                 echo ' checked="checked"';
-            echo $this->_endt,'<label for="',$id,$i,'">',htmlspecialchars($label),"</label></span>\n";
+            echo $this->_endt,'<label for="',$id,$i,'">',htmlspecialchars($label),"</label></span> <br/>\n";
             $i++;
         }
     }
@@ -804,7 +843,7 @@ class jFormsBuilderHtml extends jFormsBuilderBase {
         }
         $value = (string) $value;
         if ($ctrl->emptyItemLabel !== null || !$ctrl->required)
-            echo '<option value=""',($value===''?' selected="selected"':''),'>',htmlspecialchars($ctrl->emptyItemLabel),"</option>\n";
+            echo '<option value=""',($value===''?' selected="selected"':''),'>',htmlspecialchars((string)$ctrl->emptyItemLabel),"</option>\n";
         $this->fillSelect($ctrl, $value);
         echo '</select>';
     }
@@ -882,7 +921,7 @@ class jFormsBuilderHtml extends jFormsBuilderBase {
             $attr['cols'] = $ctrl->cols;
         echo '<textarea';
         $this->_outputAttr($attr);
-        echo '>',htmlspecialchars($this->_form->getData($ctrl->ref)),'</textarea>';
+        echo '>',htmlspecialchars($this->_form->getData($ctrl->ref), ENT_COMPAT),'</textarea>';
     }
 
     protected function jsTextarea($ctrl, $withjsobj=true) {
@@ -976,7 +1015,7 @@ class jFormsBuilderHtml extends jFormsBuilderBase {
         echo '<input';
         $this->_outputAttr($attr);
         echo $this->_endt;
-        echo '<span class="jforms-value"',$hint,'>',htmlspecialchars($attr['value']),'</span>';
+        echo '<span class="jforms-value"',$hint,'>',htmlspecialchars($attr['value'], ENT_COMPAT),'</span>';
     }
 
     protected function jsOutput($ctrl) {
@@ -1167,7 +1206,7 @@ class jFormsBuilderHtml extends jFormsBuilderBase {
     protected function outputHelp($ctrl) {
         if ($ctrl->help) {
             // additionnal &nbsp, else background icon is not shown in webkit
-            echo '<span class="jforms-help" id="'. $this->_name.'_'.$ctrl->ref.'-help">&nbsp;<span>'.htmlspecialchars($ctrl->help).'</span></span>';
+            echo '<span class="jforms-help" id="'. $this->_name.'_'.$ctrl->ref.'-help">&nbsp;<span>'.htmlspecialchars($ctrl->help, ENT_COMPAT).'</span></span>';
         }
     }
 }

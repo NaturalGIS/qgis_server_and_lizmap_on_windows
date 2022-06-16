@@ -104,8 +104,10 @@ jFormsImageSelector.prototype = {
 
         this.imgDialog.openFromImage(imgElt, this.imageParameters)
             .then((canvas) => {
-                canvas = this.resizeCanvas(canvas, this.imageParameters.maxWidth, this.imageParameters.maxHeight);
-                this._saveCanvas(canvas, format, filename)
+                if (canvas) {
+                    canvas = this.resizeCanvas(canvas, this.imageParameters.maxWidth, this.imageParameters.maxHeight);
+                    this._saveCanvas(canvas, format, filename)
+                }
             });
     },
 
@@ -119,8 +121,10 @@ jFormsImageSelector.prototype = {
             var format = this.imageParameters.format || file.type;
             this.imgDialog.openFromInputFile(file, this.imageParameters)
                 .then((canvas) => {
-                    canvas = this.resizeCanvas(canvas, this.imageParameters.maxWidth, this.imageParameters.maxHeight);
-                    this._saveCanvas(canvas, format, file.name)
+                    if (canvas) {
+                        canvas = this.resizeCanvas(canvas, this.imageParameters.maxWidth, this.imageParameters.maxHeight);
+                        this._saveCanvas(canvas, format, file.name)
+                    }
                 });
         }
         else {
@@ -271,10 +275,10 @@ function jFormsImageDialog(eltSelector, options) {
     };
 
     if (this.dialog.dataset.dialogWidth) {
-        defaults.width = parseInt(this.dialog.dataset.dialogWidth, 10);
+        defaults.width = this.dialog.dataset.dialogWidth;
     }
     if (this.dialog.dataset.dialogHeight) {
-        defaults.height = parseInt(this.dialog.dataset.dialogHeight, 10);
+        defaults.height = this.dialog.dataset.dialogHeight;
     }
     if (this.dialog.dataset.dialogTitle) {
         defaults.title = this.dialog.dataset.dialogTitle;
@@ -288,12 +292,27 @@ function jFormsImageDialog(eltSelector, options) {
 
     var actual = Object.assign({}, defaults, options);
 
+    this.dialogMarginWidth = 80;
+    this.dialogMarginHeight = 200;
     this.dialogTitle = actual.title;
     this.dialogOkLabel = actual.okLabel || "Ok";
     this.dialogCancelLabel = actual.cancelLabel || "Cancel";
 
     this.dialogWidth = actual.width;
+    if (this.dialogWidth === 'auto') {
+        this.dialogWidth = Math.min(1024, document.documentElement.clientWidth-this.dialogMarginWidth-20);
+    }
+    else {
+        this.dialogWidth = parseInt(this.dialogWidth, 10);
+    }
+
     this.dialogHeight = actual.height;
+    if (this.dialogHeight === 'auto') {
+        this.dialogHeight = Math.min(1024, document.documentElement.clientHeight-this.dialogMarginHeight-20);
+    }
+    else {
+        this.dialogHeight = parseInt(this.dialogHeight, 10);
+    }
 
     this.sourceImg = null;
     this.sourceFile = null;
@@ -476,8 +495,8 @@ jFormsImageDialog.prototype = {
         return new Promise(function(resolve, reject) {
             $(me.dialog).dialog({
                 autoOpen: true,
-                width: me.dialogWidth+55,
-                height: me.dialogHeight+180,
+                width: me.dialogWidth+me.dialogMarginWidth,
+                height: me.dialogHeight+me.dialogMarginHeight,
                 modal: true,
                 title: me.dialogTitle,
                 buttons: [
@@ -497,7 +516,7 @@ jFormsImageDialog.prototype = {
                         text: me.dialogCancelLabel,
                         click: function() {
                             $(this).dialog("close");
-                            reject();
+                            resolve(null);
                         }
                     },
                 ],

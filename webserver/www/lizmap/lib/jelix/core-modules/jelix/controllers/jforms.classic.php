@@ -4,7 +4,7 @@
 * @subpackage jelix-module
 * @author     Laurent Jouanneau
 * @contributor Julien Issler
-* @copyright  2010-2015 Laurent Jouanneau
+* @copyright  2010-2020 Laurent Jouanneau
 * @copyright  2015 Julien Issler
 * @licence    http://www.gnu.org/licenses/gpl.html GNU General Public Licence, see LICENCE file
 */
@@ -52,6 +52,9 @@ class jformsCtrl extends jController {
                 return $rep;
             }
         }
+
+        // event so the form can be prepared correctly for forms made dynamically
+        jEvent::notify('jformsPrepareToFillDynamicList', array('form' => $form, 'controlRef' => $this->param('__ref')));
 
         // retrieve the control to fill
         $control = $form->getControl($this->param('__ref'));

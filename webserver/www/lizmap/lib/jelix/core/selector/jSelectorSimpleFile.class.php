@@ -5,7 +5,7 @@
 * @package     jelix
 * @subpackage  core_selector
 * @author      Laurent Jouanneau
-* @copyright   2005-2007 Laurent Jouanneau
+* @copyright   2005-2020 Laurent Jouanneau
 * @link        http://www.jelix.org
 * @licence    GNU Lesser General Public Licence see LICENCE file or http://www.gnu.org/licenses/lgpl.html
 */
@@ -22,7 +22,7 @@ class jSelectorSimpleFile implements jISelector {
     protected $_basePath='';
 
     function __construct($sel){
-        if(preg_match("/^([\w\.\/]+)$/", $sel, $m)){
+        if(preg_match("/^([\w_\-\.\/]+)$/", $sel, $m)){
             $this->file = $m[1];
             $this->_path = $this->_basePath.$m[1];
         }else{

@@ -17,17 +17,17 @@ class qgisVectorLayer extends qgisMapLayer
     protected $fields = array();
 
     /**
-     * @var string[]  list of aliases name for each fields
+     * @var string[] list of aliases name for each fields
      */
     protected $aliases = array();
 
     /**
-     * @var string[]  list of default value (as QGIS expressions) for each fields
+     * @var string[] list of default value (as QGIS expressions) for each fields
      */
     protected $defaultValues = array();
 
     /**
-     * @var string[]  list of constraints for each fields (type of contraints and if it is notNull, unique and/or expression contraint)
+     * @var string[] list of constraints for each fields (type of contraints and if it is notNull, unique and/or expression contraint)
      */
     protected $constraints = array();
 
@@ -75,13 +75,33 @@ class qgisVectorLayer extends qgisMapLayer
         $this->wfsFields = $propLayer['wfsFields'];
     }
 
+    /**
+     * Get the WFS typename for this layer.
+     *
+     * We need to get either the shortname or the layer name
+     * and replace all spaces by underscore
+     *
+     * @return string The WFS typename of the layer
+     */
+    public function getWfsTypeName()
+    {
+        // If we have a short name, we should use it
+        $typename = $this->getShortName();
+        if (!$typename) {
+            $typename = $this->getName();
+        }
+
+        return str_replace(' ', '_', $typename);
+    }
+
     public function getFields()
     {
         return $this->fields;
     }
 
     /**
-     * list of aliases
+     * list of aliases.
+     *
      * @return string[]
      */
     public function getAliasFields()
@@ -90,7 +110,7 @@ class qgisVectorLayer extends qgisMapLayer
     }
 
     /**
-     * List of default values for each fields
+     * List of default values for each fields.
      *
      * Values are QGIS expressions or may be null when no default value is given
      *
@@ -102,21 +122,24 @@ class qgisVectorLayer extends qgisMapLayer
     }
 
     /**
-     * Get the QGIS expression of the default value of the given field
+     * Get the QGIS expression of the default value of the given field.
      *
      * @param string $fieldName
-     * @return string|null null if there is no default value
+     *
+     * @return null|string null if there is no default value
      */
     public function getDefaultValue($fieldName)
     {
         if (isset($this->defaultValues[$fieldName])) {
             return $this->defaultValues[$fieldName];
         }
+
         return null;
     }
 
     /**
-     * list of constraints
+     * list of constraints.
+     *
      * @return string[]
      */
     public function getConstraintsList()
@@ -125,9 +148,10 @@ class qgisVectorLayer extends qgisMapLayer
     }
 
     /**
-     * Get the QGIS constraints of the given field
+     * Get the QGIS constraints of the given field.
      *
      * @param string $fieldName
+     *
      * @return string[] the constraints of the field
      */
     public function getConstraints($fieldName)
@@ -135,12 +159,13 @@ class qgisVectorLayer extends qgisMapLayer
         if (isset($this->constraints[$fieldName])) {
             return $this->constraints[$fieldName];
         }
+
         return array(
-                    'constraints' => 0,
-                    'notNull' => false,
-                    'unique' => false,
-                    'exp' => false
-                );
+            'constraints' => 0,
+            'notNull' => false,
+            'unique' => false,
+            'exp' => false,
+        );
     }
 
     public function getWfsFields()
@@ -157,93 +182,20 @@ class qgisVectorLayer extends qgisMapLayer
             return $this->dtParams;
         }
 
-        // Get datasource information from QGIS
+        $datasourceParser = new qgisVectorLayerDatasource(
+            $this->provider,
+            $this->datasource
+        );
+        $parameters = array(
+            'dbname', 'service', 'host', 'port', 'user', 'password',
+            'sslmode', 'key', 'estimatedmetadata', 'selectatid',
+            'srid', 'type', 'checkPrimaryKeyUnicity',
+            'table', 'geocol', 'sql', 'schema', 'tablename',
+        );
 
-        // Provider ogr AND layername given -> the layer is Spatialite or GPKG
-        if( $this->provider == 'ogr' and preg_match('#layername=#', $this->datasource ) ){
-            $split = explode('|', $this->datasource);
-            $dbname = $split[0];
-            $table = str_replace('layername=', '', $split[1]);
-            $sql = '';
-            if( count($split) == 3 ){
-                $sql = str_replace('subset=', '', $split[1]);
-            }
-            $table = str_replace('layername=', '', $split[1]);
-            $ds = array (
-                'dbname' => $dbname,
-                'service' => '',
-                'host' => '',
-                'port' => '',
-                'user' => '',
-                'password' => '',
-                'sslmode' => '',
-                'key' => '',
-                'estimatedmetadata' => '',
-                'selectatid' => '',
-                'srid' => '',
-                'type' => '',
-                'checkPrimaryKeyUnicity' => '',
-                'table' => $table,
-                'geocol' => 'geom',
-                'sql' => $sql
-            );
-        }else {
-            // Else this is a regular database layer: provider = postgres or spatialite
-            $datasourceMatch = preg_match(
-                "#(?:dbname='([^ ]+)' )?(?:service='([^ ]+)' )?(?:host=([^ ]+) )?(?:port=([0-9]+) )?(?:user='([^ ]+)' )?(?:password='([^ ]+)' )?(?:sslmode=([^ ]+) )?(?:key='([^ ]+)' )?(?:estimatedmetadata=([^ ]+) )?(?:selectatid=([^ ]+) )?(?:srid=([0-9]+) )?(?:type=([a-zA-Z]+) )?(?:checkPrimaryKeyUnicity='([0-1]+)' )?(?:table=\"([^ ]+)\" )?(?:\\()?(?:([^ ]+)\\) )?(?:sql=(.*))?#s",
-
-                $this->datasource,
-                $dt
-            );
-
-            if (count($dt) < 15 or $dt[14] == '') {
-
-                // if table not found, try again for complex tables, such as table="(SELECT count(*) FROM table WHERE bla)"
-                $datasourceMatch = preg_match(
-                    "#(?:dbname='([^ ]+)' )?(?:service='([^ ]+)' )?(?:host=([^ ]+) )?(?:port=([0-9]+) )?(?:user='([^ ]+)' )?(?:password='([^ ]+)' )?(?:sslmode=([^ ]+) )?(?:key='([^ ]+)' )?(?:estimatedmetadata=([^ ]+) )?(?:selectatid=([^ ]+) )?(?:srid=([0-9]+) )?(?:type=([a-zA-Z]+) )?(?:checkPrimaryKeyUnicity='([0-1]+)' )?(?:table=\"(.+)\" )?(?:\\()?(?:([^ ]+)\\) )?(?:sql=(.*))?#s",
-                    $this->datasource,
-                    $dt
-                );
-            }
-
-            $ds = array(
-                'dbname' => $dt[1],
-                'service' => $dt[2],
-                'host' => $dt[3],
-                'port' => $dt[4],
-                'user' => $dt[5],
-                'password' => $dt[6],
-                'sslmode' => $dt[7],
-                'key' => $dt[8],
-                'estimatedmetadata' => $dt[9],
-                'selectatid' => $dt[10],
-                'srid' => $dt[11],
-                'type' => $dt[12],
-                'checkPrimaryKeyUnicity' => $dt[13],
-                'table' => $dt[14],
-                'geocol' => $dt[15],
-                'sql' => $dt[16],
-            );
+        foreach ($parameters as $param) {
+            $ds[$param] = $datasourceParser->getDatasourceParameter($param);
         }
-
-        $table = $ds['table'];
-        $tableAlone = $table;
-        $schema = '';
-        if (preg_match('#"."#', $table)) {
-            $table = '"'.$table.'"';
-            $exp = explode('.', str_replace('"', '', $table));
-            $tableAlone = $exp[1];
-            $schema = $exp[0];
-        }
-        // Handle subqueries
-        if (substr($table, 0, 1) == '(' and substr($table, -1) == ')') {
-            $table = $tableAlone = $table.' fooliz';
-            // remove \" which escapes table and schema names in QGIS WML within subquery
-            $table = str_replace('\"', '"', $table);
-        }
-        $ds['schema'] = $schema;
-        $ds['table'] = $table;
-        $ds['tablename'] = $tableAlone;
 
         $this->dtParams = (object) $ds;
 
@@ -257,11 +209,15 @@ class qgisVectorLayer extends qgisMapLayer
      * getDatasourceConnection() is not useful, as we could need the profile
      * to give to jDao or other components that need a profile, not a connection
      *
+     * @param int  $timeout                default timeout for the connection
+     * @param bool $setSearchPathFromLayer If true, the layer schema is used to set the search_path.
+     *                                     Default to True to keep the same behavior as did the previous version of this method.
+     *
      * @throws jException
      *
      * @return null|string null if there is an issue or no connection parameters
      */
-    public function getDatasourceProfile()
+    public function getDatasourceProfile($timeout = 30, $setSearchPathFromLayer = true)
     {
         if ($this->dbProfile !== null) {
             return $this->dbProfile;
@@ -283,7 +239,13 @@ class qgisVectorLayer extends qgisMapLayer
                 $jdbParams = array(
                     'driver' => 'pgsql',
                     'service' => $dtParams->service,
+                    'timeout' => $timeout,
                 );
+                // Database may be used since dbname
+                // is not mandatory in service file
+                if (!empty($dtParams->dbname)) {
+                    $jdbParams['database'] = $dtParams->dbname;
+                }
             } else {
                 $jdbParams = array(
                     'driver' => 'pgsql',
@@ -292,20 +254,21 @@ class qgisVectorLayer extends qgisMapLayer
                     'database' => $dtParams->dbname,
                     'user' => $dtParams->user,
                     'password' => $dtParams->password,
+                    'timeout' => $timeout,
                 );
             }
-            if (!empty($dtParams->schema)) {
-                $jdbParams['search_path'] = '"'.$dtParams->schema . '",public';
+            if (!empty($dtParams->schema) && $setSearchPathFromLayer) {
+                $jdbParams['search_path'] = '"'.$dtParams->schema.'",public';
             }
         } elseif ($this->provider == 'ogr'
-            and preg_match('#(gpkg|sqlite)$#', $dtParams->dbname ) ) {
-                $spatialiteExt = $this->project->getSpatialiteExtension();
-                $repository = $this->project->getRepository();
-                $jdbParams = array(
-                    'driver' => 'sqlite3',
-                    'database' => realpath($repository->getPath().$dtParams->dbname),
-                    'extensions' => $spatialiteExt
-                );
+            and preg_match('#(gpkg|sqlite)$#', $dtParams->dbname)) {
+            $spatialiteExt = $this->project->getSpatialiteExtension();
+            $repository = $this->project->getRepository();
+            $jdbParams = array(
+                'driver' => 'sqlite3',
+                'database' => realpath($repository->getPath().$dtParams->dbname),
+                'extensions' => $spatialiteExt,
+            );
         } else {
             return null;
         }
@@ -338,7 +301,7 @@ class qgisVectorLayer extends qgisMapLayer
             return $this->connection;
         }
 
-        if ($this->provider != 'spatialite' && $this->provider != 'postgres' and !( preg_match('#layername=#', $this->datasource ) ) ) {
+        if ($this->provider != 'spatialite' && $this->provider != 'postgres' and !(preg_match('#layername=#', $this->datasource))) {
             jLog::log('Unknown provider "'.$this->provider.'" to get connection!', 'error');
 
             return null;
@@ -404,7 +367,7 @@ class qgisVectorLayer extends qgisMapLayer
         $fields = $this->getDbFieldList();
         $wfsFields = $this->getWfsFields();
 
-        $dbInfo = new qgisLayerDbFieldsInfo();
+        $dbInfo = new qgisLayerDbFieldsInfo($cnx);
         $dbInfo->dataFields = array();
         foreach ($fields as $fieldName => $prop) {
             if (in_array($fieldName, $wfsFields) || in_array(strtolower($prop->type), $this->geometryDatatypeMap)) {
@@ -531,9 +494,8 @@ class qgisVectorLayer extends qgisMapLayer
         $dataFields = $dbFieldsInfo->dataFields;
         if (array_key_exists($field, $dataFields)) {
             $prop = $dataFields[$field];
-            if ($prop->hasDefault && $prop->default != '' &&
-                !in_array($prop->default, $values)) {
-
+            if ($prop->hasDefault && $prop->default != ''
+                && !in_array($prop->default, $values)) {
                 $provider = $this->getProvider();
                 $cnx = null;
                 if ($provider == 'postgres') {
@@ -572,7 +534,7 @@ class qgisVectorLayer extends qgisMapLayer
         }
         $sql .= ' FROM '.$dtParams->table;
 
-        list($sqlw, $pk) = $this->getPkWhereClause($cnx, $dbFieldsInfo, $feature);
+        list($sqlw, $pk) = $this->getPkWhereClause($dbFieldsInfo, $feature);
         $dataFields = $dbFieldsInfo->dataFields;
         $sql .= ' WHERE ';
         $sql .= implode(' AND ', $sqlw);
@@ -624,25 +586,16 @@ class qgisVectorLayer extends qgisMapLayer
     }
 
     /**
-     * @param jDbConnection         $cnx
      * @param qgisLayerDbFieldsInfo $dbFieldsInfo
      * @param object                $feature
      */
-    protected function getPkWhereClause($cnx, $dbFieldsInfo, $feature)
+    protected function getPkWhereClause($dbFieldsInfo, $feature)
     {
         $sqlw = array();
-        $dataFields = $dbFieldsInfo->dataFields;
         $pk = array();
         foreach ($dbFieldsInfo->primaryKeys as $key) {
             $val = $feature->properties->{$key};
-            if ($dataFields[$key]->unifiedType != 'integer'
-                && $dataFields[$key]->unifiedType !== 'numeric'
-                && $dataFields[$key]->unifiedType !== 'float'
-                && $dataFields[$key]->unifiedType !== 'decimal') {
-                $val = $cnx->quote($val);
-            }
-            $key = $cnx->encloseName($key);
-            $sqlw[] = $key.' = '.$val;
+            $sqlw[] = $dbFieldsInfo->getSQLRefEquality($key, $val);
             $pk[$key] = $val;
         }
 
@@ -666,7 +619,6 @@ class qgisVectorLayer extends qgisMapLayer
         $refs = array();
         $insert = array();
         $primaryKeys = $dbFieldsInfo->primaryKeys;
-        $dataFields = $dbFieldsInfo->dataFields;
         $dataLogInfo = array();
         foreach ($values as $ref => $value) {
             // For insert, only for not NULL values to allow serial and default values to work
@@ -676,10 +628,7 @@ class qgisVectorLayer extends qgisMapLayer
                 // For log
                 if (in_array($ref, $primaryKeys)) {
                     $val = $value;
-                    if ($dataFields[$ref]->unifiedType != 'integer') {
-                        $val = $cnx->quote($val);
-                    }
-                    $dataLogInfo[] = $cnx->encloseName($ref).' = '.$val;
+                    $dataLogInfo[] = $dbFieldsInfo->getSQLRefEquality($ref, $val);
                 }
             }
         }
@@ -696,7 +645,7 @@ class qgisVectorLayer extends qgisMapLayer
             $returnKeys[] = $cnx->encloseName($key);
         }
         $returnKeysString = implode(', ', $returnKeys);
-        // For spatialite, we will run a complentary query to retrieve the pkeys
+        // For spatialite, we will run a complementary query to retrieve the pkeys
         if ($this->provider == 'postgres') {
             $sql .= '  RETURNING '.$returnKeysString;
         }
@@ -789,7 +738,7 @@ class qgisVectorLayer extends qgisMapLayer
         $sql .= implode(', ', $update);
 
         // Add where clause with primary keys
-        list($sqlw, $pk) = $this->getPkWhereClause($cnx, $dbFieldsInfo, $feature);
+        list($sqlw, $pk) = $this->getPkWhereClause($dbFieldsInfo, $feature);
         // Store WHere clause to retrieve primary keys in spatialite
         $uwhere = '';
         $uwhere .= ' WHERE ';
@@ -802,8 +751,10 @@ class qgisVectorLayer extends qgisMapLayer
         $sql .= $uwhere;
 
         // Get select clause for primary keys (used when inserting data in postgresql)
-        $returnKeys = array_keys($pk);
-
+        $returnKeys = array();
+        foreach (array_keys($pk) as $key) {
+            $returnKeys[] = $cnx->encloseName($key);
+        }
         $returnKeysString = implode(', ', $returnKeys);
         // For spatialite, we will run a complementary query to retrieve the pkeys
         if ($this->provider == 'postgres') {
@@ -858,7 +809,7 @@ class qgisVectorLayer extends qgisMapLayer
 
             return $pkvals;
         } catch (Exception $e) {
-            jLog::log('SQL = '.$sql);
+            jLog::log('SQL = '.$sql, 'error');
 
             throw $e;
         }
@@ -886,7 +837,7 @@ class qgisVectorLayer extends qgisMapLayer
         $sql = ' DELETE FROM '.$dtParams->table;
 
         // Add where clause with primary keys
-        list($sqlw, $pkLogInfo) = $this->getPkWhereClause($cnx, $dbFieldsInfo, $feature);
+        list($sqlw, $pkLogInfo) = $this->getPkWhereClause($dbFieldsInfo, $feature);
         $sql .= ' WHERE ';
         $sql .= implode(' AND ', $sqlw);
 
@@ -920,29 +871,122 @@ class qgisVectorLayer extends qgisMapLayer
         }
     }
 
-    public function linkChildren($fkey, $fval, $pkey, $pvals)
+    public function editableFeatures()
+    {
+        $data = array(
+            'status' => 'unrestricted',
+            'features' => array(),
+        );
+
+        $project = $this->getProject();
+        $rep = $project->getRepository();
+
+        // login filtered override
+        if (jAcl2::check('lizmap.tools.loginFilteredLayers.override', $rep->getKey())) {
+            return $data;
+        }
+
+        // Get filter by login
+        $loginFilter = $project->getLoginFilter($this->getName(), true);
+        // login filters array is empty
+        if (empty($loginFilter)) {
+            return $data;
+        }
+
+        // layer not in login filters array
+        if (!array_key_exists('filter', $loginFilter)) {
+            return $data;
+        }
+
+        // Editable features are a restricted list
+        $data['status'] = 'restricted';
+
+        // Filter
+        $expByUser = $loginFilter['filter'];
+
+        // Get layer WFS typename
+        $typename = $this->getWfsTypeName();
+
+        // Get the needed fields to retrieve
+        $dbFieldsInfo = $this->getDbFieldsInfo();
+        $pKeys = $dbFieldsInfo->primaryKeys;
+        $properties = array_merge($pKeys, array($loginFilter['filterAttribute']));
+
+        $params = array(
+            'MAP' => $project->getPath(),
+            'SERVICE' => 'WFS',
+            'VERSION' => '1.0.0',
+            'REQUEST' => 'GetFeature',
+            'TYPENAME' => $typename,
+            'PROPERTYNAME' => implode(',', $properties),
+            'OUTPUTFORMAT' => 'GeoJSON',
+            'GEOMETRYNAME' => 'none',
+            'EXP_FILTER' => $expByUser,
+        );
+
+        // Perform request
+        $wfsRequest = new lizmapWFSRequest($project, $params);
+        $result = $wfsRequest->process();
+
+        // Check code
+        if (floor($result->code / 100) >= 4) {
+            return $data;
+        }
+
+        // Check mime/type
+        if (in_array(strtolower($result->mime), array('text/html', 'text/xml'))) {
+            return $data;
+        }
+
+        // Get data
+        $wfsData = $result->data;
+        if (property_exists($result, 'file') and $result->file and is_file($wfsData)) {
+            $wfsData = jFile::read($wfsData);
+        }
+
+        // Check data
+        if (!$wfsData) {
+            return $data;
+        }
+
+        // Get data from layer
+        $wfsData = json_decode($wfsData);
+        $data['features'] = $wfsData->features;
+
+        return $data;
+    }
+
+    /**
+     * Link features between 2 tables: one parent layer and one child layer.
+     *
+     * It runs a SQL query concerning the child layer table:
+     * UPDATE child_table
+     * SET foreign_key_column = parent_id_value
+     * WHERE child_pkey_column = child_id;
+     *
+     * @param string $foreign_key_column name of the foreign key column in the child layer we need in the update SET
+     * @param int    $parent_id_value    id value of the parent layer feature (only one ID allowed) used in the SET
+     * @param string $child_pkey_column  name of the primary key column in the child layer, used in the WHERE clause
+     * @param array  $child_ids          Primary key values of the child features to be linked. More than one allowed
+     *
+     * @return array Results of the SQL UPDATE queries
+     */
+    public function linkChildren($foreign_key_column, $parent_id_value, $child_pkey_column, $child_ids)
     {
         // Get database connection object
         $dtParams = $this->getDatasourceParameters();
         $cnx = $this->getDatasourceConnection();
         $dbFieldsInfo = $this->getDbFieldsInfo();
-        $dataFields = $dbFieldsInfo->dataFields;
 
         $results = array();
-        $one = (int) $fval;
-        if ($dataFields[$fkey]->unifiedType != 'integer') {
-            $one = $cnx->quote($one);
-        }
-        foreach ($pvals as $pval) {
-            $two = (int) $pval;
-            if ($dataFields[$pkey]->unifiedType != 'integer') {
-                $two = $cnx->quote($two);
-            }
+        $foreign_key_setter = $dbFieldsInfo->getSQLRefEquality($foreign_key_column, (int) $parent_id_value);
+        foreach ($child_ids as $child_id) {
+            $child_filter_based_on_pk = $dbFieldsInfo->getSQLRefEquality($child_pkey_column, (int) $child_id);
 
             // Build SQL
             $sql = ' UPDATE '.$dtParams->table;
-            $sql .= ' SET '.$cnx->encloseName($fkey).' = '.$one;
-            $sql .= ' WHERE '.$cnx->encloseName($pkey).' = '.$two;
+            $sql .= ' SET '.$foreign_key_setter;
+            $sql .= ' WHERE '.$child_filter_based_on_pk;
             $sql .= ';';
 
             try {
@@ -957,38 +1001,51 @@ class qgisVectorLayer extends qgisMapLayer
         return $results;
     }
 
-    public function insertRelations($fkey, $fvals, $pkey, $pvals)
+    /**
+     * Link features between 2 tables by creating the needed lines
+     * in a third pivot table, for a many-to-many relation (n-m).
+     *
+     * It runs one ore many SQL queries concerning the pivot layer table to insert the needed line(s):
+     * INSERT INTO pivot_table ("foreign_key_column_a" , "foreign_key_column_b")
+     * SELECT parent_a_id_value, parent_b_id_value
+     * WHERE NOT EXISTS (
+     *     SELECT "foreign_key_column_a" , "foreign_key_column_b"
+     *     FROM pivot_table
+     *     WHERE "foreign_key_column_a" = parent_a_id_value AND "foreign_key_column_b" = parent_b_id_value
+     * );
+     *
+     * @param string $foreign_key_column_a name of the foreign key column referencing the parent A in the pivot table
+     * @param array  $parent_a_ids         values of the ids of the selected features of the parent table A
+     * @param string $foreign_key_column_b name of the foreign key column referencing the parent B in the pivot table
+     * @param array  $parent_b_ids         values of the ids of the selected features of the parent table B
+     *
+     * @return array Results of the SQL INSERT queries
+     */
+    public function insertRelations($foreign_key_column_a, $parent_a_ids, $foreign_key_column_b, $parent_b_ids)
     {
         // Get database connection object
         $dtParams = $this->getDatasourceParameters();
         $cnx = $this->getDatasourceConnection();
         $dbFieldsInfo = $this->getDbFieldsInfo();
-        $dataFields = $dbFieldsInfo->dataFields;
 
         $results = array();
-        foreach ($fvals as $fval) {
-            $one = (int) $fval;
-            if ($dataFields[$fkey]->unifiedType != 'integer') {
-                $one = $cnx->quote($one);
-            }
-            foreach ($pvals as $pval) {
-                $two = (int) $pval;
-                if ($dataFields[$pkey]->unifiedType != 'integer') {
-                    $two = $cnx->quote($two);
-                }
+        foreach ($parent_a_ids as $parent_a_id) {
+            $quoted_parent_a_id = $dbFieldsInfo->getQuotedValue($foreign_key_column_a, (int) $parent_a_id);
+            foreach ($parent_b_ids as $parent_b_id) {
+                $quoted_parent_b_id = $dbFieldsInfo->getQuotedValue($foreign_key_column_b, (int) $parent_b_id);
 
                 // Build SQL
                 $sql = ' INSERT INTO '.$dtParams->table.' (';
-                $sql .= ' '.$cnx->encloseName($fkey).' , ';
-                $sql .= ' '.$cnx->encloseName($pkey).' )';
-                $sql .= ' SELECT '.$one.', '.$two;
+                $sql .= ' '.$cnx->encloseName($foreign_key_column_a).' , ';
+                $sql .= ' '.$cnx->encloseName($foreign_key_column_b).' )';
+                $sql .= ' SELECT '.$quoted_parent_a_id.', '.$quoted_parent_b_id;
                 $sql .= ' WHERE NOT EXISTS';
                 $sql .= ' ( SELECT ';
-                $sql .= ' '.$cnx->encloseName($fkey).' , ';
-                $sql .= ' '.$cnx->encloseName($pkey).' ';
+                $sql .= ' '.$cnx->encloseName($foreign_key_column_a).' , ';
+                $sql .= ' '.$cnx->encloseName($foreign_key_column_b).' ';
                 $sql .= ' FROM '.$dtParams->table;
-                $sql .= ' WHERE '.$cnx->encloseName($fkey).' = '.$one;
-                $sql .= ' AND '.$cnx->encloseName($pkey).' = '.$two.')';
+                $sql .= ' WHERE '.$cnx->encloseName($foreign_key_column_a).' = '.$quoted_parent_a_id;
+                $sql .= ' AND '.$cnx->encloseName($foreign_key_column_b).' = '.$quoted_parent_b_id.')';
                 $sql .= ';';
 
                 try {
@@ -1010,17 +1067,13 @@ class qgisVectorLayer extends qgisMapLayer
         $dtParams = $this->getDatasourceParameters();
         $cnx = $this->getDatasourceConnection();
         $dbFieldsInfo = $this->getDbFieldsInfo();
-        $dataFields = $dbFieldsInfo->dataFields;
 
         // Build SQL
-        $val = (int) $pval;
-        if ($dataFields[$pkey]->unifiedType != 'integer') {
-            $val = $cnx->quote($val);
-        }
+        $valSQL = $dbFieldsInfo->getSQLRefEquality($pkey, (int) $pval);
 
         $sql = ' UPDATE '.$dtParams->table;
         $sql .= ' SET '.$cnx->encloseName($fkey).' = NULL';
-        $sql .= ' WHERE '.$cnx->encloseName($pkey).' = '.$val;
+        $sql .= ' WHERE '.$valSQL;
         $sql .= ';';
 
         try {

@@ -8,7 +8,7 @@
 * @contributor Laurent Raufaste
 * @contributor Julien Issler
 * @contributor Alexandre Zanelli
-* @copyright  2001-2005 CopixTeam, 2005-2018 Laurent Jouanneau, 2007-2008 Laurent Raufaste
+* @copyright  2001-2005 CopixTeam, 2005-2020 Laurent Jouanneau, 2007-2008 Laurent Raufaste
 * @copyright  2009 Julien Issler
 * This class was get originally from the Copix project (CopixDBConnectionPostgreSQL, Copix 2.3dev20050901, http://www.copix.org)
 * Few lines of code are still copyrighted 2001-2005 CopixTeam (LGPL licence).
@@ -104,6 +104,12 @@ class pgsqlDbConnection extends jDbConnection {
         // If given, no need to add host, user, database, port and password
         if(isset($this->profile['service']) && $this->profile['service'] != ''){
             $str = 'service=\''.$this->profile['service'].'\''.$str;
+
+            // Database name may be given, even if service is used
+            // dbname should not be mandatory in service file
+            if (isset($this->profile['database']) && $this->profile['database'] != '') {
+                $str .= ' dbname=\''.$this->profile['database'].'\'';
+            }
         }
         else {
             // we do a distinction because if the host is given == TCP/IP connection else unix socket
@@ -137,8 +143,15 @@ class pgsqlDbConnection extends jDbConnection {
             $str .= ' options=\''.$this->profile['pg_options'].'\'';
         }
 
+        if (isset($this->profile['force_new']) && $this->profile['force_new']) {
+            $cnx = @$funcconnect ($str, PGSQL_CONNECT_FORCE_NEW);
+        }
+        else {
+            $cnx = @$funcconnect ($str);
+        }
+
         // let's do the connection
-        if ($cnx = @$funcconnect ($str)) {
+        if ($cnx) {
             if (isset($this->profile['force_encoding']) && $this->profile['force_encoding'] == true
                && isset($this->_charsets[jApp::config()->charset])) {
                 pg_set_client_encoding($cnx, $this->_charsets[jApp::config()->charset]);
@@ -264,6 +277,15 @@ class pgsqlDbConnection extends jDbConnection {
             }
         }
         return $this->serverVersion;
+    }
+
+
+    public function getSearchPath()
+    {
+        if (isset($this->profile['search_path']) && trim($this->profile['search_path']) != '') {
+            return preg_split('/\s*,\s*/', trim($this->profile['search_path']));
+        }
+        return array('public');
     }
 }
 

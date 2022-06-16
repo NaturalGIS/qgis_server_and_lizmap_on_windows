@@ -100,7 +100,7 @@ class popup
                 $n_abspath = explode('/', $n_abspath);
                 $n_keys = array_keys($n_abspath, '..');
                 foreach ($n_keys as $keypos => $key) {
-                    array_splice($address, $key - ($keypos * 2 + 1), 2);
+                    array_splice($n_abspath, $key - ($keypos * 2 + 1), 2);
                 }
                 $n_abspath = implode('/', $n_abspath);
                 $n_abspath = str_replace('./', '', $n_abspath);
@@ -126,7 +126,8 @@ class popup
             else {
                 if (!$popupFeatureContent) {
                     // only if no template is passed by the user
-                    $attributeValueLabel = preg_replace('#_|-#', ' ', end(explode('/', $attributeValue)));
+                    $attributeParts = explode('/', $attributeValue);
+                    $attributeValueLabel = preg_replace('#_|-#', ' ', end($attributeParts));
                     $attributeValue = '<a href="'.$mediaUrl.'" target="_blank">'.$attributeValueLabel.'</a>';
                 } else {
                     $attributeValue = $mediaUrl;

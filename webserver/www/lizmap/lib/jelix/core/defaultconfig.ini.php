@@ -409,9 +409,13 @@ start = 1
 shared_session = off
 
 ; parameters for the session cookie
+
+; if on, cookie sent only with https
 cookieSecure=off
+; if on, the cookie is not accessible in JS (keep "on" !)
 cookieHttpOnly=on
-cookieExpires=0
+; lifetime of the session cookie in seconds. 0 means "until the browser is closed"
+cookieLifetime=0
 ; only supported with php 7.3.0+. Possible values: None, Strict, Lax
 cookieSameSite=
 
@@ -442,11 +446,13 @@ loadClasses=
 [forms]
 ; define input type for datetime widgets : "textboxes" or "menulists"
 controls.datetime.input = "menulists"
+controls.time.input = "menulists"
 ; define the way month labels are displayed widgets: "numbers", "names" or "shortnames"
 controls.datetime.months.labels = "names"
 ; define the default config for datepickers in jforms
 datepicker = default
 datetimepicker = default
+timepicker=
 
 ; default captcha type
 captcha = simple
@@ -457,6 +463,9 @@ captcha.simple.widgettype=captcha
 captcha.recaptcha.validator=\jelix\forms\Captcha\ReCaptchaValidator
 captcha.recaptcha.widgettype=recaptcha
 
+; deprecated
+flagPrepareObjectFromControlsContactArrayValues = 0
+
 [jforms_builder_html]
 ;control type = plugin name
 
@@ -465,21 +474,25 @@ jquery = $jqueryPath/jquery.js
 jqueryui.js[] = $jqueryPath/ui/jquery-ui-core-widg-mous-posi.custom.min.js
 jqueryui.css[] = $jqueryPath/themes/base/jquery.ui.all.css
 
+
 [datepickers]
 default = $jelix/js/jforms/datepickers/default/init.js
 default.js[]=$jqueryPath/ui/jquery-ui-core-widg-mous-posi.custom.min.js
 default.js[]=$jqueryPath/ui/jquery.ui.datepicker.min.js
-default.js[]=$jelix/js/jforms/datepickers/default/ui.$lang.js
 default.js[]=$jqueryPath/ui/i18n/jquery.ui.datepicker-$lang.js
+default.js[]=$jelix/js/jforms/datepickers/default/ui.$lang.js
 default.css[]=$jqueryPath/themes/base/jquery.ui.all.css
 
 [datetimepickers]
 default = $jelix/js/jforms/datepickers/default/init.js
 default.js[]=$jqueryPath/ui/jquery-ui-core-widg-mous-posi.custom.min.js
 default.js[]=$jqueryPath/ui/jquery.ui.datepicker.min.js
-default.js[]=$jelix/js/jforms/datepickers/default/ui.$lang.js
 default.js[]=$jqueryPath/ui/i18n/jquery.ui.datepicker-$lang.js
+default.js[]=$jelix/js/jforms/datepickers/default/ui.$lang.js
 default.css[]=$jqueryPath/themes/base/jquery.ui.all.css
+
+[timepickers]
+
 
 [htmleditors]
 default.engine.name = wymeditor

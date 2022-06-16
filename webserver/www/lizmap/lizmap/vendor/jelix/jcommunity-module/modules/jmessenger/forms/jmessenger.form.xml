@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form xmlns="http://jelix.org/ns/forms/1.1">
+
+    <hidden ref="answer_to" />
+
+    <menulist ref="id_for" required="true">
+        <label locale="message.form.dest"></label>
+        <datasource dao="jcommunity~user" method="findAll"
+		    labelproperty="nickname" valueproperty="id"/>
+    </menulist>
+
+    <input ref="title" required="true" maxlength="255">
+        <label locale="message.form.subject"></label>
+    </input>
+
+    <textarea ref="content" required="true">
+        <label locale="message.form.content"></label>
+    </textarea>
+
+    <submit ref="_submit">
+        <label locale="message.form.ok"></label>
+    </submit>
+
+</form>

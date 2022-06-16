@@ -26,6 +26,9 @@ if  [ -d $BACKUPDIR ]; then
     if [ -f $BACKUPDIR/liveconfig.ini.php ]; then
         cp -p $BACKUPDIR/liveconfig.ini.php        $LIZMAP/var/config/
     fi
+    if [ -f $BACKUPDIR/localframework.ini.php ]; then
+        cp -p $BACKUPDIR/localframework.ini.php        $LIZMAP/var/config/
+    fi
     if [ -f $BACKUPDIR/lizmapLogConfig.ini.php ]; then
         cp -p $BACKUPDIR/lizmapLogConfig.ini.php    $LIZMAP/var/config/lizmapLogConfig.ini.php
     fi
@@ -41,6 +44,18 @@ if  [ -d $BACKUPDIR ]; then
     cp -p $BACKUPDIR/lizmapConfig.ini.php           $LIZMAP/var/config/lizmapConfig.ini.php
     cp -p $BACKUPDIR/installer.ini.php              $LIZMAP/var/config/installer.ini.php
     cp -p $BACKUPDIR/profiles.ini.php               $LIZMAP/var/config/profiles.ini.php
+    if [ -d $BACKUPDIR/my-packages ]; then
+        cp -Rp $BACKUPDIR/my-packages       $LIZMAP/
+    fi
+    if [ -d $BACKUPDIR/lizmap-modules ]; then
+        cp -Rp $BACKUPDIR/lizmap-modules       $LIZMAP/
+    fi
+    if [ -f $BACKUPDIR/mapBuilder.ini.php ]; then
+        cp -p $BACKUPDIR/mapBuilder.ini.php        $LIZMAP/var/config/
+    fi
+    if [ -f $BACKUPDIR/altiProfil.ini.php ]; then
+        cp -p $BACKUPDIR/altiProfil.ini.php        $LIZMAP/var/config/
+    fi
 else
     echo "backup directory does not exists"
     exit 1

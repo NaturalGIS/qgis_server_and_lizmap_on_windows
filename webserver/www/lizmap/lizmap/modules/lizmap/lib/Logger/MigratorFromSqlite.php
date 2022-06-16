@@ -10,33 +10,54 @@
 
 namespace Lizmap\Logger;
 
-
-class MigratorFromSqlite {
-
-    function __construct()
+class MigratorFromSqlite
+{
+    public function __construct()
     {
-
     }
 
     const MIGRATE_RES_OK = 1;
     const MIGRATE_RES_ALREADY_MIGRATED = 2;
 
-    protected function copyTable($daoSelector, $oldProfile, $newProfile)
+    protected function copyTable($daoSelector, $oldProfile, $newProfile, $updateSequence = true)
     {
         $daoNew = \jDao::get($daoSelector, $newProfile);
         $daoSqlite = \jDao::create($daoSelector, $oldProfile);
         $properties = array_keys($daoSqlite->getProperties());
-        foreach($daoSqlite->findAll() as $rec) {
+        foreach ($daoSqlite->findAll() as $rec) {
             $daoRec = \jDao::createRecord($daoSelector, $newProfile);
-            foreach($properties as $prop) {
-                $daoRec->$prop = $rec->$prop;
+            foreach ($properties as $prop) {
+                $daoRec->{$prop} = $rec->{$prop};
             }
-            $daoNew->insert($daoRec);
+
+            try {
+                $daoNew->insert($daoRec);
+            } catch (\Exception $e) {
+                echo '*** Insert ERROR for the record ';
+                var_export($rec->getPk());
+                echo "\nError is: ".$e->getMessage()."\n";
+            }
+        }
+
+        if ($updateSequence) {
+            $idField = $daoNew->getProperties()[$daoNew->getPrimaryKeyNames()[0]]['fieldName'];
+            $table = $daoNew->getTables()[$daoNew->getPrimaryTable()]['realname'];
+
+            $conn = \jDb::getConnection($newProfile);
+            $rs = $conn->query('SELECT pg_get_serial_sequence('.$conn->quote($table).','.$conn->quote($idField).') as sequence_name');
+            if ($rs && ($rec = $rs->fetch())) {
+                $sequence = $rec->sequence_name;
+                if ($sequence) {
+                    $conn->query('SELECT setval('.$conn->quote($sequence).',
+                    (SELECT max('.$conn->encloseName($idField).') 
+                    FROM '.$conn->encloseName($table).'))');
+                }
+            }
         }
     }
 
-    function migrateLog($profileName = 'lizlog') {
-
+    public function migrateLog($profileName = 'lizlog', $resetBefore = false)
+    {
         $profile = \jProfiles::get('jdb', $profileName);
         if (!$profile) {
             throw new \UnexpectedValueException('No lizlog profile defined into profiles.ini.php', 1);
@@ -63,7 +84,13 @@ class MigratorFromSqlite {
         $daoCounterNew = \jDao::create('lizmap~logCounter', $profileName);
         $daoDetailsNew = \jDao::get('lizmap~logDetail', $profileName);
 
-        if ($daoCounterNew->countAll() > 0 || $daoDetailsNew->countAll() > 0) {
+        if ($resetBefore) {
+            $db = \jDb::getConnection($profileName);
+            $table = $daoCounterNew->getTables()[$daoCounterNew->getPrimaryTable()]['realname'];
+            $db->exec('DELETE FROM '.$db->prefixTable($table));
+            $table = $daoDetailsNew->getTables()[$daoDetailsNew->getPrimaryTable()]['realname'];
+            $db->exec('DELETE FROM '.$db->prefixTable($table));
+        } elseif ($daoCounterNew->countAll() > 0 || $daoDetailsNew->countAll() > 0) {
             return self::MIGRATE_RES_ALREADY_MIGRATED;
         }
 
@@ -73,19 +100,19 @@ class MigratorFromSqlite {
         return self::MIGRATE_RES_OK;
     }
 
-
-    protected function createLogTables($profile) {
-
+    protected function createLogTables($profile)
+    {
         $db = \jDb::getConnection($profile);
         $tools = $db->tools();
         $file = \jApp::getModulePath('lizmap').'/install/sql/lizlog.'.$db->dbms.'.sql';
         $db->beginTransaction();
+
         try {
             $tools->execSQLScript($file);
             $db->commit();
-        }
-        catch(\Exception $e) {
+        } catch (\Exception $e) {
             $db->rollback();
+
             throw $e;
         }
     }

@@ -5,7 +5,7 @@
  * @author      Claudio Bernardes
  * @contributor Laurent Jouanneau, Julien Issler, Dominique Papin
  * @copyright   2012 Claudio Bernardes
- * @copyright   2006-2018 Laurent Jouanneau, 2008-2011 Julien Issler, 2008 Dominique Papin
+ * @copyright   2006-2020 Laurent Jouanneau, 2008-2011 Julien Issler, 2008 Dominique Papin
  * @link        http://www.jelix.org
  * @licence     http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public Licence, see LICENCE file
  */
@@ -41,7 +41,14 @@ class upload2_htmlFormWidget extends \jelix\forms\HtmlWidget\WidgetBase
     protected $uriActionParameters = array();
 
     /**
-     * @var string parameter name containing the control value, for the jUrl object used to get the URL of the image
+     * parameter name containing the control value, for the jUrl object used
+     * to get the URL of the image.
+     *
+     * The parameter can already exists into $uriActionParameters and could contain
+     * a `%s` pattern that will be replaced by the value. Else the existing parameter
+     * value will be replaced by the new value.
+     *
+     * @var string parameter name containing the control value
      */
     protected $uriActionFileParameter = '';
 
@@ -53,6 +60,21 @@ class upload2_htmlFormWidget extends \jelix\forms\HtmlWidget\WidgetBase
     protected $imgMaxWidth = 0;
 
     protected $imgMaxHeight = 0;
+
+    /**
+     * @param array $attr
+     */
+    protected function filterUploadAttributes(&$attr)
+    {
+        foreach(array('uriAction', 'uriActionParameters', 'uriActionFileParameter',
+                    'baseURI', 'imgMaxWidth', 'imgMaxHeight') as $parameter) {
+            if (isset($attr[$parameter])) {
+                $this->$parameter = $attr[$parameter];
+                unset($attr[$parameter]);
+            }
+        }
+
+    }
 
     //------ ParentBuilderInterface
 
@@ -70,16 +92,15 @@ class upload2_htmlFormWidget extends \jelix\forms\HtmlWidget\WidgetBase
 
     // -------- WidgetInterface
 
-    public function setAttributes($attr) {
+    public function setDefaultAttributes($attr)
+    {
+        $this->filterUploadAttributes($attr);
+        parent::setDefaultAttributes($attr);
+    }
 
-        foreach(array('uriAction', 'uriActionParameters', 'uriActionFileParameter',
-                    'baseURI', 'imgMaxWidth', 'imgMaxHeight') as $parameter) {
-            if (isset($attr[$parameter])) {
-                $this->$parameter = $attr[$parameter];
-                unset($attr[$parameter]);
-            }
-        }
-
+    public function setAttributes($attr)
+    {
+        $this->filterUploadAttributes($attr);
         parent::setAttributes($attr);
     }
 
@@ -208,7 +229,9 @@ class upload2_htmlFormWidget extends \jelix\forms\HtmlWidget\WidgetBase
 
         if (count($choices) > 1) {
             echo '<li id="' . $idItem . 'new_item">',
-                '<label><input ' . $attrRadio . 'new' . $attrRadioSuffix . '  id="' . $idChoice . '_jf_action_new" value="new"/> '.
+                '<label><input ' . $attrRadio . 'new' . $attrRadioSuffix . '  id="' . $idChoice . '_jf_action_new" value="new" ' .
+                ($action == 'new' ? 'checked' : '') .
+                '/> '.
                 jLocale::get("jelix~jforms.upload.choice.new").
                 '</label> ';
             echo '<input';
@@ -238,6 +261,7 @@ class upload2_htmlFormWidget extends \jelix\forms\HtmlWidget\WidgetBase
 
         if (count($choices) > 1) {
             $this->parentWidget->addJs("c2.activate('" . $action . "');\n");
+            echo "</ul>\n";
         }
     }
 
@@ -261,14 +285,21 @@ class upload2_htmlFormWidget extends \jelix\forms\HtmlWidget\WidgetBase
             ($this->uriAction || $this->baseURI)
         ) {
             if ($this->baseURI) {
-                $url = $this->baseURI.$value;
+                $url = htmlspecialchars($this->baseURI.$value);
             }
             else {
                 $params = $this->uriActionParameters;
                 if ($this->uriActionFileParameter) {
-                    $params[$this->uriActionFileParameter] = $value;
+                    // replace %s by the value into the uri action parameter
+                    $pname = $this->uriActionFileParameter;
+                    if (isset($params[$pname]) && strpos($params[$pname], '%s') !== false) {
+                        $params[$pname] = str_replace('%s', $value, $params[$pname]);
+                    }
+                    else {
+                        $params[$pname] = $value;
+                    }
                 }
-                $url = jUrl::get($this->uriAction, $params);
+                $url = jUrl::get($this->uriAction, $params, jUrl::XMLSTRING);
             }
             $style = '';
             if ($this->imgMaxHeight) {

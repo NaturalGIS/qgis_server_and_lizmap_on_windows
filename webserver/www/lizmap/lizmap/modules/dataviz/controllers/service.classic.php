@@ -73,7 +73,7 @@ class serviceCtrl extends jController
         // Fins layer by id
         if (array_key_exists($plot_id, $this->config['layers'])) {
             $plotConfig = $this->config['layers'][$plot_id];
-        }else{
+        } else {
             return array(
                 'errors' => array(
                     'title' => 'No corresponding plot',
@@ -84,6 +84,7 @@ class serviceCtrl extends jController
 
         // Create plot
         jClasses::inc('dataviz~datavizPlot');
+
         $type = $plotConfig['plot']['type'];
         if ($type == 'scatter') {
             $dplot = new datavizPlotScatter($repository, $project, $layerId, $plotConfig);
@@ -99,6 +100,10 @@ class serviceCtrl extends jController
             $dplot = new datavizPlotHistogram2d($repository, $project, $layerId, $plotConfig);
         } elseif ($type == 'polar') {
             $dplot = new datavizPlotPolar($repository, $project, $layerId, $plotConfig);
+        } elseif ($type == 'sunburst') {
+            $dplot = new datavizPlotSunburst($repository, $project, $layerId, $plotConfig);
+        } elseif ($type == 'html') {
+            $dplot = new datavizPlotHtml($repository, $project, $layerId, $plotConfig);
         } else {
             $dplot = null;
         }

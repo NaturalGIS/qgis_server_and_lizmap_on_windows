@@ -3,7 +3,7 @@
 * @package    jelix
 * @subpackage db_driver
 * @author     Laurent Jouanneau
-* @copyright  2010-2018 Laurent Jouanneau
+* @copyright  2010-2020 Laurent Jouanneau
 *
 * @link        http://www.jelix.org
 * @licence     http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public Licence, see LICENCE file
@@ -27,6 +27,12 @@ class pgsqlDbTable extends jDbTable {
         $conn = $this->schema->getConn();
         $tools = $conn->tools();
         $version = $conn->getServerMajorVersion();
+
+        $searchPath = $conn->getSearchPath();
+        $schemas = implode(',', array_map(function($schema) use ($conn) {
+            return $conn->quote($schema);
+        }, $searchPath));
+
         // pg_get_expr on adbin, not compatible with pgsql < 9
         $adColName = ($version < 12 ? 'd.adsrc' : 'pg_get_expr(d.adbin,d.adrelid) AS adsrc');
 
@@ -40,7 +46,8 @@ class pgsqlDbTable extends jDbTable {
             LEFT OUTER JOIN pg_attrdef AS d
                 ON (d.adrelid = c.oid AND d.adnum = a.attnum)
             WHERE a.attnum > 0 AND c.relname = ".$conn->quote($this->name) .
-            " ORDER BY a.attnum";
+            " AND c.relnamespace IN ( SELECT oid FROM pg_namespace WHERE nspname IN (".$schemas."))
+            ORDER BY a.attnum";
         $rs = $conn->query($sql);
         while ($line = $rs->fetch()) {
             $name = $line->attname;
@@ -55,7 +62,7 @@ class pgsqlDbTable extends jDbTable {
             $col = new jDbColumn($name, $type, $length, $hasDefault, $default, $notNull);
 
             $typeinfo = $tools->getTypeInfo($type);
-            if (preg_match('/^nextval\(([^\)]*)\)$/', $default, $m)) {
+            if (is_string($default) && preg_match('/^nextval\(([^\)]*)\)$/', $default, $m)) {
                 $col->autoIncrement = true;
                 $col->default = '';
                 if ($m[1]) {
@@ -71,8 +78,7 @@ class pgsqlDbTable extends jDbTable {
             else if ($typeinfo[6]) {
                 $col->autoIncrement = true;
                 $col->default = '';
-            }
-            else if (preg_match('/^NULL::/', $default) && $hasDefault) {
+            } elseif (is_string($default) && preg_match('/^NULL::/', $default) && $hasDefault) {
                 $col->default = null;
             }
 
@@ -364,9 +370,15 @@ class pgsqlDbSchema extends jDbSchema {
     }
 
     protected function _getTables () {
+        $searchPath = $this->getConn()->getSearchPath();
+        $c = $this->getConn();
+        $schemas = implode(',', array_map(function($schema) use ($c) {
+            return $c->quote($schema);
+        }, $searchPath));
+
         $results = array ();
-        $sql = "SELECT tablename FROM pg_tables
-                  WHERE schemaname NOT IN ('pg_catalog', 'information_schema')
+        $sql = "SELECT tablename, schemaname FROM pg_tables
+                  WHERE schemaname IN (".$schemas.")
                   ORDER BY tablename";
         $rs = $this->getConn()->query ($sql);
         while ($line = $rs->fetch()){

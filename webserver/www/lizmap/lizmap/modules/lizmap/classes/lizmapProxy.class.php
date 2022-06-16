@@ -30,9 +30,9 @@ class lizmapProxy
         $data = array();
 
         // Filter and normalize the parameters of the request
-        $paramsBlacklist = array('module', 'action', 'c', 'repository', 'project');
+        $paramsBlocklist = array('module', 'action', 'c', 'repository', 'project');
         foreach ($params as $key => $val) {
-            if (!in_array(strtolower($key), $paramsBlacklist)) {
+            if (!in_array(strtolower($key), $paramsBlocklist)) {
                 $data[strtolower($key)] = $val;
             }
         }
@@ -75,11 +75,11 @@ class lizmapProxy
      *
      * @param string            $url     url of the remote data to fetch
      * @param null|array|string $options list of options for the http request.
-     *                                   Option items can be: "method", "referer", "proxyMethod",
+     *                                   Option items can be: "method", "referer", "proxyHttpBackend",
      *                                   "headers" (array of headers strings), "body", "debug".
      *                                   If $options is a string, this should be the proxy method
      *                                   for compatibility to old calls.
-     *                                   proxyMethod: method for the proxy : 'php' or 'curl'.
+     *                                   $proxyHttpBackend: method for the proxy : 'php' or 'curl', or ''.
      *                                   by default, it is the proxy method indicated into lizmapService
      * @param null|int          $debug   deprecated. 0 or 1 to get debug log.
      *                                   if null, it uses the method indicated into lizmapService.
@@ -96,7 +96,7 @@ class lizmapProxy
             if ($options !== null) {
                 $options = array(
                     'method' => $method,
-                    'proxyMethod' => $options,
+                    'proxyHttpBackend' => $options,
                 );
             } else {
                 $options = array('method' => $method);
@@ -111,7 +111,7 @@ class lizmapProxy
             'method' => 'get',
             'referer' => '',
             'headers' => array(),
-            'proxyMethod' => $services->proxyMethod,
+            'proxyHttpBackend' => $services->proxyHttpBackend,
             'debug' => $services->debugMode,
             'body' => '',
         ), $options);
@@ -137,21 +137,48 @@ class lizmapProxy
             'Accept' => '*/*',
         ), $options['headers']);
 
-        $options['headers'] = array_merge(
-            self::userHttpHeader()
-            , $options['headers']);
+        if (strpos($url, $services->wmsServerURL) === 0) {
+            // headers only for QGIS server
+            $options['headers'] = array_merge(
+                self::userHttpHeader(),
+                $services->wmsServerHeaders,
+                $options['headers']
+            );
+        }
+
+        if (isset($options['loginFilteredOverride'])) {
+            $options['headers']['X-Lizmap-Override-Filter'] = $options['loginFilteredOverride'];
+        }
 
         // Initialize responses
         $http_code = null;
 
-        // Proxy method : use curl or file_get_contents
-        if ($options['proxyMethod'] == 'curl' && extension_loaded('curl')) {
+        // Proxy http backend : use curl or file_get_contents
+        if (extension_loaded('curl') && $options['proxyHttpBackend'] != 'php') {
             // With curl
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_HEADER, 0);
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+
+            // For POST, remove parameters from the URL
+            // and add them to the body of the request
+            // Also change the content type
+            if ($options['method'] === 'post') {
+                if (empty($options['body'])) {
+                    $explode_url = explode('?', $url);
+                    if (count($explode_url) == 2) {
+                        // Override previous url by removing the parameters after ?
+                        $url = $explode_url[0];
+
+                        // Set the body to use POST instead of GET
+                        $options['body'] = $explode_url[1];
+                        $options['headers']['Content-type'] = 'application/x-www-form-urlencoded';
+                    }
+                }
+            }
+
             curl_setopt($ch, CURLOPT_HTTPHEADER, self::encodeHttpHeaders($options['headers']));
             curl_setopt($ch, CURLOPT_URL, $url);
 
@@ -178,7 +205,9 @@ class lizmapProxy
             }
             if ($options['method'] === 'post') {
                 curl_setopt($ch, CURLOPT_POST, 1);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, $options['body']);
+                if (!empty($options['body'])) {
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, $options['body']);
+                }
             }
             $data = curl_exec($ch);
             $info = curl_getinfo($ch);
@@ -264,18 +293,30 @@ class lizmapProxy
         return array($data, $mime, $http_code);
     }
 
-
-    protected static function userHttpHeader(){
+    protected static function userHttpHeader()
+    {
         // Check if a user is authenticated
-        if ( !jAuth::isConnected() ) {
-            // return empty header array
-            return array();
+        if (!jAuth::isConnected()) {
+            // return headers with empty user header
+            return array(
+                'X-Lizmap-User' => '',
+                'X-Lizmap-User-Groups' => '',
+            );
         }
+
+        // Provide user and groups to lizmap plugin access control
         $user = jAuth::getUserSession();
-        $userGroups = jAcl2DbUserGroup::getGroups();
+        $userGroups = array();
+        $uGroups = jAcl2DbUserGroup::getGroups();
+        foreach ($uGroups as $uGroup) {
+            if (substr($uGroup, 0, 7) != '__priv_') {
+                $userGroups[$uGroup] = $uGroup;
+            }
+        }
+
         return array(
             'X-Lizmap-User' => $user->login,
-            'X-Lizmap-User-Groups' => implode(', ', $userGroups)
+            'X-Lizmap-User-Groups' => implode(', ', $userGroups),
         );
     }
 
@@ -303,8 +344,18 @@ class lizmapProxy
 
         // Get cache if exists
         $keyParams = $params;
+        // Remove keys not necessary for cache
         if (array_key_exists('map', $keyParams)) {
             unset($keyParams['map']);
+        }
+        if (array_key_exists('Lizmap_User', $keyParams)) {
+            unset($keyParams['Lizmap_User']);
+        }
+        if (array_key_exists('Lizmap_User_Groups', $keyParams)) {
+            unset($keyParams['Lizmap_User_Groups']);
+        }
+        if (array_key_exists('Lizmap_Override_Filter', $keyParams)) {
+            unset($keyParams['Lizmap_Override_Filter']);
         }
         ksort($keyParams);
 
@@ -317,9 +368,6 @@ class lizmapProxy
         $lproj = $project;
         $project = $lproj->getKey();
         $repository = $lrep->getKey();
-
-        // Change to true to put some information in debug files
-        $debug = $ser->debugMode;
 
         // Read config file for the current project
         $layername = $params['layers'];
@@ -369,9 +417,9 @@ class lizmapProxy
         // --> must be done after checking that parent project is involved
         $profile = lizmapProxy::createVirtualProfile($repository, $project, $layers, $crs);
 
-        if ($debug) {
-            lizmap::logMetric('LIZMAP_PROXY_READ_LAYER_CONFIG');
-        }
+        lizmap::logMetric('LIZMAP_PROXY_READ_LAYER_CONFIG', 'WMS', array(
+            'qgisParams' => $params,
+        ));
 
         // Has the user asked for cache for this layer ?
         $useCache = false;
@@ -411,15 +459,14 @@ class lizmapProxy
                 $tile = false;
             }
             if ($tile) {
-                $_SESSION['LIZMAP_GETMAP_CACHE_STATUS'] = 'read';
                 $mime = 'image/jpeg';
                 if (preg_match('#png#', $params['format'])) {
                     $mime = 'image/png';
                 }
 
-                if ($debug) {
-                    lizmap::logMetric('LIZMAP_PROXY_HIT_CACHE');
-                }
+                lizmap::logMetric('LIZMAP_PROXY_HIT_CACHE', 'WMS', array(
+                    'qgisParams' => $params,
+                ));
 
                 return array($tile, $mime, 200, true);
             }
@@ -448,8 +495,8 @@ class lizmapProxy
         $metatileBuffer = 5;
 
         // Also checks if gd is installed
-        if ($metatileSize && $useCache && $wmsClient == 'web' &&
-            extension_loaded('gd') && function_exists('gd_info')) {
+        if ($metatileSize && $useCache && $wmsClient == 'web'
+            && extension_loaded('gd') && function_exists('gd_info')) {
             // Metatile Size
             $metatileSizeExp = explode(',', $metatileSize);
             $metatileSizeX = (int) $metatileSizeExp[0];
@@ -468,7 +515,7 @@ class lizmapProxy
             $xmax = $bboxExp[2] + $xFactor * $width + $metatileBuffer * $width / $params['width'];
             $ymax = $bboxExp[3] + $yFactor * $height + $metatileBuffer * $height / $params['height'];
             // Replace request bbox by metatile bbox
-            $params['bbox'] = "${xmin},${ymin},${xmax},${ymax}";
+            $params['bbox'] = "{$xmin},{$ymin},{$xmax},{$ymax}";
 
             // Keep original param value
             $originalParams = array('width' => $params['width'], 'height' => $params['height']);
@@ -490,9 +537,10 @@ class lizmapProxy
             array('method' => 'post')
         );
 
-        if ($debug) {
-            lizmap::logMetric('LIZMAP_PROXY_REQUEST_QGIS_MAP');
-        }
+        lizmap::logMetric('LIZMAP_PROXY_REQUEST_QGIS_MAP', 'WMS', array(
+            'qgisParams' => $params,
+            'qgisResponseCode' => $code,
+        ));
 
         if ($useCache && !preg_match('/^image/', $mime)) {
             $useCache = false;
@@ -500,8 +548,8 @@ class lizmapProxy
 
         // Metatile : if needed, crop the metatile into a single tile
         // Also checks if gd is installed
-        if ($metatileSize && $useCache && $wmsClient == 'web' &&
-            extension_loaded('gd') && function_exists('gd_info')
+        if ($metatileSize && $useCache && $wmsClient == 'web'
+            && extension_loaded('gd') && function_exists('gd_info')
         ) {
 
             // Save original content into an image var
@@ -542,12 +590,10 @@ class lizmapProxy
             imagedestroy($original);
             imagedestroy($image);
 
-            if ($debug) {
-                lizmap::logMetric('LIZMAP_PROXY_CROP_METATILE');
-            }
+            lizmap::logMetric('LIZMAP_PROXY_CROP_METATILE', 'WMS', array(
+                'qgisParams' => $params,
+            ));
         }
-
-        $_SESSION['LIZMAP_GETMAP_CACHE_STATUS'] = 'off';
 
         // Store into cache if needed
         $cached = false;
@@ -560,12 +606,11 @@ class lizmapProxy
 
             try {
                 jCache::set($key, $data, $cacheExpiration, $profile);
-                $_SESSION['LIZMAP_GETMAP_CACHE_STATUS'] = 'write';
                 $cached = true;
 
-                if ($debug) {
-                    lizmap::logMetric('LIZMAP_PROXY_WRITE_CACHE');
-                }
+                lizmap::logMetric('LIZMAP_PROXY_WRITE_CACHE', 'WMS', array(
+                    'qgisParams' => $params,
+                ));
             } catch (Exception $e) {
                 jLog::logEx($e, 'error');
                 $cached = false;
@@ -749,6 +794,41 @@ class lizmapProxy
         return false;
     }
 
+    public static function clearProjectCache($repository, $project)
+    {
+
+        // Storage type
+        $ser = lizmap::getServices();
+        $cacheStorageType = $ser->cacheStorageType;
+        $clearCacheOk = false;
+
+        // Cache root directory
+        if ($cacheStorageType != 'redis') {
+            $cacheRootDirectory = $ser->cacheRootDirectory;
+            if (!is_dir($cacheRootDirectory) or !is_writable($cacheRootDirectory)) {
+                $cacheRootDirectory = sys_get_temp_dir();
+            }
+
+            // Directory where cached files are stored for the project
+            $cacheProjectDir = $cacheRootDirectory.'/'.$repository.'/'.$project.'/';
+            $results = array();
+            if (file_exists($cacheProjectDir)) {
+                $clearCacheOk = jFile::removeDir($cacheProjectDir);
+            } else {
+                return true;
+            }
+        } else {
+            // FIXME: removing by layer is not supported for the moment. For the moment, we flush all layers of the project.
+            $cacheName = 'lizmapCache_'.$repository.'_'.$project;
+            self::declareRedisProfile($ser, $cacheName, $repository, $project);
+            jCache::flush($cacheName);
+            $clearCacheOk = true;
+        }
+        jEvent::notify('lizmapProxyClearProjectCache', array('repository' => $repository, 'project' => $project));
+
+        return $clearCacheOk;
+    }
+
     public static function clearLayerCache($repository, $project, $layer)
     {
 
@@ -778,6 +858,9 @@ class lizmapProxy
                     }
                 }
                 closedir($handle);
+                if (count($results) == 0) {
+                    return true;
+                }
                 foreach ($results as $rem) {
                     if (is_dir($rem)) {
                         jFile::removeDir($rem);
@@ -785,6 +868,8 @@ class lizmapProxy
                         unlink($rem);
                     }
                 }
+            } else {
+                return true;
             }
         } else {
             // FIXME: removing by layer is not supported for the moment. For the moment, we flush all layers of the project.
@@ -793,6 +878,8 @@ class lizmapProxy
             jCache::flush($cacheName);
         }
         jEvent::notify('lizmapProxyClearLayerCache', array('repository' => $repository, 'project' => $project, 'layer' => $layer));
+
+        return true;
     }
 }
 

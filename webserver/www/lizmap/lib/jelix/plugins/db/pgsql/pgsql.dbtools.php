@@ -5,7 +5,7 @@
 * @author     Laurent Jouanneau
 * @contributor Laurent Jouanneau
 * @contributor Nicolas Jeudy (patch ticket #99)
-* @copyright  2005-2017 Laurent Jouanneau
+* @copyright  2005-2020 Laurent Jouanneau
 * @link        http://jelix.org
 * @licence  http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public Licence, see LICENCE file
 */
@@ -279,7 +279,7 @@ class pgsqlDbTools extends jDbTools {
             $field->maxLength = $typeinfo[5];
             $field->minLength = $typeinfo[4];
 
-            if(preg_match('/^nextval\(.*\)$/', $line->adsrc) || $typeinfo[6]){
+            if ((is_string($line->adsrc) && preg_match('/^nextval\(.*\)$/', $line->adsrc)) || $typeinfo[6]) {
                 $field->autoIncrement=true;
                 $field->default = '';
             }

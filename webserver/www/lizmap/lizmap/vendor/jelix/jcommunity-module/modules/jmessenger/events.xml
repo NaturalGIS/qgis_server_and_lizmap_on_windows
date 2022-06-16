@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<events xmlns="http://jelix.org/ns/events/1.0">
+   <listener name="message">
+       <event name="cours_version_reject" />
+       <event name="cours_version_accept" />
+       <event name="MessageSend" />
+       <event name="CreateMessage" />
+   </listener>
+</events>
