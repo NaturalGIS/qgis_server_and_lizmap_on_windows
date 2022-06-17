@@ -13,7 +13,7 @@ The following steps assume that the user will keep the suggested installation/de
 
 3) Copy the "webserver" folder inside the C: drive
 
-4) Start the Apache web server by running (**as administrator** > right click > run as administrator) the file *C:\webserver\Apache24\bin\httpd.exe*
+4) Start the Apache web server by running **as administrator** (right click > run as administrator) the file *C:\webserver\Apache24\bin\httpd.exe*
 
 5) As option Apache can be installed as Windows service by running (from the Windows console, launched as administrator) the following command:
 
@@ -25,6 +25,7 @@ After that Apache can be started/stopped from the Windows Services control panel
 
 ```
 C:\webserver\Apache24\bin\start-server.bat
+```
 
 6) Open a browser and test if Apache works:
 
