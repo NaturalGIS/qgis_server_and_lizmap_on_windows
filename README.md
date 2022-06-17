@@ -7,7 +7,7 @@ Last Tested on: QGIS Server 3.22.6 LTR + LizMap Web Client 3.4.11
 
 The following steps assume that the user will keep the suggested installation/deploy paths. If there is the necessity to use custom installatin/deploy paths then a number of configuration files (Apache, PHP) will need to be modified. This guide also assumes that on the Windows machine being used there aren't any other programs/services running on port 80.
 
-1) Download the OSGeo4W installer: [http://download.osgeo.org/osgeo4w/osgeo4w-setup-x86_64.exe](https://download.osgeo.org/osgeo4w/v2/osgeo4w-setup.exe)
+1) Download the OSGeo4W installer: https://download.osgeo.org/osgeo4w/v2/osgeo4w-setup.exe 
 
 2) Install the packages "qgis-ltr", "qgis-ltr-server" and "fcgi", let the installer manage the installation of dependencies
 
