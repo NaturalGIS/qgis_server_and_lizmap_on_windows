@@ -7,13 +7,13 @@ Last Tested on: QGIS Server 3.22.6 LTR + LizMap Web Client 3.4.11
 
 The following steps assume that the user will keep the suggested installation/deploy paths. If there is the necessity to use custom installatin/deploy paths then a number of configuration files (Apache, PHP) will need to be modified. This guide also assumes that on the Windows machine being used there aren't any other programs/services running on port 80.
 
-1) Download the OSGeo4W 64 bit installer: http://download.osgeo.org/osgeo4w/osgeo4w-setup-x86_64.exe
+1) Download the OSGeo4W installer: [http://download.osgeo.org/osgeo4w/osgeo4w-setup-x86_64.exe](https://download.osgeo.org/osgeo4w/v2/osgeo4w-setup.exe)
 
-2) Install the packages "qgis-ltr", "qgis-ltr-server", "gdal204dll" and "fcgi", let the installer manage the installation of dependencies
+2) Install the packages "qgis-ltr", "qgis-ltr-server" and "fcgi", let the installer manage the installation of dependencies
 
 3) Copy the "webserver" folder inside the C: drive
 
-4) Start the Apache web server by double clicking (**as administrator**) the file *C:\webserver\Apache24\bin\httpd.exe*
+4) Start the Apache web server by running (**as administrator** > right click > run as administrator) the file *C:\webserver\Apache24\bin\httpd.exe*
 
 5) As option Apache can be installed as Windows service by running (from the Windows console, launched as administrator) the following command:
 
@@ -44,22 +44,10 @@ http://localhost/info.php
 http://localhost/qgis/qgis_mapserv.fcgi.exe
 ```
 
-9) Using a Windows console, **launched as administrator**, go to the Lizmap Web Client folder
-
-```
-cd C:\webserver\www\lizmap
-```
-
-and then run the following command
-
-```
-C:\webserver\php73\php.exe lizmap/install/installer.php
-```
-
-10) Test if Lizmap Web Client works:
+9) Test if Lizmap Web Client works:
 
 ```
 http://localhost/lizmap/lizmap/www/index.php
 ```
 
-11) On a completely clean Window 10 machine you can get an error message about missing some library. If is the case just download and install them from the MS web site: https://www.microsoft.com/en-us/download/details.aspx?id=52685
+10) On a completely clean Window 10 machine you can get an error message about missing some library. If is the case just download and install them from the MS web site: https://www.microsoft.com/en-us/download/details.aspx?id=52685
