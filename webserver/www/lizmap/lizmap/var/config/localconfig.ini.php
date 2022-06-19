@@ -21,3 +21,7 @@ lizmap.installparam=demo
 
 [coordplugins]
 lizmap=lizmapConfig.ini.php
+
+
+[jcommunity]
+resetAdminPasswordEnabled = off
