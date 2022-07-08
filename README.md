@@ -4,6 +4,8 @@ Credits: João Gaspar, https://github.com/jonnyforestGIS
 
 Last Tested on: QGIS Server 3.22.6 LTR + LizMap Web Client 3.4.11
 
+:warning:**Warning for Portuguese Users**:warning:: If you use the application for Cartão de Cidadão Autenticação GOV, we found a issue that breaks the QGIS and QGIS Server instalation. Please check https://github.com/amagovpt/autenticacao.gov/issues/88
+
 
 The following steps assume that the user will keep the suggested installation/deploy paths. If there is the necessity to use custom installatin/deploy paths then a number of configuration files (Apache, PHP) will need to be modified. This guide also assumes that on the Windows machine being used there aren't any other programs/services running on port 80.
 
