@@ -6,12 +6,11 @@ Last Tested on: QGIS Server 3.28.11 LTR + PHP 8.2 + LizMap Web Client 3.6.6
 
 :warning:**Warning for Portuguese Users**:warning:: If you use the application for Cartão de Cidadão Autenticação GOV, we found a issue that breaks the QGIS and QGIS Server instalation. Please check https://github.com/amagovpt/autenticacao.gov/issues/88
 
-
-The following steps assume that the user will keep the suggested installation/deploy paths. If there is the necessity to use custom installatin/deploy paths then a number of configuration files (Apache, PHP) will need to be modified. This guide also assumes that on the Windows machine being used there aren't any other programs/services running on port 80.
+**The following guide assume that the user will keep the suggested installation/deploy paths**. If there is the necessity to use custom installatin/deploy paths then a number of configuration files (Apache, PHP) will need to be modified. **This guide also assumes that on the Windows machine being used there aren't any other programs/services running on port 80**.
 
 1) Download the OSGeo4W installer: https://download.osgeo.org/osgeo4w/v2/osgeo4w-setup.exe 
 
-2) Use the "advanced" install method. Install the packages "qgis-ltr", "qgis-ltr-server" and "fcgi", let the installer manage the installation of dependencies
+2) Use the "advanced" install method. Install the packages "qgis-ltr", "qgis-ltr-server" and "fcgi", let the installer manage the installation of dependencies. 
 
 ![osgeo1](https://github.com/NaturalGIS/qgis_server_and_lizmap_on_windows/assets/1951107/33ce533e-cd3e-4caa-86fd-50eec42a5e92)
 
