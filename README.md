@@ -15,29 +15,24 @@ The following steps assume that the user will keep the suggested installation/de
 
 ![osgeo1](https://github.com/NaturalGIS/qgis_server_and_lizmap_on_windows/assets/1951107/33ce533e-cd3e-4caa-86fd-50eec42a5e92)
 
-
-3) Copy the "webserver" folder inside the C: drive
+3) Download the file https://github.com/NaturalGIS/qgis_server_and_lizmap_on_windows/archive/refs/heads/master.zip unzip it and copy the "webserver" folder inside the C: drive
 
 ![image](https://github.com/NaturalGIS/qgis_server_and_lizmap_on_windows/assets/1951107/2a7a494e-23ea-472c-9f50-78643f477545)
-
 
 4) Start the Apache web server by running **as administrator** (right click > run as administrator) the file 
 
 ```
 C:\webserver\Apache24\bin\httpd.exe
 ```
-
 At this point you cpuld see this message from Windows firewall: allow Apache to serve pages through it.
 
-![windows_forwall](https://github.com/NaturalGIS/qgis_server_and_lizmap_on_windows/assets/1951107/f42e0a44-cf9a-4553-9205-d7bb82c41d44)
-
+![windows_firwall](https://github.com/NaturalGIS/qgis_server_and_lizmap_on_windows/assets/1951107/f42e0a44-cf9a-4553-9205-d7bb82c41d44)
 
 5) As option Apache can be installed as Windows service by running (from the Windows console, launched as administrator) the following command:
 
 ```
 C:\webserver\Apache24\bin\install-server.bat
 ```
-
 After that Apache can be started/stopped from the Windows Services control panel or from the Windows console using the command (as administrator):
 
 ```
@@ -52,7 +47,6 @@ http://localhost
 
 ![image](https://github.com/NaturalGIS/qgis_server_and_lizmap_on_windows/assets/1951107/82795341-7906-4f9b-a326-09d1408d44f2)
 
-
 7) Test if PHP works:
 
 ```
@@ -61,14 +55,13 @@ http://localhost/info.php
 
 ![image](https://github.com/NaturalGIS/qgis_server_and_lizmap_on_windows/assets/1951107/cd893de8-0bc3-4b8a-8f4c-2d35fffd7034)
 
-
 8) Test if QGIS Server works:
 
 ```
 http://localhost/qgis/qgis_mapserv.fcgi.exe
 ```
-![image](https://github.com/NaturalGIS/qgis_server_and_lizmap_on_windows/assets/1951107/d6ced0e0-ae6c-4402-95d0-1565fe0eccbd)
 
+![image](https://github.com/NaturalGIS/qgis_server_and_lizmap_on_windows/assets/1951107/d6ced0e0-ae6c-4402-95d0-1565fe0eccbd)
 
 9) Test if Lizmap Web Client works:
 
