@@ -27,7 +27,7 @@ C:\OSGeo4W
 ```
 C:\webserver\Apache24\bin\httpd.exe
 ```
-At this point you cpuld see this message from Windows firewall: allow Apache to serve pages through it.
+At this point you could see this message from Windows firewall: allow Apache to serve pages through it.
 
 ![windows_firwall](https://github.com/NaturalGIS/qgis_server_and_lizmap_on_windows/assets/1951107/f42e0a44-cf9a-4553-9205-d7bb82c41d44)
 
