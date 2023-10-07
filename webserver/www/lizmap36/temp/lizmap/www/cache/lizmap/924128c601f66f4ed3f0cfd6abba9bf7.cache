@@ -1,0 +1,1 @@
+s:272:"{"token":"924128c601f66f4ed3f0cfd6abba9bf7","typename":"AArdida2016_ETRS89PTTM06_20170809","filter":"AArdida2016_ETRS89PTTM06_20170809: ( ( \"DHInicio\" >= '2016-03-20' OR  \"DHFim\" >= '2016-03-20' ) AND ( \"DHInicio\" <= '2016-03-26' OR  \"DHFim\" <= '2016-03-26' ) ) "}";

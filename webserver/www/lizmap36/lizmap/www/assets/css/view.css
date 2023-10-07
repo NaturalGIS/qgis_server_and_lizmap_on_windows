@@ -1,0 +1,145 @@
+.thumbnail h5 {
+  text-align: center;
+}
+.liz-project {
+  position:relative;
+  text-align:center;
+  cursor: pointer;
+  flex-grow: 1;
+}
+.liz-project-img {
+  width : 250px;
+  text-align : center;
+  vertical-align : middle;
+  font-size : 1em;
+  text-transform : uppercase;
+  line-height: 248px;
+  position:relative;
+  max-width:100%;
+}
+.liz-project-desc {
+  color: white;
+  font-size: 0.8em;
+  line-height: 0.8em;
+  position: absolute;
+  bottom:-1px;
+  right:0px;
+  left:0px;
+  text-align: left;
+  text-transform: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding:5px;
+  margin:0px;
+  overflow-wrap: break-word;
+}
+
+.liz-project-title{
+  overflow-wrap: anywhere;
+}
+
+.liz-project-title ~ p {
+  text-align: center;
+  margin: 0;
+}
+
+.liz-repository-project-list{
+  display: grid;
+  list-style: none;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.liz-repository-project-item{
+  display: inline-block;
+}
+
+.liz-repository-project-item .thumbnail{
+  background-color: white;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+#headermenu .input-prepend {
+  margin: 0;
+}
+
+#auth{
+  text-align: right;
+}
+
+#search{
+  display: inline-block;
+  position: fixed;
+  top: 76px;
+  z-index: 1;
+}
+
+#toggle-search{
+  font-weight: bold;
+  font-family: serif;
+}
+
+#search-project-keywords {
+  position: absolute;
+  min-width: 270px;
+}
+
+#search-project-result .project-keyword, #search-project-keywords-selected .remove-keyword{
+  cursor: pointer;
+}
+
+#search-project-keywords-selected .project-keyword, .project-keyword:hover {
+  background-color: #97C517;
+  color: white;
+}
+
+#search-project-keywords-selected .remove-keyword{
+  margin-left: 10px;
+  font-size: smaller;
+  border: white 1px solid;
+  padding: 0px 4px 1px 4px;
+  border-radius: 3px;
+}
+
+.project-keyword {
+  background-color: #ccc;
+  color: black;
+  padding: 0px 4px;
+  border-radius: 5px;
+  margin-right: 5px;
+  display: inline-block;
+}
+
+.project-keyword.hide {
+  display: none;
+}
+
+.project-keyword .highlight{
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+@media (max-width: 767px) {
+  .liz-repository-project-list{
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-height: 500px) {
+  .modal.fade.in {
+    top:30px;
+  }
+  .modal-body {
+    max-height: 200px;
+  }
+}
+@media (max-height: 350px) {
+  .modal.fade.in {
+    top:10px;
+  }
+  .modal-body {
+    max-height: 150px;
+  }
+}

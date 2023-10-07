@@ -1,0 +1,12 @@
+<?php
+jApp::declareModulesDir(array(
+            __DIR__.'/jelix/jcommunity-module/modules',
+            __DIR__.'/jelix/jelix/lib/jelix-modules',
+            __DIR__.'/jelix/jelix/lib/jelix-admin-modules',
+));
+jApp::declareModule(array(
+            __DIR__.'/jelix/ldapdao-module/ldapdao',
+));
+jApp::declarePluginsDir(array(
+            __DIR__.'/jelix/jelix/lib/jelix-plugins',
+));

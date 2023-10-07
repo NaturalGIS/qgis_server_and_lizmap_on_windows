@@ -1,0 +1,30 @@
+{
+    "name": "jelix/properties-file",
+    "type": "library",
+    "description": "classes to read and write properties files. Format is similar to Java properties files.",
+    "keywords": ["properties", "files"],
+    "homepage": "http://jelix.org",
+    "license": "LGPL-2.1",
+    "authors": [
+        {
+            "name": "Laurent Jouanneau",
+            "email": "laurent@jelix.org"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.0",
+        "ext-mbstring": ">=5.6.0"
+    },
+    "require-dev" : {
+        "phpunit/phpunit": "8.5.*"
+    },
+    "archive": {
+        "exclude": ["/tests"]
+    },
+    "autoload": {
+        "psr-4" : {
+            "Jelix\\PropertiesFile\\" : "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}

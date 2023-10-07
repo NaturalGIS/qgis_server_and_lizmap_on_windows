@@ -1,0 +1,32 @@
+{
+    "name": "jelix/inifile",
+    "type": "library",
+    "description": "classes to read and modify ini files by preserving comments and empty lines",
+    "keywords": ["ini", "files"],
+    "homepage": "http://jelix.org",
+    "license": "LGPL-2.1",
+    "authors": [
+        {
+            "name": "Laurent Jouanneau",
+            "email": "laurent@jelix.org"
+        },
+        {
+            "name": "Loic Mathaud"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.1"
+    },
+    "require-dev" : {
+        "phpunit/phpunit": "8.5.*"
+    },
+    "archive": {
+        "exclude": ["/tests"]
+    },
+    "autoload": {
+        "psr-4" : {
+            "Jelix\\IniFile\\" : "lib/"
+        }
+    },
+    "minimum-stability": "stable"
+}

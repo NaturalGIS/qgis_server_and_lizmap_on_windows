@@ -1,0 +1,40 @@
+{
+    "name": "jelix/castor",
+    "type": "library",
+    "description": "A template engine using a simple syntax",
+    "keywords": ["template"],
+    "homepage": "http://jelix.org",
+    "license": "LGPL-2.1",
+    "authors": [
+        {
+            "name": "Laurent Jouanneau",
+            "email": "laurent@jelix.org"
+        },
+        {
+            "name": "Loic Mathaud"
+        }
+    ],
+    "require": {
+        "php": ">=5.6",
+        "jelix/simplelocalization": "1.7.*"
+    },
+    "require-dev" : {
+        "phpunit/phpunit": "8.5.*"
+    },
+    "archive": {
+        "exclude": ["/tests", "/docs"]
+    },
+    "replace": {
+    },
+    "autoload": {
+        "psr-4" : {
+            "Jelix\\Castor\\" : "lib/Castor/"
+        }
+    },
+    "extra" : {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "minimum-stability": "stable"
+}

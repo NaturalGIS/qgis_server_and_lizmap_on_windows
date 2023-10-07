@@ -1,0 +1,59 @@
+{
+    "name": "jelix/jelix-essential",
+    "type": "library",
+    "description": "used to declare jelix dependencies for testapp or other packages",
+    "license": "LGPL-2.1-or-later",
+    "require": {
+        "php": ">=7.4.0",
+        "jelix/fakeserverconf": "^1.0.0",
+        "jelix/composer-module-setup": "^1.1.0",
+        "phpmailer/phpmailer": "^6.8.0",
+        "jelix/castor": "^1.1.1",
+        "jelix/inifile": "^3.3.2",
+        "jelix/simplelocalization": "^1.7.2",
+        "jelix/properties-file": "^1.2.3",
+        "symfony/console":"^5.4.26",
+        "jelix/file-utilities": "^1.8.5",
+        "jelix/version": "^2.0.1",
+        "defuse/php-encryption": "^2.4.0",
+        "google/recaptcha": "~1.2.4",
+        "psr/event-dispatcher": "~1.0.0"
+    },
+    "autoload": {
+        "psr-0": { "jelix\\": "."
+        },
+        "psr-4": {
+            "Jelix\\DevHelper\\": "jelix-scripts/DevHelper/",
+            "Jelix\\Event\\" : "jelix/events/",
+            "Jelix\\Routing\\UrlMapping\\": "jelix/core/UrlMapping/",
+            "Jelix\\Installer\\": "jelix/installer/Installer/",
+            "Jelix\\Scripts\\": "jelix/Scripts/",
+            "Jelix\\Core\\Infos\\": "jelix/core/Infos/",
+            "Jelix\\Dependencies\\" : "jelix/Dependencies",
+            "Jelix\\WebAssets\\" : "jelix/WebAssets",
+            "Jelix\\UnitTests\\" : "jelix-tests/UnitTests"
+        },
+        "classmap": [ ],
+        "files": [ "jelix/init.php" ]
+    },
+    "replace": {
+        "jelix/jelix":"self.version"
+    },
+    "config": {
+      "allow-plugins": {
+        "jelix/composer-module-setup": true
+      }
+    },
+    "minimum-stability": "stable",
+    "extra" : {
+        "jelix": {
+            "modules-dir" : [
+                "jelix-modules",
+                "jelix-admin-modules"
+            ],
+            "plugins-dir" : [
+                "jelix-plugins"
+            ]
+        }
+    }
+}

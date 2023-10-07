@@ -1,0 +1,29 @@
+{
+    "name": "jelix/version",
+    "type": "library",
+    "description": "Parse any version syntax, including semantic version. Compare version, using Composer version constraints syntax.",
+    "keywords": ["version", "semver", "composer", "comparator"],
+    "homepage": "http://jelix.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Laurent Jouanneau",
+            "email": "laurent@jelix.org"
+        }
+    ],
+    "require": {
+        "php": ">=5.6"
+    },
+    "require-dev" : {
+        "phpunit/phpunit": "8.5.*"
+    },
+    "archive": {
+        "exclude": ["/tests"]
+    },
+    "autoload": {
+        "psr-4" : {
+            "Jelix\\Version\\" : "lib/"
+        }
+    },
+    "minimum-stability": "stable"
+}

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suburls xmlns="http://jelix.org/ns/suburls/1.0">
+    <url pathinfo="/"       action="config:index"/>
+    <url pathinfo="/services"            action="config:modifyServices"/>
+    <url pathinfo="/services/edit"       action="config:editServices"/>
+    <url pathinfo="/services/save"       action="config:saveServices"/>
+    <url pathinfo="/section/:repository/create"       action="maps:createSection">
+        <param name="repository"/>
+    </url>
+    <url pathinfo="/section/:repository/modify"       action="maps:modifySection">
+        <param name="repository"/>
+    </url>
+    <url pathinfo="/section/:repository/edit"       action="maps:editSection">
+        <param name="repository"/>
+    </url>
+    <url pathinfo="/section/:repository/save"       action="maps:saveSection">
+        <param name="repository"/>
+    </url>
+    <url pathinfo="/section/:repository/validate"       action="maps:validateSection">
+        <param name="repository"/>
+    </url>
+    <url pathinfo="/section/:repository/remove"       action="maps:removeSection">
+        <param name="repository"/>
+    </url>
+    <url pathinfo="/section/:repository/remove-cache"       action="maps:removeCache">
+        <param name="repository"/>
+    </url>
+    <url pathinfo="/section/:repository/remove-layer-cache"       action="maps:removeLayerCache">
+        <param name="repository"/>
+    </url>
+
+
+    <url pathinfo="/logs"       action="logs:index"/>
+    <url pathinfo="/logs/counter"       action="logs:counter"/>
+    <url pathinfo="/logs/counter/empty"       action="logs:emptyCounter"/>
+    <url pathinfo="/logs/details"       action="logs:detail"/>
+    <url pathinfo="/logs/export"       action="logs:export"/>
+    <url pathinfo="/logs/details/empty"       action="logs:emptyDetail"/>
+
+
+    <url pathinfo="/theme"              action="theme:index"/>
+    <url pathinfo="/theme/modify"       action="theme:modify"/>
+    <url pathinfo="/theme/edit"         action="theme:edit"/>
+    <url pathinfo="/theme/save"         action="theme:save"/>
+    <url pathinfo="/theme/validate"     action="theme:validate"/>
+    <url pathinfo="/theme/remove-logo"  action="theme:removeLogo"/>
+
+
+    <url pathinfo="/acl/user/removegroup"  action="acl:removegroup"/>
+    <url pathinfo="/acl/user/addgroup"  action="acl:addgroup"/>
+
+</suburls>

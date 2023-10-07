@@ -1,0 +1,49 @@
+{
+    "name": "jelix/file-utilities",
+    "type": "library",
+    "description": "helpers to manipulate files, path and directories",
+    "keywords": ["helpers", "files"],
+    "homepage": "http://jelix.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Laurent Jouanneau",
+            "email": "laurent@jelix.org"
+        },
+        {
+            "name":"Loic Mathaud"
+        },
+        {
+            "name":"Christophe Thiriot"
+        },
+        {
+            "name":"Bastien Jaillot"
+        },
+        {
+            "name":"Julien Issler"
+        },
+        {
+            "name":"Gérald Croes"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "require-dev" : {
+        "phpunit/phpunit": "^8.5.30"
+    },
+    "archive": {
+        "exclude": ["/tests"]
+    },
+    "autoload": {
+        "psr-4" : {
+            "Jelix\\FileUtilities\\" : "lib/"
+        }
+    },
+    "minimum-stability": "stable",
+    "extra" : {
+        "branch-alias": {
+            "dev-master": "1.8.x-dev"
+        }
+    }
+}

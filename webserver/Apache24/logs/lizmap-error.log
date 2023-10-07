@@ -1,0 +1,12 @@
+[Wed Oct 04 18:13:03.200662 2023] [authz_core:error] [pid 22612:tid 1016] [client 127.0.0.1:61240] AH01630: client denied by server configuration: C:/webserver/www/lizmap35/lib/
+[Wed Oct 04 18:13:03.203862 2023] [authz_core:error] [pid 22612:tid 1016] [client 127.0.0.1:61240] AH01630: client denied by server configuration: C:/webserver/www/lizmap35/temp/
+[Wed Oct 04 18:17:08.326320 2023] [cgi:error] [pid 22612:tid 1020] [client 127.0.0.1:61425] AH02811: script not found or unable to stat: C:/webserver/Apache24/cgi-bin/qgis_mapserv.fcgi
+[Wed Oct 04 18:17:08.327314 2023] [cgi:error] [pid 22612:tid 1020] [client 127.0.0.1:61426] AH02811: script not found or unable to stat: C:/webserver/Apache24/cgi-bin/qgis_mapserv.fcgi
+[Wed Oct 04 18:17:09.348574 2023] [cgi:error] [pid 22612:tid 1020] [client 127.0.0.1:61427] AH02811: script not found or unable to stat: C:/webserver/Apache24/cgi-bin/qgis_mapserv.fcgi
+[Wed Oct 04 18:17:09.546027 2023] [cgi:error] [pid 22612:tid 1016] [client 127.0.0.1:61428] AH02811: script not found or unable to stat: C:/webserver/Apache24/cgi-bin/qgis_mapserv.fcgi
+[Wed Oct 04 18:17:09.769805 2023] [cgi:error] [pid 22612:tid 1044] [client 127.0.0.1:61429] AH02811: script not found or unable to stat: C:/webserver/Apache24/cgi-bin/qgis_mapserv.fcgi
+[Thu Oct 05 17:16:57.142219 2023] [authz_core:error] [pid 424:tid 1040] [client 127.0.0.1:59945] AH01630: client denied by server configuration: C:/webserver/www/lizmap36/temp/
+[Thu Oct 05 17:17:10.694883 2023] [cgi:error] [pid 424:tid 1036] [client 127.0.0.1:60032] AH02811: script not found or unable to stat: C:/webserver/Apache24/cgi-bin/qgis_mapserv.fcgi
+[Thu Oct 05 17:17:10.710551 2023] [cgi:error] [pid 424:tid 1036] [client 127.0.0.1:60033] AH02811: script not found or unable to stat: C:/webserver/Apache24/cgi-bin/qgis_mapserv.fcgi
+[Thu Oct 05 17:17:16.459997 2023] [cgi:error] [pid 424:tid 1048] [client 127.0.0.1:60037] AH02811: script not found or unable to stat: C:/webserver/Apache24/cgi-bin/qgis_mapserv.fcgi
+[Thu Oct 05 17:17:16.462003 2023] [cgi:error] [pid 424:tid 1048] [client 127.0.0.1:60038] AH02811: script not found or unable to stat: C:/webserver/Apache24/cgi-bin/qgis_mapserv.fcgi

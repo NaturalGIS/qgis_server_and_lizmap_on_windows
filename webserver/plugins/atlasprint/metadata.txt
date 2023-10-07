@@ -1,0 +1,45 @@
+[general]
+name=atlasprint
+qgisMinimumVersion=3.10
+description=Add atlas capabilities for getPrint request in WMS for QGIS Server
+author=3Liz
+email=info@3liz.com
+server=True
+
+about=Add atlas capabilities for getPrint request in WMS for QGIS Server
+
+tracker=https://github.com/3liz/qgis-atlasprint/issues
+repository=https://github.com/3liz/qgis-atlasprint
+homepage=https://github.com/3liz/qgis-atlasprint
+
+# Done by qgis-plugin-ci, but still need manual editing
+version=3.3.2
+# Done auto by qgis-plugin-ci
+commitNumber=1
+commitSha1=7b8a3ea12775bcdcdac0b0f8432bd64adb3dc528
+dateTime=2022-10-19T08:10:14Z
+changelog=
+ Version 3.3.2:
+ * Fix an issue when the layout does not have a map, fix #59 (contribution from @benoitblanc)
+
+ Version 3.3.1:
+ * Improve logs about additional parameters and current login
+
+ Version 3.3.0:
+ * Add expression for `@lizmap_user` and `@lizmap_user_groups` related to the current logged user in Lizmap Web Client
+ * Add `FORMAT` option in the GET request to export as JPEG, PDF, PNG or SVG.
+   Values are from the QGIS Server documentation : https://docs.qgis.org/latest/en/docs/server_manual/services.html#wms-getprint-format
+ * Display the version number in the logs when starting the plugin
+ * Set file permission to 744 in the ZIP by default
+ * Some code refactoring and cleaning
+ * Remove the `v` prefix in a git tag
+
+
+# End of qgis-plugin-ci
+
+tags=server,print,atlas
+
+category=Plugins
+icon=icon.png
+experimental=False
+deprecated=False

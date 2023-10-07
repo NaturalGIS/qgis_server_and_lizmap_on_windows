@@ -1,0 +1,24 @@
+Jelix Installation
+==================
+
+Server configuration
+---------------------
+
+Jelix works with PHP 7.4 and higher.
+
+This php extensions should be installed : xml, simplexml, pcre, session, spl, json, mbstring et tokenizer.
+
+Jelix supports these databases: MySQL 5.5+, PostgreSQL 10.0+, SQLite 3.
+
+installation
+------------
+
+- unzip the archive
+- create an application with the bin/create-jelix-app script
+- set write access on temp/ and var/* directories, for the web server
+
+Details
+-------
+
+see https://docs.jelix.org/fr/manuel-1.8/mise-en-route
+or https://docs.jelix.org/en/manual-1.8/getting-started

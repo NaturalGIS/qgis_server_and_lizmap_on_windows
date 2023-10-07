@@ -1,0 +1,135 @@
+a:4:{s:8:"qgsmtime";i:1696663858;s:11:"qgscfgmtime";i:1696663760;s:14:"format_version";i:9;s:4:"data";a:3:{s:4:"code";i:200;s:4:"mime";s:23:"text/xml; charset=utf-8";s:4:"data";s:4240:"<?xml version="1.0" encoding="utf-8"?><WFS_Capabilities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.opengis.net/wfs" xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/ogc" xmlns:ows="http://www.opengis.net/ows" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0.0" updateSequence="0" xsi:schemaLocation="http://www.opengis.net/wfs http://schemas.opengis.net/wfs/1.0.0/WFS-capabilities.xsd">
+ <Service>
+  <Name>WFS</Name>
+  <Title>teste1</Title>
+  <OnlineResource/>
+  <Fees>conditions unknown</Fees>
+  <AccessConstraints>None</AccessConstraints>
+ </Service>
+ <Capability>
+  <Request>
+   <GetCapabilities>
+    <DCPType>
+     <HTTP>
+      <Get onlineResource="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C%3A%2Fwebserver%2Flm_repos%2Frepo1%2Fteste1.qgs"/>
+     </HTTP>
+    </DCPType>
+    <DCPType>
+     <HTTP>
+      <Post onlineResource="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C%3A%2Fwebserver%2Flm_repos%2Frepo1%2Fteste1.qgs"/>
+     </HTTP>
+    </DCPType>
+   </GetCapabilities>
+   <DescribeFeatureType>
+    <SchemaDescriptionLanguage>
+     <XMLSCHEMA/>
+    </SchemaDescriptionLanguage>
+    <DCPType>
+     <HTTP>
+      <Get onlineResource="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C%3A%2Fwebserver%2Flm_repos%2Frepo1%2Fteste1.qgs"/>
+     </HTTP>
+    </DCPType>
+    <DCPType>
+     <HTTP>
+      <Post onlineResource="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C%3A%2Fwebserver%2Flm_repos%2Frepo1%2Fteste1.qgs"/>
+     </HTTP>
+    </DCPType>
+   </DescribeFeatureType>
+   <GetFeature>
+    <ResultFormat>
+     <GML2/>
+     <GML3/>
+     <GeoJSON/>
+    <SHP/><TAB/><MIF/><KML/><GPKG/><GPX/><ODS/><XLSX/><CSV/><FGB/></ResultFormat>
+    <DCPType>
+     <HTTP>
+      <Get onlineResource="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C%3A%2Fwebserver%2Flm_repos%2Frepo1%2Fteste1.qgs"/>
+     </HTTP>
+    </DCPType>
+    <DCPType>
+     <HTTP>
+      <Post onlineResource="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C%3A%2Fwebserver%2Flm_repos%2Frepo1%2Fteste1.qgs"/>
+     </HTTP>
+    </DCPType>
+   </GetFeature>
+   <Transaction>
+    <DCPType>
+     <HTTP>
+      <Post onlineResource="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C%3A%2Fwebserver%2Flm_repos%2Frepo1%2Fteste1.qgs"/>
+     </HTTP>
+    </DCPType>
+   </Transaction>
+  </Request>
+ </Capability>
+ <FeatureTypeList>
+  <Operations>
+   <Query/>
+  </Operations>
+  <FeatureType>
+   <Name>AArdida2016_ETRS89PTTM06_20170809</Name>
+   <Title>AArdida2016_ETRS89PTTM06_20170809</Title>
+   <SRS>EPSG:3763</SRS>
+   <LatLongBoundingBox maxy="266415.696" minx="-105419.894" maxx="112418.592" miny="-248479.906"/>
+   <Operations>
+    <Query/>
+   </Operations>
+  </FeatureType>
+  <FeatureType>
+   <Name>caop_2019</Name>
+   <Title>caop_2019</Title>
+   <SRS>EPSG:3763</SRS>
+   <LatLongBoundingBox maxy="276084" minx="-119191" maxx="162129" miny="-300405"/>
+   <Operations>
+    <Query/>
+   </Operations>
+  </FeatureType>
+  <FeatureType>
+   <Name>concelhos</Name>
+   <Title>concelhos</Title>
+   <SRS>EPSG:3763</SRS>
+   <LatLongBoundingBox maxy="276083.768" minx="-119191.408" maxx="162129.082" miny="-300404.804"/>
+   <Operations>
+    <Query/>
+   </Operations>
+  </FeatureType>
+  <FeatureType>
+   <Name>inag_albufeiras</Name>
+   <Title>inag_albufeiras</Title>
+   <SRS>EPSG:3763</SRS>
+   <LatLongBoundingBox maxy="252351.688" minx="-102218.836" maxx="162258.079" miny="-284380.688"/>
+   <Operations>
+    <Query/>
+   </Operations>
+  </FeatureType>
+  <FeatureType>
+   <Name>inag_rios</Name>
+   <Title>inag rios</Title>
+   <SRS>EPSG:3763</SRS>
+   <LatLongBoundingBox maxy="276242" minx="-116199" maxx="160607" miny="-294548"/>
+   <Operations>
+    <Query/>
+   </Operations>
+  </FeatureType>
+ </FeatureTypeList>
+ <ogc:Filter_Capabilities>
+  <ogc:Spatial_Capabilities>
+   <ogc:Spatial_Operators>
+    <ogc:BBOX/>
+    <ogc:Disjoint/>
+    <ogc:Intersect/>
+    <ogc:Touches/>
+    <ogc:Crosses/>
+    <ogc:Contains/>
+    <ogc:Overlaps/>
+    <ogc:Within/>
+   </ogc:Spatial_Operators>
+  </ogc:Spatial_Capabilities>
+  <ogc:Scalar_Capabilities>
+   <ogc:Comparison_Operators>
+    <ogc:Simple_Comparisons/>
+    <ogc:Between/>
+    <ogc:Like/>
+   </ogc:Comparison_Operators>
+  </ogc:Scalar_Capabilities>
+ </ogc:Filter_Capabilities>
+</WFS_Capabilities>";}}

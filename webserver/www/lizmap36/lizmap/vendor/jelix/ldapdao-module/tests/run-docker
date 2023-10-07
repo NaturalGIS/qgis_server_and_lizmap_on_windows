@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+set -e
+
+export FPM_USER_ID=${FPM_USER_ID:-$(id -u)}
+export FPM_GROUP_ID=${FPM_GROUP_ID:-$(id -g)}
+export PHP_VERSION=${PHP_VERSION:-8.1}
+
+CMD=$1
+
+if [ ! -f docker-conf/certs/tests.jelix-CA.crt ]; then
+  echo "generate CA certs"
+  (
+  cd docker-conf
+  ./ssl.sh createCA tests.jelix
+  )
+fi
+
+
+if [ ! -f docker-conf/certs/ldap.jelix.crt ]; then
+  echo "generate certificates for the ldap server"
+  (
+  cd docker-conf
+  ./ssl.sh createCert ldap.jelix tests.jelix
+  )
+fi
+
+if [ "$TESTAPP_WEB_PORT" == "" ]; then
+  export TESTAPP_WEB_PORT=8817
+fi
+
+if [ "$CMD" == "reset" ]; then
+    # Stop/Remove containers
+    docker compose -p jelix-ldapdao-tests rm -sf || true
+    exit 0
+elif [ -z "$CMD" ]; then
+    CMD="up"
+else
+    shift
+fi
+
+docker compose -p jelix-ldapdao-tests $CMD

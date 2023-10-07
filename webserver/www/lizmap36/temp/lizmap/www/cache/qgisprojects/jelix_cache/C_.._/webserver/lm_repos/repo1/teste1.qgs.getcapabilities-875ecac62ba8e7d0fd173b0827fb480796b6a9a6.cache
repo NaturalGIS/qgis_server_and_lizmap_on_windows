@@ -1,0 +1,355 @@
+a:4:{s:8:"qgsmtime";i:1696663858;s:11:"qgscfgmtime";i:1696663760;s:14:"format_version";i:9;s:4:"data";a:3:{s:4:"code";i:200;s:4:"mime";s:23:"text/xml; charset=utf-8";s:4:"data";s:16412:"<?xml version="1.0" encoding="utf-8"?>
+<WMS_Capabilities xmlns:qgs="http://www.qgis.org/wms" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.opengis.net/wms" version="1.3.0" xmlns:sld="http://www.opengis.net/sld" xsi:schemaLocation="http://www.opengis.net/wms http://schemas.opengis.net/wms/1.3.0/capabilities_1_3_0.xsd http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/sld_capabilities.xsd http://www.qgis.org/wms http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C%3A%2Fwebserver%2Flm_repos%2Frepo1%2Fteste1.qgs&amp;SERVICE=WMS&amp;REQUEST=GetSchemaExtension">
+ <Service>
+  <Name>WMS</Name>
+  <Title>teste1</Title>
+  <KeywordList>
+   <Keyword vocabulary="ISO">infoMapAccessService</Keyword>
+  </KeywordList>
+  <OnlineResource xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C%3A%2Fwebserver%2Flm_repos%2Frepo1%2Fteste1.qgs" xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+  <Fees>conditions unknown</Fees>
+  <AccessConstraints>None</AccessConstraints>
+ </Service>
+ <Capability>
+  <Request>
+   <GetCapabilities>
+    <Format>text/xml</Format>
+    <DCPType>
+     <HTTP>
+      <Get>
+       <OnlineResource xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C%3A%2Fwebserver%2Flm_repos%2Frepo1%2Fteste1.qgs&amp;" xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+      </Get>
+     </HTTP>
+    </DCPType>
+   </GetCapabilities>
+   <GetMap>
+    <Format>image/jpeg</Format>
+    <Format>image/png</Format>
+    <Format>image/png; mode=16bit</Format>
+    <Format>image/png; mode=8bit</Format>
+    <Format>image/png; mode=1bit</Format>
+    <Format>application/dxf</Format>
+    <DCPType>
+     <HTTP>
+      <Get>
+       <OnlineResource xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C%3A%2Fwebserver%2Flm_repos%2Frepo1%2Fteste1.qgs&amp;" xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+      </Get>
+     </HTTP>
+    </DCPType>
+   </GetMap>
+   <GetFeatureInfo>
+    <Format>text/plain</Format>
+    <Format>text/html</Format>
+    <Format>text/xml</Format>
+    <Format>application/vnd.ogc.gml</Format>
+    <Format>application/vnd.ogc.gml/3.1.1</Format>
+    <Format>application/json</Format>
+    <Format>application/geo+json</Format>
+    <DCPType>
+     <HTTP>
+      <Get>
+       <OnlineResource xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C%3A%2Fwebserver%2Flm_repos%2Frepo1%2Fteste1.qgs&amp;" xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+      </Get>
+     </HTTP>
+    </DCPType>
+   </GetFeatureInfo>
+   <sld:GetLegendGraphic>
+    <Format>image/jpeg</Format>
+    <Format>image/png</Format>
+    <Format>application/json</Format>
+    <DCPType>
+     <HTTP>
+      <Get>
+       <OnlineResource xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C%3A%2Fwebserver%2Flm_repos%2Frepo1%2Fteste1.qgs&amp;" xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+      </Get>
+     </HTTP>
+    </DCPType>
+   </sld:GetLegendGraphic>
+   <sld:DescribeLayer>
+    <Format>text/xml</Format>
+    <DCPType>
+     <HTTP>
+      <Get>
+       <OnlineResource xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C%3A%2Fwebserver%2Flm_repos%2Frepo1%2Fteste1.qgs&amp;" xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+      </Get>
+     </HTTP>
+    </DCPType>
+   </sld:DescribeLayer>
+   <qgs:GetStyles>
+    <Format>text/xml</Format>
+    <DCPType>
+     <HTTP>
+      <Get>
+       <OnlineResource xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C%3A%2Fwebserver%2Flm_repos%2Frepo1%2Fteste1.qgs&amp;" xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+      </Get>
+     </HTTP>
+    </DCPType>
+   </qgs:GetStyles>
+  </Request>
+  <Exception>
+   <Format>XML</Format>
+  </Exception>
+  <sld:UserDefinedSymbolization UserLayer="0" InlineFeature="0" UserStyle="1" RemoteWFS="0" SupportSLD="1" RemoteWCS="0"/>
+  <Layer queryable="1">
+   <Name>teste1</Name>
+   <Title>teste1</Title>
+   <KeywordList>
+    <Keyword vocabulary="ISO">infoMapAccessService</Keyword>
+   </KeywordList>
+   <CRS>CRS:84</CRS>
+   <CRS>EPSG:3763</CRS>
+   <EX_GeographicBoundingBox>
+    <westBoundLongitude>-9.575005</westBoundLongitude>
+    <eastBoundLongitude>-6.172036</eastBoundLongitude>
+    <southBoundLatitude>36.948018</southBoundLatitude>
+    <northBoundLatitude>42.15432</northBoundLatitude>
+   </EX_GeographicBoundingBox>
+   <BoundingBox CRS="EPSG:3763" maxy="276083.768" minx="-119191.408" maxx="162129.082" miny="-300404.804"/>
+   <Layer queryable="1">
+    <Name>localidades</Name>
+    <Title>localidades</Title>
+    <CRS>CRS:84</CRS>
+    <CRS>EPSG:3763</CRS>
+    <EX_GeographicBoundingBox>
+     <westBoundLongitude>-9.526119</westBoundLongitude>
+     <eastBoundLongitude>-5.835987</eastBoundLongitude>
+     <southBoundLatitude>36.918378</southBoundLatitude>
+     <northBoundLatitude>42.186938</northBoundLatitude>
+    </EX_GeographicBoundingBox>
+    <BoundingBox CRS="EPSG:3763" maxy="279707" minx="-115090" maxx="189834" miny="-303122"/>
+    <Style>
+     <Name>default</Name>
+     <Title>default</Title>
+     <LegendURL>
+      <Format>image/png</Format>
+      <OnlineResource xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C%3A%2Fwebserver%2Flm_repos%2Frepo1%2Fteste1.qgs&amp;SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=localidades&amp;FORMAT=image/png&amp;STYLE=default&amp;SLD_VERSION=1.1.0" xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+     </LegendURL>
+    </Style>
+   </Layer>
+   <Layer queryable="1">
+    <Name>inag_rios</Name>
+    <Title>inag rios</Title>
+    <CRS>CRS:84</CRS>
+    <CRS>EPSG:3763</CRS>
+    <EX_GeographicBoundingBox>
+     <westBoundLongitude>-9.538847</westBoundLongitude>
+     <eastBoundLongitude>-6.190393</eastBoundLongitude>
+     <southBoundLatitude>37.001028</southBoundLatitude>
+     <northBoundLatitude>42.155749</northBoundLatitude>
+    </EX_GeographicBoundingBox>
+    <BoundingBox CRS="EPSG:3763" maxy="276242" minx="-116199" maxx="160607" miny="-294548"/>
+    <Style>
+     <Name>default</Name>
+     <Title>default</Title>
+     <LegendURL>
+      <Format>image/png</Format>
+      <OnlineResource xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C%3A%2Fwebserver%2Flm_repos%2Frepo1%2Fteste1.qgs&amp;SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=inag_rios&amp;FORMAT=image/png&amp;STYLE=default&amp;SLD_VERSION=1.1.0" xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+     </LegendURL>
+    </Style>
+   </Layer>
+   <Layer queryable="1">
+    <Name>AArdida2016_ETRS89PTTM06_20170809</Name>
+    <Title>AArdida2016_ETRS89PTTM06_20170809</Title>
+    <CRS>CRS:84</CRS>
+    <CRS>EPSG:3763</CRS>
+    <EX_GeographicBoundingBox>
+     <westBoundLongitude>-9.406707</westBoundLongitude>
+     <eastBoundLongitude>-6.77498</eastBoundLongitude>
+     <southBoundLatitude>37.423017</southBoundLatitude>
+     <northBoundLatitude>42.067282</northBoundLatitude>
+    </EX_GeographicBoundingBox>
+    <BoundingBox CRS="EPSG:3763" maxy="266415.696" minx="-105419.894" maxx="112418.592" miny="-248479.906"/>
+    <Style>
+     <Name>default</Name>
+     <Title>default</Title>
+     <LegendURL>
+      <Format>image/png</Format>
+      <OnlineResource xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C%3A%2Fwebserver%2Flm_repos%2Frepo1%2Fteste1.qgs&amp;SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=AArdida2016_ETRS89PTTM06_20170809&amp;FORMAT=image/png&amp;STYLE=default&amp;SLD_VERSION=1.1.0" xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+     </LegendURL>
+    </Style>
+   </Layer>
+   <Layer queryable="1">
+    <Name>inag_albufeiras</Name>
+    <Title>inag_albufeiras</Title>
+    <CRS>CRS:84</CRS>
+    <CRS>EPSG:3763</CRS>
+    <EX_GeographicBoundingBox>
+     <westBoundLongitude>-9.365597</westBoundLongitude>
+     <eastBoundLongitude>-6.177037</eastBoundLongitude>
+     <southBoundLatitude>37.092313</southBoundLatitude>
+     <northBoundLatitude>41.940648</northBoundLatitude>
+    </EX_GeographicBoundingBox>
+    <BoundingBox CRS="EPSG:3763" maxy="252351.688" minx="-102218.836" maxx="162258.079" miny="-284380.688"/>
+    <Style>
+     <Name>default</Name>
+     <Title>default</Title>
+     <LegendURL>
+      <Format>image/png</Format>
+      <OnlineResource xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C%3A%2Fwebserver%2Flm_repos%2Frepo1%2Fteste1.qgs&amp;SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=inag_albufeiras&amp;FORMAT=image/png&amp;STYLE=default&amp;SLD_VERSION=1.1.0" xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+     </LegendURL>
+    </Style>
+   </Layer>
+   <Layer queryable="1">
+    <Name>concelhos</Name>
+    <Title>concelhos</Title>
+    <CRS>CRS:84</CRS>
+    <CRS>EPSG:3763</CRS>
+    <EX_GeographicBoundingBox>
+     <westBoundLongitude>-9.575005</westBoundLongitude>
+     <eastBoundLongitude>-6.172036</eastBoundLongitude>
+     <southBoundLatitude>36.948018</southBoundLatitude>
+     <northBoundLatitude>42.15432</northBoundLatitude>
+    </EX_GeographicBoundingBox>
+    <BoundingBox CRS="EPSG:3763" maxy="276083.768" minx="-119191.408" maxx="162129.082" miny="-300404.804"/>
+    <Style>
+     <Name>default</Name>
+     <Title>default</Title>
+     <LegendURL>
+      <Format>image/png</Format>
+      <OnlineResource xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C%3A%2Fwebserver%2Flm_repos%2Frepo1%2Fteste1.qgs&amp;SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=concelhos&amp;FORMAT=image/png&amp;STYLE=default&amp;SLD_VERSION=1.1.0" xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+     </LegendURL>
+    </Style>
+   </Layer>
+   <Layer queryable="1">
+    <Name>caop_2019</Name>
+    <Title>caop_2019</Title>
+    <CRS>CRS:84</CRS>
+    <CRS>EPSG:3763</CRS>
+    <EX_GeographicBoundingBox>
+     <westBoundLongitude>-9.575</westBoundLongitude>
+     <eastBoundLongitude>-6.172037</eastBoundLongitude>
+     <southBoundLatitude>36.948017</southBoundLatitude>
+     <northBoundLatitude>42.154322</northBoundLatitude>
+    </EX_GeographicBoundingBox>
+    <BoundingBox CRS="EPSG:3763" maxy="276084" minx="-119191" maxx="162129" miny="-300405"/>
+    <Style>
+     <Name>default</Name>
+     <Title>default</Title>
+     <LegendURL>
+      <Format>image/png</Format>
+      <OnlineResource xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C%3A%2Fwebserver%2Flm_repos%2Frepo1%2Fteste1.qgs&amp;SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=caop_2019&amp;FORMAT=image/png&amp;STYLE=default&amp;SLD_VERSION=1.1.0" xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+     </LegendURL>
+    </Style>
+   </Layer>
+   <Layer queryable="1">
+    <Name>l_500k_10_11</Name>
+    <Title>500k_10_11</Title>
+    <CRS>CRS:84</CRS>
+    <CRS>EPSG:3763</CRS>
+    <EX_GeographicBoundingBox>
+     <westBoundLongitude>-10.192462</westBoundLongitude>
+     <eastBoundLongitude>-5.829735</eastBoundLongitude>
+     <southBoundLatitude>36.766121</southBoundLatitude>
+     <northBoundLatitude>42.278924</northBoundLatitude>
+    </EX_GeographicBoundingBox>
+    <BoundingBox CRS="EPSG:3763" maxy="289925" minx="-169925" maxx="190075" miny="-320025"/>
+    <Style>
+     <Name>default</Name>
+     <Title>default</Title>
+     <LegendURL>
+      <Format>image/png</Format>
+      <OnlineResource xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C%3A%2Fwebserver%2Flm_repos%2Frepo1%2Fteste1.qgs&amp;SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=l_500k_10_11&amp;FORMAT=image/png&amp;STYLE=default&amp;SLD_VERSION=1.1.0" xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+     </LegendURL>
+    </Style>
+   </Layer>
+   <Layer queryable="1">
+    <Name>mdt</Name>
+    <Title>mdt</Title>
+    <CRS>CRS:84</CRS>
+    <CRS>EPSG:3763</CRS>
+    <EX_GeographicBoundingBox>
+     <westBoundLongitude>-9.58567</westBoundLongitude>
+     <eastBoundLongitude>-6.148386</eastBoundLongitude>
+     <southBoundLatitude>36.932961</southBoundLatitude>
+     <northBoundLatitude>42.171933</northBoundLatitude>
+    </EX_GeographicBoundingBox>
+    <BoundingBox CRS="EPSG:3763" maxy="278040" minx="-120040" maxx="164040" miny="-302040"/>
+    <Style>
+     <Name>default</Name>
+     <Title>default</Title>
+     <LegendURL>
+      <Format>image/png</Format>
+      <OnlineResource xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C%3A%2Fwebserver%2Flm_repos%2Frepo1%2Fteste1.qgs&amp;SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=mdt&amp;FORMAT=image/png&amp;STYLE=default&amp;SLD_VERSION=1.1.0" xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+     </LegendURL>
+    </Style>
+    <Style>
+     <Name>topography</Name>
+     <Title>topography</Title>
+     <LegendURL>
+      <Format>image/png</Format>
+      <OnlineResource xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C%3A%2Fwebserver%2Flm_repos%2Frepo1%2Fteste1.qgs&amp;SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=mdt&amp;FORMAT=image/png&amp;STYLE=topography&amp;SLD_VERSION=1.1.0" xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+     </LegendURL>
+    </Style>
+   </Layer>
+   <Layer queryable="1">
+    <Name>baselayers</Name>
+    <Title>baselayers</Title>
+    <CRS>CRS:84</CRS>
+    <CRS>EPSG:3763</CRS>
+    <EX_GeographicBoundingBox>
+     <westBoundLongitude>-178.415894</westBoundLongitude>
+     <eastBoundLongitude>171.733655</eastBoundLongitude>
+     <southBoundLatitude>-85.443462</southBoundLatitude>
+     <northBoundLatitude>85.443462</northBoundLatitude>
+    </EX_GeographicBoundingBox>
+    <BoundingBox CRS="EPSG:3763" maxy="14969082.433" minx="-14236383.571" maxx="16458379.334" miny="-23754472.979"/>
+    <Layer queryable="1">
+     <Name>Bing_Satellite</Name>
+     <Title>Bing Satellite</Title>
+     <CRS>CRS:84</CRS>
+     <CRS>EPSG:3763</CRS>
+     <EX_GeographicBoundingBox>
+      <westBoundLongitude>-180</westBoundLongitude>
+      <eastBoundLongitude>180</eastBoundLongitude>
+      <southBoundLatitude>-85.051129</southBoundLatitude>
+      <northBoundLatitude>85.051129</northBoundLatitude>
+     </EX_GeographicBoundingBox>
+     <BoundingBox CRS="EPSG:3763" maxy="14969082.433" minx="-14236383.571" maxx="16458379.334" miny="-23754472.979"/>
+     <Style>
+      <Name>default</Name>
+      <Title>default</Title>
+      <LegendURL>
+       <Format>image/png</Format>
+       <OnlineResource xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C%3A%2Fwebserver%2Flm_repos%2Frepo1%2Fteste1.qgs&amp;SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=Bing_Satellite&amp;FORMAT=image/png&amp;STYLE=default&amp;SLD_VERSION=1.1.0" xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+      </LegendURL>
+     </Style>
+    </Layer>
+   </Layer>
+   <Layer queryable="1">
+    <Name>Overview</Name>
+    <Title>Overview</Title>
+    <CRS>CRS:84</CRS>
+    <CRS>EPSG:3763</CRS>
+    <EX_GeographicBoundingBox>
+     <westBoundLongitude>-178.415894</westBoundLongitude>
+     <eastBoundLongitude>171.733655</eastBoundLongitude>
+     <southBoundLatitude>-85.443462</southBoundLatitude>
+     <northBoundLatitude>85.443462</northBoundLatitude>
+    </EX_GeographicBoundingBox>
+    <BoundingBox CRS="EPSG:3763" maxy="14969082.433" minx="-14236383.571" maxx="16458379.334" miny="-23754472.979"/>
+    <Layer queryable="1">
+     <Name>OpenStreetMap</Name>
+     <Title>OpenStreetMap</Title>
+     <CRS>CRS:84</CRS>
+     <CRS>EPSG:3763</CRS>
+     <EX_GeographicBoundingBox>
+      <westBoundLongitude>-180</westBoundLongitude>
+      <eastBoundLongitude>180</eastBoundLongitude>
+      <southBoundLatitude>-85.051129</southBoundLatitude>
+      <northBoundLatitude>85.051129</northBoundLatitude>
+     </EX_GeographicBoundingBox>
+     <BoundingBox CRS="EPSG:3763" maxy="14969082.433" minx="-14236383.571" maxx="16458379.334" miny="-23754472.979"/>
+     <Style>
+      <Name>default</Name>
+      <Title>default</Title>
+      <LegendURL>
+       <Format>image/png</Format>
+       <OnlineResource xlink:href="http://localhost/qgis/qgis_mapserv.fcgi.exe?MAP=C%3A%2Fwebserver%2Flm_repos%2Frepo1%2Fteste1.qgs&amp;SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=OpenStreetMap&amp;FORMAT=image/png&amp;STYLE=default&amp;SLD_VERSION=1.1.0" xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+      </LegendURL>
+     </Style>
+    </Layer>
+   </Layer>
+  </Layer>
+ </Capability>
+</WMS_Capabilities>
+";}}

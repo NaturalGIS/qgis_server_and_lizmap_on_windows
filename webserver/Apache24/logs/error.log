@@ -1,0 +1,264 @@
+[Wed Oct 04 17:56:32.763327 2023] [core:warn] [pid 25200:tid 500] AH00098: pid file C:/webserver/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Wed Oct 04 17:56:32.775053 2023] [ssl:warn] [pid 25200:tid 500] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed Oct 04 17:56:32.775053 2023] [mpm_winnt:notice] [pid 25200:tid 500] AH00455: Apache/2.4.41 (Win64) OpenSSL/1.1.1c mod_fcgid/2.3.9 configured -- resuming normal operations
+[Wed Oct 04 17:56:32.775053 2023] [mpm_winnt:notice] [pid 25200:tid 500] AH00456: Apache Lounge VC15 Server built: Aug 11 2019 12:20:04
+[Wed Oct 04 17:56:32.775053 2023] [core:notice] [pid 25200:tid 500] AH00094: Command line: 'C:\\webserver\\Apache24\\bin\\httpd.exe -d C:/webserver/Apache24'
+[Wed Oct 04 17:56:32.806374 2023] [mpm_winnt:notice] [pid 25200:tid 500] AH00418: Parent: Created child process 22612
+Apache server shutdown initiated...
+sl:warn] [pid 22612:tid 512] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed Oct 04 17:56:33.544299 2023] [mpm_winnt:notice] [pid 22612:tid 512] AH00354: Child: Starting 64 worker threads.
+[Wed Oct 04 18:06:50.019278 2023] [fcgid:warn] [pid 22612:tid 460] mod_fcgid: process 22184 graceful kill fail, sending SIGKILL
+[Wed Oct 04 18:06:50.019278 2023] [fcgid:warn] [pid 22612:tid 460] mod_fcgid: process 2448 graceful kill fail, sending SIGKILL
+[Wed Oct 04 18:06:50.019278 2023] [fcgid:warn] [pid 22612:tid 460] mod_fcgid: process 29996 graceful kill fail, sending SIGKILL
+[Wed Oct 04 18:06:50.019278 2023] [fcgid:warn] [pid 22612:tid 460] mod_fcgid: process 10360 graceful kill fail, sending SIGKILL
+[Wed Oct 04 18:06:50.019278 2023] [fcgid:warn] [pid 22612:tid 460] mod_fcgid: process 12416 graceful kill fail, sending SIGKILL
+[Wed Oct 04 18:06:50.019278 2023] [fcgid:warn] [pid 22612:tid 460] mod_fcgid: process 1236 graceful kill fail, sending SIGKILL
+[Wed Oct 04 18:31:04.113040 2023] [fcgid:warn] [pid 22612:tid 460] mod_fcgid: process 25572 graceful kill fail, sending SIGKILL
+[Wed Oct 04 18:31:04.113040 2023] [fcgid:warn] [pid 22612:tid 460] mod_fcgid: process 4600 graceful kill fail, sending SIGKILL
+[Wed Oct 04 18:31:04.113040 2023] [fcgid:warn] [pid 22612:tid 460] mod_fcgid: process 28760 graceful kill fail, sending SIGKILL
+[Wed Oct 04 18:31:04.113040 2023] [fcgid:warn] [pid 22612:tid 460] mod_fcgid: process 25864 graceful kill fail, sending SIGKILL
+[Wed Oct 04 18:31:04.113040 2023] [fcgid:warn] [pid 22612:tid 460] mod_fcgid: process 3224 graceful kill fail, sending SIGKILL
+[Wed Oct 04 18:31:04.113040 2023] [fcgid:warn] [pid 22612:tid 460] mod_fcgid: process 23848 graceful kill fail, sending SIGKILL
+[Wed Oct 04 18:31:04.113040 2023] [fcgid:warn] [pid 22612:tid 460] mod_fcgid: process 21240 graceful kill fail, sending SIGKILL
+[Wed Oct 04 18:31:04.113040 2023] [fcgid:warn] [pid 22612:tid 460] mod_fcgid: process 30452 graceful kill fail, sending SIGKILL
+[Wed Oct 04 18:31:04.113040 2023] [fcgid:warn] [pid 22612:tid 460] mod_fcgid: process 28392 graceful kill fail, sending SIGKILL
+[Wed Oct 04 18:38:03.839153 2023] [mpm_winnt:notice] [pid 25200:tid 500] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Wed Oct 04 18:38:05.858975 2023] [mpm_winnt:notice] [pid 22612:tid 512] AH00364: Child: All worker threads have exited.
+[Wed Oct 04 18:38:14.315641 2023] [fcgid:error] [pid 22612] FastCGI process 25780 still did not exit, terminating forcefully
+[Wed Oct 04 18:38:23.196892 2023] [core:warn] [pid 27116:tid 484] AH00098: pid file C:/webserver/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Wed Oct 04 18:38:23.198947 2023] [ssl:warn] [pid 27116:tid 484] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed Oct 04 18:38:23.198947 2023] [mpm_winnt:notice] [pid 27116:tid 484] AH00455: Apache/2.4.41 (Win64) OpenSSL/1.1.1c mod_fcgid/2.3.9 configured -- resuming normal operations
+[Wed Oct 04 18:38:23.198947 2023] [mpm_winnt:notice] [pid 27116:tid 484] AH00456: Apache Lounge VC15 Server built: Aug 11 2019 12:20:04
+[Wed Oct 04 18:38:23.198947 2023] [core:notice] [pid 27116:tid 484] AH00094: Command line: 'C:\\webserver\\Apache24\\bin\\httpd.exe -d C:/webserver/Apache24'
+[Wed Oct 04 18:38:23.198947 2023] [mpm_winnt:notice] [pid 27116:tid 484] AH00418: Parent: Created child process 30336
+Apache server shutdown initiated...
+sl:warn] [pid 30336:tid 388] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed Oct 04 18:38:23.841751 2023] [mpm_winnt:notice] [pid 30336:tid 388] AH00354: Child: Starting 64 worker threads.
+[Wed Oct 04 18:45:57.501424 2023] [mpm_winnt:notice] [pid 27116:tid 484] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Wed Oct 04 18:45:59.519066 2023] [mpm_winnt:notice] [pid 30336:tid 388] AH00364: Child: All worker threads have exited.
+[Wed Oct 04 18:46:07.961556 2023] [fcgid:error] [pid 30336] FastCGI process 22672 still did not exit, terminating forcefully
+[Wed Oct 04 18:46:07.961556 2023] [fcgid:error] [pid 30336] FastCGI process 16924 still did not exit, terminating forcefully
+[Wed Oct 04 18:46:07.961556 2023] [fcgid:error] [pid 30336] FastCGI process 26560 still did not exit, terminating forcefully
+[Wed Oct 04 18:46:07.961556 2023] [fcgid:error] [pid 30336] FastCGI process 6456 still did not exit, terminating forcefully
+[Wed Oct 04 18:46:07.961556 2023] [fcgid:error] [pid 30336] FastCGI process 5412 still did not exit, terminating forcefully
+[Wed Oct 04 18:46:07.961556 2023] [fcgid:error] [pid 30336] FastCGI process 30104 still did not exit, terminating forcefully
+[Wed Oct 04 18:46:07.961556 2023] [fcgid:error] [pid 30336] FastCGI process 9856 still did not exit, terminating forcefully
+[Wed Oct 04 18:46:15.275247 2023] [core:warn] [pid 24956:tid 512] AH00098: pid file C:/webserver/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Wed Oct 04 18:46:15.278776 2023] [ssl:warn] [pid 24956:tid 512] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed Oct 04 18:46:15.278776 2023] [mpm_winnt:notice] [pid 24956:tid 512] AH00455: Apache/2.4.41 (Win64) OpenSSL/1.1.1c mod_fcgid/2.3.9 configured -- resuming normal operations
+[Wed Oct 04 18:46:15.278776 2023] [mpm_winnt:notice] [pid 24956:tid 512] AH00456: Apache Lounge VC15 Server built: Aug 11 2019 12:20:04
+[Wed Oct 04 18:46:15.278776 2023] [core:notice] [pid 24956:tid 512] AH00094: Command line: 'C:\\webserver\\Apache24\\bin\\httpd.exe -d C:/webserver/Apache24'
+[Wed Oct 04 18:46:15.284286 2023] [mpm_winnt:notice] [pid 24956:tid 512] AH00418: Parent: Created child process 17568
+Apache server shutdown initiated...
+sl:warn] [pid 17568:tid 472] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed Oct 04 18:46:15.924098 2023] [mpm_winnt:notice] [pid 17568:tid 472] AH00354: Child: Starting 64 worker threads.
+[Wed Oct 04 18:47:47.656294 2023] [mpm_winnt:notice] [pid 24956:tid 512] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Wed Oct 04 18:47:49.679211 2023] [mpm_winnt:notice] [pid 17568:tid 472] AH00364: Child: All worker threads have exited.
+[Wed Oct 04 18:47:58.149854 2023] [fcgid:error] [pid 17568] FastCGI process 30368 still did not exit, terminating forcefully
+[Wed Oct 04 18:47:58.149854 2023] [fcgid:error] [pid 17568] FastCGI process 28728 still did not exit, terminating forcefully
+[Wed Oct 04 18:47:58.338657 2023] [core:warn] [pid 28924:tid 452] AH00098: pid file C:/webserver/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Wed Oct 04 18:47:58.338657 2023] [ssl:warn] [pid 28924:tid 452] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed Oct 04 18:47:58.338657 2023] [mpm_winnt:notice] [pid 28924:tid 452] AH00455: Apache/2.4.41 (Win64) OpenSSL/1.1.1c mod_fcgid/2.3.9 configured -- resuming normal operations
+[Wed Oct 04 18:47:58.338657 2023] [mpm_winnt:notice] [pid 28924:tid 452] AH00456: Apache Lounge VC15 Server built: Aug 11 2019 12:20:04
+[Wed Oct 04 18:47:58.338657 2023] [core:notice] [pid 28924:tid 452] AH00094: Command line: 'C:\\webserver\\Apache24\\bin\\httpd.exe -d C:/webserver/Apache24'
+[Wed Oct 04 18:47:58.354281 2023] [mpm_winnt:notice] [pid 28924:tid 452] AH00418: Parent: Created child process 15920
+Apache server shutdown initiated...
+sl:warn] [pid 15920:tid 484] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed Oct 04 18:47:59.030367 2023] [mpm_winnt:notice] [pid 15920:tid 484] AH00354: Child: Starting 64 worker threads.
+[Wed Oct 04 18:49:13.660963 2023] [mpm_winnt:notice] [pid 28924:tid 452] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Wed Oct 04 18:49:15.672504 2023] [mpm_winnt:notice] [pid 15920:tid 484] AH00364: Child: All worker threads have exited.
+[Wed Oct 04 18:49:24.120724 2023] [fcgid:error] [pid 15920] FastCGI process 26780 still did not exit, terminating forcefully
+[Wed Oct 04 18:49:24.120724 2023] [fcgid:error] [pid 15920] FastCGI process 22840 still did not exit, terminating forcefully
+[Wed Oct 04 18:49:24.120724 2023] [fcgid:error] [pid 15920] FastCGI process 28596 still did not exit, terminating forcefully
+[Wed Oct 04 18:49:24.120724 2023] [fcgid:error] [pid 15920] FastCGI process 5844 still did not exit, terminating forcefully
+[Wed Oct 04 18:49:24.120724 2023] [fcgid:error] [pid 15920] FastCGI process 29764 still did not exit, terminating forcefully
+[Wed Oct 04 18:49:24.120724 2023] [fcgid:error] [pid 15920] FastCGI process 12396 still did not exit, terminating forcefully
+[Wed Oct 04 18:49:24.120724 2023] [fcgid:error] [pid 15920] FastCGI process 7980 still did not exit, terminating forcefully
+[Wed Oct 04 18:49:27.682460 2023] [core:warn] [pid 30452:tid 480] AH00098: pid file C:/webserver/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Wed Oct 04 18:49:27.682460 2023] [ssl:warn] [pid 30452:tid 480] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed Oct 04 18:49:27.682460 2023] [mpm_winnt:notice] [pid 30452:tid 480] AH00455: Apache/2.4.41 (Win64) OpenSSL/1.1.1c mod_fcgid/2.3.9 configured -- resuming normal operations
+[Wed Oct 04 18:49:27.682460 2023] [mpm_winnt:notice] [pid 30452:tid 480] AH00456: Apache Lounge VC15 Server built: Aug 11 2019 12:20:04
+[Wed Oct 04 18:49:27.682460 2023] [core:notice] [pid 30452:tid 480] AH00094: Command line: 'C:\\webserver\\Apache24\\bin\\httpd.exe -d C:/webserver/Apache24'
+[Wed Oct 04 18:49:27.698477 2023] [mpm_winnt:notice] [pid 30452:tid 480] AH00418: Parent: Created child process 24388
+Apache server shutdown initiated...
+sl:warn] [pid 24388:tid 436] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Wed Oct 04 18:49:28.298029 2023] [mpm_winnt:notice] [pid 24388:tid 436] AH00354: Child: Starting 64 worker threads.
+[Wed Oct 04 19:01:46.014786 2023] [fcgid:warn] [pid 24388:tid 508] mod_fcgid: process 1108 graceful kill fail, sending SIGKILL
+[Wed Oct 04 19:01:46.014786 2023] [fcgid:warn] [pid 24388:tid 508] mod_fcgid: process 8240 graceful kill fail, sending SIGKILL
+[Wed Oct 04 19:01:46.014786 2023] [fcgid:warn] [pid 24388:tid 508] mod_fcgid: process 20812 graceful kill fail, sending SIGKILL
+[Wed Oct 04 19:01:46.014786 2023] [fcgid:warn] [pid 24388:tid 508] mod_fcgid: process 19852 graceful kill fail, sending SIGKILL
+[Thu Oct 05 17:02:58.168711 2023] [mpm_winnt:notice] [pid 30452:tid 480] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Thu Oct 05 17:03:00.188977 2023] [mpm_winnt:notice] [pid 24388:tid 436] AH00364: Child: All worker threads have exited.
+[Thu Oct 05 17:03:08.667940 2023] [fcgid:error] [pid 24388] FastCGI process 2644 still did not exit, terminating forcefully
+[Thu Oct 05 17:03:08.668090 2023] [fcgid:error] [pid 24388] FastCGI process 15516 still did not exit, terminating forcefully
+[Thu Oct 05 17:03:08.668090 2023] [fcgid:error] [pid 24388] FastCGI process 24356 still did not exit, terminating forcefully
+[Thu Oct 05 17:05:31.946188 2023] [core:warn] [pid 24388:tid 424] AH00098: pid file C:/webserver/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Thu Oct 05 17:05:31.946188 2023] [ssl:warn] [pid 24388:tid 424] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Thu Oct 05 17:05:31.946188 2023] [mpm_winnt:notice] [pid 24388:tid 424] AH00455: Apache/2.4.41 (Win64) OpenSSL/1.1.1c mod_fcgid/2.3.9 configured -- resuming normal operations
+[Thu Oct 05 17:05:31.946188 2023] [mpm_winnt:notice] [pid 24388:tid 424] AH00456: Apache Lounge VC15 Server built: Aug 11 2019 12:20:04
+[Thu Oct 05 17:05:31.955699 2023] [core:notice] [pid 24388:tid 424] AH00094: Command line: 'C:\\webserver\\Apache24\\bin\\httpd.exe -d C:/webserver/Apache24'
+[Thu Oct 05 17:05:31.962249 2023] [mpm_winnt:notice] [pid 24388:tid 424] AH00418: Parent: Created child process 22772
+Apache server shutdown initiated...
+sl:warn] [pid 22772:tid 488] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Thu Oct 05 17:05:32.525871 2023] [mpm_winnt:notice] [pid 22772:tid 488] AH00354: Child: Starting 64 worker threads.
+[Thu Oct 05 17:09:44.991278 2023] [mpm_winnt:notice] [pid 24388:tid 424] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Thu Oct 05 17:09:47.011577 2023] [mpm_winnt:notice] [pid 22772:tid 488] AH00364: Child: All worker threads have exited.
+[Thu Oct 05 17:09:55.467636 2023] [fcgid:error] [pid 22772] FastCGI process 26324 still did not exit, terminating forcefully
+[Thu Oct 05 17:10:07.521863 2023] [core:warn] [pid 23380:tid 516] AH00098: pid file C:/webserver/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Thu Oct 05 17:10:07.521863 2023] [ssl:warn] [pid 23380:tid 516] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Thu Oct 05 17:10:07.521863 2023] [mpm_winnt:notice] [pid 23380:tid 516] AH00455: Apache/2.4.41 (Win64) OpenSSL/1.1.1c mod_fcgid/2.3.9 configured -- resuming normal operations
+[Thu Oct 05 17:10:07.521863 2023] [mpm_winnt:notice] [pid 23380:tid 516] AH00456: Apache Lounge VC15 Server built: Aug 11 2019 12:20:04
+[Thu Oct 05 17:10:07.521863 2023] [core:notice] [pid 23380:tid 516] AH00094: Command line: 'C:\\webserver\\Apache24\\bin\\httpd.exe -d C:/webserver/Apache24'
+[Thu Oct 05 17:10:07.521863 2023] [mpm_winnt:notice] [pid 23380:tid 516] AH00418: Parent: Created child process 21544
+Apache server shutdown initiated...
+sl:warn] [pid 21544:tid 476] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Thu Oct 05 17:10:08.150517 2023] [mpm_winnt:notice] [pid 21544:tid 476] AH00354: Child: Starting 64 worker threads.
+[Thu Oct 05 17:14:08.324502 2023] [mpm_winnt:notice] [pid 23380:tid 516] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Thu Oct 05 17:14:10.338039 2023] [mpm_winnt:notice] [pid 21544:tid 476] AH00364: Child: All worker threads have exited.
+[Thu Oct 05 17:14:18.780398 2023] [fcgid:error] [pid 21544] FastCGI process 30152 still did not exit, terminating forcefully
+[Thu Oct 05 17:14:18.780398 2023] [fcgid:error] [pid 21544] FastCGI process 19836 still did not exit, terminating forcefully
+[Thu Oct 05 17:14:22.527970 2023] [core:warn] [pid 10648:tid 96] AH00098: pid file C:/webserver/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Thu Oct 05 17:14:22.531491 2023] [ssl:warn] [pid 10648:tid 96] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Thu Oct 05 17:14:22.531491 2023] [mpm_winnt:notice] [pid 10648:tid 96] AH00455: Apache/2.4.41 (Win64) OpenSSL/1.1.1c mod_fcgid/2.3.9 configured -- resuming normal operations
+[Thu Oct 05 17:14:22.531491 2023] [mpm_winnt:notice] [pid 10648:tid 96] AH00456: Apache Lounge VC15 Server built: Aug 11 2019 12:20:04
+[Thu Oct 05 17:14:22.531491 2023] [core:notice] [pid 10648:tid 96] AH00094: Command line: 'C:\\webserver\\Apache24\\bin\\httpd.exe -d C:/webserver/Apache24'
+[Thu Oct 05 17:14:22.531491 2023] [mpm_winnt:notice] [pid 10648:tid 96] AH00418: Parent: Created child process 30476
+Apache server shutdown initiated...
+sl:warn] [pid 30476:tid 504] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Thu Oct 05 17:14:23.206403 2023] [mpm_winnt:notice] [pid 30476:tid 504] AH00354: Child: Starting 64 worker threads.
+[Thu Oct 05 17:15:36.729146 2023] [mpm_winnt:notice] [pid 10648:tid 96] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Thu Oct 05 17:15:38.740468 2023] [mpm_winnt:notice] [pid 30476:tid 504] AH00364: Child: All worker threads have exited.
+[Thu Oct 05 17:15:38.887957 2023] [mpm_winnt:notice] [pid 10648:tid 96] AH00430: Parent: Child process 30476 exited successfully.
+[Thu Oct 05 17:15:50.428714 2023] [ssl:warn] [pid 21312:tid 480] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Thu Oct 05 17:15:50.428714 2023] [mpm_winnt:notice] [pid 21312:tid 480] AH00455: Apache/2.4.41 (Win64) OpenSSL/1.1.1c mod_fcgid/2.3.9 configured -- resuming normal operations
+[Thu Oct 05 17:15:50.428714 2023] [mpm_winnt:notice] [pid 21312:tid 480] AH00456: Apache Lounge VC15 Server built: Aug 11 2019 12:20:04
+[Thu Oct 05 17:15:50.428714 2023] [core:notice] [pid 21312:tid 480] AH00094: Command line: 'C:\\webserver\\Apache24\\bin\\httpd.exe -d C:/webserver/Apache24'
+[Thu Oct 05 17:15:50.444334 2023] [mpm_winnt:notice] [pid 21312:tid 480] AH00418: Parent: Created child process 424
+Apache server shutdown initiated...
+sl:warn] [pid 424:tid 452] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Thu Oct 05 17:15:51.010760 2023] [mpm_winnt:notice] [pid 424:tid 452] AH00354: Child: Starting 64 worker threads.
+[Thu Oct 05 17:26:07.371934 2023] [fcgid:warn] [pid 424:tid 508] mod_fcgid: process 20272 graceful kill fail, sending SIGKILL
+[Thu Oct 05 17:26:07.371934 2023] [fcgid:warn] [pid 424:tid 508] mod_fcgid: process 10776 graceful kill fail, sending SIGKILL
+[Thu Oct 05 17:26:07.371934 2023] [fcgid:warn] [pid 424:tid 508] mod_fcgid: process 18620 graceful kill fail, sending SIGKILL
+[Thu Oct 05 17:26:07.371934 2023] [fcgid:warn] [pid 424:tid 508] mod_fcgid: process 18156 graceful kill fail, sending SIGKILL
+[Thu Oct 05 17:26:07.371934 2023] [fcgid:warn] [pid 424:tid 508] mod_fcgid: process 29308 graceful kill fail, sending SIGKILL
+[Thu Oct 05 17:26:07.371934 2023] [fcgid:warn] [pid 424:tid 508] mod_fcgid: process 22692 graceful kill fail, sending SIGKILL
+[Thu Oct 05 18:16:45.078626 2023] [fcgid:warn] [pid 424:tid 508] mod_fcgid: process 3976 graceful kill fail, sending SIGKILL
+[Thu Oct 05 18:16:45.078626 2023] [fcgid:warn] [pid 424:tid 508] mod_fcgid: process 15232 graceful kill fail, sending SIGKILL
+[Thu Oct 05 18:16:45.078626 2023] [fcgid:warn] [pid 424:tid 508] mod_fcgid: process 25268 graceful kill fail, sending SIGKILL
+[Fri Oct 06 09:55:29.655553 2023] [fcgid:warn] [pid 424:tid 508] mod_fcgid: process 8380 graceful kill fail, sending SIGKILL
+[Fri Oct 06 09:55:29.655553 2023] [fcgid:warn] [pid 424:tid 508] mod_fcgid: process 15172 graceful kill fail, sending SIGKILL
+[Fri Oct 06 09:55:29.655553 2023] [fcgid:warn] [pid 424:tid 508] mod_fcgid: process 3212 graceful kill fail, sending SIGKILL
+[Fri Oct 06 10:10:50.889515 2023] [mpm_winnt:notice] [pid 21312:tid 480] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Fri Oct 06 10:10:52.909130 2023] [mpm_winnt:notice] [pid 424:tid 452] AH00364: Child: All worker threads have exited.
+[Fri Oct 06 10:11:01.362454 2023] [fcgid:error] [pid 424] FastCGI process 30760 still did not exit, terminating forcefully
+[Fri Oct 06 10:11:01.362454 2023] [fcgid:error] [pid 424] FastCGI process 9676 still did not exit, terminating forcefully
+[Fri Oct 06 10:11:01.362454 2023] [fcgid:error] [pid 424] FastCGI process 18296 still did not exit, terminating forcefully
+[Fri Oct 06 10:11:01.362454 2023] [fcgid:error] [pid 424] FastCGI process 29052 still did not exit, terminating forcefully
+[Fri Oct 06 10:11:03.283868 2023] [core:warn] [pid 30964:tid 540] AH00098: pid file C:/webserver/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Fri Oct 06 10:11:03.283868 2023] [ssl:warn] [pid 30964:tid 540] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Fri Oct 06 10:11:03.283868 2023] [mpm_winnt:notice] [pid 30964:tid 540] AH00455: Apache/2.4.41 (Win64) OpenSSL/1.1.1c mod_fcgid/2.3.9 configured -- resuming normal operations
+[Fri Oct 06 10:11:03.283868 2023] [mpm_winnt:notice] [pid 30964:tid 540] AH00456: Apache Lounge VC15 Server built: Aug 11 2019 12:20:04
+[Fri Oct 06 10:11:03.283868 2023] [core:notice] [pid 30964:tid 540] AH00094: Command line: 'C:\\webserver\\Apache24\\bin\\httpd.exe -d C:/webserver/Apache24'
+[Fri Oct 06 10:11:03.283868 2023] [mpm_winnt:notice] [pid 30964:tid 540] AH00418: Parent: Created child process 2112
+Apache server shutdown initiated...
+sl:warn] [pid 2112:tid 460] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Fri Oct 06 10:11:03.895247 2023] [mpm_winnt:notice] [pid 2112:tid 460] AH00354: Child: Starting 64 worker threads.
+[Fri Oct 06 10:17:18.639552 2023] [fcgid:warn] [pid 2112:tid 492] mod_fcgid: process 7744 graceful kill fail, sending SIGKILL
+[Fri Oct 06 10:17:18.639552 2023] [fcgid:warn] [pid 2112:tid 492] mod_fcgid: process 21688 graceful kill fail, sending SIGKILL
+[Fri Oct 06 10:17:18.641079 2023] [fcgid:warn] [pid 2112:tid 492] mod_fcgid: process 30840 graceful kill fail, sending SIGKILL
+[Fri Oct 06 10:17:18.641079 2023] [fcgid:warn] [pid 2112:tid 492] mod_fcgid: process 24872 graceful kill fail, sending SIGKILL
+[Fri Oct 06 15:27:52.150034 2023] [fcgid:warn] [pid 2112:tid 492] mod_fcgid: process 17504 graceful kill fail, sending SIGKILL
+[Fri Oct 06 15:27:52.150034 2023] [fcgid:warn] [pid 2112:tid 492] mod_fcgid: process 21844 graceful kill fail, sending SIGKILL
+[Fri Oct 06 15:27:52.150034 2023] [fcgid:warn] [pid 2112:tid 492] mod_fcgid: process 18536 graceful kill fail, sending SIGKILL
+[Fri Oct 06 15:27:52.150034 2023] [fcgid:warn] [pid 2112:tid 492] mod_fcgid: process 1776 graceful kill fail, sending SIGKILL
+[Fri Oct 06 15:27:52.150034 2023] [fcgid:warn] [pid 2112:tid 492] mod_fcgid: process 332 graceful kill fail, sending SIGKILL
+[Fri Oct 06 15:56:11.490921 2023] [fcgid:warn] [pid 2112:tid 492] mod_fcgid: process 24572 graceful kill fail, sending SIGKILL
+[Fri Oct 06 15:56:11.490921 2023] [fcgid:warn] [pid 2112:tid 492] mod_fcgid: process 27596 graceful kill fail, sending SIGKILL
+[Fri Oct 06 15:56:11.490921 2023] [fcgid:warn] [pid 2112:tid 492] mod_fcgid: process 30240 graceful kill fail, sending SIGKILL
+[Fri Oct 06 16:18:24.059343 2023] [fcgid:warn] [pid 2112:tid 492] mod_fcgid: process 13408 graceful kill fail, sending SIGKILL
+[Fri Oct 06 16:18:24.059343 2023] [fcgid:warn] [pid 2112:tid 492] mod_fcgid: process 29912 graceful kill fail, sending SIGKILL
+[Fri Oct 06 16:18:24.059343 2023] [fcgid:warn] [pid 2112:tid 492] mod_fcgid: process 17724 graceful kill fail, sending SIGKILL
+[Fri Oct 06 16:18:24.059343 2023] [fcgid:warn] [pid 2112:tid 492] mod_fcgid: process 29192 graceful kill fail, sending SIGKILL
+[Fri Oct 06 16:18:24.059343 2023] [fcgid:warn] [pid 2112:tid 492] mod_fcgid: process 27048 graceful kill fail, sending SIGKILL
+[Fri Oct 06 16:30:35.241306 2023] [fcgid:warn] [pid 2112:tid 492] mod_fcgid: process 24688 graceful kill fail, sending SIGKILL
+[Fri Oct 06 16:30:35.241306 2023] [fcgid:warn] [pid 2112:tid 492] mod_fcgid: process 30728 graceful kill fail, sending SIGKILL
+[Fri Oct 06 16:30:35.241306 2023] [fcgid:warn] [pid 2112:tid 492] mod_fcgid: process 17552 graceful kill fail, sending SIGKILL
+[Fri Oct 06 16:37:52.397133 2023] [mpm_winnt:notice] [pid 30964:tid 540] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Fri Oct 06 16:37:54.737275 2023] [mpm_winnt:notice] [pid 2112:tid 460] AH00364: Child: All worker threads have exited.
+[Fri Oct 06 16:38:03.179785 2023] [fcgid:error] [pid 2112] FastCGI process 2780 still did not exit, terminating forcefully
+[Fri Oct 06 16:38:03.179785 2023] [fcgid:error] [pid 2112] FastCGI process 22776 still did not exit, terminating forcefully
+[Fri Oct 06 16:38:03.179785 2023] [fcgid:error] [pid 2112] FastCGI process 16272 still did not exit, terminating forcefully
+[Fri Oct 06 16:38:03.179785 2023] [fcgid:error] [pid 2112] FastCGI process 10336 still did not exit, terminating forcefully
+[Fri Oct 06 16:38:03.179785 2023] [fcgid:error] [pid 2112] FastCGI process 14328 still did not exit, terminating forcefully
+[Fri Oct 06 16:38:03.179785 2023] [fcgid:error] [pid 2112] FastCGI process 28952 still did not exit, terminating forcefully
+[Fri Oct 06 16:38:03.179785 2023] [fcgid:error] [pid 2112] FastCGI process 17636 still did not exit, terminating forcefully
+[Fri Oct 06 16:38:03.179785 2023] [fcgid:error] [pid 2112] FastCGI process 20712 still did not exit, terminating forcefully
+[Fri Oct 06 16:38:05.708475 2023] [core:warn] [pid 7724:tid 484] AH00098: pid file C:/webserver/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Fri Oct 06 16:38:05.711498 2023] [ssl:warn] [pid 7724:tid 484] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Fri Oct 06 16:38:05.714517 2023] [mpm_winnt:notice] [pid 7724:tid 484] AH00455: Apache/2.4.41 (Win64) OpenSSL/1.1.1c mod_fcgid/2.3.9 configured -- resuming normal operations
+[Fri Oct 06 16:38:05.714517 2023] [mpm_winnt:notice] [pid 7724:tid 484] AH00456: Apache Lounge VC15 Server built: Aug 11 2019 12:20:04
+[Fri Oct 06 16:38:05.714517 2023] [core:notice] [pid 7724:tid 484] AH00094: Command line: 'C:\\webserver\\Apache24\\bin\\httpd.exe -d C:/webserver/Apache24'
+[Fri Oct 06 16:38:05.714517 2023] [mpm_winnt:notice] [pid 7724:tid 484] AH00418: Parent: Created child process 25248
+Apache server shutdown initiated...
+sl:warn] [pid 25248:tid 436] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Fri Oct 06 16:38:06.453307 2023] [mpm_winnt:notice] [pid 25248:tid 436] AH00354: Child: Starting 64 worker threads.
+[Fri Oct 06 16:44:18.180180 2023] [fcgid:warn] [pid 25248:tid 516] mod_fcgid: process 30436 graceful kill fail, sending SIGKILL
+[Fri Oct 06 16:44:18.180180 2023] [fcgid:warn] [pid 25248:tid 516] mod_fcgid: process 18460 graceful kill fail, sending SIGKILL
+[Fri Oct 06 16:44:18.180180 2023] [fcgid:warn] [pid 25248:tid 516] mod_fcgid: process 18712 graceful kill fail, sending SIGKILL
+[Fri Oct 06 16:58:29.421399 2023] [fcgid:warn] [pid 25248:tid 516] mod_fcgid: process 17272 graceful kill fail, sending SIGKILL
+[Fri Oct 06 16:58:29.421399 2023] [fcgid:warn] [pid 25248:tid 516] mod_fcgid: process 11756 graceful kill fail, sending SIGKILL
+[Fri Oct 06 16:58:29.422389 2023] [fcgid:warn] [pid 25248:tid 516] mod_fcgid: process 30504 graceful kill fail, sending SIGKILL
+[Fri Oct 06 16:58:29.422389 2023] [fcgid:warn] [pid 25248:tid 516] mod_fcgid: process 21124 graceful kill fail, sending SIGKILL
+[Fri Oct 06 16:58:29.423423 2023] [fcgid:warn] [pid 25248:tid 516] mod_fcgid: process 12380 graceful kill fail, sending SIGKILL
+[Fri Oct 06 17:24:42.098690 2023] [fcgid:warn] [pid 25248:tid 516] mod_fcgid: process 23156 graceful kill fail, sending SIGKILL
+[Fri Oct 06 17:24:42.098690 2023] [fcgid:warn] [pid 25248:tid 516] mod_fcgid: process 31540 graceful kill fail, sending SIGKILL
+[Fri Oct 06 17:24:42.098690 2023] [fcgid:warn] [pid 25248:tid 516] mod_fcgid: process 20344 graceful kill fail, sending SIGKILL
+[Fri Oct 06 17:24:42.098690 2023] [fcgid:warn] [pid 25248:tid 516] mod_fcgid: process 14160 graceful kill fail, sending SIGKILL
+[Fri Oct 06 17:24:42.098690 2023] [fcgid:warn] [pid 25248:tid 516] mod_fcgid: process 19112 graceful kill fail, sending SIGKILL
+[Fri Oct 06 17:24:42.098690 2023] [fcgid:warn] [pid 25248:tid 516] mod_fcgid: process 22536 graceful kill fail, sending SIGKILL
+[Fri Oct 06 18:17:11.023242 2023] [fcgid:warn] [pid 25248:tid 516] mod_fcgid: process 31436 graceful kill fail, sending SIGKILL
+[Fri Oct 06 18:17:11.037168 2023] [fcgid:warn] [pid 25248:tid 516] mod_fcgid: process 22540 graceful kill fail, sending SIGKILL
+[Fri Oct 06 18:17:11.037168 2023] [fcgid:warn] [pid 25248:tid 516] mod_fcgid: process 23744 graceful kill fail, sending SIGKILL
+[Fri Oct 06 18:17:11.037168 2023] [fcgid:warn] [pid 25248:tid 516] mod_fcgid: process 18236 graceful kill fail, sending SIGKILL
+[Fri Oct 06 18:17:11.037168 2023] [fcgid:warn] [pid 25248:tid 516] mod_fcgid: process 2652 graceful kill fail, sending SIGKILL
+[Fri Oct 06 18:17:11.037168 2023] [fcgid:warn] [pid 25248:tid 516] mod_fcgid: process 25692 graceful kill fail, sending SIGKILL
+[Fri Oct 06 18:23:16.797057 2023] [fcgid:warn] [pid 25248:tid 516] mod_fcgid: process 6836 graceful kill fail, sending SIGKILL
+[Fri Oct 06 18:23:16.797057 2023] [fcgid:warn] [pid 25248:tid 516] mod_fcgid: process 29856 graceful kill fail, sending SIGKILL
+[Fri Oct 06 18:23:16.797057 2023] [fcgid:warn] [pid 25248:tid 516] mod_fcgid: process 13256 graceful kill fail, sending SIGKILL
+[Fri Oct 06 18:23:16.797057 2023] [fcgid:warn] [pid 25248:tid 516] mod_fcgid: process 21104 graceful kill fail, sending SIGKILL
+[Fri Oct 06 18:23:16.797057 2023] [fcgid:warn] [pid 25248:tid 516] mod_fcgid: process 19272 graceful kill fail, sending SIGKILL
+[Fri Oct 06 18:23:16.797057 2023] [fcgid:warn] [pid 25248:tid 516] mod_fcgid: process 31500 graceful kill fail, sending SIGKILL
+[Sat Oct 07 08:32:08.675475 2023] [mpm_winnt:notice] [pid 7724:tid 484] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Sat Oct 07 08:32:10.686824 2023] [mpm_winnt:notice] [pid 25248:tid 436] AH00364: Child: All worker threads have exited.
+[Sat Oct 07 08:32:19.182931 2023] [fcgid:error] [pid 25248] FastCGI process 25072 still did not exit, terminating forcefully
+[Sat Oct 07 08:32:19.182931 2023] [fcgid:error] [pid 25248] FastCGI process 18416 still did not exit, terminating forcefully
+[Sat Oct 07 08:32:19.182931 2023] [fcgid:error] [pid 25248] FastCGI process 31224 still did not exit, terminating forcefully
+[Sat Oct 07 08:32:19.182931 2023] [fcgid:error] [pid 25248] FastCGI process 31612 still did not exit, terminating forcefully
+[Sat Oct 07 08:32:19.182931 2023] [fcgid:error] [pid 25248] FastCGI process 26084 still did not exit, terminating forcefully
+[Sat Oct 07 08:32:19.182931 2023] [fcgid:error] [pid 25248] FastCGI process 28452 still did not exit, terminating forcefully
+[Sat Oct 07 08:32:19.182931 2023] [fcgid:error] [pid 25248] FastCGI process 28432 still did not exit, terminating forcefully
+[Sat Oct 07 08:33:57.166872 2023] [core:warn] [pid 24732:tid 500] AH00098: pid file C:/webserver/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Sat Oct 07 08:33:57.166872 2023] [ssl:warn] [pid 24732:tid 500] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Sat Oct 07 08:33:57.166872 2023] [mpm_winnt:notice] [pid 24732:tid 500] AH00455: Apache/2.4.41 (Win64) OpenSSL/1.1.1c mod_fcgid/2.3.9 configured -- resuming normal operations
+[Sat Oct 07 08:33:57.166872 2023] [mpm_winnt:notice] [pid 24732:tid 500] AH00456: Apache Lounge VC15 Server built: Aug 11 2019 12:20:04
+[Sat Oct 07 08:33:57.166872 2023] [core:notice] [pid 24732:tid 500] AH00094: Command line: 'C:\\webserver\\Apache24\\bin\\httpd.exe -d C:/webserver/Apache24'
+[Sat Oct 07 08:33:57.166872 2023] [mpm_winnt:notice] [pid 24732:tid 500] AH00418: Parent: Created child process 20056
+Apache server shutdown initiated...
+sl:warn] [pid 20056:tid 476] AH01873: Init: Session Cache is not configured [hint: SSLSessionCache]
+[Sat Oct 07 08:33:57.763217 2023] [mpm_winnt:notice] [pid 20056:tid 476] AH00354: Child: Starting 64 worker threads.
+[Sat Oct 07 08:40:09.466982 2023] [fcgid:warn] [pid 20056:tid 500] mod_fcgid: process 29828 graceful kill fail, sending SIGKILL
+[Sat Oct 07 08:40:09.466982 2023] [fcgid:warn] [pid 20056:tid 500] mod_fcgid: process 25424 graceful kill fail, sending SIGKILL
+[Sat Oct 07 08:40:09.466982 2023] [fcgid:warn] [pid 20056:tid 500] mod_fcgid: process 13476 graceful kill fail, sending SIGKILL
+[Sat Oct 07 08:40:09.466982 2023] [fcgid:warn] [pid 20056:tid 500] mod_fcgid: process 29416 graceful kill fail, sending SIGKILL
+[Sat Oct 07 08:40:09.466982 2023] [fcgid:warn] [pid 20056:tid 500] mod_fcgid: process 19344 graceful kill fail, sending SIGKILL
+[Sat Oct 07 08:40:09.466982 2023] [fcgid:warn] [pid 20056:tid 500] mod_fcgid: process 15544 graceful kill fail, sending SIGKILL
+[Sat Oct 07 08:58:17.419552 2023] [mpm_winnt:notice] [pid 24732:tid 500] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Sat Oct 07 08:58:19.436617 2023] [mpm_winnt:notice] [pid 20056:tid 476] AH00364: Child: All worker threads have exited.
+[Sat Oct 07 08:58:27.881048 2023] [fcgid:error] [pid 20056] FastCGI process 16436 still did not exit, terminating forcefully
+[Sat Oct 07 08:58:27.881048 2023] [fcgid:error] [pid 20056] FastCGI process 2036 still did not exit, terminating forcefully
+[Sat Oct 07 08:58:27.881048 2023] [fcgid:error] [pid 20056] FastCGI process 8964 still did not exit, terminating forcefully
+[Sat Oct 07 08:58:27.881048 2023] [fcgid:error] [pid 20056] FastCGI process 22256 still did not exit, terminating forcefully
+[Sat Oct 07 08:58:27.881048 2023] [fcgid:error] [pid 20056] FastCGI process 22776 still did not exit, terminating forcefully
+[Sat Oct 07 08:58:27.881048 2023] [fcgid:error] [pid 20056] FastCGI process 30912 still did not exit, terminating forcefully
+[Sat Oct 07 08:58:27.881048 2023] [fcgid:error] [pid 20056] FastCGI process 28492 still did not exit, terminating forcefully

@@ -1,0 +1,42 @@
+[general]
+name=Lizmap server
+qgisMinimumVersion=3.10
+qgisMaximumVersion=3.99
+author=3Liz
+email=info@3liz.com
+description=Designed only for QGIS server. For QGIS Desktop, install the other plugin called "Lizmap".
+about=This plugin is designed for QGIS server only. For more detailed information about Lizmap, install the other plugin called "Lizmap".
+category=Web
+tags=online,server,web,webgis,webservice,webmapping,mobile,publication,wms,wfs,wps,internet,cloud
+
+homepage=https://docs.lizmap.com/current/fr/install/pre_requirements.html#lizmap-qgis-server-plugin
+tracker=https://github.com/3liz/qgis-lizmap-server-plugin/issues
+repository=https://github.com/3liz/qgis-lizmap-server-plugin
+
+# Done automatically by qgis-plugin-ci
+version=2.8.1
+commitNumber=1
+commitSha1=d7fa8730426e00548cdc3183c4b187da5fb9c18a
+dateTime=2023-09-27T12:56:57Z
+changelog=
+ Version 2.8.1:
+ * Support the "text widget" from QGIS 3.30 in the tooltip, contribution from @ghtmtt
+ * Move the fonts from the server into the JSON metadata
+
+ Version 2.8.0:
+ * Fix concatenate with number in aggregate in the drag&drop layout popup, contribution from @ghtmtt
+ * For Lizmap Web Client 3.7.0 minimum
+   * Add support for the "Attribute Editor Relation" when generating the tooltip
+   * Add new filter for the GetLegendGraphic request
+   * Add new parameter `PARENT_FEATURE` when evaluating expression
+
+ Version 2.7.2:
+ * Fix the QGIS server name with QGIS 3.30 `'s-Hertogenbosch`
+
+
+# End of qgis-plugin-ci
+
+icon=resources/icons/icon.png
+experimental=False
+deprecated=False
+server=True

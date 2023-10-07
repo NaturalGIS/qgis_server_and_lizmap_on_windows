@@ -1,0 +1,3 @@
+2023-10-05 18:17:16	127.0.0.1	lizmapadmin	QGIS server minimum 3.10 and Lizmap QGIS server plugin minimum 2.8.1 need to be installed and configured correctly. Your QGIS server couldn't be reached correctly with the given URL "http://127.0.0.1/cgi-bin/qgis_mapserv.fcgi".
+2023-10-05 18:55:12	127.0.0.1	lizmapadmin	invalid query (no such function: GeomFromGPB ( SELECT AsGeoJSON(Extent(Transform(GeomFromGPB("geom"), 3763)), 8, 1) AS bbox FROM caop_2019 WHERE 2>1 AND ( "Freguesia" IN ( 'Pedreiras' ) )))
+2023-10-05 18:57:17	127.0.0.1	lizmapadmin	invalid query (no such function: GeomFromGPB ( SELECT AsGeoJSON(Extent(Transform(GeomFromGPB("geom"), 3763)), 8, 1) AS bbox FROM caop_2019 WHERE 2>1 AND ( "Freguesia" IN ( 'Campo do Gerês' ) )))

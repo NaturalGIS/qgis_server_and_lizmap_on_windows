@@ -1,0 +1,764 @@
+2023-10-05 18:18:29	[2]	Undefined array key "repository"	C:\webserver\www\lizmap36\temp\lizmap\www\compiled\templates\modules\admin\server_information_html_t_15.php	179
+
+2023-10-05 18:42:48	[2]	Undefined array key "repository"	C:\webserver\www\lizmap36\temp\lizmap\www\compiled\templates\modules\admin\server_information_html_t_15.php	179
+
+2023-10-05 18:44:32	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:44:32	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:44:32	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-05 18:44:32	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-05 18:44:32	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:44:32	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:44:32	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-05 18:44:32	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:44:32	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:44:32	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:44:32	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:44:32	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-05 18:44:32	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-05 18:55:02	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:55:02	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:55:02	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-05 18:55:02	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:55:02	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:55:12	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:55:12	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:55:12	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-05 18:55:12	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:55:12	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:55:12	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:55:12	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:55:12	[2]	SQLite3::query(): Unable to prepare statement: 1, no such function: GeomFromGPB	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-05 18:57:00	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:57:00	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:57:00	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:57:00	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:57:00	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-05 18:57:16	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:57:16	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:57:16	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:57:16	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:57:16	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-05 18:57:17	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:57:17	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:57:17	[2]	SQLite3::query(): Unable to prepare statement: 1, no such function: GeomFromGPB	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-05 18:57:18	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:57:18	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:57:18	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-05 18:57:18	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:57:18	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:57:21	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:57:21	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:57:21	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-05 18:57:21	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:57:21	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:57:22	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:57:22	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:57:22	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-05 18:57:22	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:57:22	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:57:23	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:57:23	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:57:23	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:57:23	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:57:23	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-05 18:57:26	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:57:26	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:57:26	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-05 18:57:26	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:57:26	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:57:26	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:57:26	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:57:26	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:57:26	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:57:26	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-05 18:57:35	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:57:35	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:59:14	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:59:14	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:59:14	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:59:14	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 18:59:14	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-05 19:03:20	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 19:03:20	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 19:03:20	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-05 19:03:20	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 19:03:20	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 19:05:29	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 19:05:29	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 19:05:29	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 19:05:29	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 19:05:29	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-05 19:07:06	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 19:07:06	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 19:07:06	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 19:07:06	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 19:07:06	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-05 19:07:30	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 19:07:30	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 19:07:30	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-05 19:07:30	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 19:07:30	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 19:07:40	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 19:07:40	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 19:07:40	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 19:07:40	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 19:07:40	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-05 19:09:45	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 19:09:45	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 19:09:45	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 19:09:45	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-05 19:09:45	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 10:47:28	[2]	Undefined array key "repository"	C:\webserver\www\lizmap36\temp\lizmap\www\compiled\templates\modules\admin\server_information_html_t_15.php	179
+
+2023-10-06 10:54:33	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 10:54:33	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 10:54:33	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 10:54:34	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 10:54:34	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 11:08:16	[2]	Undefined array key "repository"	C:\webserver\www\lizmap36\temp\lizmap\www\compiled\templates\modules\admin\server_information_html_t_15.php	179
+
+2023-10-06 11:10:30	[2]	Undefined array key "repository"	C:\webserver\www\lizmap36\temp\lizmap\www\compiled\templates\modules\admin\server_information_html_t_15.php	179
+
+2023-10-06 11:10:34	[2]	Undefined array key "repository"	C:\webserver\www\lizmap36\temp\lizmap\www\compiled\templates\modules\admin\server_information_html_t_15.php	179
+
+2023-10-06 11:11:37	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 11:11:37	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 11:11:37	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 11:11:37	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 11:11:37	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 11:12:28	[0]	Connection refused for URI http://localhost/qgis/qgis_mapserv.fcgi.exe	C:\webserver\www\lizmap36\lizmap\vendor\guzzlehttp\guzzle\src\Handler\StreamHandler.php	72
+
+2023-10-06 11:13:24	[0]	Connection refused for URI http://localhost/qgis/qgis_mapserv.fcgi.exe	C:\webserver\www\lizmap36\lizmap\vendor\guzzlehttp\guzzle\src\Handler\StreamHandler.php	72
+
+2023-10-06 11:28:15	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 11:28:15	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 11:28:15	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 11:28:15	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 11:28:15	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 11:29:19	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 11:29:19	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 11:29:19	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 11:29:19	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 11:29:19	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 11:30:01	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 11:30:01	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 11:30:02	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 11:30:02	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 11:30:02	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 11:34:11	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 11:34:11	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 11:34:11	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 11:34:12	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 11:34:12	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 11:34:35	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 11:34:35	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 11:34:35	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 11:34:35	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 11:34:35	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 16:49:59	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 16:49:59	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 16:49:59	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 16:49:59	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 16:49:59	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 17:11:51	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:11:51	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:11:51	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 17:11:51	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:11:51	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:19:13	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:19:13	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:19:13	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:19:13	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:19:13	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 17:21:12	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:21:12	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:21:12	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 17:21:12	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:21:12	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:31:16	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:31:16	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:31:16	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 17:31:16	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:31:16	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:32:58	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:32:58	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:32:58	[2]	Trying to access array offset on value of type bool	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	85
+
+2023-10-06 17:32:58	[0]	Unable to open database: unable to open database file	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	97
+
+2023-10-06 17:32:58	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:32:58	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:32:58	[2]	Trying to access array offset on value of type bool	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	85
+
+2023-10-06 17:32:58	[0]	Unable to open database: unable to open database file	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	97
+
+2023-10-06 17:32:58	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:32:58	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:32:58	[2]	Trying to access array offset on value of type bool	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	85
+
+2023-10-06 17:32:58	[0]	Unable to open database: unable to open database file	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	97
+
+2023-10-06 17:32:59	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:32:59	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:32:59	[2]	Trying to access array offset on value of type bool	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	85
+
+2023-10-06 17:32:59	[0]	Unable to open database: unable to open database file	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	97
+
+2023-10-06 17:34:52	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:34:52	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:34:52	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 17:34:52	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 17:34:52	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:34:52	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:34:52	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 17:34:52	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:34:52	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:34:52	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 17:34:52	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 17:34:52	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:34:52	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:35:41	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:35:41	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:35:41	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 17:35:41	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:35:41	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:35:41	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 17:35:41	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 17:35:41	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:35:41	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:35:41	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 17:35:41	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 17:35:41	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:35:41	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:35:48	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:35:48	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:35:48	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 17:35:48	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 17:35:48	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:35:48	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:35:48	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:35:48	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:35:48	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 17:35:48	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 17:35:48	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:35:48	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:35:48	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 17:35:59	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:35:59	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:35:59	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 17:35:59	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 17:35:59	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:35:59	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:35:59	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 17:35:59	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 17:35:59	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:35:59	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:35:59	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 17:35:59	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:35:59	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:38:14	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:38:14	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:38:14	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 17:38:14	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:38:14	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:38:14	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 17:38:14	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 17:38:14	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:38:14	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:38:14	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:38:14	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:38:14	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 17:38:14	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 17:38:43	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:38:43	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:38:43	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 17:38:43	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 17:38:43	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:38:43	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:38:43	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 17:38:43	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:38:43	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:38:43	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:38:43	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:38:43	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 17:38:43	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 17:46:48	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:46:48	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:46:48	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 17:46:48	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:46:48	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:48:41	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:48:41	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:50:58	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:50:58	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:58:32	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:58:32	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:58:32	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:58:32	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 17:58:32	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 18:00:30	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:00:30	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:00:30	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:00:30	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:00:30	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 18:05:43	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:05:43	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:05:43	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:05:43	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:05:43	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 18:08:28	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:08:28	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:08:28	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:08:28	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:08:28	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 18:14:31	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:14:31	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:14:31	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 18:14:32	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:14:32	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:15:46	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:15:46	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:15:46	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 18:15:46	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:15:46	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:16:59	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:16:59	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:16:59	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 18:16:59	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:16:59	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:18:35	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:18:35	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:18:35	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 18:18:35	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:18:35	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:19:16	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:19:16	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:19:16	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 18:19:16	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:19:16	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:56:42	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:56:42	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:56:44	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:56:44	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:56:44	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 18:58:07	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:58:07	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:58:07	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 18:58:07	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:58:07	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:58:52	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:58:52	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:58:52	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 18:58:52	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:58:52	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:58:59	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:58:59	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:58:59	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:58:59	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:58:59	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 18:59:32	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:59:32	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:59:32	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 18:59:32	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 18:59:32	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 19:00:28	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 19:00:28	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 19:00:28	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 19:00:29	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 19:00:29	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 19:05:44	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 19:05:44	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 19:05:44	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 19:05:44	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 19:05:44	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 19:10:22	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 19:10:22	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 19:10:22	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-06 19:10:22	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 19:10:22	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 19:17:51	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 19:17:51	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 19:17:52	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 19:17:52	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-06 19:17:52	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-07 09:28:39	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-07 09:28:39	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-07 09:28:40	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-07 09:28:40	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-07 09:28:40	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-07 09:29:28	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-07 09:29:28	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-07 09:29:28	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+
+2023-10-07 09:29:29	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-07 09:29:29	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-07 09:34:17	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-07 09:34:17	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-07 09:34:19	[2]	Undefined array key "schema"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-07 09:34:19	[2]	Undefined array key "tablename"	C:\webserver\www\lizmap36\lizmap\modules\lizmap\classes\qgisVectorLayerDatasource.class.php	149
+
+2023-10-07 09:34:19	[2]	SQLite3::query(): Unable to prepare statement: 1, near &quot;)&quot;: syntax error	C:\webserver\www\lizmap36\lizmap\vendor\jelix\jelix\lib\jelix\plugins\db\sqlite3\sqlite3.dbconnection.php	129
+

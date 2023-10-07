@@ -1,0 +1,240 @@
+<html>
+<head>
+<style>
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button[type=submit]:hover {
+  background-color: #45a049;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+div {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+$(document).ready(function () {
+
+    $("#service").change(function () {
+        var el = $(this);
+        if (el.val() === "WFS") {
+            $("#request option:last-child").remove();
+            $("#request option:last-child").remove();
+            $("#request option:last-child").remove();
+            $("#request option:last-child").remove();
+            $("#request").append("<option>GetCapabilities</option>");
+            $("#request").append("<option>GetFeature</option>");
+        } else if (el.val() === "WMS") {
+            $("#request option:last-child").remove();
+            $("#request option:last-child").remove();
+            $("#request option:last-child").remove();
+            $("#request").append("<option>GetCapabilities</option>");
+            $("#request").append("<option>GetMap</option>");
+            $("#request").append("<option>GetLegendGraphic</option>");
+            $("#request").append("<option>GetPrint</option>");
+			$("#request").append("<option>GetFeatureInfo</option>");
+        } else if (el.val() === "WCS") {
+            $("#request option:last-child").remove();
+            $("#request option:last-child").remove();
+            $("#request option:last-child").remove();
+            $("#request option:last-child").remove();    
+            $("#request option:last-child").remove();
+            $("#request").append("<option>GetCapabilities</option>");
+            $("#request").append("<option>GetCoverage</option>");
+        }
+    });
+
+});
+
+
+$(document).ready(function () {
+
+    $("#request").change(function () {
+        var el = $(this);
+        if (el.val() === "GetPrint") {
+            $("#format").append("<option>PDF</option>");
+        } else if (el.val() === "GetMap") {
+            $("#format option:last-child").remove();
+        }
+    });
+
+});
+
+
+</script>
+
+
+<script>
+$(document).ready(function () {
+
+
+$("#request").change(function() {
+        var el = $(this);
+        if (el.val() === "GetFeature") {
+            $('#bbox').val('');
+        } else {
+          $('#bbox').val('-396898.1806138854,-314817.018285,439835.8542138855,290495.981685');
+	}
+    });  
+
+});
+</script>
+
+</head>
+<body>
+
+<h1>Form to test OpenGeoSpatialConsoritum map (WMS, WFS and WCS) requests</h1>
+
+<h2>Example based on QGIS Server</h2>
+
+
+<button type="submit" onClick="window.location.href=window.location.href">Refresh Page</button></br>
+
+
+<form action="http://localhost/qgis/qgis_mapserv.fcgi.exe" method="get">
+
+<input type="submit" value="Submit">
+
+<!--
+Service: <input type="text" name="service"><br>
+-->
+
+Service:
+<select name="service" id="service">
+  <option value="WMS">WMS</option>
+  <option value="WFS">WFS</option>
+  <option value="WCS">WCS</option>
+</select>
+
+<!--
+Request: <input type="text" name="request"><br>
+-->
+
+WMS version:
+<select name="version" id="version">
+   <option value="1.3.0">1.3.0</option>
+</select>
+
+Request:
+<select name="request" id="request">
+  <option value="GetCapabilities">GetCapabilities</option>
+  <option value="GetMap">GetMap</option>
+  <option value="GetLegendGraphic">GetLegendGraphic</option>
+  <option value="GetPrint">GetPrint</option>
+  <option value="GetFeatureInfo">GetFeatureInfo</option>
+</select>
+
+
+Project file: <input type="text" id="map" name="map" value="C:/webserver/lm_repos/repo1/teste1.qgs"><br>
+BBOX (WMS,WFS, WCS) [xmin,ymin,x,xmax,ymax] or [lower_left,upper_right]: <input type="text" id="bbox" name="bbox" value="-396898.1806138854,-314817.018285,439835.8542138855,290495.981685"><br>
+Layers (WMS): <input type="text" id="layers" name="layers" value="mdt,caop_2019"><br>
+Width (WMS): <input type="text" id="width" name="width" value="1024"><br>
+Height (WMS): <input type="text" id="height" name="height" value="768"><br>
+SRS (WMS): <input type="text" id="srs" name="srs" value="EPSG:3763"><br>
+Format (WMS): 
+<select name="format" id="format">
+  <option value="image/PNG">image/PNG</option>
+  <option value="image/JPG">image/JPG</option>
+</select>
+
+Info Format (WMS): 
+<select name="info_format" id="info_format">
+  <option value="text/xml">text/xml</option>
+  <option value="text/plain">text/plain</option>
+  <option value="text/html">text/html</option>
+  <option value="application/json">application/json</option>
+  <option value="application/vnd.ogc.gml">application/vnd.ogc.gml</option>  
+</select>
+
+I (WMS): <input type="text" id="I" name="I" value="512"><br>
+J (WMS): <input type="text" id="J" name="J" value="384"><br>
+Query Layers (WMS): <input type="text" id="query_layers" name="query_layers" value="mdt,caop_2019"><br>
+
+With Geometry (WMS): 
+<select name="WITH_GEOMETRY" id="WITH_GEOMETRY">
+  <option value="TRUE">TRUE</option>
+  <option value="FALSE">FALSE</option>
+</select>
+
+
+Symbolwidth (WMS): <input type="text" id="SYMBOLWIDTH" name="SYMBOLWIDTH" value="20"><br>
+DPI (WMS): <input type="text" id="dpi" name="dpi" value="150"><br>
+Template (WMS): <input type="text" id="template" name="template" value="horizontal_A4"><br>
+Layout Extent (WMS): <input type="text" id="map0:extent" name="map0:extent" value="-396898.1806138854,-314817.018285,439835.8542138855,290495.981685"><br>
+Title (WMS): <input type="text" id="titulo" name="titulo" value="O meu mapa"><br>
+Feature ID (WFS): <input type="text" id="featureid" name="featureid" value="caop_2019.1"><br>
+Typename (WFS): <input type="text" id="typename" name="typename" value="caop_2019"><br>
+Outputformat (WFS): 
+
+<!--
+<input type="text" id="outputformat" name="outputformat" value="dxf"><br>
+-->
+
+<select name="outputformat" id="outputformat">
+ <option value="text/xml; subtype=gml/2.1.2">text/xml; subtype=gml/2.1.2</option>
+ <option value="text/xml; subtype=gml/3.1.1">text/xml; subtype=gml/3.1.1</option>
+ <option value="application/vnd.geo+json">application/vnd.geo+json</option>
+ <option value="SHP">SHP</option>
+ <option value="TAB">TAB</option>
+ <option value="MIF">MIF</option>
+ <option value="KML">KML</option>
+ <option value="GPKG">GPKG</option>
+ <option value="GPX">GPX</option>
+ <option value="ODS">ODS</option>
+ <option value="XLSX">XLSX</option>
+ <option value="CSV">CSV</option>
+</select>
+
+
+
+Coverage (WCS): <input type="text" id="coverage" name="coverage" value="mdt"><br>
+
+CRS (WCS): <input type="text" id="crs" name="crs" value="EPSG:3763"><br>
+
+<input type="submit" value="Submit"><br>
+</form>
+
+</body>
+</html> 

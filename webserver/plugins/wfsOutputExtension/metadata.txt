@@ -1,0 +1,42 @@
+[general]
+name=wfsOutputExtension
+qgisMinimumVersion=3.22
+description=Adds additional output formats to WFS GetFeature request on QGIS Server such as Geopackage, ODS, CSV etc.
+about=wfsOutputExtension adds additional output formats to WFS GetFeature request such as Geopackage, ODS, CSV etc.
+tags=server,format,wfs,ogc,lizmap,web,extension
+
+author=3Liz
+email=info@3liz.com
+
+tracker=https://github.com/3liz/qgis-wfsOutputExtension/issues
+repository=https://github.com/3liz/qgis-wfsOutputExtension
+homepage=https://github.com/3liz/qgis-wfsOutputExtension
+
+# Done automatically by qgis-plugin-ci
+version=1.8.0
+commitNumber=1
+commitSha1=fa816dd744d3d7e4c0546242946b27229c638f98
+dateTime=2023-08-04T14:12:18Z
+changelog=
+ Version 1.8.0:
+ * Some Python cleanup
+ * Raise the QGIS minimum version to QGIS 3.22 and Python 3.7
+ * Add FlatGeobuf support
+
+ Version 1.7.1:
+ * Add the CPG file when a shapefile is created
+ * Modernize Python by using fstrings everywhere. Python 3.6 required.
+
+ Version 1.7.0:
+ * Fix the field type detection when exporting the layer
+ * Fix removing files when a Python exception occurs during the request
+ * Removing files by default when the export is done
+
+
+# End of qgis-plugin-ci
+category=Server
+icon=icon.png
+
+experimental=False
+deprecated=False
+server=True

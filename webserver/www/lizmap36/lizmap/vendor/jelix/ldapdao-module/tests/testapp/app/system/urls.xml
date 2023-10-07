@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<urls xmlns="http://jelix.org/ns/urls/1.0">
+    <entrypoint type="classic" name="index" default="true">
+        <url pathinfo="/" module="master_admin" action="default:index">
+        </url>
+        <url module="master_admin"/>
+        <url pathinfo="/check" module="testapp" action="default:index">
+        </url>
+
+
+    </entrypoint>
+</urls>

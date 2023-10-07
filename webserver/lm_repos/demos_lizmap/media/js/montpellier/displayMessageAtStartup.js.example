@@ -1,0 +1,23 @@
+lizMap.events.on({
+
+  layersadded: function(e) {
+    var html = '';
+    html+= '<div class="modal-header"><a class="close" data-dismiss="modal">×</a><h3>Welcome on this map</h3></div>';
+
+    html+= '<div class="modal-body">';
+    html+= $('#metadata').html();
+    html+= '</div>';
+
+    html+= '<div class="modal-footer"><button id="button_OK" type="button" class="btn btn-default" data-dismiss="modal">Ok (&#9166;)</button></div>';
+
+    $('#lizmap-modal').html(html).modal('show');
+
+    $('#lizmap-modal').keypress(function(e) {
+        if(e.which == 13) { //for key up use 13 - Touche Entrée
+            $('#button_OK').click();
+        }
+    });
+
+  }
+
+});
