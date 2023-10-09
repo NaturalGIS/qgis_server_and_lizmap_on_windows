@@ -1,6 +1,8 @@
 # Easy install/deploy QGIS Server and Lizmap Web Client on MS Windows
 
-Credits: João Gaspar, https://github.com/jonnyforestGIS
+Credits: 
+3Liz, https://github.com/3liz
+João Gaspar, https://github.com/jonnyforestGIS
 
 Last Tested on: QGIS Server 3.28.11 LTR + PHP 8.2 + LizMap Web Client 3.6.6
 
