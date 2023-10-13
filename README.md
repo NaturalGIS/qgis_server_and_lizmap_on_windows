@@ -71,7 +71,7 @@ http://localhost/qgis/qgis_mapserv.fcgi.exe
 9) Test if Lizmap Web Client works:
 
 ```
-http://localhost/lizmap/lizmap/www/index.php
+http://localhost/lizmap36/lizmap/www/index.php
 ```
 
 ![image](https://github.com/NaturalGIS/qgis_server_and_lizmap_on_windows/assets/1951107/611b3119-69ec-4399-aa09-49dfcbb830c5)
